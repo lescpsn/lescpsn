@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+import "nulltype.proto";
+
+package proto;
+
+enum DiaryPrivacy {
+    diary_privacy_null = 0;
+    diary_privacy_public = 1;
+    diary_privacy_private = 2;
+}
+
+enum DiaryStatus {
+    diary_status_none = 0;
+    diary_status_null = 1;
+    diary_status_saved = 2;
+    diary_status_published = 3;
+}
+
+message Diary {
+    int64 ID = 1;
+    string UUID = 2;
+    string CreatedAt = 3;
+    string UserUUID = 4;
+    StringType Title = 5;
+    StringType Content = 6;
+    StringType Style = 7;
+    DiaryPrivacy DiaryPrivacy = 8;
+    DiaryStatus DiaryStatus = 9;
+    string Timestamp = 10;
+}

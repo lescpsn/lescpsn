@@ -1,0 +1,308 @@
+#+TITLE: Oh My Emacs Advanced
+#+OPTIONS: toc:2 num:nil ^:nil
+
+This is part of [[https://github.com/xiaohanyu/oh-my-emacs][oh-my-emacs]].
+
+This file contains some advanced features or packages which could make emacs
+look unlike emacs. So ensure you have some basic knowledge and experience
+before loading this file.
+
+* Prerequisites
+  :PROPERTIES:
+  :CUSTOM_ID: advanced-prerequisites
+  :END:
+
+#+NAME: advanced-prerequisites
+#+CAPTION: Prerequisites for ome-advanced module
+|          | Windows | Ubuntu/Debian/Mint        | ArchLinux                    | Fedora              | Mac OS X            | Mandatory? |
+|----------+---------+---------------------------+------------------------------+---------------------+---------------------+------------|
+| [[http://www.tug.org/texlive/][texlive]]  |         | texlive-full latex-beamer | texlive-most texlive-langcjk | texlive-all         |                     | Yes        |
+| [[http://beyondgrep.com/][ack-grep]] | ack     | ack-grep                  | ack                          | ack                 | ack                 | No         |
+| [[https://github.com/ggreer/the_silver_searcher][ag]]       |         | the_silver_searcher       | the_silver_searcher          | the_silver_searcher | the_silver_searcher | No         |
+
+Notes:
+- [[http://www.tug.org/texlive/][texlive]] is required by evil, since evil need =texi2pdf= to =make
+  info=. However, I don't think it is a good idea to install the huge texlive
+  just to build evil, so I've made a [[http://gitorious.org/evil/evil/merge_requests/50][patch]] for it.
+
+* El-get packages
+  :PROPERTIES:
+  :CUSTOM_ID: advanced-el-get-packages
+  :END:
+
+#+NAME: advanced-el-get-packages
+#+CAPTION: El-get packages matrix for ome-advanced module
+| Package          | Status      | Description                                   |
+|------------------+-------------+-----------------------------------------------|
+| [[http://gitorious.org/evil][evil]]             | Required    | Finally, the Emacs OS get a good editor.      |
+| [[https://github.com/cofi/evil-leader][evil-leader]]      | Required    | <leader> key for evil.                        |
+| [[https://github.com/timcharper/evil-surround][evil-surround]]    | Recommended | Surround.vim for evil.                        |
+| [[https://github.com/magnars/expand-region.el][expand-region.el]] | Recommended | Expand and select.                            |
+| [[git://gitorious.org/vimpulse/vimpulse.git][vimpulse]]         | Deprecated  | Use evil instead.                             |
+| [[http://www.gnu.org/software/emacs/manual/html_node/viper/][viper]]            | Deprecated  | Use evil instead.                             |
+| [[https://github.com/Wilfred/ag.el][ag.el]]            | Recommended | Better than ack.                              |
+| [[https://github.com/syohex/emacs-helm-ag][helm-ag.el]]       | Recommended | Helm interface to ag.                         |
+| [[https://github.com/jhelwig/ack-and-a-half][ack-and-a-half]]   | Deprecated  | Yet another emacs front-end to ack.           |
+| [[https://github.com/winterTTr/ace-jump-mode][ace-jump-mode]]    | Recommended | A quick cursor location minor mode for emacs. |
+
+* Evil
+  :PROPERTIES:
+  :CUSTOM_ID: evil
+  :END:
+
+#+BEGIN_QUOTE
+As a poke at Emacs' creeping featurism, vi advocates have been known to
+describe Emacs as "a great operating system, lacking only a decent editor".
+
+-- [[http://en.wikipedia.org/wiki/Editor_war][Editor war]]
+#+END_QUOTE
+
+I must say that emacs is a great platform, but lacks a quick and effective
+editor like vi, fortunately, there comes [[http://gitorious.org/evil][evil]].
+
+"Evil is an extensible vi layer for Emacs. It emulates the main features of
+Vim, and provides facilities for writing custom extensions." IMHO, evil is a
+great successor to [[http://www.emacswiki.org/emacs/Vimpulse][Vimpulse]], [[http://www.emacswiki.org/emacs/VimMode][vim-mode]] and [[http://www.emacswiki.org/emacs/ViperMode][ViperMode]].
+
+By default, oh-my-emacs =turn-on-evil-mode= on =text-mode= and =prog-mode=,
+since emacs has only three [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Basic-Major-Modes.html][basic major modes]], you'll get evil enabled in almost
+all modes which focus on editing, by editing I mean, modes such as =c-mode=,
+=js-mode= would =turn-on-evil-mode=, however, modes such as =dired=, =info=
+would not =turn-on-evil-mode= by default. And since =Info-mode= didn't has a
+parent mode, so we need to =turn-off-evil-mode= manually.
+
+If you need to turn off evil temporarily for a single buffer, use
+=M-x evil-local-mode= instead of =M-x evil-mode=, since the latter will turn
+off evil-mode globally, which means, evil-mode will be turned off for the whole
+Emacs session.
+
+#+NAME: evil
+#+BEGIN_SRC emacs-lisp
+(defun ome-evil-setup ()
+  ;; (define-key evil-insert-state-map (kbd "C-[") 'evil-force-normal-state)
+  (setq evil-auto-indent t)
+  (setq evil-regexp-search t)
+  (setq evil-want-C-i-jump t)
+  (mapc
+   (lambda (mode-hook)
+     (add-hook mode-hook 'turn-on-evil-mode))
+   '(text-mode-hook
+     prog-mode-hook
+     comint-mode-hook
+     conf-mode-hook))
+  (mapc
+   (lambda (mode-hook)
+     (add-hook mode-hook 'turn-off-evil-mode))
+   '(Info-mode-hook)))
+
+(ome-install 'evil)
+#+END_SRC
+
+* Evil-leader
+  :PROPERTIES:
+  :CUSTOM_ID: evil-leader
+  :END:
+
+The keyboard is a real and heavily occupied estate in both Emacs and
+Vim. Specially, just about every key is already bound to a command in normal
+state Vim. Fortunately, Vim provides an easy way to define additional mappings
+on these keys. It's called a [[http://usevim.com/2012/07/20/vim101-leader/][mapleader]].
+
+Evil leader just provides the =<leader>= feature from Vim to evil, which
+provides an easy way to bind keys under a variable prefix key. The default
+binding of =<leader>= is =\=, which is not easy to reach, so oh-my-emacs bind
+it to =<SPC>=, you don't use =<SPC>= to move right, ha?  Some other people
+prefer to bind the =<leader>= key to comma =,=, but =,= already has a
+binding(=evil-repeat-find-char-revers= in evil normal state).
+
+BTW, oh-my-emacs will use [[https://github.com/emacs-helm/helm][helm]] in evil-leader if available. Since I'm a heavy
+user of [[https://github.com/emacs-helm/helm][helm]], I personally bind lots of keys with evil-leader just for [[https://github.com/emacs-helm/helm][helm]]. So
+now you can do =helm-ind-files= simply by =<SPC> e=, for example. Enjoy it.
+
+I also bind some keys to [[https://github.com/syohex/emacs-git-gutter][git-gutter.el]], so you can just stage your commits when
+editing your document at your fingertips.
+
+#+NAME: evil-leader
+#+BEGIN_SRC emacs-lisp
+(defun ome-evil-leader-setup ()
+  (evil-leader/set-leader "<SPC>")
+  (unless (featurep 'helm)
+    (evil-leader/set-key
+      "e" 'find-file
+      "b" 'switch-to-buffer))
+  (eval-after-load "helm"
+    (progn
+      (require 'helm-projectile)
+      (evil-leader/set-key
+        "f" 'helm-for-files
+        "l" 'helm-locate
+        "y" 'helm-show-kill-ring
+        "t" 'helm-top
+        "m" 'helm-man-woman
+        "o" 'helm-occur
+        "j" 'helm-M-x
+        "e" 'helm-find-files
+        "b" 'helm-buffers-list
+        "h" 'helm-projectile-find-file
+        "r" 'helm-recentf
+        "H" 'helm-projectile)))
+  (eval-after-load "helm-ag"
+    (evil-leader/set-key
+      "a" 'helm-projectile-ag))
+  (eval-after-load "expand-region"
+    (progn
+      (setq expand-region-contract-fast-key "z")
+      (evil-leader/set-key "xx" 'er/expand-region)))
+  (eval-after-load "magit"
+    (evil-leader/set-key "g" 'magit-status))
+  (eval-after-load "quickrun"
+    (evil-leader/set-key "q" 'quickrun))
+  (eval-after-load "git-gutter-mode"
+    (evil-leader/set-key
+      "s" 'git-gutter:stage-hunk
+      "n" 'git-gutter:next-hunk
+      "p" 'git-gutter:previous-hunk))
+  (evil-leader/set-key
+    "k" 'kill-buffer
+    "d" 'dired
+    "z" 'repeat
+    "0" 'delete-window
+    "1" 'delete-other-windows
+    "2" 'split-window-below
+    "3" 'split-window-right)
+  (global-evil-leader-mode))
+
+(ome-install 'evil-leader)
+#+END_SRC
+
+* Evil-surround
+  :PROPERTIES:
+  :CUSTOM_ID: evil-surround
+  :END:
+
+As I said, =smartparens= is the ultimate pair management solution for
+Emacs. So why [[https://github.com/timcharper/evil-surround][evil-surround]]?
+
+[[https://github.com/timcharper/evil-surround][evil-surround]] is a port of [[https://github.com/tpope/vim-surround][vim-surround]] to evil. I think you can treat
+=evil-surround= as a complement of =smartparens= in pair changing, deleting
+and adding, while =smartparens= is good at pair inserting and operating.
+
+IMHO, no editors can compete with Vim in pure text editing speed[1]. So I
+think =evil-surround= is still worth a try. [[http://www.catonmat.net/blog/vim-plugins-surround-vim/][Here]] is an excellent and concise
+tutorial for =vim-surround=. Note that there may be some minor differences
+between =evil-surround= and =vim-surround=. However, for daily use, they're
+almost the same.
+
+#+NAME: evil-surround
+#+BEGIN_SRC emacs-lisp
+(ome-install 'evil-surround)
+#+END_SRC
+
+* Expand-region
+  :PROPERTIES:
+  :CUSTOM_ID: expand-region
+  :END:
+
+Often we need to select text. We select since we want to limit our operation to
+a small region. For a long time, people select text by =C-@= and then manually
+moving the point with =C-f=, =M-f= or something similar.
+
+However, most of the time, we want to select text by semantic unit, such as
+sentences, paragraphs, s-exps, code blocks, instead of just select character by
+character, or word by word. So there comes [[https://github.com/magnars/expand-region.el][expand-region.el]], created by
+[[https://github.com/magnars/expand-region.el][magnars]], the author of [[http://emacsrocks.com/][emacsrocks]].
+
+As its name, =expand-region= can expand/contract the selected region by
+ semantic units. Just keep pressing the key until it selects what you
+want. Here's a live [[http://emacsrocks.com/e09.html][demo]] of expand-region from emacsrocks.
+
+Again, oh-my-emacs defines two extra lazy keys with the help of =evil-leader=,
+thus, in normal-state evil, you can trigger =(er/expand-region)= by =<Leader>
+xx=, and then expand/contract the region by hitting =x= or =z=.
+
+If you are in =evil-insert-state=, you can trigger =(er/expand-region)= by
+=C-==. Ah, in this case, =smartparens= is your good friend. You can select the
+region, then QUOTE the region with =smartparens= pairs. Sounds amazing, ha?
+Just try it and you will love it.
+
+#+NAME: expand-region
+#+BEGIN_SRC emacs-lisp
+(defun ome-expand-region-setup ()
+  (global-set-key (kbd "C-=") 'er/expand-region))
+
+(ome-install 'expand-region)
+#+END_SRC
+
+* Ace-jump-mode
+  :PROPERTIES:
+  :CUSTOM_ID: ace-jump-mode
+  :END:
+
+[[https://github.com/winterTTr/ace-jump-mode][ace-jump-mode]] is a minor mode for Emacs, enabling fast/direct cursor movement
+in current view. "You can move your cursor to ANY position (across window and
+frame) in emacs by using only 3 times key press."
+
+To tell the truth, I still don't why it it called "ace-jump". Seems [[https://github.com/johnlindquist/AceJump][AceJump]]
+first appears as an [[http://www.jetbrains.com/idea/][Intellij]] [[http://plugins.jetbrains.com/plugin/7086?pr%3DphpStorm][plugin]]. [[http://www.vim.org/scripts/script.php?script_id%3D3526][EasyMotion]] provides a similar feature to
+Vim.
+
+Oh-my-emacs adopt [[https://github.com/cofi/evil-leader][evil-leader]] and bind serveral keys to ace-jump-mode commands:
+- =<Leader> c=: =ace-jump-char-mode=
+- =<Leader> w=: =ace-jump-word-mode=
+- =<Leader> l=: =ace-jump-line-mode=
+
+By default, =<Leader>= is =<SPC>=, so you can use =<SPC> c= to activate
+=ace-jump-char-mode=, and move you cursor quickly and directly. Enjoy it.
+
+#+NAME: ace-jump-mode
+#+BEGIN_SRC emacs-lisp
+(defun ome-ace-jump-mode-setup ()
+  (when (and (featurep 'evil) (featurep 'evil-leader))
+    (evil-leader/set-key
+      "c" 'ace-jump-char-mode
+      "w" 'ace-jump-word-mode
+      "l" 'ace-jump-line-mode)))
+
+(ome-install 'ace-jump-mode)
+#+END_SRC
+
+* ag
+  :PROPERTIES:
+  :CUSTOM_ID: ag
+  :END:
+
+ag, [[https://github.com/ggreer/the_silver_searcher][the silver searcher]], a code searching tool similar to [[http://beyondgrep.com/][ack]] but much more
+faster. It searches code abot 3-5x faster than ack, and "The command name is
+33% shorter than ack, and all keys are on the home row!". I've used it for
+serveral months and it's amazing.
+
+[[https://github.com/bbatsov/projectile][Projectile]] has builtin support for ag(=projectile-ag=) via =C-c p A=.
+
+#+NAME: ag
+#+BEGIN_SRC emacs-lisp
+(when (executable-find "ag")
+  (ome-install 'ag))
+#+END_SRC
+
+* helm-ag
+  :PROPERTIES:
+  :CUSTOM_ID: helm-ag
+  :END:
+
+[[https://github.com/syohex/emacs-helm-ag][helm-ag.el]] provides interfaces of [[https://github.com/ggreer/the_silver_searcher][The Silver Searcher]] with helm.
+
+#+NAME: helm-ag
+#+BEGIN_SRC emacs-lisp
+(when (executable-find "ag")
+  (ome-install 'helm-ag))
+#+END_SRC
+
+* Todo
+*** Evil mode
+- Evil has some conflicts with smartparens due to cursor position. I should
+  temporarily disable =evil-local-mode= when I do operations like
+  =sp-up-sexp=. Maybe I can get this by =post-command-hook= or smartparens's
+  =post-command-handler=? Or just use =defadvice=?
+
+
+[1] See [[http://vimgolf.com/][vimgolf]] for funny things.

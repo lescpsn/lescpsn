@@ -1,0 +1,19 @@
+命令提示符标志说明：
+> :表示普通用户执行的命令
+# :表示root用户执行的命令
+
+ubuntu下fish-shell的安装
+1 安装fish shell
+> sudo apt-get install fish
+
+2 安装oh-my-fish（oh-my-fish是对fish-shell配置的一个二次封装，便于开箱即用）
+> sudo apt-get curl
+> curl -L http://get.oh-my.fish | fish
+
+3 将自身用户的默认shell指定为fish-shell
+> which fish  (查看下fish-shell的路径，结果类似/usr/bin/fish)
+> sudo vim /etc/passwd
+carhj:x:1000:1000:iota-ubuntu-16.10-server-amd64-001,,,:/home/carhj:/usr/bin/fish
+(将最后的用户登录shell的字段修改为/usr/bin/fish)
+
+4 退出用户，重新登陆，beautiful的fish-shell即刻展现

@@ -1,0 +1,54 @@
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list
+tramp
+.\#*
+
+# Org-mode
+.org-id-locations
+*_archive
+
+# elpa
+elpa
+
+# el-get
+el-get
+
+# the generated el files by org-babel
+ome*el
+*ome*part*el
+*ome*part*org
+
+# auto-complete data file
+ac*dat
+
+# saved-places
+*saved-places*
+
+# recentf
+.recentf
+
+# projectile
+projectile*
+
+# url
+url
+
+# oh-my-emacs doc
+doc
+
+# abbrev
+abbrev_defs
+
+# eshell
+eshell
+
+# tex and pdf
+*tex
+*pdf
+
+# ido.last
+ido.last

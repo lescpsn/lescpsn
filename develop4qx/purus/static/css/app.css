@@ -1,0 +1,12 @@
+/** { outline: 1px dotted red }*/
+/** * { outline: 1px dotted green }*/
+/** * * { outline: 1px dotted orange }*/
+/** * * * { outline: 1px dotted blue }*/
+/** * * * * { outline: 1px solid red }*/
+/** * * * * * { outline: 1px solid green }*/
+/** * * * * * * { outline: 1px solid orange }*/
+/** * * * * * * * { outline: 1px solid blue }*/
+
+.switch {
+    padding: 6px;
+}

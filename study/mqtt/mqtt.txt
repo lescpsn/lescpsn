@@ -1,0 +1,5 @@
+mqtt参考文档
+http://www.cnblogs.com/shanyou/p/4085802.htmxl
+http://public.dhe.ibm.com/software/dw/webservices/ws-mqtt/mqtt-v3r1.html
+http://joyexpr.com/2013/11/27/mqtt/  //民歌mqtt翻译
+

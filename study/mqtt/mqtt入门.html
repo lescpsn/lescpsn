@@ -1,0 +1,558 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2016-12-23 周五 13:48 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>MQTT入门</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../style/my-org-worg.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">MQTT入门</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgb1890ef">1. MQTT协议概览</a>
+<ul>
+<li><a href="#orgb692f55">1.1. 关键词解释</a></li>
+<li><a href="#org8ff7764">1.2. MQTT协议主要特性</a></li>
+</ul>
+</li>
+<li><a href="#orgd1f8013">2. mqtt协议详解</a>
+<ul>
+<li><a href="#org5bc82b5">2.1. Topic(主题)</a></li>
+<li><a href="#orgb3795f8">2.2. 协议格式</a></li>
+<li><a href="#org4b48b9e">2.3. 固定头部</a></li>
+<li><a href="#org9a7fda1">2.4. 可变头部</a></li>
+<li><a href="#orgd03081a">2.5. 有效负载</a></li>
+</ul>
+</li>
+<li><a href="#org896e359">3. emqttd集群</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgb1890ef" class="outline-2">
+<h2 id="orgb1890ef"><span class="section-number-2">1</span> MQTT协议概览</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-orgb692f55" class="outline-3">
+<h3 id="orgb692f55"><span class="section-number-3">1.1</span> 关键词解释</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>MQTT</li>
+</ul>
+<pre class="example">
+MQTT遥测传输(MQ Telemetry Transport，MQTT)是一个轻量级的基于代理(服务器)的发布/订阅式消息传输协议，
+
+专门针对低带宽和不稳定网络环境的物联网应用设计。
+
+一个中心：代理服务器为中心
+
+两个基本点：发布消息和订阅消息（Pub/Sub）
+</pre>
+
+<ul class="org-ul">
+<li>QoS</li>
+</ul>
+<pre class="example">
+QoS（Quality of Service）消息的服务质量，是网络的一种安全机制， 是用来解决网络延迟和阻塞
+
+等问题的一种技术。 
+
+QoS Level(服务质量级别)，三种模式
+0: 至多一次(&lt;=1)：消息可能丢失。比如环境传感器数据1次/分，丢失一次也无所谓，下条很快又来了
+
+1: 至少一次(&gt;=1)： 无论如何都要确保消息的到达，消息可能重复发送
+
+2: 只有一次(=1)： 无论如何都要确保消息到达有且只能有一次。比如：计费系统，重复或者丢失都是错误的。
+</pre>
+
+<ul class="org-ul">
+<li>Pub</li>
+</ul>
+<pre class="example">
+和发布消息相关
+</pre>
+
+<ul class="org-ul">
+<li>Sub</li>
+</ul>
+<pre class="example">
+和订阅消息相关
+</pre>
+
+<ul class="org-ul">
+<li>Topic</li>
+</ul>
+<pre class="example">
+发布/订阅总有个主题，即主题名
+</pre>
+
+<ul class="org-ul">
+<li>Payload</li>
+</ul>
+<pre class="example">
+有效载荷,消息体
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org8ff7764" class="outline-3">
+<h3 id="org8ff7764"><span class="section-number-3">1.2</span> MQTT协议主要特性</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>使用发布消息/订阅消息模式，提供了一个发布者可以有多个订阅者的一对多的模式</li>
+
+<li>消息体（payload）字符串采用utf-8编码</li>
+
+<li>传输开销小（数据包格式小），降低了网络流量</li>
+
+<li>Qos的支持，传输的可靠性可以保证</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-orgd1f8013" class="outline-2">
+<h2 id="orgd1f8013"><span class="section-number-2">2</span> mqtt协议详解</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-org5bc82b5" class="outline-3">
+<h3 id="org5bc82b5"><span class="section-number-3">2.1</span> Topic(主题)</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>作用</li>
+</ul>
+<pre class="example">
+Topic(主题)就是Puber(发布者)和Suber(订阅者)之间的桥梁，Suber(订阅者)订阅了什么样的主题，
+
+一旦Puber(发布者)发布了该主题的相关消息，MQTT服务器就会向匹配到改主题的Suber(订阅者)推送消息。
+</pre>
+
+<ul class="org-ul">
+<li>路由规则</li>
+</ul>
+<pre class="example">
+1 精确主题 (puber,suber)
+  music/香港/男/周杰论
+
+2 一级正则匹配主题+(只能针对suber)
+  music/香港/男/+  ==&gt; music/香港/男/周杰伦 music/香港/男/刘德华 ...
+
+3 多级正则匹配主题#(只能针对suber)
+  music/香港/#     ==&gt; music/香港/男/周杰伦 music/香港/女 ...
+</pre>
+
+
+<p>
+实例演示
+</p>
+<pre class="example">
+# 启动192.168.161.128服务器的mqtt服务 注意如果集群都要起来
+cd ~/local
+./bin/emqttd start
+
+#192.168.161.129客户端发起订阅了music/香港/男/+这个主题的消息
+mosquitto_sub -h 192.168.161.128 -t 'music/香港/男/+' -q 1 
+
+#192.168.161.129客户端发布了music/香港/男/周杰伦这个主题的消息
+mosquitto_pub -h 192.168.161.128 -t 'music/香港/男/周杰伦' -m "龙卷风" -q 1  // 提及下q非端到端的
+
+// 上的订阅者订阅的主题和该发布者发布的主题就匹配
+mosquitto_pub -h 192.168.161.128 -t music/香港/男/周杰伦/a -m "龙卷风" -q 1
+</pre>
+</div>
+</div>
+<div id="outline-container-orgb3795f8" class="outline-3">
+<h3 id="orgb3795f8"><span class="section-number-3">2.2</span> 协议格式</h3>
+<div class="outline-text-3" id="text-2-2">
+<pre class="example">
+MQTT命令消息一般组成结构：
+
+固定头部(fixed header) +  [可变头部](variable header) + [ 有效载荷](Payload)
+
+固定头部：一定有
+
+可变头部和有效载荷：可能没有，只有某些特定的类型消息才有
+
+有效载荷：也称为消息体
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org4b48b9e" class="outline-3">
+<h3 id="org4b48b9e"><span class="section-number-3">2.3</span> 固定头部</h3>
+<div class="outline-text-3" id="text-2-3">
+
+<div class="figure">
+<p><img src="./img/固定头部.png" alt="固定头部.png" />
+</p>
+</div>
+
+<pre class="example">
+Byte 1：
+       包含消息类型和标志字段 
+Byte 2：
+       包含剩余长度字段（至少1个字节，最多4个字节），以大端模式存储的（高字节-&gt;内存低地址）
+
+字节范围[ 2 - 5 字节]
+</pre>
+
+<ul class="org-ul">
+<li>MessageType ( byte 1，bits 7-4 ）</li>
+</ul>
+<pre class="example">
+14种消息类型
+占4 bit，0和15为保留数值
+         0 =&gt;                      // 保留字
+         1 =&gt; "CONNECT"            // 客户端请求连接服务器
+         2 =&gt; "CONNACK"            // 连接确认
+         3 =&gt; "PUBLISH"            // 发布消息
+         4 =&gt; "PUBACK"             // 发布确认
+         5 =&gt; "PUBREC"             // 发布接收 QoS2消息回执
+         6 =&gt; "PUBREL"             // 发布释放 QoS2消息释放
+         7 =&gt; "PUBCOMP"            // 发布完成 QoS2消息完成
+         8 =&gt; "SUBSCRIBE"          // 客户端订阅请求
+         9 =&gt; "SUBACK"             // 订阅确认
+        10 =&gt; "UNSUBSCRIBE"        // 客户端取消订阅请求
+        11 =&gt; "UNSUBACK"           // 取消订阅确认
+        12 =&gt; "PINGREQ"            // PING请求
+        13 =&gt; "PINGRESP"           // PING响应
+        14 =&gt; "DISCONNECT"         // 客户端断开连接
+        15 =&gt;                      // 保留字
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org9a7fda1" class="outline-3">
+<h3 id="org9a7fda1"><span class="section-number-3">2.4</span> 可变头部</h3>
+</div>
+
+<div id="outline-container-orgd03081a" class="outline-3">
+<h3 id="orgd03081a"><span class="section-number-3">2.5</span> 有效负载</h3>
+<div class="outline-text-3" id="text-2-5">
+<ul class="org-ul">
+<li>CONNECT</li>
+<li>SUBSCRIBE</li>
+<li>SUBACK</li>
+<li>PUBLISH</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org896e359" class="outline-2">
+<h2 id="org896e359"><span class="section-number-2">3</span> emqttd集群</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>集群环境搭建</li>
+</ul>
+<pre class="example">
+1 下载emqttd-ubuntu16.04-v2.0.4.zip  
+
+2 解压emqttd-ubuntu16.04-v2.0.4.zip到目标目录中去
+
+3 vim etc/emq.conf
+  node.name = emqttd@hostname  //hostname当前主机的主机名或者IP
+  // hostname IOTA-001中有中杠-可能有问题,用IP
+
+4 各个节点的emqtt服务控制
+   # 启动emqttd
+   ./bin/emqttd start
+
+   # 停止emqttd
+   ./bin/emqttd stop
+
+   # 查看emqttd
+   ./bin/emqttd_ctl status
+
+   # 控制台调试模式启动（查看日志）
+   ./bin/emqttd console
+
+5 web管理控制平台
+    http://192.168.161.128:18083/
+    user: admin
+    password: public:
+
+6 各个节点加入集群，node1上执行
+  ./bin/emqttd_ctl cluster join emqttd@192.168.161.129
+  ./bin/emqttd_ctl cluster join emqttd@192.168.161.130
+  ...
+</pre>
+
+<pre class="example">
+订阅主题集群图
+
+
+topic1              topic1,topic3
+---------         ---------
+| Node1 | --------| Node2 |
+---------         ---------
+    |     \     /    |
+    |       \ /      |
+    |       / \      |
+    |     /     \    |
+---------         ---------
+| Node3 | --------| Node4 |
+---------         ---------
+topic2             topic3
+
+EMQ消息服务器同一集群的所有节点，都会复制一份订阅主题(Topic) -&gt; 节点(Node)映射的路由表
+topic1 -&gt; node1, node2
+topic2 -&gt; node3
+topic3 -&gt; node2, node4
+
+集群中无论在向哪台机器pub(发布)一个主题内容，只要该主题在其他集群中任何一台机器中被订阅了
+
+都是可以收到。
+</pre>
+
+
+<pre class="example">
+集群实例
+
+t/x -&gt; node1  mosquitto_sub -h 192.168.161.128 -t t/x
+t/y -&gt; node2  mosquitto_sub -h 192.168.161.129 -t t/y
+
+node2 pub-&gt;t/x mosquitto_pub -h 192.168.161.129 -t t/x -m "mq129" 
+node1 pub-&gt;t/y mosquitto_pub -h 192.168.161.128 -t t/y -m "mq128" 
+
+# '$local/t/x' ：local只接受本地的mq所pub的消息
+mosquitto_sub -h 192.168.161.128 -t '$local/t/x' 
+mosquitto_pub -h 192.168.161.129 -t 't/x' -m "mq129" // 收不到的
+mosquitto_pub -h 192.168.161.128 -t 't/x' -m "mq128" // 可以收不到的
+
+http://192.168.161.128:18083/ 查看routes规则
+http://192.168.161.129:18083/
+</pre>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2016-12-23 周五 13:48</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

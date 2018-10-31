@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Karmanta - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Karmanta, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="img/favicon.png">
+    <title>{{title}} | 流量单笔充值</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/css/elegant-icons-style.css" rel="stylesheet"/>
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Custom styles -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet"/>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="js/lte-ie7.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<!-- container section start -->
+<section id="container" class="">
+    <!--header start-->
+    {% include section.header.html %}
+    <!--header end-->
+
+    <!--sidebar start-->
+    {% module Sidebar({'data-charge', 'charge'}) %}
+    <!--sidebar end-->
+
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row">
+
+                <div class="col-md-12 col-lg-12">
+
+                    <section class="panel">
+                        <header class="panel-heading row">
+                            <span class="pull-left"><i class="icon-edit"></i>流量单笔充值</span>
+                        </header>
+                        <div class="panel-body">
+                            <form class="form-validate form-horizontal " method="get">
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">手机号</label>
+
+                                    <div class="col-sm-6">
+                                        <input id="form_number" type="text" class="form-control" value=""
+                                               maxlength="11"/>
+                                        <label id="for_number" class="error"></label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label"> </label>
+
+                                    <div class="col-sm-5">
+                                        <h1 id="show_number">请输入号码</h1>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <h2 id="show_carrier"></h2>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label class="col-sm-2 control-label">充值产品</label>
+                                    <ul id="prod" class="col-sm-8"></ul>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10">
+                                    <a id="act_charge" href="javascript:void(0);" class="btn btn-danger"><i class="icon-ok-circle"></i> 确定</a>
+                                        <!--<a id="act_query" href="javascript:void(0);" class="btn btn-danger">查询</a>-->
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+
+                    <section class="panel">
+                        <header class="panel-heading row">
+                        <span class="pull-left"><i class="icon-table"></i>最新订单 <b class="price_color">(请注意最新充值记录可能有5~10秒延时)</b></span>
+                        </header>
+                        <div class="panel-body table-responsive">
+                            <table id="order_result" class="table table-striped table-hover">
+                                <thead>
+                                <tr>
+                                    <th>订单编号</th>
+                                    <th>代理商订单编号</th>
+                                    <th>手机号</th>
+                                    <th>产品名称</th>
+                                    <th>运营商</th>
+                                    <th>开始时间</th>
+                                    <th>订单状态</th>
+                                    <th>状态时间</th>
+                                    <th>面值</th>
+                                    <th>采购金额</th>
+                                    <th>余额</th>
+                                    <th>备注</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <div class="btn-row dataTables_filter">
+                                    <div id="page_group" class="btn-group">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- page end-->
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+<!-- container section end -->
+<!-- javascripts -->
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<!-- nice scroll -->
+<script src="/js/jquery.scrollTo.min.js"></script>
+<script src="/js/jquery.nicescroll.js"></script>
+<!-- jquery ui -->
+<script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
+<!-- bootstrap-datepicker -->
+<script type="text/javascript" src="/assets/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="/assets/bootstrap-daterangepicker/moment.js"></script>
+<script type="text/javascript" src="/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+<!-- custome script for all page -->
+<script src="/js/scripts.js"></script>
+<script src="/js/charge-single.js"></script>
+</body>
+</html>

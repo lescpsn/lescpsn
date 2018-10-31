@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package proto;
+
+message StringType {
+    string String= 1;
+    bool Null = 2;
+}
+
+message IntegerType {
+    int64 Int = 1;
+    bool Null = 2;
+}
+
+message BooleanType {
+    bool Bool = 1;
+    bool Null = 2;
+}

@@ -1,0 +1,33 @@
+syntax = "proto3";
+
+package sms;
+
+message RegisterSMSRequest {
+    string mobile = 1;
+    string code = 2;
+}
+
+message GenericSMSValidationRequest {
+    string userUUID = 1;
+    string mobile = 2;
+    string code = 3;
+}
+
+message SMSResponse {
+    bool success = 1;
+    string error = 2;
+
+    string request_code = 3;
+    SMSResult sms_result = 4;
+}
+
+message SMSResult {
+    int32 code = 1;
+    string message = 2;
+    string detail = 3;
+}
+
+service SMSServices {
+    rpc SendRegisterSMS(RegisterSMSRequest) returns (SMSResponse) {}
+    rpc SendGenericSMS(GenericSMSValidationRequest) returns (SMSResponse) {}
+}

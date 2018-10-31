@@ -1,0 +1,679 @@
+#+TITLE: Oh My Emacs Miscs
+#+OPTIONS: toc:nil num:nil ^:nil
+
+This is part of [[https://github.com/xiaohanyu/oh-my-emacs][oh-my-emacs]].
+
+This file contains things that still don't find a good place to put, :-).
+
+* Prerequisites
+  :PROPERTIES:
+  :CUSTOM_ID: miscs-prerequisites
+  :END:
+
+#+NAME: miscs-prerequisites
+#+CAPTION: Prerequisites for ome-miscs module
+| Package | Windows | Ubuntu/Debian/Mint | ArchLinux | Fedora | Mac OS X | Mandatory? |
+|---------+---------+--------------------+-----------+--------+----------+------------|
+| [[http://w3m.sourceforge.net/][w3m]]     |         | w3m, w3m-img       |           |        |          | No         |
+
+* El-get packages
+  :PROPERTIES:
+  :CUSTOM_ID: miscs-el-get-packages
+  :END:
+
+#+NAME: miscs-el-get-packages
+#+CAPTION: El-get packages for ome-miscs module
+| Package            | Status      | Description                                        |
+|--------------------+-------------+----------------------------------------------------|
+| [[https://github.com/jlr/rainbow-delimiters][rainbow-delimiters]] | Required    | Colorful parens.                                   |
+| [[http://magit.github.io/magit/][magit]]              | Required    | Git in Emacs.                                      |
+| [[https://github.com/bbatsov/projectile][projectile]]         | Required    | Project managment in Emacs.                        |
+| [[https://github.com/Fuco1/smartparens][smartparens]]        | Required    | The ulitimate paren management solution for Emacs. |
+| [[http://emacs-w3m.namazu.org/][emacs-w3m]]          | Recommended | Browsing HTML docs in Emacs.                       |
+| [[https://github.com/syohex/emacs-quickrun][quickrun]]           | Recommended | Just as its name said.                             |
+| [[http://www.eskimo.com/~seldon/diminish.el][diminish]]           | Recommended | Clean up mode line space.                          |
+| [[https://github.com/syohex/emacs-git-gutter-fringe][git-gutter-fringe]]  | Recommended | Fringe version of [[https://github.com/syohex/emacs-git-gutter][git-gutter.el]]                    |
+
+* Enable some dangerous commands
+
+Emacs may be slow when you editing large files with many minor modes
+on. [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Narrowing.html][Narrowing]] allows you focus in on some portion of the buffer, making the
+rest temporarily inaccessible. Widening is the reverse of narrowing, which
+cancels the narrowing, and makes the entire buffer once again accessible.
+
+By default, the narrowing commands are considered to be dangerous, we just
+remove the dangerous tag here.
+
+#+BEGIN_SRC emacs-lisp
+(put 'narrow-to-page 'disabled nil)
+(put 'narrow-to-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
+#+END_SRC
+* Toggle server mode .
+  :PROPERTIES:
+  :CUSTOM_ID: emacs-server
+  :END:
+
+You can [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Emacs-Server.html][use emacs as a server]], which "listens" for external edit requests and
+acts accordingly. Thus you can =alias vim=emacsclient= as the lucky
+stuff, :-).
+
+There're two ways to turn on =server-mode= on emacs start:
+- =(server-mode t)=
+- =(server-start)=
+
+In either way you can use =emacsclient= to connect an existing emacs server,
+and finish editing by typing =C-x #(server-edit)=, which will "kill" the
+=emacscient=. You can also quit =emacsclient= by =C-x C-c=, but this will kill
+emacs if you use =(server-start)= while keeps emacs alive if you use
+=(server-mode t)=, I don't know why. If you know the details, please tell me.
+
+#+NAME: emacs-server
+#+BEGIN_SRC emacs-lisp
+(server-mode t)
+#+END_SRC
+
+* Random Number
+  :PROPERTIES:
+  :CUSTOM_ID: random-number
+  :END:
+
+#+NAME: random-number
+#+BEGIN_SRC emacs-lisp
+;; Seed the random-number generator
+(random t)
+#+END_SRC
+
+* Rainbow Delimiters
+  :PROPERTIES:
+  :CUSTOM_ID: rainbow-delimiters
+  :END:
+
+"RainbowDelimiters is a "rainbow parentheses"-like mode which highlights
+parentheses, brackets, and braces according to their depth. Each successive
+level is highlighted in a different color. This makes it easy to spot matching
+delimiters, orient yourself in the code, and tell which statements are at a
+given depth."
+
+#+NAME: rainbow-delimiters
+#+BEGIN_SRC emacs-lisp
+(defun ome-rainbow-delimiters-setup ()
+  (rainbow-delimiters-mode))
+(ome-install 'rainbow-delimiters)
+#+END_SRC
+
+* Transparently Open Compressed Files
+  :PROPERTIES:
+  :CUSTOM_ID: auto-compression-mode
+  :END:
+
+"Auto Compression mode is a global minor mode.  When enabled, compressed files
+are automatically uncompressed for reading, and compressed when writing."
+
+#+NAME: auto-compression-mode
+#+BEGIN_SRC emacs-lisp
+(auto-compression-mode t)
+#+END_SRC
+
+* Allowing Opening Images
+  :PROPERTIES:
+  :CUSTOM_ID: auto-image-file-mode
+  :END:
+
+"Toggle visiting of image files as images (Auto Image File mode)."
+
+#+NAME: auto-image-file-mode
+#+BEGIN_SRC emacs-lisp
+(auto-image-file-mode t)
+#+END_SRC
+
+* Outline mode
+  :PROPERTIES:
+  :CUSTOM_ID: outline
+  :END:
+
+Outline mode is the root of org-mode, while =outline-minor-mode= is still
+useful with other major modes when browsing large files. You can get the
+overall structure with =outline-minor-mode=, so oh-my-emacs enabled
+=outline-minor-mode= for all programming modes by adding =outline-minor-mode=
+to =prog-mode-hook=.
+
+By default, outline minor mode provides special key bindings on the =C-c @=
+prefix, which, IMHO, is a little cumbersome to type. You can rebind to other
+keys if you like.
+
+You can get detailed information about =outline-mode= by typing =C-h F
+outline-mode=, and =C-h b= will bring you a full list of keybindings, including
+keybindings for =outline-minor-mode=.
+
+#+NAME: outline
+#+BEGIN_SRC emacs-lisp
+(add-hook 'prog-mode-hook
+          (lambda ()
+            (outline-minor-mode t)))
+
+;; (add-hook 'outline-minor-mode-hook
+;;           (lambda ()
+;;             (local-set-key (kbd "C-c C-o")
+;;                            outline-mode-prefix-map)))
+
+#+END_SRC
+
+* Magit
+  :PROPERTIES:
+  :CUSTOM_ID: magit
+  :END:
+
+[[http://www.git-scm.com/][Git]] might be the most popular version control system in the world by far, every
+programmer should try it, learn it, and finally master it. In fact, mastering
+git will boost your workflow and efficiency to a new level. Besides version
+control, git can also do other useful things such as file and storage
+sync. [[http://en.wikipedia.org/wiki/Linus_Torvalds][Linus Torvalds]], father of git, describes git as [[http://linux.die.net/man/1/git][a stupid content tracker]]:
+
+#+BEGIN_QUOTE
+In many ways you can just see git as a filesystem - it's content-
+addressable, and it has a notion of versioning, but I really really
+designed it coming at the problem from the viewpoint of a _filesystem_
+person (hey, kernels is what I do), and I actually have absolutely _zero_
+interest in creating a traditional SCM system.
+
+-- Linus Torvalds, http://marc.info/?l=linux-kernel&m=111314792424707
+#+END_QUOTE
+
+Actually, "git is fundamentally a content-addressable filesystem with a
+VCS user interface written on top of it[1]".
+
+[[http://magit.github.io/magit/][Magit]] integrate emacs with git, which will make your workflow smoother and more
+enjoyable. Of course there're other choices, but I prefer magit, view [[http://alexott.net/en/writings/emacs-vcs/EmacsGit.html][Alexott's
+Blog]] for technical details.
+
+There're a huge collection of magit commands which I can't remember at all,
+check the magit [[http://daemianmack.com/magit-cheatsheet.html][cheatsheet]] for details. The entry point to magit is
+=magit-status=, by default, ome bind "C-x g" to this command.
+
+#+NAME: magit
+#+BEGIN_SRC emacs-lisp
+(defun ome-magit-setup ()
+  ;; magit-status is the entry point
+  (global-set-key (kbd "C-x g") 'magit-status)
+  (add-hook 'git-rebase-mode-hook
+            (lambda ()
+              (evil-local-mode -1))))
+
+(if (executable-find "git")
+    (ome-install 'magit))
+#+END_SRC
+
+* git-gutter-fringe
+  :PROPERTIES:
+  :CUSTOM_ID: git-gutter-fringe
+  :END:
+
+[[https://github.com/syohex/emacs-git-gutter][git-gutter.el]] is a port of [[https://github.com/jisaacks/GitGutter][GitGutter]] which is a plugin of Sublime Text. It
+shows an icon in the gutter area indicating whether a line has been inserted,
+modified or deleted.
+
+The original [[https://github.com/syohex/emacs-git-gutter][git-gutter.el]] didn't work with linum-mode, so the author created a
+fringe version, called [[https://github.com/syohex/emacs-git-gutter-fringe][git-gutter-fringe.el]] which works with linux-mode. For
+detailed differences, check [[https://github.com/syohex/emacs-git-gutter][git-gutter.el]]'s [[https://github.com/syohex/emacs-git-gutter#git-gutterel-vs-git-gutter-fringeel][document]].
+
+[[https://github.com/syohex/emacs-git-gutter][git-gutter.el]] provides the following commands:
+- =git-gutter:next-hunk=
+- =git-gutter:previous-hunk=
+- =git-gutter:popup-hunk=, alias =git-gutter:popup-diff=
+- =git-gutter:stage-hunk=
+- =git-gutter:revert-hunk=
+- =git-gutter:clear=
+- =git-gutter:toggle=
+
+#+NAME: git-gutter-fringe
+#+BEGIN_SRC emacs-lisp
+(defun ome-git-gutter-fringe-setup ()
+  (dolist (mode-hook '(text-mode-hook prog-mode-hook))
+    (add-hook mode-hook
+              (lambda ()
+                ;; set fringe width to better display
+                (setq left-fringe-width 10)
+                (setq right-fringe-width 4))))
+
+  ;; some keybindings
+  (global-set-key (kbd "C-x v g") 'git-gutter:toggle)
+  (global-set-key (kbd "C-x v =") 'git-gutter:popup-hunk)
+  ;; Jump to next/previous hunk
+  (global-set-key (kbd "C-x v p") 'git-gutter:previous-hunk)
+  (global-set-key (kbd "C-x v n") 'git-gutter:next-hunk)
+  ;; Stage current hunk
+  (global-set-key (kbd "C-x v s") 'git-gutter:stage-hunk)
+  ;; Revert current hunk
+  (global-set-key (kbd "C-x v r") 'git-gutter:revert-hunk)
+
+  ;; improve performance
+  ;; (setq git-gutter:update-hooks '(after-save-hook after-revert-hook))
+
+  (require 'git-gutter-fringe)
+  (global-git-gutter-mode))
+
+(ome-install 'git-gutter-fringe)
+#+END_SRC
+
+* Visual-line-mode
+  :PROPERTIES:
+  :CUSTOM_ID: visual-line-mode
+  :END:
+
+[[http://www.gnu.org/software/emacs/manual/html_node/emacs/Visual-Line-Mode.html][Visual line mode]] is a new mode in Emacs 23. It provides support for editing by
+visual lines. It turns on word-wrapping in the current buffer, and rebinds C-a,
+C-e, and C-k to commands that operate by visual lines instead of logical lines.
+
+[[file:ome-basic.org::*Auto-fill%20Mode][As you know]], we have =turn-on-auto-fill= for =text-mode= and =prog-mode= and
+all derived modes, which may make it useless to turn on =visual-line-mode= most
+of the time. But we still turn on it globally to make it a fallback when
+=auto-fill-mode= was disabled by users.
+
+#+NAME: visual-line-mode
+#+BEGIN_SRC emacs-lisp
+(global-visual-line-mode t)
+#+END_SRC
+
+* Projectile
+  :PROPERTIES:
+  :CUSTOM_ID: projectile
+  :END:
+
+Emacs is good at file/buffer management, but lacks support for project level
+management. Fortunately, [[https://github.com/bbatsov/projectile][projectile]], a project created by [[http://batsov.com/][Bozhidar Batsov]], also
+the author of [[https://github.com/bbatsov/prelude][emacs prelude]], solved this problem in a lightweight, elegant,
+flexible and portable way.
+
+The concept of a project in projectile is pretty easy and basic -- just s
+folder containing special file. "Currently =git=, =mercurial=, =darcs= and
+=bazaar= repos are considered projects by default. So are =lein=, =maven=,
+=sbt=, =rebar= and =bundler= projects. If you want to mark a folder manually as
+a project just create an empty .projectile file in it."
+
+Projectile is flexible, you can use different completion backends, such as the
+emacs builtin =ido= with [[https://github.com/lewang/flx][flx-ido]], [[https://github.com/d11wtq/grizzl][grizzl]], or just regular completion, it also
+offers =helm= integration, which is great in oh-my-emacs since oh-my-emacs
+enables =helm= by default. But there's still room for improvement, I think, if
+one project contains multiple files with the same name, you can't
+differentiate them in helm's "projectile files list", so maybe add the
+fullpath aside to filename is a good idea.
+
+With projectile, you can find/grep/list files *within a project*, switch/view
+a list of known project you have viewed recently, kills all project buffers
+with a single shortcut, etc. Sounds great, ha? So, don't hesitate any more,
+just enjoy it!
+
+#+NAME: projectile
+#+BEGIN_SRC emacs-lisp
+(defun ome-projectile-setup ()
+  (projectile-global-mode)
+  (setq projectile-enable-caching t)
+  (global-set-key (kbd "C-x c h") 'helm-projectile))
+
+(ome-install 'projectile)
+#+END_SRC
+
+* Smartparens
+  :PROPERTIES:
+  :CUSTOM_ID: smartparens
+  :END:
+
+#+BEGIN_QUOTE
+Smartparens is modern minor mode for Emacs that /deals with parens pairs and
+tries to be smart about it/. It is a unification and enhancement effort to
+combine functionality of several existing packages in a single, common and
+straightforward way (and most of all compatible). These packages include
+[[https://github.com/capitaomorte/autopair][autopair]], [[http://code.google.com/p/emacs-textmate/][textmate]], [[https://github.com/rejeep/wrap-region][wrap-region]], [[http://emacswiki.org/emacs/ParEdit][paredit]] and others with similar
+philosophies. It also adds support for many more features. [[https://github.com/Fuco1/smartparens/wiki#wiki-what-is-this-package-about?][Here's]] a highlight
+of some features, for a complete list and detailed documentation look in the
+[[https://github.com/Fuco1/smartparens/wiki#wiki-information-for-new-users][manual]].
+
+For the complete picture of what is it about, visit the [[https://github.com/Fuco1/smartparens/wiki][documentation wiki]].
+#+END_QUOTE
+
+Believe me, [[https://github.com/Fuco1/smartparens][smartparens]] is the future, it is the ultimate solution for paren
+pairs management in Emacs world. It is flexible, uniform and highly
+customizable. It is also bundled with a comprehensive documentation, besides
+the aforementioned wiki, you can also =M-x sp-cheat-sheet= to get live
+examples, which, I think, is really a innovative feature.
+
+Smartparens didn't provide keybindings for most of its commands by default, so
+you must define proper =sp-keymap= by yourself, however, smartparens does
+provide =sp-use-paredit-bindings= and =sp-use-smartparens-bindings= as a good
+starting point. Oh-my-emacs adopt its own keybindings for smartparens, which
+defines =M-s= as the prefix key. The default keybindings provided by
+smartparens has some conflicts with =evil='s =ESC= key. If you have any other
+good suggestions, please tell me, thanks!
+
+I spent about one week's spare time just learning this amazing
+package. Smartparens is not as strict as paredit, for some people that kind of
+strictness seems annoying and weird at first. Paredit is [[http://emacsrocks.com/e14.html][powerful]], so
+smartparens import many features from paredit and provides a compatible, and
+more powerful, flexible version. For any serious Lispers, I recommend you spend
+some time to master these wonderful commands, which will make your life easier.
+
+#+NAME: smartparens
+#+BEGIN_SRC emacs-lisp
+(defun ome-create-newline-and-enter-sexp (&rest _ignored)
+  "Open a new brace or bracket expression, with relevant newlines and indent. "
+  (previous-line)
+  (indent-according-to-mode)
+  (forward-line)
+  (newline)
+  (indent-according-to-mode)
+  (forward-line -1)
+  (indent-according-to-mode))
+
+(defun ome-smartparens-setup ()
+  ;; global
+  (require 'smartparens-config)
+  (setq sp-autoskip-closing-pair 'always)
+  (setq sp-navigate-close-if-unbalanced t)
+  (smartparens-global-mode t)
+
+  ;; turn on smartparens-strict-mode on all lisp-like mode
+  (dolist (sp--lisp-mode-hook
+           (mapcar (lambda (x)
+                     (intern (concat (symbol-name x) "-hook")))
+                   sp--lisp-modes))
+    (add-hook sp--lisp-mode-hook
+              'smartparens-strict-mode)
+    ;; inferior-emacs-lisp-mode-hook is an alias of ielm-mode-hook
+    ;; and it will be overrided when you first start ielm
+    (add-hook 'ielm-mode-hook
+              'smartparens-strict-mode))
+
+  ;; highlights matching pairs
+  (show-smartparens-global-mode t)
+
+  ;; keybinding management
+  (define-key sp-keymap (kbd "M-s f") 'sp-forward-sexp)
+  (define-key sp-keymap (kbd "M-s b") 'sp-backward-sexp)
+
+  (define-key sp-keymap (kbd "M-s d") 'sp-down-sexp)
+  (define-key sp-keymap (kbd "M-s D") 'sp-backward-down-sexp)
+  (define-key sp-keymap (kbd "M-s a") 'sp-beginning-of-sexp)
+  (define-key sp-keymap (kbd "M-s e") 'sp-end-of-sexp)
+
+  (define-key sp-keymap (kbd "M-s u") 'sp-up-sexp)
+  ;; (define-key emacs-lisp-mode-map (kbd ")") 'sp-up-sexp)
+  (define-key sp-keymap (kbd "M-s U") 'sp-backward-up-sexp)
+  (define-key sp-keymap (kbd "M-s t") 'sp-transpose-sexp)
+
+  (define-key sp-keymap (kbd "M-s n") 'sp-next-sexp)
+  (define-key sp-keymap (kbd "M-s p") 'sp-previous-sexp)
+
+  (define-key sp-keymap (kbd "M-s k") 'sp-kill-sexp)
+  (define-key sp-keymap (kbd "M-s w") 'sp-copy-sexp)
+
+  (define-key sp-keymap (kbd "M-s s") 'sp-forward-slurp-sexp)
+  (define-key sp-keymap (kbd "M-s r") 'sp-forward-barf-sexp)
+  (define-key sp-keymap (kbd "M-s S") 'sp-backward-slurp-sexp)
+  (define-key sp-keymap (kbd "M-s R") 'sp-backward-barf-sexp)
+  (define-key sp-keymap (kbd "M-s F") 'sp-forward-symbol)
+  (define-key sp-keymap (kbd "M-s B") 'sp-backward-symbol)
+
+  (define-key sp-keymap (kbd "M-s [") 'sp-select-previous-thing)
+  (define-key sp-keymap (kbd "M-s ]") 'sp-select-next-thing)
+
+  (define-key sp-keymap (kbd "M-s M-i") 'sp-splice-sexp)
+  (define-key sp-keymap (kbd "M-s <delete>") 'sp-splice-sexp-killing-forward)
+  (define-key sp-keymap (kbd "M-s <backspace>") 'sp-splice-sexp-killing-backward)
+  (define-key sp-keymap (kbd "M-s M-<backspace>") 'sp-splice-sexp-killing-around)
+
+  (define-key sp-keymap (kbd "M-s M-d") 'sp-unwrap-sexp)
+  (define-key sp-keymap (kbd "M-s M-b") 'sp-backward-unwrap-sexp)
+
+  (define-key sp-keymap (kbd "M-s M-t") 'sp-prefix-tag-object)
+  (define-key sp-keymap (kbd "M-s M-p") 'sp-prefix-pair-object)
+  (define-key sp-keymap (kbd "M-s M-c") 'sp-convolute-sexp)
+  (define-key sp-keymap (kbd "M-s M-a") 'sp-absorb-sexp)
+  (define-key sp-keymap (kbd "M-s M-e") 'sp-emit-sexp)
+  (define-key sp-keymap (kbd "M-s M-p") 'sp-add-to-previous-sexp)
+  (define-key sp-keymap (kbd "M-s M-n") 'sp-add-to-next-sexp)
+  (define-key sp-keymap (kbd "M-s M-j") 'sp-join-sexp)
+  (define-key sp-keymap (kbd "M-s M-s") 'sp-split-sexp)
+  (define-key sp-keymap (kbd "M-s M-r") 'sp-raise-sexp)
+
+  ;; pair management
+  (sp-local-pair 'minibuffer-inactive-mode "'" nil :actions nil)
+
+  ;; markdown-mode
+  (sp-with-modes '(markdown-mode gfm-mode rst-mode)
+    (sp-local-pair "*" "*" :bind "C-*")
+    (sp-local-tag "2" "**" "**")
+    (sp-local-tag "s" "```scheme" "```")
+    (sp-local-tag "<"  "<_>" "</_>" :transform 'sp-match-sgml-tags))
+
+  ;; tex-mode latex-mode
+  (sp-with-modes '(tex-mode plain-tex-mode latex-mode)
+    (sp-local-tag "i" "\"<" "\">"))
+
+  ;; html-mode
+  (sp-with-modes '(html-mode sgml-mode)
+    (sp-local-pair "<" ">"))
+
+  ;; lisp modes
+  (sp-with-modes sp--lisp-modes
+    (sp-local-pair "(" nil :bind "C-("))
+
+  (dolist (mode '(c-mode c++-mode java-mode js2-mode sh-mode css-mode))
+    (sp-local-pair mode
+                   "{"
+                   nil
+                   :post-handlers
+                   '((ome-create-newline-and-enter-sexp "RET")))))
+
+(ome-install 'smartparens)
+#+END_SRC
+
+* Emacs-w3m
+  :PROPERTIES:
+  :CUSTOM_ID: emacs-w3m
+  :END:
+
+[[http://w3m.sourceforge.net/index.en.html][w3m]] is a text-based web browser as well as a pager like =more= or =less=, while
+[[http://emacs-w3m.namazu.org/][emacs-w3m]] is a simple Emacs interface to w3m, thus, to use emacs-w3m, you need
+=w3m= installed, there're other optional [[http://emacs-w3m.namazu.org/info/emacs-w3m_5.html#SEC5][requirements]], which provides a better
+surfing experience, but these are not mandatory, so try it if you like for
+free.
+
+In fact, I'm not that kind of person who does almost everything in Emacs, or
+lives in Emacs. I don't want to use emacs-w3m to do things like watching
+youtube videos, searching google map, etc. So, why emacs-w3m came here?
+
+I want emacs-w3m when I try to configure [[http://common-lisp.net/project/slime/][slime]] with [[http://www.lispworks.com/documentation/common-lisp.html][hyperspec]]. Slime provides
+an great =slime-documentation-lookup= function, which indeed is a wrapper of
+=slime-hyperspec-lookup=, through which you can browser the whole hyperspec
+documentation at your fingertips. Under the hood, =slime-hyperspec-lookup= will
+call =browse-url=, which in turn ask a WWW browser to show the
+documentation. Variable =browse-url-browser-function= says which browser to
+use. Here, I set it to =w3m-browse-url=.
+
+Now follows my secret weapon. I use =sp-copy-sexp= from =smartparens-mode= to
+copy some lisp snippets, and then paste the code snippets back to an lisp
+buffer and sent the snippet to slime to get a quick feedback. Ha, what a
+perfect workflow!  Now you should know why I need =emacs-w3m=.
+
+Some commonly used keybindings for =w3m-mode=:
+- =R= Reload the current page.
+- =r= Redisplay the current page.
+- =[= Move the point to the previous form.
+- =]= Move the point to the next form.
+- ={= Move the point to the previous image.
+- =}= Move the point to the next image.
+- =B= Move back to the previous page in the history.
+- =N= Move forward to the next page in the history.
+- =^= Attempt to move to the parent directory of the page.
+- =U= Visit the web page.
+- =G= Visit the web page in a new session.
+- =H= Go to the Home page.
+- =M= Display the current page using the external browser.
+- =C-c M-l= Delete tabs on the left side of the current tab.
+- =C-c M-r= Delete tabs on the right side of the current tab.
+- =M-d= Download the URL.
+- =d= Download the URL under point.
+- =I= Display the image under point in the external viewer.
+- =M-i= Save the image under point to a file.
+- =t= Toggle the visibility of an image under point.
+- =T= Toggle the visibility of all images.
+- =M-T= Turn off to display all images.
+- =M-[= Zoom in an image on the point.
+- =M-]= Zoom out an image on the point.
+- =u= Display the url under point and put it into `kill-ring'.
+- =c= Display the url of the current page and put it into `kill-ring'.
+- =\= Display the html source of the current page.
+- === Display the header of the current page.
+- =E= Edit the local file displayed as the current page.
+- =e= Edit the local file which is pointed to by URL under point.
+- =M-k= Display cookies and enable you to manage them.
+- =b= Scroll down the current window, or go to the previous page.
+- =J= Scroll the current window up one line (or lines of which the number you
+  specify by the prefix argument).
+- =j= Next line.
+- =k= Previous line.
+- =l= Forward char.
+- =h= Backward char.
+- =s= Display the history of pages you have visited in the session. If it is
+  called with the prefix arg, it displays the arrived URLs.
+- =S= Query to the search engine a word. To change the server, give any prefix
+  argument to the command.
+- =C-t t= Create an empty page as a new session and visit it.
+- =C-c C-t= Create a copy of the current page as a new session.
+- =C-c C-n= Turn the page of emacs-w3m buffers ahead.
+- =C-c C-p= Turn the page of emacs-w3m buffers behind.
+- =C-c RET= Move to the next unseen buffer.
+- =C-c C-s= Pop to the emacs-w3m buffers selection window up.
+- =C-c C-a= Select one of emacs-w3m buffers at the current window.
+- =C-c C-w= Delete the current emacs-w3m buffer.
+- =C-c M-w= Delete emacs-w3m buffers except for the current buffer.
+- =M-x w3m= Start browsing web with emacs-w3m.
+- =q= Close all emacs-w3m windows, without deleteing buffers.
+- =Q= Exit browsing web.  All emacs-w3m buffers will be deleted.
+- =C-c C-k= Try to stop internal processes of a page.
+
+#+NAME: emacs-w3m
+#+BEGIN_SRC emacs-lisp
+(defun ome-emacs-w3m-setup ()
+  ;; (setq w3m-default-display-inline-images t)
+  (setq w3m-home-page "http://www.google.com/ncr")
+  (setq browse-url-browser-function 'w3m-browse-url)
+  (global-set-key (kbd "C-x w") 'browse-url-at-point))
+
+(when (executable-find "w3m")
+  (ome-install 'emacs-w3m))
+#+END_SRC
+
+* Quickrun
+  :PROPERTIES:
+  :CUSTOM_ID: quickrun
+  :END:
+
+Just as its name, quickrun let you run your program in a really quick
+way. Just run it, without thinking about too much other chores.
+
+#+NAME: quickrun
+#+BEGIN_SRC emacs-lisp
+(ome-install 'quickrun)
+#+END_SRC
+
+* Diminish
+  :PROPERTIES:
+  :CUSTOM_ID: diminish
+  :END:
+
+#+BEGIN_QUOTE
+"When we diminish a mode, we are saying we want it to continue doing its work
+for us, but we no longer want to be reminded of it. It becomes a night worker,
+like a janitor; it becomes an invisible man; it remains a component, perhaps an
+important one, sometimes an indispensable one, of the mechanism that maintains
+the day-people's world, but its place in their thoughts is diminished, usually
+to nothing. As we grow old we diminish more and more such thoughts, such
+people, usually to nothing."
+
+-- Will Mengarini in diminish.el
+#+END_QUOTE
+
+As oh-my-emacs becomes more and more powerful, the mode line becomes more and
+more congested. [[http://www.eskimo.com/~seldon/diminish.el][diminish.el]] provide us a way to clean up the mode line. BTW, I
+really like its documentation, just check out the source code and you'll get
+everything you need to know about this tiny but powerful mode. See [[http://whattheemacsd.com/init.el-04.html][here]] and
+[[http://emacs-fu.blogspot.com/2010/05/cleaning-up-mode-line.html][here]] for some more details.
+
+You can check the variable =minor-mode-alist= and diminish minor modes as you
+like.
+
+#+NAME: diminish
+#+BEGIN_SRC emacs-lisp
+(defun ome-diminish-setup ()
+  ;; diminish some builtin mode
+  (eval-after-load "abbrev"
+    '(diminish 'abbrev-mode))
+
+  (eval-after-load 'simple
+    '(progn
+       ;; diminish auto-fill-mode
+       (diminish 'auto-fill-function)
+       ;; https://github.com/xiaohanyu/oh-my-emacs/issues/36
+       (when (string< emacs-version "24.3.50")
+         (diminish 'global-visual-line-mode))
+       (diminish 'visual-line-mode)))
+
+  (eval-after-load "outline"
+    '(diminish 'outline-minor-mode))
+
+  (eval-after-load "eldoc"
+    '(diminish 'eldoc-mode))
+
+  ;; diminish third-party mode
+  (eval-after-load "elisp-slime-nav"
+    '(diminish 'elisp-slime-nav-mode))
+
+  (eval-after-load "helm"
+    '(diminish 'helm-mode))
+
+  (eval-after-load "projectile"
+    '(diminish 'projectile-mode "Prjl"))
+
+  (eval-after-load "undo-tree"
+    '(diminish 'undo-tree-mode))
+
+  (eval-after-load "git-gutter-fringe"
+    '(diminish 'git-gutter-mode)))
+
+(ome-install 'diminish)
+#+END_SRC
+
+* Todo
+- Enable flyspell and ispell in text-mode.
+- Add a dictionary support, such as =sdcv=? Or a better translator support such
+  as =babel= or =gtranslate=?
+- Set emacs auto-save temporary dir instead of .emacs.d
+- Investigate how to use =imenu= and =imenu rescan=.
+- Learn more about emacs mark and selection, why CapsLK turn on selection mode.
+- Integrate elnode, skewer-mode and emacs-request to emacs.
+- Write a proper major-mode for GAS assembly language.
+- Oh-my-emacs keybindings to =C--= conflicts with Emacs's =negative-argument=?
+- Try to get the total boot up time and try to reduce the whole boot up time.
+- Documentation about indentation settings:
+  - http://emacsredux.com/blog/2013/03/29/automatic-electric-indentation/
+- Documentation about occur edit mode, which removes the need of external
+  packages such as iedit:
+  http://batsov.com/articles/2011/08/19/a-peek-at-emacs24/
+- What is emacs desktop-mode?
+- There're some documentation confusions between =sp-beginning-of-sexp= and
+  =sp-end-of-sexp=.
+- What is raw prefix =- C-u=? This comes from docstring for =sp-kill-sexp=.
+- Integrate travis?
+- Make =ome-load= interactive and buffer recognized.
+  - interactive load files
+    - absolute path such as "/home/xiao/.emacs.d/ome-lisp.org"
+    - relative path such as "ome-lisp.org"
+  - with a prefix key, load current buffer
+- More investigation on registers and marks, for better and fast jump in same
+  buffer?
+- Add realtime dictionary support for emacs.
+
+
+[1] See [[http://git-scm.com/book/en/Git-Internals][Git Internals]] to technical details.

@@ -1,0 +1,4 @@
+火狐浏览器快捷键用法总结
+快捷键缩写说明：C->Ctrl，S->Shift，D->Delete
+清除各种缓存的快捷键：C + S + D
+https://github.com/redguardtoo/mastering-emacs-in-one-year-guide/blob/master/guide-zh.org

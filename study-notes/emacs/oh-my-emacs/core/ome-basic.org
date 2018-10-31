@@ -1,0 +1,410 @@
+#+TITLE: Oh My Emacs Basic
+#+OPTIONS: toc:nil num:nil ^:nil
+
+This is part of [[https://github.com/xiaohanyu/oh-my-emacs][oh-my-emacs]].
+
+* Prerequisites
+  :PROPERTIES:
+  :CUSTOM_ID: basic-prerequisites
+  :END:
+
+#+NAME: basic-prerequisites
+#+CAPTION: Prerequisites for ome-basic module
+| Package    | Windows | Ubuntu/Debian/Mint | ArchLinux | Fedora | Mac OS X | Mandatory? |
+|------------+---------+--------------------+-----------+--------+----------+------------|
+| [[http://aspell.net/][GNU Aspell]] |         | aspell, aspell-en  |           |        |          |            |
+
+* El-get packages
+  :PROPERTIES:
+  :CUSTOM_ID: basic-el-get-packages
+  :END:
+
+#+NAME: basic-el-get-packages
+#+CAPTION: el-get packages for ome-basic module
+| Package              | Status      | Description                                                               |
+|----------------------+-------------+---------------------------------------------------------------------------|
+| saveplace            | Builtin     | Save cursor place in opened files.                                        |
+| recentf              | Builtin     | Maintains a recent opened file list.                                      |
+| uniquify             | Builtin     | Better differentiate buffers with same file name.                         |
+| auto-fill-mode       | Builtin     | We should still obey the 80-characters rule.                              |
+| [[https://github.com/purcell/exec-path-from-shell][exec-path-from-shell]] | Required    | ensure environment variables inside Emacs the same as in the user's shell |
+| [[https://github.com/flycheck/flycheck][flycheck]]             | Recommended | aka "Flymake done right"                                                  |
+| [[https://github.com/editorconfig/editorconfig-emacs][editorconfig]]         | Recommended | [[http://editorconfig.org][EditorConfig]] plugin for emacs                                             |
+| [[https://github.com/zk-phi/indent-guide][indent-guide]]         | Recommended | Show vertical lines to guide indentation                                  |
+
+* Some Basic Settings
+  :PROPERTIES:
+  :CUSTOM_ID: basic
+  :END:
+
+Sometimes you find weird thing in OS X's Emacs that a command works in your
+shell but not in Emacs. Thus you cannot install some el-get packages such as
+[[http://www.gnu.org/software/auctex/][auctex]].
+
+Thanks [[https://github.com/purcell/exec-path-from-shell][purcell/exec-path-from-shell]], it solves this problem perfectly.
+
+#+NAME: exec-path-from-shell
+#+BEGIN_SRC emacs-lisp
+(defun ome-exec-path-from-shell-setup ()
+  (when (memq window-system '(mac ns))
+    (exec-path-from-shell-initialize)))
+
+(ome-install 'exec-path-from-shell)
+#+END_SRC
+
+#+NAME: basic
+#+BEGIN_SRC emacs-lisp
+;; set environment coding system
+(set-language-environment "UTF-8")
+;; auto revert buffer globally
+(global-auto-revert-mode t)
+;; set TAB and indention
+(setq-default tab-width 4)
+(setq-default indent-tabs-mode nil)
+;; y or n is suffice for a yes or no question
+(fset 'yes-or-no-p 'y-or-n-p)
+;; always add new line to the end of a file
+(setq require-final-newline t)
+;; add no new lines when "arrow-down key" at the end of a buffer
+(setq next-line-add-newlines nil)
+;; prevent the annoying beep on errors
+(setq ring-bell-function 'ignore)
+;; remove trailing whitespaces before save
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+;; enable to support navigate in camelCase words
+(global-subword-mode t)
+;; hide startup splash screen
+(setq inhibit-startup-screen t)
+
+;; shell-mode settings
+(unless (eq system-type 'windows-nt)
+  (setq explicit-shell-file-name "/bin/bash")
+  (setq shell-file-name "/bin/bash"))
+;; always insert at the bottom
+(setq comint-scroll-to-bottom-on-input t)
+;; no duplicates in command history
+(setq comint-input-ignoredups t)
+;; what to run when i press enter on a line above the current prompt
+(setq comint-get-old-input (lambda () ""))
+;; max shell history size
+(setq comint-input-ring-size 1000)
+;; show all in emacs interactive output
+(setenv "PAGER" "cat")
+;; set lang to enable Chinese display in shell-mode
+(setenv "LANG" "en_US.UTF-8")
+
+;; set text-mode as the default major mode, instead of fundamental-mode
+;; The first of the two lines in parentheses tells Emacs to turn on Text mode
+;; when you find a file, unless that file should go into some other mode, such
+;; as C mode.
+(setq-default major-mode 'text-mode)
+
+;;; ido-mode
+(setq ido-enable-prefix nil)
+(setq ido-enable-case nil)
+(setq ido-enable-flex-matching t)
+(setq ido-everywhere t)
+(ido-mode t)
+
+;; use icomplete in minibuffer
+(icomplete-mode t)
+
+;; delete the selection with a keypress
+(delete-selection-mode t)
+#+END_SRC
+
+* Mac OS X compatibilities
+  :PROPERTIES:
+  :CUSTOM_ID: mac
+  :END:
+
+** Installation
+
+There're multiple [[http://wikemacs.org/index.php/Installing_Emacs_on_OS_X][choices]] to install Emacs on Mac OS X. I prefer [[http://brew.sh/][Homebrew]], and
+got my Emacs with =brew install emacs --cocoa=. This version of emacs even has
+native [[http://batsov.com/articles/2012/12/09/emacs-24-dot-3-introduces-native-osx-full-screen-support/][full screen support]].
+
+You'd better remove the outdated OS X's emacs to avoid conflicts with the new
+one.
+
+#+BEGIN_SRC sh
+sudo rm /usr/bin/emacs
+sudo rm -rf /usr/share/emacs
+#+END_SRC
+
+** Keybindings
+
+Another problem with emacs on Mac OX X is the keybindings to =Meta= and
+=Control=. Since most of the macbooks lack the right =Control= key, I prefer to
+bind Mac's =Command= and =Option= key to Emacs's =Meta= and =Control= key,
+respectively.
+
+However, sometimes, people would like to use an exteranl keyboard as the main
+input, so we need a switch between the "Mac" keys and "PC" keys via =M-x
+ome-switch-mac-keys=.
+
+#+BEGIN_SRC emacs-lisp
+(defvar mac-keys-p nil)
+
+(defun ome-switch-mac-keys ()
+  (interactive)
+  (if mac-keys-p
+      (progn
+        (setq mac-command-modifier 'super)
+        (setq mac-option-modifier 'meta)
+        (setq mac-keys-p nil)
+        (message "turn off Mac OS X's control/meta."))
+    (progn
+      (setq mac-command-modifier 'meta)
+      (setq mac-option-modifier 'control)
+      (setq mac-keys-p t)
+      (message "turn on Mac OS X's control/meta."))))
+
+(when (eq system-type 'darwin)
+  (ome-switch-mac-keys))
+#+END_SRC
+
+** Homebrew
+
+Lots of oh-my-emacs packages depends on external tools/libs/packages, which can
+be installed by apt(Ubuntu/Debian/Mint), yum(Fedora), homebrew(ala, Mac OS
+X). However, unlike other linux distributions, Mac OS X often has two different
+package collections, one is the system builtin, the other is something like
+homebrew. Sometimes, there're conflicts that makes you think that you have got
+the latest packages while actually emacs still use the system's builtin,
+outdated packages. So we need some special settings for this.
+
+Many el-get packages(such as [[http://common-lisp.net/project/slime/][slime]] in ome-common-lisp module) need [[http://www.gnu.org/software/texinfo/][texinfo]]. You
+can get latest texinfo by:
+
+#+BEGIN_SRC sh
+brew install texinfo
+#+END_SRC
+
+then you must do something to make texinfo become emacs's good friend.
+#+BEGIN_SRC sh
+brew link texinfo --force
+#+END_SRC
+
+* File encoding
+
+By default, emacs will detect file encoding according to an encoding priority
+list when opening a file, you can get your file encoding information by =C-h
+C=, aka =(describe-coding-system)=. However, sometimes this encoding priority
+list may not be proper for you, in this case, you can change this encoding
+priority list by =(set-coding-system-priority &rest coding-systems)=.
+
+For example, if you are Chinese and often have to work with Windows text
+document, then =(set-coding-system-priority 'utf-8 'chinese-gb18030)= may be
+the right solution for you to avoid garbled text. This statement tells emacs
+first try to open a chinese text file with utf-8 encoding, if failed, then try
+to open again with [[http://en.wikipedia.org/wiki/GB_18030][gb18030]] encoding. This will works for most Chinese users.
+
+If you want to change the file encoding temporarily when opening a file,
+=M-x revert-buffer-with-coding-system=.
+
+Text encoding is a complex topic, check emacs [[https://www.gnu.org/software/emacs/manual/html_node/emacs/International.html][manual]] for internal details.
+
+Check https://github.com/xiaohanyu/oh-my-emacs/issues/132 for detailed
+discussion.
+
+* Auto-fill Mode
+  :PROPERTIES:
+  :CUSTOM_ID: auto-fill
+  :END:
+
+[[http://www.gnu.org/software/emacs/manual/html_node/emacs/Auto-Fill.html][Auto Fill mode]] is a buffer-local minor mode in which lines are broken
+automatically when they become too wide. Breaking happens only when you type a
+<SPC> or <RET>.
+
+You may wonder why we still live with 80 columns rule in modern life, in which
+we have large monitors, intelligent editors(or IDEs). I don't explain the
+reasons here, you can refer stackoverflow [[http://stackoverflow.com/questions/110928/is-there-a-valid-reason-for-enforcing-a-maximum-width-of-80-characters-in-a-code][1]] and [[http://stackoverflow.com/questions/373561/do-people-still-live-by-the-80-column-rule][2]] to get some feeling.
+
+I zealously wrap my code at 80 columns if possible, and encourage my colleagues
+to follow the same rule. In fact, there're some projects in which 80 columns
+rule is mandatory.
+
+I enable auto fill minor mode for text-mode and prog-mode and all [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Derived-Modes.html][derived modes]]
+from them[1]. For how to quickly fill a paragraph or region, see [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Fill-Commands.html][Explicit Fill
+Commands]].
+
+#+NAME: auto-fill
+#+BEGIN_SRC emacs-lisp
+(setq-default fill-column 79)
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
+(add-hook 'prog-mode-hook 'turn-on-auto-fill)
+#+END_SRC
+
+* Save Place in Opened Files
+  :PROPERTIES:
+  :CUSTOM_ID: saveplace
+  :END:
+
+When you visit a file, point goes to the last place where it was when you
+previously visited the same file. The following code comes from [[http://emacs-fu.blogspot.com/2009/05/remembering-your-position-in-file.html][emacs-fu]].
+
+#+NAME: saveplace
+#+BEGIN_SRC emacs-lisp
+(setq-default save-place t)
+(setq save-place-file (concat user-emacs-directory ".saved-places"))
+(require 'saveplace)
+#+END_SRC
+
+* Recentf
+  :PROPERTIES:
+  :CUSTOM_ID: recentf
+  :END:
+
+All modern editors(or IDEs) provide features like open recent files/projects,
+so does emacs -- =recentf=, a builtin emacs package which maintains a menu for
+visiting files that were operated on recently. Together with =savespace=,
+emacs provides a quick way to restore your workspace.
+
+The following code comes from [[http://www.masteringemacs.org/articles/2011/01/27/find-files-faster-recent-files-package/][masteringemacs]], which combined =ido= and
+=recentf=.
+
+#+NAME: recentf
+#+BEGIN_SRC emacs-lisp
+(require 'recentf)
+
+;; get rid of `find-file-read-only' and replace it with something
+;; more useful.
+(global-set-key (kbd "C-x C-r") 'ido-recentf-open)
+
+;; save the .recentf file to .emacs.d/
+(setq recentf-save-file (concat user-emacs-directory ".recentf"))
+
+;; enable recent files mode.
+(recentf-mode t)
+
+;; 50 files ought to be enough.
+(setq recentf-max-saved-items 50)
+
+(defun ido-recentf-open ()
+  "Use `ido-completing-read' to \\[find-file] a recent file"
+  (interactive)
+  (if (find-file (ido-completing-read "Find recent file: " recentf-list))
+      (message "Opening file...")
+    (message "Aborting")))
+#+END_SRC
+
+* Uniquify
+  :PROPERTIES:
+  :CUSTOM_ID: uniquify
+  :END:
+
+Sometimes when you view different files with same filenames, emacs will
+append "<1>", "<2>" to the filename as the buffer name to differentiate
+them. Maybe you do not like the default naming patterns to "uniquify" these
+buffers, so emacs provides a uniquify package which can change the default
+naming of buffers to include parts of the file name (directory names) until the
+buffer names are unique.
+
+You can type =C-h i m emacs RET s uniquify RET= to get the manual about
+uniquify package. Or you can refer to [[http://trey-jackson.blogspot.com/2008/01/emacs-tip-11-uniquify.html][1]] and [[http://emacs-fu.blogspot.com/2009/11/making-buffer-names-unique.html][2]].
+
+#+NAME: uniquify
+#+BEGIN_SRC emacs-lisp
+(setq uniquify-buffer-name-style 'post-forward-angle-brackets)
+(require 'uniquify)
+#+END_SRC
+
+* Flyspell
+  :PROPERTIES:
+  :CUSTOM_ID: flyspell
+  :END:
+
+Emacs has builtin support for [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Spelling.html][spelling checking and correcting]] -- =flyspell=,
+but it is nonsense to enable it by default since most programming mode has
+special keyword which is not always spelled correctly by the judgement of the
+spelling checker.
+
+In order to use =flyspell=, you must install an external spell checker, such as
+[[http://aspell.net/][Aspell]] or [[http://www.gnu.org/software/ispell/][Ispell]], but GNU recommends [[http://aspell.net/man-html/Using-Aspell-as-a-Replacement-for-Ispell.html][Using Aspell as a Replacement for
+Ispell]]. The following code snippets comes from [[https://github.com/bbatsov/prelude/blob/master/core/prelude-editor.el][emacs prelude]].
+
+#+NAME: flyspell
+#+BEGIN_SRC emacs-lisp
+;; use aspell instead of ispell
+(setq ispell-program-name "aspell"
+      ispell-extra-args '("--sug-mode=ultra"))
+#+END_SRC
+
+* Flycheck
+  :PROPERTIES:
+  :CUSTOM_ID: flycheck
+  :END:
+
+[[https://github.com/flycheck/flycheck][Flycheck]] (aka "Flymake done right") is a modern on-the-fly syntax checking
+extension for GNU Emacs 24.
+
+#+NAME: flycheck
+#+BEGIN_SRC emacs-lisp
+(defun ome-flycheck-setup ()
+  (eval-after-load 'flycheck
+    '(setq flycheck-checkers (delq 'emacs-lisp-checkdoc flycheck-checkers)))
+  (add-hook 'prog-mode-hook 'flycheck-mode))
+
+(ome-install 'flycheck)
+#+END_SRC
+
+* EditorConfig
+  :PROPERTIES:
+  :CUSTOM_ID: editorconfig
+  :END:
+
+We live in a world with multiple editors or IDEs, and often we need
+collaboration with others. We can tune our emacs as best as we could. However,
+we still need a consistent, cross-editor, cross IDEs way to set some basic
+editor style.
+
+Fortunately, there comes [[http://editorconfig.org/][EditorConfig]]. EditorConfig helps developers define and
+maintain consistent coding styles between different editors and IDEs. The
+EditorConfig project consists of a file format for defining coding styles and a
+collection of text editor plugins that enable editors to read the file format
+and adhere to defined styles. EditorConfig files are easily readable and they
+work nicely with version control systems.
+
+You need to install =editorconfig= before you use the emacs package, check
+[[https://github.com/editorconfig/editorconfig-core-c/blob/master/INSTALL.md#installing-from-a-binary-package][Installation]].
+
+#+NAME: editorconfig
+#+BEGIN_SRC emacs-lisp
+(defun ome-editorconfig-setup ()
+  (require 'editorconfig))
+
+(ome-install 'editorconfig)
+#+END_SRC
+
+* Indent-guide
+  :PROPERTIES:
+  :CUSTOM_ID: indent-guide
+  :END:
+
+Often we work with indented code, and it's better for our friend, the Emacs
+editor, to provide some indentation guide for us. Most of the builtin
+indentation features or third-party packages provide static indentation guide,
+which may be not good in some cases. Fortunately, a smart guy write a dynamic
+[[https://github.com/zk-phi/indent-guide][indent-guide]] package for us. It's amazing.
+
+#+NAME: indent-guide
+#+BEGIN_SRC emacs-lisp
+(defun ome-indent-guide-setup ()
+  (require 'indent-guide))
+
+(ome-install 'indent-guide)
+#+END_SRC
+
+[[https://github.com/zk-phi/indent-guide][indent-guide]]
+
+* Todo
+** Flycheck
+- Customizable prefix key, see https://github.com/flycheck/flycheck/issues/223.
+- Checkers for Common Lisp.
+- Test with big files for performance.
+- More documentation and tutorial.
+
+
+[1] Actually, emacs has only three [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Basic-Major-Modes.html][basic major modes]], so we actually enable
+auto-fill in almost every programming and writing modes.

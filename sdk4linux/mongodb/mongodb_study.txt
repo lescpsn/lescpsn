@@ -1,0 +1,81 @@
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                             MONGODB_STUDY
+
+
+<<<<<<< HEAD
+                     ubuntu-16.04-server-amd64_001
+     ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+Table of Contents
+─────────────────
+
+1 mongodb的安装
+2 创建数据库访问用户
+.. 2.1 admin库中创建一个管理员用户
+.. 2.2 用户库中创建一个数据库连接用户
+.. 2.3 切换到admin库中对用户库用户授权
+3 mongodb常用操作
+.. 3.1 连接mongodb
+4 学习资源
+
+
+1 mongodb的安装
+═══════════════
+
+
+2 创建数据库访问用户
+════════════════════
+
+2.1 admin库中创建一个管理员用户
+───────────────
+
+  >mongo use admin
+  >db.createUser({user:'ngsmongo',pwd:'ngsmongo',roles:['userAdminAnyDatabase','dbAdminAnyDatabase']})
+
+
+2.2 用户库中创建一个数据库连接用户
+─────────────────
+
+  >use mydb [ use mean ] db.createUser({user: "ngsmongo", pwd:
+  >"ngsmongo", roles: [{role: "dbOwner", db: "mean"}]})
+
+
+2.3 切换到admin库中对用户库用户授权
+─────────────────
+
+  >use admin db.grantRolesToUser("ngsmongo",[{ role: "dbOwner", db:
+  >"mean" } ])
+
+
+3 mongodb常用操作
+═════════════════
+
+3.1 连接mongodb
+───────
+
+  mongo 127.0.0.1:27017/mean -u ngsmongo -p ngsmongo
+
+
+4 学习资源
+══════════
+
+  [http://wenku.baidu.com/link?url=hcm2wZyR2bRZY6atMbNpCwrq7y5gb3BZJyvb4ty2mhDbD-yfjlTQk6Iwu0n-t5t9MRGI3Hlx5TEfBid2VNco4b5IC9z3z0tfOPME-NseC3C]
+=======
+2、创建数据库访问用户(三部曲)
+   >mongo
+   # 创建数据库mean访问用户 ngsmongo
+   >use mydb [ use mean ]
+   >db.createUser({user: "ngsmongo", pwd: "ngsmongo", roles: [{role: "dbOwner", db: "mean"}]})
+
+
+   # 创建管理用户 ngsmongo
+   >use admin [ use admin ]
+   >db.createUser({user: "ngsmongo", pwd: "ngsmongo",roles:["userAdminAnyDatabase","dbAdminAnyDatabase"]})
+
+
+   # 管理用户 ngsmongo 对数据库用户授权
+   >db.grantRolesToUser("ngsmongo",[{ role: "dbOwner", db: "mean" } ])
+
+   # mongo 127.0.0.1:27017/mean -u ngsmongo -p ngsmongo
+>>>>>>> tmp

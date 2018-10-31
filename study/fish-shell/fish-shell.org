@@ -1,0 +1,40 @@
+#+TITLE: Fish-Shell学习历程
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/my-org-worg.css" />
+* 安装fish-shell
+** fish-shell安装(version>2.2)
++ 网络安装
+#+BEGIN_EXAMPLE
+sudo apt-get install fish
+#+END_EXAMPLE
+
++ 修改用户登陆shell
+#+BEGIN_EXAMPLE
+sudo vim /etc/passwd
+/usr/bin/fish
+#+END_EXAMPLE
+
++ oh-my-fish
+#+BEGIN_EXAMPLE
+oh-my-fish是fish-shell的环境配置
+方法1：curl -L https://get.oh-my.fish | fish
+方法2：curl -L github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
+#+END_EXAMPLE
+
+* fish-shell环境常用配置
+#+BEGIN_EXAMPLE
+~/.config/fish/config.fish没有就新创建一个该文件
+vim ~/.config/fish/config.fish
+
+# 设置xterm中端256                                                                                                                                         
+set -x TERM xterm-256color                                                                                                                                 
+
+# 设置PATH                                                                                                                                                 
+set -x GOPATH ~/Projects/lescpsn/golang                                                                                                                    
+set -x PATH $GOPATH/bin ~/anaconda3/bin $PATH                                                                                                              
+
+# 设置python虚拟环境初始华                                                                                                                                 
+source (conda info --root)/etc/fish/conf.d/conda.fish                                                                                                      
+activate py36env # deactivate 退出虚拟环境    
+#+END_EXAMPLE
+
+

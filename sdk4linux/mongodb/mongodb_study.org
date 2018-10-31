@@ -1,0 +1,19 @@
+* mongodb的安装
+* 创建数据库访问用户
+** admin库中创建一个管理员用户
+   >mongo
+   >use admin
+   >db.createUser({user:'ngsmongo',pwd:'ngsmongo',roles:['userAdminAnyDatabase','dbAdminAnyDatabase']})
+
+** 用户库中创建一个数据库连接用户
+   >use mydb [ use mean ]
+   >db.createUser({user: "ngsmongo", pwd: "ngsmongo", roles: [{role: "dbOwner", db: "mean"}]})
+
+** 切换到admin库中对用户库用户授权
+   >use admin
+   >db.grantRolesToUser("ngsmongo",[{ role: "dbOwner", db: "mean" } ])
+* mongodb常用操作
+** 连接mongodb
+   mongo 127.0.0.1:27017/mean -u ngsmongo -p ngsmongo
+* 学习资源
+[[http://wenku.baidu.com/link?url=hcm2wZyR2bRZY6atMbNpCwrq7y5gb3BZJyvb4ty2mhDbD-yfjlTQk6Iwu0n-t5t9MRGI3Hlx5TEfBid2VNco4b5IC9z3z0tfOPME-NseC3C]]

@@ -1,0 +1,8 @@
+分布式系统为什么需要 Tracing
+http://www.cnblogs.com/zhengyun_ustc/p/55solution2.html
+
+zipkin
+https://www.douban.com/note/489458786/?type=like [*****]
+
+
+http://www.ibm.com/developerworks/cn/cloud/library/cl-plug-and-play-service-discovery-with-consul-and-docker-bluemix/

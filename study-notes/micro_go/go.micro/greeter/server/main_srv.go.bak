@@ -1,0 +1,36 @@
+package main
+
+import (
+	"github.com/micro/go-micro"
+	hello "go.micro/greeter/server/proto/hello"
+	"golang.org/x/net/context"
+	"log"
+	"time"
+)
+
+type Say struct{}
+
+func (s *Say) Hello(ctx context.Context, req *hello.Request, rsp *hello.Response) error {
+	log.Print("Received Say.Hello request")
+	rsp.Msg = "Hello " + req.Name
+	return nil
+
+}
+
+func main() {
+	service := micro.NewService(
+		micro.Name("go.micro.srv.greeter"),
+		micro.RegisterTTL(time.Second*30),
+		micro.RegisterInterval(time.Second*10),
+	)
+
+	// command line usage
+	service.Init()
+
+	// register handlers
+	hello.RegisterSayHandler(service.Server(), new(Say))
+
+	if err := service.Run(); err != nil {
+		log.Println(err)
+	}
+}

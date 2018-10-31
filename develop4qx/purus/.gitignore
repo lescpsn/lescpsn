@@ -1,0 +1,10 @@
+.idea/
+.vagrant
+__pycache__/
+exports/
+inner/
+*.log*
+config_repo
+static/js/.module-cache/
+.vs/
+node_modules/

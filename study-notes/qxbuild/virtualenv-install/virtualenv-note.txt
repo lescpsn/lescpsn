@@ -1,0 +1,25 @@
+[ virtualenv安装 ]
+  1、安装python3-pip(需要root用户权限)
+     sudo apt-get install python3-pip
+
+  2、安装virtualenv,virtualenv已集成到大多数linux的发行版中了(需要root用户权限)
+     sudo apt-get install virtualenv
+
+  3、安装python运行的虚拟环境(py3run)
+     mkdir -p ~/py3run
+     virtualenv --distribute --no-site-packages --python=/usr/bin/python3 py3run
+
+     参数说明:
+     --distribute       : 使用新的基于发行版的包管理系统Distribute替代setuptools，
+                          并自动在新的虚拟环境中安装pip,pip3
+     --no-site-packages : 令隔离环境不能访问系统全局的site-packages目录
+     --python           : 指定所创建的python虚拟环境的解释器版本
+
+  4、将python的虚拟环境添加到各种shell的初始环境中
+     [bash shell] :
+     vim ~/.bashrc
+     source ~/py3run/bin/activate
+
+     [fish shell] :
+     vim ~/.config/fish/config.fish/
+     source ~/py3run/bin/activate.fish

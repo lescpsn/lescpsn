@@ -1,0 +1,7 @@
+{
+  "address": "localhost",
+  "username": "lincan",
+  "password": "",
+  "database_name": "mean",
+  "ssl_mode": "disable"
+}

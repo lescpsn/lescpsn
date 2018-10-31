@@ -1,0 +1,11 @@
+motor
+tornado
+PyYAML
+redis
+SQLAlchemy
+pycrypto
+onetimepass
+wheezy.captcha
+Pillow
+XlsxWriter
+mysql-connector-python-rf

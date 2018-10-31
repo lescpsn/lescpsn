@@ -1,0 +1,49 @@
+http://doc.oschina.net/grpc?t=56831（gRPC 官方文档中文版）
+                                          gRPC 官方文档中文版
+
+1 前言
+  gRPC 是一个高性能，开源的通用RPC框架，面向移动和HTTP/2设计。
+  目前提供C、Java和Go语言版本，分别是：grpc，grpc-java，grpc-go。
+  其中C版本支持C，C++，Python ...
+
+2 指南
+  2.1 概览
+  gRPC 是由google开发，是一款语言中立，平台中立，开源的远程过程调用系统（RPC）
+       2.1.1 快速开始（go语言版）
+
+       2.1.2 gRPC 是什么?
+             在 gRPC 里客户端应用可以像调用本地对象一样直接调用不同的机器上的
+             服务端应用的方法，使得你很容易创建分布式应用和服务。
+             服务端：
+                实现供客户端调用的服务（即接口，包括参数和返回值），运行gRPC
+                服务器处理客户端来的请求
+             客户端：
+                拥有一个 gRPC Stub（存根），能够像服务端一样的方法
+
+       2.1.2 protocol buffers（gRPC默认使用的序列化格式）
+             protocol buffers 是google开源的一套成熟的结构数据序列化机制了
+            （类似json）,服务端接口方法的参数，返回值采用protocol buffers
+             类型。
+             目前默认版本是proto2，建议开始使用proto3，就可以使用gRPC支持
+             全部范围的语言。并且可以避免proto2客户端和proto3服务端交换时
+             兼容性的问题了。
+
+       2.1.3 安装 gRPC
+             git clone https://github.com/grpc/grpc-go.git
+
+       2.1.4 定义服务
+             编辑 name.proto 文件
+
+       2.1.5 生成gRPC代码
+       protoc -I ../protos ../protos/helloworld.proto --go_out=plugins=grpc：helloworld
+       编译后生成helloworld.pb.go
+
+
+
+  2.2 gPRC概念
+
+  2.3 安全认证
+
+  2.4 通讯协议
+
+3 教程

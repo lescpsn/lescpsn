@@ -1,0 +1,151 @@
+go micro(go微服务学习网址)
+http://gogap.cn/archives/2016/
+
+go micro 的接口函数的文档
+https://godoc.org/github.com/micro/go-micro#Option
+
+go-micro环境搭建
+1、安装配置好golang环境
+
+2、安装 consul
+   go get github.com/hashicorp/consul
+
+3、安装 protoc
+   注意：
+   不能采用brew和apt-get安装(2.0版本)
+   采用源码编译安装3.0以上的版本
+
+4、安装 micro
+   go get github.com/micro/micro
+
+5、安装 {proto,protoc-gen-go}
+   注意：
+   未选用github.com/golang/protobuf/{proto,protoc-gen-go}
+   选用了这个版本
+   go get github.com/micro/protobuf/{proto,protoc-gen-go}
+
+   #go get -u github.com/golang/protobuf/{proto,protoc-gen-go}
+   go get github.com/micro/protobuf/{proto,protoc-gen-go}
+
+6、启动consul
+   consul agent -dev -advertise=127.0.0.1
+   consul agent -dev -advertise=127.0.0.1 -ui
+
+
+5、下载一个app的daemon运行测试
+go get github.com/micro/micro/examples/greeter/server
+server启动该app服务
+
+
+API 开发流程
+1、创建一个proto 目录
+   mkdir proto
+
+2、编写xxx.proto文件
+   vi greeter.proto
+
+3、编译xxx.proto文件
+   protoc --go_out=plugins=micro:. greeter.proto
+
+3、编写main.go文件
+   vi main.go
+
+
+
+micro常用命令集
+1、显示所有services
+micro list services
+
+2、查看某一个services的信息
+micro get service go.micro.srv.greeter
+
+3、调用某一个services中的方法
+micro query go.micro.srv.greeter Say.Hello '{"name": "John"}'
+
+
+使用事例
+https://github.com/micro/micro/blob/master/examples/greeter/api/api.go
+API请求方式：
+1、/rpc
+curl
+-d "service=go.micro.srv.greeter" \
+-d "method=Say.Hello" \
+-d "request={\"name\": \"John\"}" \
+http://localhost:8080/rpc
+
+{"msg":"Hello John"}
+
+
+2、api.Request
+通过约定好的URL格式，请求到内部的服务
+请求
+GET /greeter/say/hello?name=John
+解析成
+service: go.micro.api.greeter (default namespace go.micro.api is applied)
+method: Say.Hello
+        request {
+                "method": "GET",
+                "path": "/greeter/say/hello",
+                "get": {
+                "name": "John"
+        }
+}
+
+3、protobuf定义接口
+
+syntax = "proto3";
+
+message Pair {
+        optional string key = 1;
+        repeated string values = 2;
+}
+
+message Request {
+        optional string method = 1;   // GET, POST, etc
+        optional string path = 2;     // e.g /greeter/say/hello
+        map<string, Pair> header = 3;
+        map<string, Pair> get = 4;    // The URI query params
+        map<string, Pair> post = 5;   // The post body params
+        optional string body = 6;     // raw request body; if not application/x-www-form-urlencoded
+}
+
+message Response {
+        optional int32 statusCode = 1;
+        map<string, Pair> header = 2;
+        optional string body = 3;
+}
+
+
+
+
+https://github.com/micro/micro/tree/master/examples/greeter/api/go-restful
+运行 Micro API
+运行 App Service
+运行 App Service API
+Curl 请求
+micro --api_handler=proxy api
+go run greeter/server/main.go
+go run go-restful.go
+curl http://localhost:8080/greeter
+
+
+微服务开发流程
+1、编写main.go文件
+
+2、main.go文件的同级目录中创建一个proto目录，
+   在proto目录下编写该微服务的 xxx.proto文件
+
+3、安装 protoc 编译xxx.proto文件
+protoc -I$GOPATH/src --go_out=plugins=micro:$GOPATH/src  $GOPATH/src/go.micro/proto
+protoc --go_out=plugins=micro:. greeter.proto
+
+
+【问题】：
+1、Web UI 如何安装启动
+
+2、micro list services
+consul
+go.micro.api
+go.micro.api.greeter
+go.micro.srv.greeter
+go.micro.api 与 go.micro.srv 区别是什么

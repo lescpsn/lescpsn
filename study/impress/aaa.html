@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+ <html>
+ <head lang="zh">
+     <meta charset="UTF-8">
+     <title>Impress.js Demo - 孤影</title>
+
+     <link href="impress-demo.css" rel="stylesheet" type="text/css"/>
+     <!-- <style type="text/css">
+          body{margin:0px; background:#000000; color:#00FF66; font-size: 20px;}
+          div.step h3{display: inline-block;}
+          div.step{width:400px; height: 100px; padding-top: 50px; text-align: center; border:1px solid #00FF66; box-shadow: 0px 0px 10px #00FF66; border-radius: 20px;}
+          div#overview{border:0px; box-shadow:0px 0px 0px transparent; }
+          </style> -->
+ </head>
+ <body>
+     <div class="impress-not-supported"></div>
+ 
+     <div id="impress">
+         <div class="step" data-x="1000" data-y="1000"><h3>《Poker Face》</h3> - Lady Gaga</div>
+         <div class="step" data-x="1000" data-y="1000">I wanna hold them like they do in Texas Plays.</div>
+         <div class="step" data-x="500" data-y="-400">Fold them let them hit me raise it Baby stay with me..</div>
+         <div class="step" data-x="500" data-y="-800" data-scale="0.5">(I love it.)</div>
+         <div class="step" data-x="0" data-y="-800" data-rotate="90">Love game intuition play the cards with Spades to start.</div>
+         <div class="step" data-x="-1200" data-y="0" data-rotate-x="30" data-rotate-y="-30" data-rotate-z="90" data-scale="4">
+             And after he's been hooked I'll play the on that's on his heart.
+         </div>
+         <div class="step" id="overview" data-x="-200" data-y="-500" data-scale="3"></div>
+     </div>
+ 
+     <script type="text/javascript" src="impress.js"></script>
+     <script type="text/javascript">
+         impress().init();
+     </script>
+ </body>
+ </html><!DOCTYPE html>
+<html>

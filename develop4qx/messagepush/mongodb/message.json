@@ -1,0 +1,24 @@
+{
+    "_id" : "1",
+    "msg" : "超时",
+    "type" : "madeira.order_timeout",
+    "create_date" : "2016-02-01 15:27:41.062399",
+    "payload" : {
+        "order_list" : [
+            "Q20000000000"
+        ]
+    },
+    "processing_time" : ISODate("2016-02-01T15:27:48.382+0000")
+}
+{
+    "_id" : "2",
+    "msg" : "超时",
+    "type" : "madeira.order_timeout",
+    "create_date" : "2016-02-01 15:27:51.961453",
+    "payload" : {
+        "order_list" : [
+            "Q20000000001"
+        ]
+    },
+    "processing_time" : ISODate("2016-02-01T15:27:58.353+0000")
+}

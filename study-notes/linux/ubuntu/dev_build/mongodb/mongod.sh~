@@ -1,0 +1,45 @@
+#!/usr/bin/env bash
+
+start()
+{
+    echo "Starting mongodb..."
+}
+
+stop()
+{
+    echo "Stopping mongodb..."
+}
+
+status()
+{
+    echo "mongodb is running."
+    echo "mongodb is stopped."
+}
+
+
+restart()
+{
+    echo "Restarting mongodb..."
+}
+
+
+case "$1" in
+     start)
+	 start
+	 ;;
+
+     stop)
+	 stop
+	 ;;
+
+     status)
+	 status
+	 ;;
+
+     restart)
+	 restart
+	 ;;
+     *)
+	 echo "Usage $0 {start|stop|status|restart}"
+	 ;;
+esac

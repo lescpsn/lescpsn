@@ -1,0 +1,22 @@
+{
+    "_id" : ObjectId("56af05f4b285a125245a7fea"),
+    "msg_list" : [
+        {
+            "msg_id" : "1"
+        }
+    ],
+    "operator_id" : "2",
+    "sub_id" : ObjectId("56a98b87b285a120cc681734"),
+    "send_time" : ISODate("2016-02-01T15:15:01.363+0000")
+}
+{
+    "_id" : ObjectId("56af05f5b285a125245a7feb"), 
+    "msg_list" : [
+        {
+            "msg_id" : "1"
+        }
+    ], 
+    "operator_id" : "3", 
+    "sub_id" : ObjectId("56a9ce49b285a11df0745a11"), 
+    "send_time" : ISODate("2016-02-01T15:15:02.577+0000")
+}

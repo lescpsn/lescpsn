@@ -1,0 +1,105 @@
+1、64位ubuntu-15.10下采用apt-get网络自动化安装mysql步骤
+   1) aptitude search mysql-server 找出mysql安装包名
+      $ aptitude search mysql-server
+p   mysql-server                                                                  - MySQL database server (metapackage depending on the latest version)
+v   mysql-server:i386                                                             -
+p   mysql-server-5.6                                                              - MySQL database server binaries and system database setup
+p   mysql-server-5.6:i386                                                         - MySQL database server binaries and system database setup
+p   mysql-server-core-5.6                                                         - MySQL database server binaries
+p   mysql-server-core-5.6:i386                                                    - MySQL database server binaries
+v   virtual-mysql-server                                                          -
+v   virtual-mysql-server:i386                                                     -
+v   virtual-mysql-server-core                                                     -
+v   virtual-mysql-server-core:i386                                                -
+
+   2) 切换到root用户权限，执行apt-get install mysql-server
+      $ sudo -i
+      $ apt-get install mysql-server
+
+
+2、mysql命令行客户端常用命令
+   登录                 : mysql -h 127.0.0.1 -u root -p
+   显示所有数据库       : show databases;
+   切换到某个数据库     : use mysql;
+   显示当前库下的所有表 : show tables;
+   查看某个表的结构     : desc user;
+   查看当前所在数据库名 : select database();
+   删除mysql的用户      : drop user 用户名;
+   创建一个表           : CREATE TABLE repo_product_catalog(
+                          domain_id varchar(20) NOT NULL,
+                          catalog_id varchar(20) NOT NULL,
+                          name varchar(100) NOT NULL
+                          ) DEFAULT CHARSET=utf8;
+   删除一个表           : DROP TABLE  repo_product_catalog;
+
+   某字段后新增一个字段 : ALTER TABLE repo_product ADD catalog_id varchar(20) AFTER domain_id
+
+   [ 表操作 ] :
+   增加表的一个字段     : mysql> ALTER TABLE table_name ADD field_name field_type;
+                          mysql> ALTER TABLE repo_special ADD update_supply_time datetime;
+
+   修改字段的值         : mysql> UPDATE table_name SET field_name=value WHERE field_name IS NULL;
+                        : mysql> UPDATE repo_special SET update_supply_time=now() WHERE update_supply_time IS NULL;
+
+   [ select 语句 ] :
+   SELECT User,Host from user \G
+   (注意没有分号结尾,\G表示按照列格式化输出结果)
+
+   [ 用户管理 ] :
+   创建一个管理员用户:
+   grant all on *.* to 'user'@'%' identified by "passwd";
+   % : 表示允许让任意主机连接
+
+
+
+   [ mysql数据导入和导出 ] :
+   mysql -u用户名 -p密码 数据库名  < 数据库名.sql
+   mysqldump -u用户名 -p 数据库名  > 数据库名.sql
+   mysqldump -h 服务器 -u 用户  -p   -P 端口 --set-gtid-purged=OFF  数据库名 > repo.sql
+   mysqldump -h albertreadonly2.mysql.rds.aliyuncs.com -u purus  -p   -P 3998 --set-gtid-purged=OFF  repo > repo.sql
+   例如 :    mysqldump -urepo -p repo  > repo.sql       (passwd: repo)
+
+################################################################################
+[常见问题汇总]:
+1、mysql连接不上解决思路
+   1) 采用telnet检查通讯是否建立telnet <ip> <port>
+      $ telnet 192.168.1.159 3306
+        Trying 192.168.1.159...
+        telnet: Unable to connect to remote host: Connection refused
+      日志提示mysql数据库服务器主机的3306端口根本无法通讯，初步断定有两种情况：
+      一种可能是mysql的服务没有启动
+      一种可能是防火墙限定了端口
+
+   2) 查看系统是否有mysql进程，如果没有请启动mysql服务
+      $ ps -ef | grep mysql
+      $ service mysql start （有的系统mysql的服务名是mysqld，
+        采用service mysqld start）
+
+   3) 查看防火墙状态，如果防火墙是开启的，请关闭（当然也可以不关闭，采用配置防火墙
+      端口策略，允许mysql的3306端口被外界访问）
+      $ sudo ufw status
+        Status: inactive
+
+   4) 用netstat查看mysql服务端口3306绑定IP的情况
+      $ netstat -an | grep 3306
+        tcp        0      0 127.0.0.1:3306          0.0.0.0:*               LISTEN
+      显示mysql只能提供本机IP127.0.0.1被访问，
+      所有通过网络上的IP肯定是不能访问mysql数据库的
+      mysql -h 127.0.0.1 -u -p   （能被访问）
+      mysql -h <网络中IP> -u -p  （不能被访问）
+
+   5) 以上问题基本解决，mysql远程还是不能远程访问,
+      初步断定应该不是Linux系统的问题，可能是mysql自身的配置文件做了权限的限制，
+      不允许远程用户登录，查看mysql的配置文件/etc/mysql/mysql.conf.d，
+      注释掉bind-address = 127.0.0.1，并重启服务,并用netstat继续查看3306端口
+      绑定的IP的情况
+      # vi /etc/mysql/mysql.conf.d/mysqld.cnf
+      # bind-address          = 127.0.0.1
+      # service mysql restart
+      # netstat -an | grep 3306
+      tcp6       0      0 :::3306                 :::*                    LISTEN
+      至此OK，显示:::3306, mysql可以绑定在任意被外界可访问的IP上了
+
+   5) $ mysql -h 192.168.1.159 -uroot -p
+        Enter password:
+        ERROR 1130 (HY000): Host '192.168.1.159' is not allowed to connect to this MySQL server

@@ -1,0 +1,15 @@
+Title = "This Is NikeName and Avatar  Interface Config File"
+
+NickName = [
+"小犬屎一郎",
+"马大叔叔",
+"三胖锅锅",
+"三胖锅锅",
+]
+
+AvatarUrl = [
+"http://7xodxr.com2.z0.glb.qiniucdn.com/81edd5ab-759f-4ecb-8724-ad37b5caf915.jpg",
+"http://7xodxr.com2.z0.glb.qiniucdn.com/a71424cb-2af6-4d85-9969-040aa0af8b64.jpg",
+"http://7xodxr.com2.z0.glb.qiniucdn.com/3ac4aa63-adf5-4cf3-95d5-3de710eca0dd.jpg",
+"http://7xodxr.com2.z0.glb.qiniucdn.com/3ac4aa63-adf5-4cf3-95d5-3de710eca0dd.jpg",
+]

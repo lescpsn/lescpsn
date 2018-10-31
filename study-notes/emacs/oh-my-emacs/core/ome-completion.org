@@ -1,0 +1,376 @@
+#+TITLE: Oh My Emacs Completion
+#+OPTIONS: toc:nil num:nil ^:nil
+
+This is part of [[https://github.com/xiaohanyu/oh-my-emacs][oh-my-emacs]].
+
+* El-get packages
+  :PROPERTIES:
+  :CUSTOM_ID: completion-el-get-packages
+  :END:
+
+#+NAME: completion-el-get-packages
+#+CAPTION: El-get packages for ome-completion module
+| Package       | Status   | Description                                 |
+|---------------+----------+---------------------------------------------|
+| [[http://cx4a.org/software/auto-complete/][auto-complete]] | Required | I really like it.                           |
+| [[https://github.com/emacs-helm/helm][helm]]          | Required | Completion everywhere, highly recommended.  |
+| [[https://github.com/capitaomorte/yasnippet][YASnippet]]     | Required | Quick snippet template insertion.           |
+| [[http://www.emacswiki.org/emacs/PosTip][pos-tip]]       | Required | For better auto-complete popup tips window. |
+
+* Hippie expand
+=M-x hippie-expand= is a single command providing a variety of completions and
+expansions. The following code segment comes from [[https://github.com/bbatsov/prelude][Emacs Prelude]].
+
+#+name: hippie-expand
+#+BEGIN_SRC emacs-lisp
+;; hippie expand is dabbrev expand on steroids
+(setq hippie-expand-try-functions-list '(try-expand-dabbrev
+                                         try-expand-dabbrev-all-buffers
+                                         try-expand-dabbrev-from-kill
+                                         try-complete-file-name-partially
+                                         try-complete-file-name
+                                         try-expand-all-abbrevs
+                                         try-expand-list
+                                         try-expand-line
+                                         try-complete-lisp-symbol-partially
+                                         try-complete-lisp-symbol))
+#+END_SRC
+
+* Auto complete
+  :PROPERTIES:
+  :CUSTOM_ID: auto-complete
+  :END:
+
+[[http://cx4a.org/software/auto-complete/][Auto-Complete]] is an intelligent auto-completion extension for Emacs. It extends
+the standard Emacs completion interface and provides an environment that allows
+users to concentrate more on their own work.
+
+Actually, there're multiple completion packages for Emacs, say Emacs builtin
+[[http://www.gnu.org/software/emacs/manual/html_node/elisp/Completion.html][completion]], there're =completion-at-point= function for [[http://www.gnu.org/software/emacs/manual/html_node/elisp/Completion-in-Buffers.html][completion in buffers]],
+[[http://www.emacswiki.org/emacs/ProgrammableCompletion][pcomplete]] for completion mainly for =comint-mode=, such as [[http://www.masteringemacs.org/articles/2012/01/16/pcomplete-context-sensitive-completion-emacs/][completion in
+Eshell]], =ido-mode= for completion in minibuffers. Say auto-complete, there's
+also a [[http://stackoverflow.com/questions/4704748/emacs-completion-autocomplete-or-company][competitive]] [[http://company-mode.github.io/][company-mode]].
+
+By default, function =global-auto-complete-mode= will toggle on auto-complete
+according to =ac-modes=, which in turn determines what major mode
+=auto-complete-mode= can run on. Oh-my-emacs add =org-mode= and =text-mode= to
+=ac-modes=.
+
+#+NAME: auto-complete
+#+BEGIN_SRC emacs-lisp
+(defun ome-auto-complete-setup ()
+  (require 'auto-complete-config)
+
+  (define-key ac-mode-map (kbd "M-/") 'ac-fuzzy-complete)
+  (dolist (ac-mode '(text-mode org-mode))
+    (add-to-list 'ac-modes ac-mode))
+  (dolist (ac-mode-hook '(text-mode-hook org-mode-hook prog-mode-hook))
+    (add-hook ac-mode-hook
+              (lambda ()
+                (setq ac-fuzzy-enable t)
+                (add-to-list 'ac-sources 'ac-source-files-in-current-dir)
+                (add-to-list 'ac-sources 'ac-source-filename))))
+
+  (ac-config-default))
+
+(ome-install 'auto-complete)
+#+END_SRC
+
+** Integrate pcomplete with Auto-complete
+   :PROPERTIES:
+   :CUSTOM_ID: ac-source-pcomplete
+   :END:
+
+You may wonder why oh-my-emacs choose auto-complete? In a word, auto-complete
+is flexible which provides a plugin mechanism through which you can define your
+own =ac-source=, thus you get unlimited possibilities to complete in various
+programming languages, major modes, etc.
+
+The following code comes from [[http://www.emacswiki.org/emacs/EshellCompletion][EmacsWiki]], which defines a =ac-source-pcomplete=
+that integrates pcomplete as a completion backend to auto-complete.
+
+#+NAME: ac-source-pcomplete
+#+BEGIN_SRC emacs-lisp
+(defun ac-pcomplete ()
+  ;; eshell uses `insert-and-inherit' to insert a \t if no completion
+  ;; can be found, but this must not happen as auto-complete source
+  (flet ((insert-and-inherit (&rest args)))
+    ;; this code is stolen from `pcomplete' in pcomplete.el
+    (let* (tramp-mode ;; do not automatically complete remote stuff
+           (pcomplete-stub)
+           (pcomplete-show-list t) ;; inhibit patterns like * being deleted
+           pcomplete-seen pcomplete-norm-func
+           pcomplete-args pcomplete-last pcomplete-index
+           (pcomplete-autolist pcomplete-autolist)
+           (pcomplete-suffix-list pcomplete-suffix-list)
+           (candidates (pcomplete-completions))
+           (beg (pcomplete-begin))
+           ;; note, buffer text and completion argument may be
+           ;; different because the buffer text may bet transformed
+           ;; before being completed (e.g. variables like $HOME may be
+           ;; expanded)
+           (buftext (buffer-substring beg (point)))
+           (arg (nth pcomplete-index pcomplete-args)))
+      ;; we auto-complete only if the stub is non-empty and matches
+      ;; the end of the buffer text
+      (when (and (not (zerop (length pcomplete-stub)))
+                 (or (string= pcomplete-stub ; Emacs 23
+                              (substring buftext
+                                         (max 0
+                                              (- (length buftext)
+                                                 (length pcomplete-stub)))))
+                     (string= pcomplete-stub ; Emacs 24
+                              (substring arg
+                                         (max 0
+                                              (- (length arg)
+                                                 (length pcomplete-stub)))))))
+        ;; Collect all possible completions for the stub. Note that
+        ;; `candidates` may be a function, that's why we use
+        ;; `all-completions`.
+        (let* ((cnds (all-completions pcomplete-stub candidates))
+               (bnds (completion-boundaries pcomplete-stub
+                                            candidates
+                                            nil
+                                            ""))
+               (skip (- (length pcomplete-stub) (car bnds))))
+          ;; We replace the stub at the beginning of each candidate by
+          ;; the real buffer content.
+          (mapcar #'(lambda (cand) (concat buftext (substring cand skip)))
+                  cnds))))))
+
+(defvar ac-source-pcomplete
+  '((candidates . ac-pcomplete)))
+#+END_SRC
+
+** Auto-complete usability matrix
+   :PROPERTIES:
+   :CUSTOM_ID: auto-complete-usability-matrix
+   :END:
+
+Semantic completion based on [[http://cx4a.org/software/auto-complete/][auto-complete]] is one of the major goals of
+oh-my-emacs. The following matrix show the current status of oh-my-emacs
+semantic completion.
+
+#+NAME: auto-complete-usability-matrix
+|             | AC Usability | AC Backend          | Detail                             |
+|-------------+--------------+---------------------+------------------------------------|
+| C/C++       |          80% | [[https://github.com/brianjcj/auto-complete-clang][auto-complete-clang]] | Issue with function argument list. |
+| Python      |         100% | [[https://github.com/jorgenschaefer/elpy][elpy]]                | elpy is amazing.                   |
+| Emacs Lisp  |         100% | Builtin             | You kown that.                     |
+| Common Lisp |         100% | [[https://github.com/purcell/ac-slime][ac-slime]]            | SLIME is amazing, too.             |
+| Scheme      |          80% | [[https://github.com/xiaohanyu/ac-geiser][ac-geiser]]           | Yeah, I'm the author of ac-geiser. |
+| Clojure     |         100% | [[https://github.com/clojure-emacs/ac-nrepl][ac-nrepl]]            | It even completes Java!            |
+
+* Helm
+  :PROPERTIES:
+  :CUSTOM_ID: helm
+  :END:
+
+[[https://github.com/emacs-helm/helm][Helm]] is a incremental completion and selection narrowing framework for
+emacs. It will help steer you in the right direction when you're looking for
+stuff in Emacs (like buffers, files, etc). Helm is a fork of =anything.el=,
+which clean up the legacy code in =anything.el= and provide a cleaner and more
+modular tool.
+
+Actually, helm is not the only [[http://ergoemacs.org/emacs/emacs_name_completion.html][name completion packages in emacs]], there're
+other choices--of course you always have choices in emacs, for example, the
+builtin [[http://www.masteringemacs.org/articles/2010/10/10/introduction-to-ido-mode/][ido-mode]] is quite a good choice. I also heard of [[http://www.emacswiki.org/emacs/Icicles][icicles]] to be the most
+powerful, but I found its documentatin really awkward. I choose helm since it
+is easy to install and config, user-friendly, powerful enough and quite
+intuitive to boost your workflow.
+
+
+
+To tell the truth, I, myself, the author of oh-my-emacs, is a heavy user of
+helm and never wish to go back to life with ido or some fuzzy match
+packages. Helm is one of my favourite emacs packages. The more you live with
+helm, the more you will find that you never want to go back. Helm can replace
+many builtin or third-party emacs packages, or even provide a better
+experience. For example, =helm-M-x= is a good competitor to [[https://github.com/nonsequitur/smex][smex]],
+=helm-show-kill-ring= provides a better way to interact with emacs kill ring
+than [[https://github.com/browse-kill-ring/browse-kill-ring][browse-kill-ring]]. Helm integrates various external tools(such as =grep=,
+=find=, =locate=, =md5sum=, =etags=, etc.) to emacs in a highly intuitive and
+interactive way. Helm can even help you install debian apt packages. If you
+have any question, just type =M-x helm-google-suggest= and then helm will fire
+a web browser opening google for you at your fingertip.
+
+And I've found a really great and awesome [[http://tuhdo.github.io/helm-intro.html][post]] written by [[http://tuhdo.github.io/index.html][tuhdo@github]], which
+demonstrate how powerful helm is with an intuitive way by posting lots of GIF
+images. I highly recommend you to read this post and I'm sure that you will
+fall in love with helm and never look back, just like me.
+
+I've also borrow lots of code from that [[http://tuhdo.github.io/helm-intro.html][post]] and make some incompatible changes
+about how to use helm in oh-my-emacs. *One of the most important is*,
+oh-my-emacs now binds =helm-execute-persistent-action= to =TAB= and
+=helm-select-action= to =C-z=, and also, you should use =C-o= to go to
+different "categories" in helm list, since oh-my-emacs set
+=helm-move-to-line-cycle-in-source= to =t=, check docs for details.
+
+To wrap your mind around the helm way, you need to remember a few key
+bindings. When helm starts, remember:
+- access the helm action menu with =C-z=. Maybe this is the most whirlwind
+  turnaround since most name completion packages use =TAB= as completion
+  key. Don't worry, helm doesn't need too much completion, since helm provides
+  name completion by navigation instead by using =TAB= to complete character by
+  character. Actually, the helm =TAB= brings you a new world, in which you
+  combine several tasks into a series of successive keystrokes and get your job
+  done.
+- Use persistent actions with =TAB=.
+- Mark candidate with =M-<SPACE>=, thus you can do batch processing through helm.
+
+The [[https://github.com/emacs-helm/helm/wiki][helm wiki]] is a good place to explore this new world, but it's a little long
+and not complete enough to cover all helm power. You can access helm functions
+through the emacs menubar if want to use helm but don't want to remember too
+much helm key bindings. Some shortcuts:
+- =C-x c l=: =helm-locate=
+- =C-x c /=: =helm-find=
+- =C-x c f=: =helm-for-files=
+- =C-x c M-x=: =helm-M-x=
+- =C-x c a=: =helm-apropos=
+- =C-x c r=: =helm-regexp=
+- =C-x c c=: =helm-colors=
+- =C-x c 8=: =helm-ucs=
+- =C-x c i=: =helm-imenu=
+- =C-x c m=: =helm-man-woman=
+- =C-x c t=: =helm-top=
+- =C-x c p=: =helm-list-emacs-process=
+- =C-x c M-y=: =helm-show-kill-ring=
+
+To fully adopt helm power, I also set some custom helm keybindings in
+oh-my-emacs, you can change it as you like. Of course you can disable helm at
+all, then oh-my-emacs will use some other packages such as =ido-mode= as a
+fallback. But I do suggest you to take some time to be familiar with helm.
+
+#+NAME: helm
+#+BEGIN_SRC emacs-lisp
+(defun ome-helm-setup ()
+  (require 'helm-config)
+  (setq helm-input-idle-delay 0.2)
+  (helm-mode t)
+  (setq helm-locate-command
+        (case system-type
+          ('gnu/linux "locate -i -r %s")
+          ('berkeley-unix "locate -i %s")
+          ('windows-nt "es %s")
+          ('darwin "mdfind -name %s %s")
+          (t "locate %s")))
+
+  (global-set-key (kbd "C-x c g") 'helm-do-grep)
+  (global-set-key (kbd "C-x c o") 'helm-occur)
+  (global-set-key (kbd "M-x") 'helm-M-x)
+  (global-set-key (kbd "C-x C-f") 'helm-find-files)
+
+  ;; rebind tab to run persistent action
+  (define-key helm-map (kbd "<tab>") 'helm-execute-persistent-action)
+  ;; make TAB works in terminal
+  (define-key helm-map (kbd "C-i") 'helm-execute-persistent-action)
+  ;; list actions using C-z
+  (define-key helm-map (kbd "C-z") 'helm-select-action)
+
+  (when (executable-find "curl")
+    (setq helm-google-suggest-use-curl-p t))
+
+  (setq
+   ;; open helm buffer inside current window, not occupy whole other window
+   helm-split-window-in-side-p t
+   ;; fuzzy matching buffer names when non--nil
+   helm-buffers-fuzzy-matching t
+   ;; move to end or beginning of source when reaching top or bottom of source.
+   helm-move-to-line-cycle-in-source t
+   ;; search for library in `require' and `declare-function' sexp.
+   helm-ff-search-library-in-sexp t
+   ;; scroll 8 lines other window using M-<next>/M-<prior>
+   helm-scroll-amount 8
+   helm-ff-file-name-history-use-recentf t))
+
+(ome-install 'helm)
+
+#+END_SRC
+
+* helm-descbinds
+  :PROPERTIES:
+  :CUSTOM_ID: helm-descbinds
+  :END:
+
+Helm Descbinds provides an interface to emacs’ describe-bindings making the
+currently active key bindings interactively searchable with helm.
+
+Additionally you have the following helm persistent actions
+- Execute the command
+- Describe the command
+- Find the command
+
+#+BEGIN_SRC emacs-lisp
+(defun ome-helm-descbinds-setup ()
+  (helm-descbinds-mode 1))
+
+(ome-install 'helm-descbinds)
+#+END_SRC
+
+* Yasnippet
+  :PROPERTIES:
+  :CUSTOM_ID: yasnippet
+  :END:
+
+[[https://github.com/capitaomorte/yasnippet][YASnippet]] is "Yet Another Snippet" expansion system for Emacs. It is inspired by
+[[http://macromates.com/][TextMate]]'s templating syntax. You can see the [[http://capitaomorte.github.io/yasnippet/][intro and tutorial]] or watch this
+[[http://www.youtube.com/watch?v%3DvOj7btx3ATg][video on youtube]] to get some basic knowledge.
+
+Oh-my-emacs do some hacks to =yas-prompt-functions=, it adopts [[https://github.com/m2ym/popup-el][popup]], a visual
+popup interface library extracted from [[http://cx4a.org/software/auto-complete/][auto-complete]] by its author. It has
+better look and feel than all the built-in =yas-prompt-functions=. Also it is
+easy to customize, and its isearch mode is very efficient, the items are
+filtered on-the-fly when typing[1].
+
+TODO:
+- The bundled snippets from official yasnippet is considered frozen, so you
+  should add your own snippets if you want more. Maybe [[https://github.com/AndreaCrotti/yasnippet-snippets][yasnippet-snippets]] is a
+  good starting point, but I think it's far from perfect, for example, the
+  emacs-lisp snippet is not quite hard to use.
+
+#+NAME: yasnippet
+#+BEGIN_SRC emacs-lisp
+(eval-after-load 'popup
+  '(progn
+     (define-key popup-menu-keymap (kbd "M-n") 'popup-next)
+     (define-key popup-menu-keymap (kbd "TAB") 'popup-next)
+     (define-key popup-menu-keymap (kbd "<tab>") 'popup-next)
+     (define-key popup-menu-keymap (kbd "<backtab>") 'popup-previous)
+     (define-key popup-menu-keymap (kbd "M-p") 'popup-previous)))
+
+(defun yas-popup-isearch-prompt (prompt choices &optional display-fn)
+  (when (featurep 'popup)
+    (popup-menu*
+     (mapcar
+      (lambda (choice)
+        (popup-make-item
+         (or (and display-fn (funcall display-fn choice))
+             choice)
+         :value choice))
+      choices)
+     :prompt prompt
+     ;; start isearch mode immediately
+     :isearch t)))
+
+(defun ome-yasnippet-setup ()
+  (setq yas-prompt-functions
+        '(yas-popup-isearch-prompt
+          yas-no-prompt))
+  (yas-global-mode))
+
+(ome-install 'popup)
+(ome-install 'yasnippet)
+#+END_SRC
+
+* Todo
+
+** Helm
+Ah, various ideas to enhance helm:
+- Provide a copy action which just copy the selected items. This is useful when
+  you query a elisp command or function.
+- Provide a doc action which show documentation of elisp function or commands.
+- For helm-projectile, add full path to file list to differentiate same file
+  name files.
+
+
+[1] http://iany.me/2012/03/use-popup-isearch-for-yasnippet-prompt/

@@ -1,0 +1,322 @@
+<aside>
+    <div id="reload_fullbg"></div>
+    <div id="reload_icon"><i class="icon-spinner icon-spin icon-4x"></i></div>
+    <div id="sidebar" class="nav-collapse ">
+        <!-- sidebar menu start-->
+        <ul class="sidebar-menu">
+            <li class="{% if 'dashboard' in current_menu %} active{% end %}">
+                <a class="" href="/">
+                    <i class="icon_house_alt"></i>
+                    <span>首页</span>
+                </a>
+            </li>
+
+            {% if 'data-query' in roles or 'fee-query' in roles or 'sinopec-query' in roles %}
+            <li class="sub-menu{% if 'query' in current_menu %} active{% end %}">
+                <a href="javascript:void(0);" class="{% if 'query' in current_menu %} active{% end %}">
+                    <i class="icon_search_alt"></i>
+                    <span>订单查询</span>
+                    <span class="menu-arrow arrow_carrot-right"></span>
+                </a>
+                <ul class="sub">
+                    {% if 'data-query' in roles %}
+                    <li class="{% if 'query-data' in current_menu %}active{% end %}"><a
+                            href="/query/data">流量查询</a>
+                    </li>
+                    {% end %}
+                    {% if 'fee-query' in roles %}
+                    <li class="{% if 'query-fee' in current_menu %}active{% end %}"><a
+                            href="/query/fee">话费查询</a></li>
+                    {% end %}
+                    {% if 'sinopec-query' in roles %}
+                    <li class="{% if 'query-sinopec' in current_menu %}active{% end %}"><a
+                            href="/query/sinopec">加油卡查询</a></li>
+                    {% end %}
+                </ul>
+            </li>
+            {% end %}
+
+            {% if 'charge' in roles %}
+            <li class="sub-menu{% if 'charge' in current_menu %} active{% end %}">
+                <a href="javascript:void(0);" class="{% if 'charge' in current_menu %} active{% end %}">
+                    <i class="icon-signal"></i>
+                    <span>充值中心</span>
+                    <span class="menu-arrow arrow_carrot-right"></span>
+                </a>
+                <ul class="sub">
+                    {% if 'data-charge' in roles %}
+                    <li class="{% if 'data-charge' in current_menu %}active{% end %}"><a
+                            href="/charge/data/single">流量充值</a>
+                    </li>
+                    {% end %}
+
+                    {% if 'sinopec-charge' in roles %}
+                    <li class="{% if 'sinopec-charge' in current_menu %}active{% end %}"><a
+                            href="/charge/sinopec/single">加油卡充值</a>
+                    </li>
+                    {% end %}
+                </ul>
+            </li>
+            {% end %}
+
+            {% if 'admin-customer' in roles %}
+            <li class="sub-menu{% if 'downstream' in current_menu %} active{% end %}">
+                <a href="javascript:void(0);" class="{% if 'admin' in current_menu %} active{% end %}">
+                    <i class="icon_group"></i>
+                    <span>客户管理</span>
+                    <span class="menu-arrow arrow_carrot-right"></span>
+                </a>
+                <ul class="sub">
+                    <li class="{% if 'approval' in current_menu %}active{% end %}">
+                        <a href="/downstream/approval">客户审核</a>
+                    </li>
+                    <li class="{% if 'management' in current_menu %}active{% end %}">
+                        <a href="/downstream/management">客户列表</a>
+                    </li>
+                    <li class="{% if 'special' in current_menu %}active{% end %}">
+                        <a href="/admin/special">密价</a>
+                    </li>
+                </ul>
+            </li>
+            {% end %}
+
+            {% if 'admin-product' in roles %}
+            <li class="sub-menu{% if 'product' in current_menu %} active{% end %}">
+                <a href="javascript:void(0);" class="{% if 'admin' in current_menu %} active{% end %}">
+                    <i class="icon_cart_alt"></i>
+                    <span>产品中心</span>
+                    <span class="menu-arrow arrow_carrot-right"></span>
+                </a>
+                <ul class="sub">
+                    <li class="{% if 'product-list' in current_menu %}active{% end %}">
+                        <a href="/admin/product">产品列表</a>
+                    </li>
+
+                    <li class="{% if 'product-price' in current_menu %}active{% end %}">
+                        <a href="/admin/price">价格等级</a>
+                    </li>
+
+                    <li class="{% if 'admin-product-user' in current_menu %}active{% end %}">
+                        <a href="/admin/product_user">用户-产品管理</a>
+                    </li>
+                </ul>
+            </li>
+            {% end %}
+
+            {% if 'admin-route' in roles %}
+            <li class="sub-menu{% if 'admin-route' in current_menu %} active{% end %}">
+                <a href="javascript:void(0);" class="{% if 'admin-route' in current_menu %} active{% end %}">
+                    <i class="icon-random"></i>
+                    <span>路由管理</span>
+                    <span class="menu-arrow arrow_carrot-right"></span>
+                </a>
+                <ul class="sub">
+                    <li class="{% if 'route-interface' in current_menu %}active{% end %}">
+                        <a href="/route/interface">接口管理</a>
+                    </li>
+                    <li class="{% if 'route-supply' in current_menu %}active{% end %}">
+                        <a href="/route/supply">货源管理</a>
+                    </li>
+                    <li class="{% if 'product-supply' in current_menu %}active{% end %}">
+                        <a href="/route/product-supply">产品-货源管理</a>
+                    </li>
+                    <li class="{% if 'user-supply' in current_menu %}active{% end %}">
+                        <a href="/route/user-supply">用户-货源管理</a>
+                    </li>
+                </ul>
+            </li>
+            {% end %}
+
+            {% if 'admin' in roles %}
+            <li class="sub-menu{% if 'admin' in current_menu %} active{% end %}">
+                <a href="javascript:void(0);" class="{% if 'admin' in current_menu %} active{% end %}">
+                    <i class="icon_shield_alt"></i>
+                    <span>管理中心</span>
+                    <span class="menu-arrow arrow_carrot-right"></span>
+                </a>
+                <ul class="sub">
+                    {% if 'admin-withdraw' in roles %}
+                    <li class="sub-menu{% if 'admin-withdraw' in current_menu %} active{% end %}">
+                        <a href="/admin/withdraw">财务提现</a>
+                    </li>
+                    <li class="sub-menu{% if 'withdraw_list' in current_menu %} active{% end %}">
+                        <a href="/admin/withdraw_list">提现明细</a>
+                    </li>
+                    {% end %}
+                    {% if 'admin-point' in roles %}
+                    <li class="{% if 'admin-point' in current_menu %}active{% end %}">
+                        <a href="/admin/fund">财务维护</a>
+                    </li>
+                    <li class="{% if 'deposit-quota' in current_menu %}active{% end %}">
+                        <a href="/admin/deposit/quota">加款限额管理</a>
+                    </li>
+                    {% end %}
+                    {% if 'admin-card' in roles %}
+                    <li class="{% if 'admin-quxun-card' in current_menu %}active{% end %}">
+                        <a href="/admin/quxun_card">中移动卡充维护</a>
+                    </li>
+                    <li class="{% if 'admin-quxun-sinopec-card' in current_menu %}active{% end %}">
+                        <a href="/admin/quxun_sinopec_card">中石化卡充维护</a>
+                    </li>
+                    <li class="{% if 'admin-quxun-card-query' in current_menu %}active{% end %}">
+                        <a href="/admin/quxun_card_query">中移动卡充查询</a>
+                    </li>
+                    <!--<li class="{% if 'admin-card' in current_menu %}active{% end %}">
+                        <a href="/admin/card">卡充维护</a>
+                    </li>-->
+                    {% end %}
+                    {% if 'admin-routing' in roles %}
+                    <li class="{% if 'admin-routing' in current_menu %}active{% end %}">
+                        <a href="/admin/routing">卡充路由维护</a>
+                    </li>
+                    <li class="{% if 'admin-quxun-cmcc-fee-card-switch' in current_menu %}active{% end %}">
+                        <a href="/admin/cmcc_fee_route_switch">卡充分省维护</a>
+                    </li>
+                    {% end %}
+                    {% if 'admin-devops' in roles %}
+                    <li class="{% if 'admin-devops' in current_menu %}active{% end %}">
+                        <a href="/downstream/admin">运维维护</a>
+                    </li>
+                    {% end %}
+                    {% if 'admin' in roles %}
+                    <li class="{% if 'admin-domain-list' in current_menu %}active{% end %}">
+                        <a href="/admin/domain">用户-平台管理</a>
+                    </li>
+                    {% end %}
+                </ul>
+            </li>
+            {% end %}
+
+            {% if 'data-card' in roles %}
+            <li class="sub-menu{% if 'data-card' in current_menu %} active{% end %}">
+                <a href="javascript:void(0);" class="{% if 'data-card' in current_menu %} active{% end %}">
+                    <i class="icon-credit-card"></i>
+                    <span>流量卡密</span>
+                    <span class="menu-arrow arrow_carrot-right"></span>
+                </a>
+                <ul class="sub">
+                    <li class="{% if 'open-data-card' in current_menu %}active{% end %}">
+                        <a href="/data_card/card_open">开卡管理</a>
+                    </li>
+                    <li class="{% if 'admin-data-card' in current_menu %}active{% end %}">
+                        <a href="/data_card/card_search">卡密管理</a>
+                    </li>
+                    <li class="{% if 'admin-card-page' in current_menu %}active{% end %}">
+                        <a href="/data_card/page_recharge">充值页面管理</a>
+                    </li>
+                </ul>
+            </li>
+            {% end %}
+
+            {% if 'fee-finance' in roles %}
+            <li class="sub-menu{% if 'add' in current_menu %} active{% end %}">
+                <a href="javascript:void(0);" class="{% if 'add' in current_menu %} active{% end %}">
+                    <i class=" icon_currency_alt"></i>
+                    <span>财务管理</span>
+                    <span class="menu-arrow arrow_carrot-right"></span>
+                </a>
+                <ul class="sub">
+                    <li class="{% if 'fee-finance' in current_menu %}active{% end %}">
+                        <a href="/finance">账户明细</a>
+                    </li>
+                    {% if 'withdraw' in roles %}
+                    <li class="sub-menu{% if 'withdraw' in current_menu %} active{% end %}">
+                        <a href="/withdraw">提现说明</a>
+                    </li>
+                    {% end %}
+                    {% if 'deposit-apply' in roles %}
+                    <li class="{% if 'deposit-apply' in current_menu %}active{% end %}">
+                        <a href="/fund/deposit/apply">加款单填写</a>
+                    </li>
+                    {% end %}
+                    {% if 'fee-yeepay' in roles %}
+                    <li class="sub-menu{% if 'add-fund-yeepay' in current_menu %} active{% end %}">
+                        <a href="/yeepay">银行卡加款</a>
+                    </li>
+                    {% end %}
+                </ul>
+            </li>
+            {% end %}
+
+            {% if 'services' in roles %}
+            <li class="sub-menu{% if 'services' in current_menu %} active{% end %}">
+                <a href="javascript:void(0);" class="{% if 'services' in current_menu %} active{% end %}">
+                    <i class="icon-group"></i>
+                    <span>客服中心</span>
+                    <span class="menu-arrow arrow_carrot-right"></span>
+                </a>
+                <ul class="sub">
+                    <li class="{% if 'services-order' in current_menu %}active{% end %}">
+                        <a href="/services/order">订单中心</a>
+                    </li>
+                    <li class="{% if 'statistics' in current_menu %}active{% end %}">
+                        <a href="/services/statistics">流量订单监控</a>
+                    </li>
+                    <li class="{% if 'data-routing' in current_menu %}active{% end %}">
+                        <a href="/services/data_routing">路由监控</a>
+                    </li>
+                    <li class="{% if 'service-interface' in current_menu %}active{% end %}">
+                        <a href="/services/service_interface">接口维护信息</a>
+                    </li>
+                    <li class="{% if 'deposit-approve' in current_menu %}active{% end %}">
+                        <a href="/services/deposit/approve">用户加款审核</a>
+                    </li>
+                    <li class="{% if 'deposit-upstream' in current_menu %}active{% end %}">
+                        <a href="/admin/upstream">上游余额管理</a>
+                    </li>
+                    <li class="{% if 'product-query' in current_menu %}active{% end %}">
+                        <a href="/services/product">产品查询</a>
+                    </li>
+                    <li class="{% if 'services-callback' in current_menu %}active{% end %}">
+                        <a href="/services/callback">手工回调</a>
+                    </li>
+                </ul>
+            </li>
+            {% end %}
+
+            {% if 'fuel-card' in roles %}
+            <li class="sub-menu{% if 'fuel-card' in current_menu %} active{% end %}">
+                <a href="javascript:void(0);" class="{% if 'fuel-card' in current_menu %} active{% end %}">
+                    <i class="icon-group"></i>
+                    <span>油卡中心</span>
+                    <span class="menu-arrow arrow_carrot-right"></span>
+                </a>
+                <ul class="sub">
+                    {% if 'fuel-card-bot-account' in roles %}
+                    <li class="{% if 'fuel-card_bot-account' in current_menu %}active{% end %}">
+                        <a href="/fuel_card/bot_account">账号管理</a>
+                    </li>
+                    {% end %}
+                    <li>
+                        <a href="http://112.25.220.13:9901" target="_blank">库存管理 <i class="icon-external-link"></i></a>
+                    </li>
+                    {% if 'fuel-card-customer-list' in roles %}
+                    <li class="{% if 'fuel-card_customer-list' in current_menu %}active{% end %}">
+                        <a href="/fuel_card/customer_list">客户列表</a>
+                    </li>
+                    {% end %}
+                    {% if 'fuel-card-single-recharge' in roles %}
+                    <li class="{% if 'fuel-card_single-recharge' in current_menu %}active{% end %}">
+                        <a href="/fuel_card/single_recharge">单笔充值</a>
+                    </li>
+                    {% end %}
+                    {% if 'fuel-card-big-recharge' in roles %}
+                    <li class="{% if 'fuel-card_big-recharge' in current_menu %}active{% end %}">
+                        <a href="/fuel_card/big_recharge">大额充值</a>
+                    </li>
+                    {% end %}
+                    {% if 'fuel-card-order-list' in roles %}
+                    <li class="{% if 'fuel-card_order-list' in current_menu %}active{% end %}">
+                        <a href="/fuel_card/order_list">订单记录</a>
+                    </li>
+                    {% end %}
+                    <li class="{% if 'fuel-card_help' in current_menu %}active{% end %}">
+                        <a href="/fuel_card/help">帮助说明</a>
+                    </li>
+                </ul>
+            </li>
+            {% end %}
+        </ul>
+        <!-- sidebar menu end-->
+    </div>
+</aside>

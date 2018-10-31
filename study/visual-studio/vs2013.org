@@ -1,0 +1,16 @@
+#+TITLE: visual stduio 2013学习记录
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/my-org-worg.css" />
+
+* issue
++ utf-8文件乱码问题
+#+BEGIN_EXAMPLE
+1 修改vs2013安装目录D:\Program Files\Microsoft Visual Studio 12.0\VC\vcprojectitems下的
+  两个文件hfile.h和newc++file.cpp
+  添加如下两行
+  #pragma once
+  #pragma execution_character_set("utf-8")
+
+2 文件菜单 -> 高级选项 -> utf-8
+#+END_EXAMPLE
+
+

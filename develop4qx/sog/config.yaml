@@ -1,0 +1,6 @@
+config:
+  port: 9999
+
+
+mongodb:
+  mongo_sog: 'mongodb://sog3:abc123@127.0.0.1:27017/sog'

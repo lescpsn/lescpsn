@@ -1,0 +1,34 @@
+version: 1
+
+loggers:
+  root:
+    level: DEBUG
+    handlers: [console]
+  tornado:
+    level: DEBUG
+    handlers: [console]
+  request:
+    level: DEBUG
+    handlers: [request, console]
+    propagate: no
+
+formatters:
+  simple:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  timedRotating:
+    format: '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+  request:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: DEBUG
+    formatter: simple
+    filename: 'log/request-sog.log'
+    when: 'midnight'
+    interval: 1
+    backupCount: 120
+    encoding: 'utf8'

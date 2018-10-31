@@ -1,0 +1,68 @@
+#+TITLE:  OpenSsl
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/my-org-worg.css"/>
+
+* OpenSsl安装
+** Windows下的编译安装
+*** 安装perl
++ 下载
+#+BEGIN_EXAMPLE
+官网https://www.perl.org/get.html下载 ActiveState Perl 对应的系统版本（32位或者64位）
+#+END_EXAMPLE
+
++ 安装及配置
+#+BEGIN_EXAMPLE
+选择custom方式，指定好安装目录，一路回车法
+#+END_EXAMPLE
+
++ 测试安装是否成功
+#+BEGIN_EXAMPLE
+where perl
+#+END_EXAMPLE
+
+*** 安装nasm
++ 下载
+#+BEGIN_EXAMPLE
+官网 http://www.nasm.us/pub/nasm/releasebuilds/2.12.02/win64/
+
+下载对应的windows版本
+#+END_EXAMPLE
+
++ 安装
+#+BEGIN_EXAMPLE
+指定好安装目录，一路回车法，之后将安装后的目录添加到环境变量PATH中去。
+#+END_EXAMPLE
+
+*** 安装vs community 2013
++ 下载
+#+BEGIN_EXAMPLE
+注意：vs2015以上的版本可能有坑，暂不想花时间去解决。直接先用2013版本
+
+官网https://www.visualstudio.com/downloads/下载vs2013的iso版本
+#+END_EXAMPLE
+
++ 安装
+#+BEGIN_EXAMPLE
+指定好安装目录，自定义安装，勾选VC++，一路回车法
+#+END_EXAMPLE
+
+*** 安装OpenSsl
++ 下载
+#+BEGIN_EXAMPLE
+官网https://www.openssl.org/下载最新稳定版本
+#+END_EXAMPLE
+
++ 编译
+#+BEGIN_EXAMPLE
+进入vs的安装目录下 D:\Program Files\Microsoft Visual Studio 12.0\Common7\Tools\Shortcuts
+注意：一定右键以管理员方式 运行 VS2013 x64 本机工具命令提示，而不能以cmd行运行。
+（若以cmd行运行，则环境变量的信息没有带过来）
+
+perl Configure VC-WIN64A --prefix=D:\Local\usr\openssl
+
+nmake
+
+nmake test
+
+nmake install
+ #+END_EXAMPLE
+

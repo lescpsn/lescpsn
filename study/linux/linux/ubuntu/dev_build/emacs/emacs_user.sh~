@@ -1,0 +1,75 @@
+#!/usr/bin/env bash
+
+################################################################################
+function is_notroot()
+{
+    typeset user=`whoami`
+    if [[ "X$user" = "Xroot" ]]; then
+        return 1
+    fi
+    return 0
+}
+
+################################################################################
+function install_emacs()
+{
+    rm -rf ~/.emacs.d/
+    curl -L https://git.io/epre | sh
+
+    #
+#    cp prelude-packages.el  ~/.emacs.d/core/prelude-packages.el
+#    cp prelude-modules.el  ~/.emacs.d/
+#    cp my@prelude.el ~/.emacs.d/personal/
+}
+
+################################################################################
+function install_devtools()
+{
+    apt-get -y install openssh-server
+    if [[ $? -ne 0  ]]; then
+	return 1
+    fi
+
+    apt-get -y install git
+    if [[ $? -ne 0  ]]; then
+	return 1
+    fi
+
+    apt-get -y install gcc
+    if [[ $? -ne 0  ]]; then
+	return 1
+    fi
+
+    apt-get -y install curl
+    if [[ $? -ne 0  ]]; then
+	return 1
+    fi
+
+    apt-get -y install vim
+    if [[ $? -ne 0  ]]; then
+	return 1
+    fi
+    
+    apt-get -y install emacs
+    if [[ $? -ne 0  ]]; then
+	return 1
+    fi
+}
+
+################################################################################
+function main()
+{
+    is_notroot
+    if [[ $? -ne 0  ]]; then
+	return 1
+    fi
+
+    install_emacs
+    if [[ $? -ne 0  ]]; then
+	return 1
+    fi
+    
+}
+
+################################################################################
+main "$@"

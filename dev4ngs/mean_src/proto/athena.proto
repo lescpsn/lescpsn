@@ -1,0 +1,37 @@
+syntax = "proto3";
+
+import "user.proto";
+import "photo.proto";
+
+package proto;
+message News {
+    int64 ID = 1;
+    string UUID = 2;
+    string CreatedAt = 3;
+    string UpdatedAt = 4;
+    string DeletedAt = 5;
+    int64 UserID = 6;
+    repeated int64 PhotoIDs = 7;
+    int64 PhotoCount = 8;
+    int64 CommentCount = 9;
+    int64 StarredCount = 10;
+    string Timestamp = 11;
+    User User = 12;
+    repeated Photo Photos = 13;
+
+}
+message AllUserNewsRequest {
+    int64 offsetHead = 1;
+    int64 offsetTail = 2;
+    string startTime = 3;
+    string endTime = 4;
+}
+
+message AllUserNewsResponse {
+    int64 count = 1;
+    repeated News tusoList = 2;
+}
+
+service AthenaServices {
+    rpc GetAllUserNews(AllUserNewsRequest) returns (AllUserNewsResponse) {}
+}

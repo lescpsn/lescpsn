@@ -1,0 +1,644 @@
+#+TITLE: Oh My Emacs
+#+OPTIONS: toc:2 num:nil ^:nil
+
+#+BEGIN_QUOTE
+  Emacs outshines all other editing software in approximately the same
+  way that the noonday sun does the stars. It is not just bigger and
+  brighter; it simply makes everything else vanish.
+
+  -- Neal Stephenson, "In the Beginning was the Command Line"
+#+END_QUOTE
+
+* Prerequisites
+  :PROPERTIES:
+  :CUSTOM_ID: ome-prerequisites
+  :END:
+
+This project was born for emacs 24+, emacs 23 is not officially supported and
+there's no plan to support it. One of the builtin package of oh-my-emacs, [[https://github.com/emacs-helm/helm][helm]],
+required Emacs version 24.3+, and oh-my-emacs will work best with recent
+version emacs.
+
+The following software is really basic that almost every el-get package will
+need one of them.
+
+#+NAME: ome-prerequisites
+#+CAPTION: Prerequisites for all oh-my-emacs module.
+|             | Windows | Ubuntu/Debian/Mint      | ArchLinux | Fedora     | Mac OS X | Mandatory? |
+|-------------+---------+-------------------------+-----------+------------+----------+------------|
+| [[https://www.gnu.org/software/emacs/][emacs 24.3+]] |         | emacs24(emacs-snapshot) |           |            |          | Yes        |
+| [[http://savannah.nongnu.org/projects/cvs][cvs]]         |         | cvs                     |           | cvs        |          | Yes        |
+| [[http://subversion.apache.org/][subversion]]  |         | subversion              |           | subversion |          | Yes        |
+| [[http://mercurial.selenic.com/][mercurial]]   |         | mercurial               |           | mercurial  |          | Yes        |
+| [[http://git-scm.com/][git]]         |         | git                     |           | git        |          | Yes        |
+| [[http://www.gnu.org/software/make/][make]]        |         | make                    |           | make       |          | Yes        |
+| [[http://www.gnu.org/software/texinfo/][texinfo]]     |         | texinfo                 |           | texinfo    |          | Yes        |
+| [[http://gcc.gnu.org/][gcc]]         |         | gcc                     |           | gcc        |          | Yes        |
+| [[http://www.gnu.org/software/automake/][automake]]    |         | automake                |           | automake   |          | Yes        |
+| [[http://www.gnu.org/software/autoconf/][autoconf]]    |         | autoconf                |           | autoconf   |          | Yes        |
+
+* Introduction
+  :PROPERTIES:
+  :CUSTOM_ID: introduction
+  :END:
+
+This dotemacs project aims to provide an out-of-the-box emacs configuration
+for writing and programming. It is intended for both beginners and
+intermediate users. The name of this project is inspired by [[https://github.com/robbyrussell/oh-my-zsh][oh-my-zsh]], which is
+another out-of-the-box configuration for [[http://www.zsh.org/][zsh]].
+
+The main features of oh-my-emacs are
+- better default settings
+- focus on writing and programming, let emacs do what it really good at
+- "literate" customization embedded in Org-mode files
+- use el-get to manage packages, which is portable, and version control
+  friendly
+- self-adapting, enable features only when the system meet the requirements
+
+The latest version is at https://github.com/xiaohanyu/oh-my-emacs.
+
+** Learning Emacs
+   :PROPERTIES:
+   :CUSTOM_ID: learning
+   :END:
+
+#+BEGIN_QUOTE
+People talk about getting used to a new editor, but over time, it is precisely
+the opposite that should happen --- the editor should get used to us.
+
+-- Vivek Haldar
+#+END_QUOTE
+
+This project won't teach you anything about how to use emacs or why use
+emacs. However, I'll give you some useful resources if you're new to emacs.
+
+The first thing you should refer to is the emacs builtin tutorial, type =C-h
+t= to get it within a running emacs.
+
+Next, you should refer to some general books to get a full view of emacs,
+just search http://www.amazon.com.
+
+Now you should be a intermediate emacs user(or lover, I hope), the final step
+is emacs lisp, which is not that easy as it looks like, since it is not easy to
+get a full understanding of the so-called lisp. But you can still do something
+useful even if you didn't know lisp quite a lot. The builtin [[https://www.gnu.org/software/emacs/manual/html_node/eintr/][An Introduction to
+Programming in Emacs Lisp]] is a really good entry point to emacs lisp
+programming. You can refer to this tutorial by typing =C-h i m Emacs Lisp
+Intro=.
+
+Finally, if you want to do some big jobs in emacs lisp, then there's a long
+adventure waiting for you. The builtin [[http://www.gnu.org/software/emacs/manual/][GNU Emacs Manual]] and [[http://www.gnu.org/software/emacs/manual/html_node/elisp/][GNU Emacs Lisp
+Reference Manual]] is your best friends. Besides these two large books, there're
+various good web sites, such as
+- [[http://www.emacswiki.org/][emacswiki]] :: the largest unofficial emacs lisp repository
+- [[http://wikemacs.org/index.php/Main_Page][wikiemacs]] :: a saner and modern wiki for emacs
+- [[http://www.masteringemacs.org/][masteringemacs]] :: a blog about mastering the world's best text editor
+- [[http://emacs-fu.blogspot.com/][emacs-fu]] :: useful tricks for emacs
+- [[http://alexott.net/en/emacs/][Alexott's Blog]] :: some really great articles about emacs
+- [[http://alexott.net/en/emacs/][emacser]] :: an excellent and comprehensive emacs blog written by Chinese
+             users.
+- [[http://whattheemacsd.com/][whattheemacsd]] :: contains some really great tips.
+
+Wow, what a long journey, if you're tired, you can [[http://emacsrocks.com/][rock with emacs]].
+
+** Installation
+   :PROPERTIES:
+   :CUSTOM_ID: installation
+   :END:
+
+1. Install Emacs version 24 or greater.  Use your package manager if
+   you have one and it has an install candidate for Emacs 24,
+   otherwise install it directly [[http://savannah.gnu.org/projects/emacs/][from source]], or Mac binaries may be
+   downloaded from the /nightlies/ section of
+   http://emacsformacosx.com/builds
+2. Checkout a version of the oh-my-emacs using git -- if you're new to
+   git, checkout this [[http://www.kernel.org/pub/software/scm/git/docs/gittutorial.html][git-tutorial]].
+#+BEGIN_SRC sh
+git clone http://github.com/xiaohanyu/oh-my-emacs.git
+#+END_SRC
+3. Move the resulting directory to =~/.emacs.d= [1]
+4. Launch Emacs!
+
+
+** Package Management
+#+BEGIN_QUOTE
+Let's face it -- although a vanilla Emacs installation is quite powerful almost
+nobody is using Emacs without a pile of add-ons. And managing those add-ons is
+quite frankly a pain in the ass. Traditional options included installing Emacs
+add-ons via the operating system's package manager (if available), downloading
+.el files from various locations (everybody hates packages distributed only on
+Emacs Wiki with no canonical version control repo) and simply sticking them on
+the load-path, etc. It's more than obvious that such solutions are less than
+ideal.
+
+For instance if you're installing Emacs add-ons via a package manager and you
+have to change OSes (or machines) you're mostly fucked. On the other hand
+piling files manually in .emacs.d is equal to hell in the version and
+dependency tracking department. There has to be a better way, right? Wouldn't
+it be nice if Emacs had its own package manager similar to the likes of
+homebrew, apt or yum?
+
+Emacs 24 finally introduces such a tool -- its name is package.el (very
+original, right?) and it's promise is to make your lives a bit easier. Does it
+manage to deliver on that promise? We'll see that in a bit...
+
+-- [[http://batsov.com/articles/2012/02/19/package-management-in-emacs-the-good-the-bad-and-the-ugly/][Package Management in Emacs: The Good, the Bad and the Ugly]]
+#+END_QUOTE
+
+Ah, a long long quote, really vivid and visual description of the state of
+emacs package management system. [[https://github.com/xiaohanyu/oh-my-emacs][oh-my-emacs]] adopt [[https://github.com/dimitri/el-get][el-get]], while other popular
+dotemacs project adopt the builtin =package.el=. You may wonder why, IMHO,
+=package.el= is far from ideal, although it is builtin with emacs, however,
+el-get is the practical solution, at least for now. In a word, what el-get
+to emacs is what =apt-get= to debian/ubuntu.
+
+So the very first thing oh-my-emacs do to your emacs is to install =el-get=,
+this is done by putting the following code snippet in =$HOME/.emacs.d/init.el=.
+
+#+NAME: ome-install-el-get
+#+BEGIN_SRC emacs-lisp :tangle no
+(add-to-list 'load-path "~/.emacs.d/el-get/el-get")
+
+(unless (require 'el-get nil 'noerror)
+  (with-current-buffer
+      (url-retrieve-synchronously
+       "https://raw.github.com/dimitri/el-get/master/el-get-install.el")
+    (let (el-get-master-branch
+          ;; do not build recipes from emacswiki due to poor quality and
+          ;; documentation
+          el-get-install-skip-emacswiki-recipes)
+      (goto-char (point-max))
+      (eval-print-last-sexp)))
+  ;; build melpa packages for el-get
+  (el-get-install 'package)
+  (setq package-archives '(("gnu" . "http://elpa.gnu.org/packages/")
+                           ("melpa" . "http://melpa.org/packages/")))
+  (el-get-elpa-build-local-recipes))
+
+(add-to-list 'el-get-recipe-path (expand-file-name "ome-el-get-recipes" ome-dir))
+
+;; (el-get 'sync)
+#+END_SRC
+
+Note that by default, el-get support multiple method to install emacs packages
+from various sources, such as elpa, emacswiki, etc. However, IMHO, most of the
+emacswiki packages have a poor quality and documentation. So I disable it by
+default.
+
+By default, el-get bundles with about 1000 packages. Combined with elpa,
+there're about 3000 packages. However, many of them are outdated, unmaintained,
+lack of documentation. For elpa package archive, there are multiple choices,
+namely the official GNU [[http://elpa.gnu.org/][elpa]], [[http://marmalade-repo.org/][marmalade]] and [[http://melpa.org/][melpa]], etc. [[http://elpa.gnu.org/][elpa]] is just too stable
+which update just too little, and packages in [[http://marmalade-repo.org/][marmalade]] is a little outdated
+since it requires authors of packages to upload their package each time a
+new version is released. [[http://melpa.org/][melpa]], similar to el-get, however, it builds packages
+directly from package's source repository. To tell the truth, melpa is really
+quite a good alternative to el-get. Compared to el-get, there's no need to
+install =git=, =cvs=, =svn=, etc. You have =package.el=, then you can use
+melpa. However, if you want better integration between your emacs packages with
+your system, just use el-get. For technical details, check [[https://github.com/milkypostman/melpa/issues/742][here]].
+
+Oh-my-emacs adopt el-get, while enabled only the official elpa and melpa repo
+for =package.el=, it also =(el-get-elpa-build-local-recipes)= when el-get is
+first installed, so you can install melpa package directly via el-get.
+
+And in the following journey, you may find the great power =el-get= provides
+for you -- which makes it possible to store just dotemacs configuration, no
+need to things like =git submodule=. Thank you, [[http://tapoueh.org/][Dimitri Fontaine]].
+
+** Cl-lib
+   :PROPERTIES:
+   :CUSTOM_ID: cl-lib
+   :END:
+
+[[http://www.gnu.org/software/emacs/news/NEWS.24.3][Emacs 24.3]] renamed the Common Lisp emulation package from =cl= to =cl-lib=,
+which causes some madness between different Emacs versions. The following hack
+code has been tested on Emacs 24.2.1 and Emacs 24.3.50. Any bug report will be
+appreciated.
+
+#+NAME: cl-lib
+#+BEGIN_SRC emacs-lisp
+(when (version< emacs-version "24.3")
+  (el-get 'sync '(cl-lib))
+  (add-to-list 'load-path "~/.emacs.d/el-get/cl-lib"))
+#+END_SRC
+
+** Structure
+   :PROPERTIES:
+   :CUSTOM_ID: structure
+   :END:
+The =init.el= file is where everything begins. It is loaded
+automatically by Emacs on startup, its sole purpose is to load the
+elisp code embedded in this file.
+
+* Implementation
+  :PROPERTIES:
+  :CUSTOM_ID: implementation
+  :END:
+
+** oh-my-emacs basics
+- Functions for loading other parts of oh-my-emacs.
+
+#+NAME: ome-load
+#+BEGIN_SRC emacs-lisp
+(defvar ome-packages nil
+  "This package contains all packages loaded by oh-my-emacs.
+
+Acutally, this variable is an alist, whose element is also a
+list. The car of the element is an oh-my-emacs module name, while
+the cdr of the element is a list of el-get packages loaded in particular
+oh-my-emacs module.")
+
+(defun ome-load (module &rest header-or-tags)
+  "Load configuration from other ome-*.org files.
+If the optional argument is the id of a subtree then only
+configuration from within that subtree will be loaded.  If it is
+not an id then it will be interpreted as a tag, and only subtrees
+marked with the given tag will be loaded.
+
+For example, to load all of ome-lisp.org simply add (ome-load
+\"ome-lisp\") to your configuration.
+
+To load only the 'window-system' config from ome-miscs.org
+add (ome-load \"ome-miscs.org\" \"window-system\") to your
+configuration.
+
+The good news is, you can load multiple parts config from one
+single file by simply (ome-load \"ome-module.org\" \"part1\"
+\"part2\")."
+  (let ((module-name (file-name-base module))
+        (file (expand-file-name (if (string-match "ome-.+\.org" module)
+                                    module
+                                  (format "ome-%s.org" module))
+                                ome-dir)))
+    ;; ensure el-get-sources is empty before loading "ome-.+\.org" files
+    (setq el-get-sources nil)
+    ;; enable git shallow clone to save time and bandwidth
+    (setq el-get-git-shallow-clone t)
+
+    (if header-or-tags
+        (dolist (header-or-tag header-or-tags)
+          (let* ((base (file-name-nondirectory file))
+                 (dir  (file-name-directory file))
+                 (partial-file (expand-file-name
+                                (concat "." (file-name-sans-extension base)
+                                        ".part." header-or-tag ".org")
+                                dir)))
+            (unless (file-exists-p partial-file)
+              (with-temp-file partial-file
+                (insert
+                 (with-temp-buffer
+                   (insert-file-contents file)
+                   (save-excursion
+                     (condition-case nil ;; collect as a header
+                         (progn
+                           (org-link-search (concat "#" header-or-tag))
+                           (org-narrow-to-subtree)
+                           (buffer-string))
+                       (error ;; collect all entries with as tags
+                        (let (body)
+                          (org-map-entries
+                           (lambda ()
+                             (save-restriction
+                               (org-narrow-to-subtree)
+                               (setq body (concat body "\n" (buffer-string)))))
+                           header-or-tag)
+                          body))))))))
+            (org-babel-load-file partial-file)))
+      (org-babel-load-file file))
+
+    (el-get 'sync (mapcar 'el-get-source-name el-get-sources))
+    (setq ome-module-packages nil)
+    (mapcar (lambda (el-get-package)
+              (add-to-list 'ome-module-packages
+                           (el-get-source-name el-get-package)))
+            el-get-sources)
+    (add-to-list 'ome-packages
+                 (cons module-name ome-module-packages))))
+
+
+#+END_SRC
+
+- Functions for installing el-get packages
+
+#+NAME: ome-install
+#+BEGIN_SRC emacs-lisp
+(defun ome-install (el-get-package)
+  "Add EL-GET-PACKAGE to `el-get-sources'.
+
+This package will be installed when `ome-load'. Users can make
+his own customization by providing a \"ome-package-name-setup\"
+function."
+  (let ((ome-package-setup-func
+         (intern
+          (concat "ome-"
+                  (el-get-as-string el-get-package)
+                  "-setup"))))
+    (if (fboundp ome-package-setup-func)
+        (add-to-list 'el-get-sources
+                     `(:name ,el-get-package
+                             :after (progn
+                                      (,ome-package-setup-func))))
+      (add-to-list 'el-get-sources
+                   `(:name ,el-get-package)))))
+#+END_SRC
+
+- Functions for getting information about el-get packages installed by
+  oh-my-emacs.
+#+NAME: ome-packages
+#+BEGIN_SRC emacs-lisp
+(defun ome-try-get-package-website (package)
+  "el-get's package recipe has multiple type, some contains
+a :website, some contains just a :url, while some github package
+just contains a :pkgname. This function try to get a proper
+website link for an el-get package."
+  (let ((package-def (el-get-package-def package)))
+    (or (plist-get package-def :website)
+        (and (eq (plist-get package-def :type) 'github)
+             (concat "https://github.com/"
+                     (plist-get package-def :pkgname)))
+        (plist-get package-def :url))))
+
+(defun ome-try-get-package-description (package)
+  "This function try to get a proper description for an el-get
+package from its recipe. Note that some package's description has
+multiple lines, so we need to join them together for better
+auto-fill."
+  (let ((package-def (el-get-package-def package)))
+    (replace-regexp-in-string "\\(\n\\|\\ \\)+" " "
+                              (plist-get package-def :description))))
+
+(defun ome-package-list-to-org-table ()
+  (interactive)
+  (setq ome-packages (sort ome-packages
+                           #'(lambda (x y) (string< (car x) (car y)))))
+  (let ((org-table-line-template "|%s|[[%s][%s]]|%s|\n"))
+    (with-temp-buffer
+      (insert "| Module | Package | Description |\n")
+      (insert "|--------+---------+-------------|\n")
+      (insert "")
+      (dolist (module-packages ome-packages)
+        (setq package-index 0)
+        (dolist (package (cdr module-packages))
+          (insert (format org-table-line-template
+                          (if (= package-index 0)
+                              (car module-packages)
+                            "")
+                          (ome-try-get-package-website package)
+                          package
+                          (ome-try-get-package-description package)))
+          (incf package-index)))
+      (buffer-string))))
+
+#+END_SRC
+
+** oh-my-emacs core functions
+   :PROPERTIES:
+   :CUSTOM_ID: core
+   :END:
+
+#+NAME: core
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'el-get-sources
+             '(:name cl-lib))
+
+(defun ome-start-or-switch-to (function buffer-name)
+  "Invoke FUNCTION if there is no buffer with BUFFER-NAME.
+  Otherwise switch to the buffer named BUFFER-NAME.  Don't clobber
+  the current buffer."
+  (if (not (get-buffer buffer-name))
+      (progn
+        (split-window-sensibly (selected-window))
+        (other-window 1)
+        (funcall function))
+    (switch-to-buffer-other-window buffer-name)))
+#+END_SRC
+
+** Writing Portable Emacs Lisp Configurations
+- Use =executable-find= to set path to external tools instead of by writing the
+  tool full path by hand.
+- Check necessary external tools before require a package if a package do need
+  that tool.
+- Try your best to avoid binding keys to function keys since some function keys
+  are easy be conflicted with system keys, and some keyboard do not have
+  function keys at all, such as HHKB.
+- Narrow you variable definition scope, for example, use =define-key= with a
+  mode map instead of =global-set-key=, and you'd better set mode related keys
+  within the mode hook.
+- Try to use system tools to get necessary configuration, for example, you can
+  use =pkg-config= to get necessary header file paths for a particular lib,
+  this is useful for settings with =auto-complete-clang=.
+- Emacs cannot do all things, it do need some external tools to facilitate its
+  jobs. For example, =semantic= from =cedet= is a bad idea, it's bloated, slow
+  and buggy. Consider using clang/jedi for completion. If there is a better
+  external tools, do not hesitate, just use it. Do not reinvent the same wheel
+  in emacs lisp, all you need to do is integrate that tool to emacs with an emacs
+  interface.
+
+* Load settings
+
+Files in oh-my-emacs =core= will be loaded by default:
+- [[file:core/ome-auto-mode.org][ome-auto-mode.org]]: small and convenient settings for some minor mode package.
+- [[file:core/ome-basic.org][ome-basic.org]]: basic settings, such as tab, space, auto-fill-mode, flyspell,
+- [[file:core/ome-completion.org][ome-completion.org]]: main settings for completion support.
+- [[file:core/ome-gui.org][ome-gui.org]]: settings for color theme, font, modeline, scrollbar, etc.
+  etc.
+- [[file:core/ome-keybindings.org][ome-keybindings.org]]: oh-my-emacs keybindings.
+- [[file:core/ome-miscs.org][ome-miscs.org]]: misc settings such as =magit=, =smartparens=, =projectile=,
+  etc.
+- [[file:core/ome-org.org][ome-org.org]]: some refinement for org-mode.
+- [[file:core/ome-writing.org][ome-writing.org]]: for writers, bloggers, only contains =markdown-mode= for
+  now.
+- [[file:core/ome-advanced.org][ome-advanced.org]]: contains =evil=, =ace-jump-mode=, =ack-and-a-half=, etc.
+
+Files in oh-my-emacs =modules= is optional, you can load necessary one when
+you really need it.
+- [[file:modules/ome-cc.org][ome-cc.org]]: main settings for =cc-mode=.
+- [[file:modules/ome-common-lisp.org][ome-common-lisp.org]]: settings for Common Lisp, mainly [[http://common-lisp.net/project/slime/][SLIME]].
+- [[file:modules/ome-clojure.org][ome-clojure.org]]: settings for Clojure.
+- [[file:modules/ome-emacs-lisp.org][ome-emacs-lisp.org]]: settings for emacs-lisp.
+- [[file:modules/ome-java.org][ome-java.org]]: settings for Java, using [[https://github.com/senny/emacs-eclim][emacs-eclim]].
+- [[file:modules/ome-javascript.org][ome-javascript.org]]: settings for JavaScript, not perfect now.
+- [[file:modules/ome-python.org][ome-python.org]]: python settings, life is short, =elpy= is amazing.
+- [[file:modules/ome-ruby.org][ome-ruby.org]]: Ruby support including =inf-ruby= and by =smartparens-ruby=.
+- [[file:modules/ome-scheme.org][ome-scheme.org]]: settings for Scheme.
+- [[file:modules/ome-ocaml.org][ome-ocaml.org]]: minimal settings for OCaml.
+- [[file:modules/ome-tex.org][ome-tex.org]]: AUCTeX and CDLaTeX for \TeX{} editing.
+- [[file:modules/ome-web.org][ome-web.org]]: settings for HTML/CSS web development.
+- [[file:modules/ome-experimental.org][ome-experimental.org]]: some experimental packages, such as sppedbar, minimap, etc. Not stable yet now.
+- [[file:modules/ome-haskell.org][ome-haskell.org]]: settings for haskell
+- [[file:modules/ome-sml.org][ome-sml.org]]: settings for sml
+- [[file:modules/ome-golang.org][ome-golang.org]]: settings for golang
+
+#+NAME: load various ome files
+#+BEGIN_SRC emacs-lisp
+(ome-load "core/ome-basic.org")
+(ome-load "core/ome-completion.org")
+(ome-load "core/ome-auto-mode.org")
+(ome-load "core/ome-gui.org")
+(ome-load "core/ome-keybindings.org")
+(ome-load "core/ome-miscs.org")
+(ome-load "core/ome-org.org")
+(ome-load "core/ome-writing.org")
+(ome-load "core/ome-advanced.org")
+(ome-load "modules/ome-cc.org")
+(ome-load "modules/ome-java.org")
+(ome-load "modules/ome-emacs-lisp.org")
+(ome-load "modules/ome-common-lisp.org")
+(ome-load "modules/ome-clojure.org")
+(ome-load "modules/ome-scheme.org")
+(ome-load "modules/ome-python.org")
+(ome-load "modules/ome-ruby.org")
+(ome-load "modules/ome-ocaml.org")
+(ome-load "modules/ome-tex.org")
+(ome-load "modules/ome-web.org")
+;; (ome-load "modules/ome-experimental.org" "smooth-scrolling" "sublimity")
+(ome-load "modules/ome-haskell.org")
+(ome-load "modules/ome-sml.org")
+(ome-load "modules/ome-golang.org")
+#+END_SRC
+
+** Load User/System Specific Files
+*** How to disable an el-get package?
+
+To modify ome itself, you need to know something about [[http://orgmode.org/worg/org-contrib/babel/intro.html#literate-programming][org-babel]]. In general,
+all ome packages are loaded in a org-mode's code block, the general format of
+which is:
+
+#+BEGIN_VERSE
+#+NAME: <name>
+#+BEGIN_SRC <language> <switches> <header arguments>
+       <body>
+#+END_SRC
+#+END_VERSE
+
+The [[http://orgmode.org/manual/Header-arguments.html#Header-arguments][header arguments]] can control things like whether code is executed when
+=org-babel-load-file=, or exported when =org-export-xxxx=. If you want to
+disable a code block in =org-babel-load-file=, you should use the [[http://orgmode.org/manual/tangle.html#tangle][:tangle]]
+header argument by settings it to =:tangle no=. Thus this code block will not
+be tangled by org-babel and ome won't execute this code block when starts.
+
+For example, here's a general code block for package-abc:
+
+#+BEGIN_VERSE
+#+BEGIN_SRC emacs-lisp
+(defun ome-package-abc-setup ()
+  ;; some custom code for package-abc
+  )
+
+(ome-install 'package-abc)
+#+END_SRC
+#+END_VERSE
+
+If you want to disable package-abc, you just add a =:tangle no= to this code
+block:
+
+#+BEGIN_VERSE
+#+BEGIN_SRC emacs-lisp :tangle no
+(defun ome-package-abc-setup ()
+  ;; some custom code for package-abc
+  )
+
+(ome-install 'package-abc)
+#+END_SRC
+#+END_VERSE
+
+Although you disabled package-abs'c code block, package-abs still keep
+installed in your emacs. Sometimes, you even want to disable this package from
+the bottom. Then you should first remove package-abc via =el-get-remove
+package-abc=, and add =:tangle no= to that code block.
+
+*** General custom code
+
+Ome push some small code snippets to =custom.el=.
+
+#+NAME: m-x-customize-customizations
+#+BEGIN_SRC emacs-lisp
+(setq custom-file (expand-file-name "custom.el" ome-dir))
+(load custom-file 'noerror)
+#+END_SRC
+
+*** System/User specific customizations
+You can keep system- or user-specific customizations here in either raw
+emacs-lisp files or as embedded elisp in org-mode files (as done in this
+document).
+
+You can keep elisp source in the =src= directory. Packages loaded from here
+will override those installed by ELPA.  This is useful if you want to track the
+development versions of a project, or if a project is not in elpa.
+
+For example, if your username is =testuser=, then you can put a =testuser.el=
+file in your =$HOME/.emacs.d=, and then put anything you like in
+=testuser.el=. You may wonder what's the difference between ome's =custom.el=
+and =testuser.el=. Actually, =custom.el= is ome's own code snippets, while
+=testuser.el= is your own code snippet and no need to =git add testuser.el=. So
+you can keep sync with upstream while keep your own customizations.
+
+After we've loaded all the oh-my-emacs defaults, lets load the user's stuff.
+
+#+NAME: ome-load-files
+#+BEGIN_SRC emacs-lisp
+(flet ((sk-load (base)
+         (let* ((path          (expand-file-name base ome-dir))
+                (literate      (concat path ".org"))
+                (encrypted-org (concat path ".org.gpg"))
+                (plain         (concat path ".el"))
+                (encrypted-el  (concat path ".el.gpg")))
+           (cond
+            ((file-exists-p encrypted-org) (org-babel-load-file encrypted-org))
+            ((file-exists-p encrypted-el)  (load encrypted-el))
+            ((file-exists-p literate)      (org-babel-load-file literate))
+            ((file-exists-p plain)         (load plain)))))
+       (remove-extension (name)
+         (string-match "\\(.*?\\)\.\\(org\\(\\.el\\)?\\|el\\)\\(\\.gpg\\)?$" name)
+         (match-string 1 name)))
+  (let ((elisp-dir (expand-file-name "src" ome-dir))
+        (user-dir (expand-file-name user-login-name ome-dir)))
+    ;; add the src directory to the load path
+    (add-to-list 'load-path elisp-dir)
+    ;; load specific files
+    (when (file-exists-p elisp-dir)
+      (let ((default-directory elisp-dir))
+        (normal-top-level-add-subdirs-to-load-path)))
+    ;; load system-specific config
+    (sk-load system-name)
+    ;; load user-specific config
+    (sk-load user-login-name)
+    ;; load any files in the user's directory
+    (when (file-exists-p user-dir)
+      (add-to-list 'load-path user-dir)
+      (mapc #'sk-load
+            (remove-duplicates
+             (mapcar #'remove-extension
+                     (directory-files user-dir t ".*\.\\(org\\|el\\)\\(\\.gpg\\)?$"))
+             :test #'string=)))))
+#+END_SRC
+
+* Todo
+
+** Blueprint
+- Add functions to rollback el-get. For example, users may have different
+  environments, which may result in a failure of one oh-my-emacs module A. Thus
+  users may want to remove all the packages installed by module A. So maybe I
+  need a function =(ome-unload "ome-module-A.org")=, which just remove all
+  oh-my-emacs by calling =el-get-remove=, and rollback the user's .emacs.d to
+  a previous workable state(hope).
+
+** Boot up speed optimization
+- Use =eval-after-load= when possible to improve the boot up speed.
+- =autoload= for lazy loading?
+
+** El-get
+- Investigate whether or not =el-get-remove= will remove all packages that
+  depends on the removed package, if not, how to solve this problem?
+- Investigate more on =el-get= to know how to reinitialize a package without
+  need to =el-get-remove= then =el-get-install= if just =:after= changes a
+  little. This is really a big problem.
+- Seems that you can write =depends= in ome =el-get-sources=, why?
+- When you =el-get-update=, =el-get= will first =el-get-remove= then
+  =el-get-install=, any way to just do things like =git pull= instead of =git
+  clone= from the beginning?
+
+
+[1] If you already have a directory at =~/.emacs.d= move it out of the way and
+put this there instead. Or you can make a symbolic link.

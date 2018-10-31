@@ -1,0 +1,55 @@
+#+TITLE: vim-study历程
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/my-org-worg.css" />
+* exVim学习
+** linux下
+*** linux下exvim安装
++ github上下载exvim Full
+#+BEGIN_EXAMPLE
+https://github.com/exvim/main/releases/download/v0.5.0/
+#+END_EXAMPLE
+
+
++ 安装exvim
+#+BEGIN_EXAMPLE
+mkdir ~/exvim
+
+tar -zxvf exvim-v0.5.0.tar.gz -C ~/exvim/
+#+END_EXAMPLE
+
+
++ 配置exvim
+#+BEGIN_EXAMPLE
+vim ~/.vimrc
+let g:exvim_custom_path='~/exvim/'
+source ~/exvim/.vimrc
+#+END_EXAMPLE
+*** linux使用exvim
++ 每个工程的根目录下创建一个exvim的工程文件
+#+BEGIN_EXAMPLE
+touch your_projectNmae.exvim
+touch gotest.exvim
+#+END_EXAMPLE
+
+*** windows下
+*** windows下安装exvim
+#+BEGIN_EXAMPLE
+直接下载包一路回车法
+#+END_EXAMPLE
+
+
+*** exvim的使用
++ 建立工程文件projectNmae.exvim
+#+BEGIN_EXAMPLE
+工程的根目录下新建projectNmae.exvim文件
+#+END_EXAMPLE
+
++ vim打开projectNmae.exvim该文件编辑配置
+
++ 主要快捷键
+#+BEGIN_EXAMPLE
+leader键 : \
+leader + R : 列出目录树
+:Update 更新工程配置文件（每次工程改变后需要执行）
+#+END_EXAMPLE
+
+

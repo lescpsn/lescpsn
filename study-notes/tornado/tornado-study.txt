@@ -1,0 +1,83 @@
+[第一章 引言]:
+        1.1
+        tornado源码安装(待完成)
+        tornado框架是一个异步服务器框架模式。如果当前请求正在等待来自其他资源的
+        数据（比如数据库查询或HTTP请求）时，异步服务器可以控制挂起当前的请求,
+        当其它资源的请求完成时，采用回调函数用以恢复挂起的的操作。
+
+        1.2
+        tornado是一个编写对http请求响应的框架，程序员的主要工作就是编写http请求
+        的响应handler,编写一个tornado应用中的最多的工作定义一个继承tornado.web.
+        RequestHandler的类
+        curl -v "http://localhost:4000/?greeting=Salutations" 模拟客户端请求，
+        后面的url必须带有双引号
+
+        (r"/reverse/(\w+)", ReverseHandler) (\w+)括号括起来的代表一个参数
+
+        tornado支持任何合法的HTTP请求(GET, POST, PUT, DELETE, HEAD, OPTIONS),只
+        需要在RequestHandler类中定义同名方法
+        def get(self, ...)
+        def post(self, ...)
+        def put(self, ...)
+        def delete(self, ...)
+        def head(self, ...)
+        def options(self, ...)
+
+        [http状态码]:
+        404 Not Found
+            Tornado会在HTTP请求的路径无法匹配任何RequestHandler类相对应的模式
+            时返回404（Not Found）响应码
+
+        400 Bad Request
+            如果你调用了一个没有默认值的get_argument函数，并且没有发现给定名称
+            的参数，Tornado将自动返回一个400（Bad Request）响应码
+
+        405 Method Not Allowed
+            如果传入的请求使用了RequestHandler中没有定义的HTTP方法（比如，一个
+            POST请求，但是处理函数中只有定义了get方法），Tornado将返回一个405
+            （Methos Not Allowed）响应码。
+
+        500 Internal Server Error
+            当程序遇到任何不能让其退出的错误时，Tornado将返回500（Internal Server
+            Error）响应码。你代码中任何没有捕获的异常也会导致500响应码
+
+        200 OK
+            如果响应成功，并且没有其他返回码被设置，Tornado将默认返回一个200（OK）
+            响应码
+
+
+[第二章 表单和模板]:
+        2.1 简单示例
+                template_path   : tornado寻找html模板文件的路径
+                template_path=os.path.join(os.path.dirname(__file__), "templates")
+                templates即和python主程序平级的一个目录
+
+                html中的两个大括号的{{ 占位符字符串}}，接受从self.render()方法
+                传递过来的关键字参数
+
+        2.2 模板语法
+            from tornado.template import Template
+            content = Template("<html><body><h1>{{ header }}</h1></body></html>")
+            print(content.generate(header="Welcome!"))
+
+            print(Template("{{ 'scrambled eggs'[-4:] }}").generate())
+
+            控制语句块以{%开始，结束%}
+
+            tornado模板语言的一个最好的东西是在if和for语句块中可以使用的表达式
+            没有限制,你可以在你的模板中执行所有的Python代码
+
+
+
+[问题汇总]:
+tornado.ioloop.IOLoop.instance().start()
+没有import tornado.ioloop也是可以调用的？
+
+[常用API总结]:
+tornado.web.RequestHandler类的api:
+self.get_argument    : 获取url请求中参数值,例如:self.get_argument('greeting', 'hello')
+                       当url中未提供该参数，可以用第二个参数设定默认值
+self.write           : 将信息返回到http请求的响应中，例如:self.write("Hello World!")
+self.set_status()    : 设置http响应的返回码 例如:self.set_status(200)
+write_error          : 可以重写write_error()方法，用自己的方法代替默认的错误响应
+self.render()        : 将html模板文件返回到浏览器 self.render('index.html')

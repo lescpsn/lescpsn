@@ -1,0 +1,333 @@
+#+TITLE: Oh My Emacs Org
+#+OPTIONS: toc:nil num:nil ^:nil
+
+This is part of [[https://github.com/xiaohanyu/oh-my-emacs][oh-my-emacs]].
+
+This file contains configuration for the eminently useful [[http://orgmode.org/][Org Mode]].
+
+Org-mode is for keeping notes, maintaining ToDo lists, doing project
+planning, and authoring with a fast and effective plain-text system.
+Org Mode can be used as a very simple folding outliner or as a complex
+GTD system or tool for reproducible research and literate programming.
+
+For more information on org-mode check out [[http://orgmode.org/worg/][worg]], a large Org-mode wiki
+which is also *implemented using* Org-mode and [[http://git-scm.com/][git]].
+
+* El-get packages
+  :PROPERTIES:
+  :CUSTOM_ID: org-el-get-packages
+  :END:
+
+#+NAME: org-el-get-packages
+#+CAPTION: El-get packages for ome-org module
+| Package    | Status      | Description                               |
+|------------+-------------+-------------------------------------------|
+| [[http://orgmode.org/][org-mode]]   | Required    | One of the killer Apps on Emacs platform. |
+| [[http://www.emacswiki.org/emacs/Htmlize][htmlize]].el | Recommended | Export an buffer to html format.          |
+| [[http://staff.science.uva.nl/~dominik/Tools/cdlatex/][CDLaTeX]]    | Recommended | Speedy \LaTeX{} input.                    |
+
+* Org-mode upgrade
+  :PROPERTIES:
+  :CUSTOM_ID: org-mode-upgrade
+  :END:
+
+#+BEGIN_QUOTE
+Org 8.0 is the most disruptive major version of Org.
+
+-- http://orgmode.org/Changes_old.html
+#+END_QUOTE
+
+So why upgrade? Because it is there, it is the future of org-mode. Second, I
+want to export my org files to markdown format, sometimes, and org-mode 8.x
+provide a new great export engine, which is one of the most exciting features
+of org-mode 8.x, check [[http://article.gmane.org/gmane.emacs.orgmode/65574][the mailing list]] for original announcing post. For other
+features, check [[http://orgmode.org/worg/org-8.0.html][org 8.0 upgrading doc]].
+
+You can get the latest org-mode by =M-x el-get-install RET org-mode=
+directly. However, with oh-my-emacs, we need some tricks to make it work.
+
+Oh-my-emacs use =org-babel= from =org-mode= to provide a literate emacs
+configuration, so we need to =(require 'org)= just after oh-my-emacs
+starts. However, by default, oh-my-emacs will load the builtin =org-mode=
+instead of the latest =org-mode= package from =el-get=. To replace the builtin
+=org-mode= with the latest =org-mode= from =el-get= when we boot oh-my-emacs
+even for the initial oh-my-emacs setup, we need to install =org-mode= just
+after =el-get= setup, that means, =org-mode= should be the first package to be
+installed via =el-get=, this can be done by putting the following code snippet
+to =$HOME/.emacs.d/init.el=:
+
+#+NAME: org-mode-upgrade
+#+BEGIN_SRC emacs-lisp :tangle no
+(defun ome-org-mode-setup ()
+  ;; markdown export support
+  (require 'ox-md))
+
+(add-to-list 'el-get-sources
+             '(:name org-mode
+                     :after (progn
+                              (ome-org-mode-setup))))
+
+(el-get 'sync (mapcar 'el-get-source-name el-get-sources))
+#+END_SRC
+
+* Keybindings
+  :PROPERTIES:
+  :CUSTOM_ID: keybindings
+  :END:
+
+#+NAME: keybindings
+#+BEGIN_SRC emacs-lisp
+(add-hook 'org-mode-hook
+          (lambda ()
+            (local-set-key (kbd "M-C-n") 'outline-next-visible-heading)
+            (local-set-key (kbd "M-C-p") 'outline-previous-visible-heading)
+            (local-set-key (kbd "M-C-u") 'outline-up-heading)
+            ;; table
+            (local-set-key (kbd "M-C-w") 'org-table-copy-region)
+            (local-set-key (kbd "M-C-y") 'org-table-paste-rectangle)
+            (local-set-key (kbd "M-C-l") 'org-table-sort-lines)
+            ;; display images
+            (local-set-key (kbd "M-I") 'org-toggle-iimage-in-org)))
+#+END_SRC
+
+* Speed keys
+  :PROPERTIES:
+  :CUSTOM_ID: speed-keys
+  :END:
+Speed commands enable single-letter commands in Org-mode files when
+the point is at the beginning of a headline, or at the beginning of a
+code block.
+
+See the `=org-speed-commands-default=' variable for a list of the keys
+and commands enabled at the beginning of headlines.  All code blocks
+are available at the beginning of a code block, the following key
+sequence =C-c C-v h= (bound to `=org-babel-describe-bindings=') will
+display a list of the code blocks commands and their related keys.
+
+#+NAME: speed-keys
+#+BEGIN_SRC emacs-lisp
+(setq org-use-speed-commands t)
+#+END_SRC
+
+* Code blocks
+  :PROPERTIES:
+  :CUSTOM_ID: babel
+  :END:
+This activates a number of widely used languages, you are encouraged
+to activate more languages using the customize interface for the
+`=org-babel-load-languages=' variable, or with an elisp form like the
+one below.  The customize interface of `=org-babel-load-languages='
+contains an up to date list of the currently supported languages.
+
+#+NAME: babel
+#+BEGIN_SRC emacs-lisp :tangle no
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((emacs-lisp . t)
+   (sh . t)))
+#+END_SRC
+
+You are encouraged to add the following to your personal configuration
+although it is not added by default as a security precaution.
+
+#+BEGIN_SRC emacs-lisp :tangle no
+(setq org-confirm-babel-evaluate nil)
+#+END_SRC
+
+Use =C-c '= to edit the current code block. This brings up a language
+major-mode edit buffer containing the body of the code block. Manually saving
+this buffer with =<C-x C-s>= will write the contents back to the Org
+buffer. You can also set =org-edit-src-auto-save-idle-delay= to save the base
+buffer after some idle delay, or org-edit-src-turn-on-auto-save to auto-save
+this buffer into a separate file using auto-save-mode. Use =C-c '= again to
+exit.
+
+Since ome adopts [[https://gitorious.org/evil/pages/Home][evil]], there's a small annoyance with =org-src-mode=. Just like
+other modes, you can type =C-x C-s= (which binds to =org-edit-src-save= in
+=org-src-mode= to save your commits), however, typing =:w= (which binds to
+=evil-write=) will cause an error since there's no real file that associates
+with the current =org-src-mode=. So we have to do some hack to bind =:w= to
+=org-edit-src-save=. Check this [[https://bitbucket.org/lyro/evil/issue/399/issues-with-org-src-mode][bitbucket issue ]]for detailed discussion.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-edit-src-auto-save-idle-delay 5)
+(setq org-edit-src-content-indentation 0)
+
+(add-hook 'org-src-mode-hook
+          (lambda ()
+            (make-local-variable 'evil-ex-commands)
+            (setq evil-ex-commands (copy-list evil-ex-commands))
+            (evil-ex-define-cmd "w[rite]" 'org-edit-src-save)))
+#+END_SRC
+
+* Code block fontification
+  :PROPERTIES:
+  :CUSTOM_ID: code-block-fontification
+  :END:
+
+The following displays the contents of code blocks in org-mode files using the
+major-mode of the code. It also changes the behavior of =TAB= to as if it were
+used in the appropriate major mode.  This means that reading and editing code
+form inside of your Org-mode files is much more like reading and editing of
+code using its major mode.
+
+#+NAME: code-block-fontification
+#+BEGIN_SRC emacs-lisp
+(setq org-src-fontify-natively t)
+(setq org-src-tab-acts-natively t)
+#+END_SRC
+
+When you use org-mode's inline [[http://orgmode.org/manual/Emphasis-and-monospace.html][markup formatting]], there're some characters
+which will make the markup failed, such as the "'"(single quote) and
+"`"(backtick) char in Lisp/Scheme/Clojure code. We need to do some hack to
+org-mode's parser, check [[http://stackoverflow.com/questions/16443386/how-to-escape-double-quote][stackoverflow: how to escape double quote?]] and
+[[http://stackoverflow.com/questions/24169333/how-can-i-emphasize-or-verbatim-quote-a-comma-in-org-mode][stackoverflow: how can I emphasize or verbatim quote a comma in org mode?]] for
+two examples.
+
+Besides, I've found that modify ~org-emphasis-regexp-components~ only affect
+fontification in org-mode, we need some extra work to make it work with
+~org-export~. I've spent almost 1.5 hours to figure out this, even read some
+code snippet of org-mode's parser. We need to ~(org-element--set-regexps)~
+manually after we modify ~org-emphasis-regexp-components~. Actually,
+~(org-element--set-regexps)~ will set some a new value for the hidden variable
+~org-element--object-regexp~, which is used to recognize org-mode's "element".
+
+#+NAME: inline-code-block-regexp
+#+BEGIN_SRC emacs-lisp
+(setcar (nthcdr 2 org-emphasis-regexp-components) " \t\n\r")
+(custom-set-variables `(org-emphasis-alist ',org-emphasis-alist))
+(org-element--set-regexps)
+#+END_SRC
+
+* The Library of Babel
+  :PROPERTIES:
+  :CUSTOM_ID: library-of-babel
+  :END:
+The library of babel contains makes many useful functions available
+for use by code blocks in *any* emacs file.  See the actual
+=library-of-babel.org= (located in the Org-mode =contrib/babel=
+directory) file for information on the functions, and see
+[[http://orgmode.org/worg/org-contrib/babel/intro.php#library-of-babel][worg:library-of-babel]] for more usage information.
+
+Code blocks can be loaded into the library of babel from any Org-mode
+file using the `org-babel-lob-ingest' function.
+
+* Htmlize
+  :PROPERTIES:
+  :CUSTOM_ID: htmlize
+  :END:
+
+[[http://www.emacswiki.org/emacs/Htmlize][htmlize.el]] is a package for exporting the contents of an Emacs buffer to HTML
+while respecting display properties such as colors, fonts, underlining,
+invisibility, etc.
+
+Org-mode can utilize =htmlize= when =org-html-export-as-html= for source code syntax
+highlighting if =htmlize= is available.
+
+However, there's a minor problem with oh-my-emacs's default settings of
+=rainbow-delimiters-mode=. Functions such as =htmlize-buffer= will report an
+error: =htmlize-make-face-map: Wrong type argument: listp,
+"rainbow-delimiters-depth-1-face"=, so I do a small hack to overcome this by
+using the elisp's =defadvice= utility.
+
+Actually, =rainbow-delimiters-mode= still has some problems within org-mode's
+code block, which may be a bug of =rainbow-delimiters-mode=.
+
+#+NAME: htmlize
+#+BEGIN_SRC emacs-lisp
+(defadvice htmlize-buffer-1 (around ome-htmlize-buffer-1 disable)
+  (rainbow-delimiters-mode -1)
+  ad-do-it
+  (rainbow-delimiters-mode t))
+
+(ome-install 'htmlize)
+#+END_SRC
+
+* Org-LaTeX
+  :PROPERTIES:
+  :CUSTOM_ID: org-latex
+  :END:
+
+Syntax highlighting is really cool when export org-mode files to other
+formats. We get syntax highlighting for html by [[http://www.emacswiki.org/emacs/Htmlize][htmlize.el]], so what about
+\LaTeX{}?
+
+Actually, org-mode has builtin support for syntax highlighting in \LaTeX{},
+check the builtin documentation via =C-h v org-latex-listings RET=. Check post
+[[http://joat-programmer.blogspot.com/2013/07/org-mode-version-8-and-pdf-export-with.html][1]] and [[http://praveen.kumar.in/2012/03/10/org-mode-latex-and-minted-syntax-highlighting/][2]] for technical details.
+
+Note that the following code snippet works with org-mode 8.x branch. So if you
+still use org-mode 7.x, you may need to [[http://orgmode.org/worg/org-tutorials/org-latex-export.html#sec-12-3][setup manually]].
+
+#+NAME: org-latex
+#+BEGIN_SRC emacs-lisp
+;; code snippet comes from
+;; http://joat-programmer.blogspot.com/2013/07/org-mode-version-8-and-pdf-export-with.html
+;; Include the latex-exporter
+;; check whether org-mode 8.x is available
+(when (require 'ox-latex nil 'noerror)
+  ;; You need to install pygments to use minted
+  (when (executable-find "pygmentize")
+    ;; Add minted to the defaults packages to include when exporting.
+    (add-to-list 'org-latex-packages-alist '("" "minted"))
+    ;; Tell the latex export to use the minted package for source
+    ;; code coloration.
+    (setq org-latex-listings 'minted)
+    ;; Let the exporter use the -shell-escape option to let latex
+    ;; execute external programs.
+    ;; This obviously and can be dangerous to activate!
+    (setq org-latex-minted-options
+          '(("mathescape" "true")
+            ("linenos" "true")
+            ("numbersep" "5pt")
+            ("frame" "lines")
+            ("framesep" "2mm")))
+    (setq org-latex-pdf-process
+          '("xelatex -shell-escape -interaction nonstopmode -output-directory %o %f"))))
+#+END_SRC
+
+* Org-CDLaTeX
+  :PROPERTIES:
+  :CUSTOM_ID: org-cdlatex
+  :END:
+
+If [[http://staff.science.uva.nl/~dominik/Tools/cdlatex/][CDLaTeX]] is available, turn on it in org-mode. See "[[http://www.gnu.org/software/emacs/manual/html_node/org/CDLaTeX-mode.html][Using CDLaTeX to enter
+math]]" for details.
+
+#+NAME: org-cdlatex
+#+BEGIN_SRC emacs-lisp
+(when (el-get-package-is-installed 'cdlatex-mode)
+  (add-hook 'org-mode-hook 'turn-on-org-cdlatex))
+#+END_SRC
+
+* Org-export
+  :PROPERTIES:
+  :CUSTOM_ID: org-export
+  :END:
+
+Org-mode has [[http://orgmode.org/manual/Exporting.html][export facilities]] to export Org documents or parts of Org
+documents to a variety of other formats.
+
+However, there're some conventions in different formats, so we need some
+[[http://orgmode.org/manual/Exporting.html]["smart" tricks]] to follow these conventions with exporting Org documents to
+other formats.
+
+** smart quotes
+
+The differentiation of single quote, double quote, back quote may comes from
+the world of \TeX of pre-Unicode eras trying to "improve" the typograph by
+using conventions that no longer hold any more[1].
+
+Org mode has builtin support for this "smart quote" feature. You can put a
+snippet of ~#+OPTIONS: ':t~ at the start of your Org document, or just turn on
+it globally.
+
+#+BEGIN_SRC emacs-lisp
+(setq org-export-with-smart-quotes t)
+#+END_SRC
+
+* Todo
+- How to handle =org-mode= format like ===?
+
+[1] [[http://stackoverflow.com/questions/1432952/why-does-html-markup-often-enclose-text-with-backticks-and-single-quotes][Why does HTML markup often enclose text with backticks and single quotes?]]
+[2] [[http://stackoverflow.com/questions/15097114/how-to-get-smart-quotes-on-org-mode-export][how to get smart quotes on org-mode export?]]

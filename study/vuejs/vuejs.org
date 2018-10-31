@@ -1,0 +1,44 @@
+* 查看npm版本
+#+BEGIN_EXAMPLE
+npm -v          // 如果<3.08的版本，需要升级
+npm i npm g     // npm 升级
+#+END_EXAMPLE
+
+* 安装webpack
+#+BEGIN_EXAMPLE
+npm install webpack -g
+webpack -v      // 查看webpack的版本
+#+END_EXAMPLE
+
+* 安装vue
+#+BEGIN_EXAMPLE
+npm install vue -g 
+vue -V          // 查看vue的版本
+#+END_EXAMPLE
+
+* 安装vue命令行工具
+#+BEGIN_EXAMPLE
+npm install vue-cli -g 
+#+END_EXAMPLE
+
+* 创建vue项目
+#+BEGIN_EXAMPLE
+vue init webpacke vue_es6  // vue_es6项目名称
+use eslint                 //  一定选择 no
+其他都选yes
+#+END_EXAMPLE
+
+* 安装相关工具链
+#+BEGIN_EXAMPLE
+cd vue_es6
+npm install
+npm run dev
+#+END_EXAMPLE
+
+* 访问
+#+BEGIN_EXAMPLE
+http://localhost:8080
+#+END_EXAMPLE
+
+
+

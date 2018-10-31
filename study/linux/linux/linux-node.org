@@ -1,0 +1,72 @@
+[ ubuntu-apt-get ]
+        1、清理apt-get数据源
+           rm -rf /var/lib/apt/lists/*
+           apt-get update
+        2、编辑数据源/etc/apt/sources.list文件
+           # apt-cdrom报错，可以编辑/etc/apt/sources.list文件
+           # 每次编辑/etc/apt/sources.list文件完成后，都需要
+           #rm -rf /var/lib/apt/lists/*
+           apt-get update
+
+[ ubuntu-中文字符集环境配置 ]
+        1、编辑/var/lib/locales/supported.d/local，
+           追加一行对中文的支持 zh_CN.UTF-8 UTF-8
+           sudo -i vim /var/lib/locales/supported.d/local
+           en_US.UTF-8 UTF-8
+           zh_CN.UTF-8 UTF-8
+
+        2、修改系统默认字符
+           sudo -i vim /etc/default/locale
+           LANG="zh_CN.UTF-8"
+           LANGUAGE="zh_CN:"
+
+        3、sudo -i locale-gen
+
+[ ubuntu-修改系统时区时间 ]
+        sudo -i cp /usr/share/zoneinfo/Asia/Shanghai  /etc/localtime
+
+[ ubuntu-注册系统服务开机自启动 ]
+        编写好应用程序的服务控制脚本，将其复制到/etc/init.d/目录下，并且赋予执行x权限
+        update-rc.d 服务脚本 defaults           (注册开机启动)
+        update-rc.d -f 服务名脚本 remove        (取消开机启动)
+
+
+[ linux-终端重用快捷键盘 ]
+        Ctrl + n         : 相当于键盘向下的方向键(n: next的意思)
+        Ctrl + p         : 相当于键盘向上的方向键(p: previous的意思)
+        Ctrl + r         : 快速检索使用过的历史命令
+        Ctrl + a         : 光标跳到行首(a: ahead的意思)
+        Ctrl + e         : 光标跳到行尾(e: end的意思)
+        Ctrl + b         : 光标向行首移动一个字符(b: backwards的意思)
+        Ctrl + f         : 光标向行尾移动一个字符(f: forwards的意思)
+        Ctrl + h         : 从光标往后删除一个字符
+        Ctrl + d         : 从光标往前删除一个字符
+        Ctrl + w         : 从光标往后删除一个单词
+        Ctrl + k         : 从光标删除至行尾
+        Ctrl + u         : 从光标删除至行首
+        Ctrl + y         : 粘贴Ctrl + u, Ctrl + k, Ctrl + w删除的文本
+        Ctrl + t         : 交换光标所在字符和其前的字符
+        Ctrl + i         : 相当于Tab键
+        Ctrl + o         : 相当于Ctrl + m
+        Ctrl + m         : 相当Enter键。
+        Ctrl + s         : 使终端发呆，静止，可以使快速输出的终端屏幕停下来,锁住终端
+        Ctrl + q         : 退出Ctrl+s引起的发呆
+        Ctrl + z         : 使正在运行在终端的任务，运行于后台(可用fg恢复)
+        Ctrl + c         : 中断终端中正在执行的任务。
+        Ctrl + d         : 在空命令行的情况下可以退出终端。
+        Ctrl + [         : 相当于Esc键。
+        Esc键            : 连续按2次显示所有的支持的终端命令。
+        Tab键            : 命令、文件名等自动补全功能。
+
+[ screen ]
+
+
+screen -ls
+列出当前所有的session
+
+
+sudo apt-get install screen
+
+C-a d ->detach  暂时离开当前session
+
+* tcpdump

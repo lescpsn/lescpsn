@@ -1,0 +1,11 @@
+config:
+  port: 4567
+  debug: False
+  exit_hour: 1
+
+spark:
+  master: 'spark://workhorse1:7077'
+  data_path: '/home/kevin/qxexport'
+  executor_memory: '6g'
+  #file_count: 1
+

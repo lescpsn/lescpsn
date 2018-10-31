@@ -1,0 +1,23 @@
+database:
+    purus:   'mysql+mysqlconnector://purus:Purus_123@localhost/purus'
+    madeira: 'mysql+mysqlconnector://madeira:madeira_123@localhost/madeira'
+
+config:
+  site: 1
+  debug: False
+  port: 8899
+
+cache:
+  - {ip: 'localhost', port: 26379}
+
+connection:
+  mongo_messagepush: 'mongodb://roott:123456@127.0.0.1:27017/messagepush'
+
+preprocessing:
+  'madeira.order_timeout': 'direct'
+
+subscrible:
+  'madeira.order_timeout': 'direct'
+
+
+

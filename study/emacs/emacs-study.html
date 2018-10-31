@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2017-03-12 周日 21:59 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>emacs-study历程</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../style/my-org-worg.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">emacs-study历程</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgd456d7c">1. emacs安装</a>
+<ul>
+<li><a href="#org3147649">1.1. windows</a></li>
+<li><a href="#orgc738434">1.2. linux</a></li>
+</ul>
+</li>
+<li><a href="#org23ff4b6">2. spacemacs安装</a>
+<ul>
+<li><a href="#org45285d6">2.1. windows</a></li>
+<li><a href="#orgac63203">2.2. linux</a></li>
+<li><a href="#org69f5dac">2.3. 相关工具的安装</a></li>
+</ul>
+</li>
+<li><a href="#orga60a21a">3. prelude 安装</a>
+<ul>
+<li><a href="#org4072a8f">3.1. Windows</a></li>
+<li><a href="#org2154bde">3.2. Linux</a></li>
+</ul>
+</li>
+<li><a href="#orgfe9978b">4. TUTORIAL学习</a></li>
+<li><a href="#orged23720">5. 文件（FILE）</a></li>
+<li><a href="#org5c7015b">6. org-mode</a></li>
+<li><a href="#orgf730721">7. tramp</a></li>
+<li><a href="#org929f10c">8. 常用快捷键</a></li>
+<li><a href="#orgf99897d">9. spacemacs教程</a>
+<ul>
+<li><a href="#orgda3e796">9.1. 常用快捷键</a></li>
+<li><a href="#org3afac16">9.2. shell-mode</a></li>
+<li><a href="#orgf239087">9.3. golang-mode</a></li>
+<li><a href="#org591ba8d">9.4. python-mode</a></li>
+<li><a href="#orgc8996e1">9.5. javascript-mode</a></li>
+</ul>
+</li>
+<li><a href="#org84d49fb">10. issue</a>
+<ul>
+<li><a href="#org2dc3864">10.1. windows</a></li>
+<li><a href="#org5e31fdc">10.2. linux</a></li>
+</ul>
+</li>
+<li><a href="#orgf4a56b9">11. lisp</a></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgd456d7c" class="outline-2">
+<h2 id="orgd456d7c"><span class="section-number-2">1</span> emacs安装</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-org3147649" class="outline-3">
+<h3 id="org3147649"><span class="section-number-3">1.1</span> windows</h3>
+<div class="outline-text-3" id="text-1-1">
+<ul class="org-ul">
+<li>下载安装包</li>
+</ul>
+<pre class="example">
+gnu网站http://ftp.gnu.org/gnu/emacs/windows下载windows对应的emacs版本
+
+http://ftp.gnu.org/gnu/emacs/windows/emacs-25.1-2-x86_64-w64-mingw32.zip
+</pre>
+
+<ul class="org-ul">
+<li>安装</li>
+</ul>
+<pre class="example">
+emacs-25.1-2-x86_64-w64-mingw32.zip为绿色版本，
+
+直接解压到自己规划好的目录并修改为自己喜欢的名字即可以使用，如D:\Local\emacs
+</pre>
+
+<ul class="org-ul">
+<li>配置PATH环境变量</li>
+</ul>
+<pre class="example">
+如：将emacs安装目录的bin目录D:\Local\emacs\bin添加到PATH环境变量中
+</pre>
+
+
+<ul class="org-ul">
+<li>规划emacs配置目录.emacs.d</li>
+</ul>
+<pre class="example">
+编辑C:\Users\carhj\AppData\Roaming\.emacs.d\init.el文件,且保证C:\Users\carhj\AppData\Roaming\
+
+目录中不能有.emacs文件
+
+(setenv "HOME" "D:/Local/emacs/")
+;;(setenv "PATH" "E:/Local/emacs/")
+(setq default-directory "E:/Projects/lescpsn/")
+(load-file "D:/Local/emacs/.emacs.d/init.el")
+</pre>
+
+<ul class="org-ul">
+<li>emacs启动</li>
+</ul>
+<pre class="example">
+创建runemacs.exe的快捷方式到桌面，右键 --&gt; 属性 --&gt; 起始位置
+删除"D:/Local/emacs/.emacs.d/init.el"文件，恢复到初始状态 git checkout -- init.el，再次启动emacs
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgc738434" class="outline-3">
+<h3 id="orgc738434"><span class="section-number-3">1.2</span> linux</h3>
+</div>
+</div>
+
+
+<div id="outline-container-org23ff4b6" class="outline-2">
+<h2 id="org23ff4b6"><span class="section-number-2">2</span> spacemacs安装</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-org45285d6" class="outline-3">
+<h3 id="org45285d6"><span class="section-number-3">2.1</span> windows</h3>
+<div class="outline-text-3" id="text-2-1">
+<ul class="org-ul">
+<li>安装spacemacs</li>
+</ul>
+<pre class="example">
+直接从git上下载代码到用户的家目录中，并取名为.emacs.d，
+
+如果之前运行过emacs，且windows的家目录下有.emacs文件和.emacs.d目录，请删除掉
+
+windows的家目录一般为C:\Users\用户名\AppData\Roaming\
+
+git clone https://github.com/syl20bnr/spacemacs.git C:\Users\carhj\AppData\Roaming\.emacs.d
+
+拷贝.spacemacs文件到C:\Users\carhj\AppData\Roaming\目录下
+
+拷贝elpa目录到C:\Users\carhj\AppData\Roaming\.emacs.d\目录下
+</pre>
+
+<ul class="org-ul">
+<li>启动emacs</li>
+</ul>
+<pre class="example">
+spacemacs采用.emacs.d目录来控制emacs了，无需.emacs文件了
+
+1 选择emacs模式
+
+2 选择standard(spacemacs)
+
+3 选择full-featured(helm)
+
+4 第一次启动后，然后关闭emacs
+
+5 HOME目录下会自动生成C:\Users\carhj\AppData\Roaming\.spacemacs这个文件
+</pre>
+
+<ul class="org-ul">
+<li>.spacemacs文件配置</li>
+</ul>
+<pre class="example">
+用现有的模板文件.spacemacs覆盖掉HOME目录下的.spacemacs,也可以自己慢慢维护.spacemacs文件
+
+如若自己维护.spacemacs文件，至少也要修改下下面的两处，否则国内的网络让其无法正常运行
+
+修改插件仓储链接超时时间为60秒
+dotspacemacs-elpa-timeout 60
+
+修改LPA的仓储源，在 dotspacemacs/user-init 函数中
+(setq configuration-layer--elpa-archives
+    '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+      ("org-cn"   . "http://elpa.emacs-china.org/org/")
+      ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
+</pre>
+
+
+<ul class="org-ul">
+<li>issue</li>
+</ul>
+<pre class="example">
+1 evil-unimpaired安装不了
+  github网络问题，evil-unimpaire不容易装上,手工下载melpa后,放入到emacs.d\.cache\quelpa\目录下,
+  重启emacs
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgac63203" class="outline-3">
+<h3 id="orgac63203"><span class="section-number-3">2.2</span> linux</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li>安装spacemacs</li>
+</ul>
+<pre class="example">
+直接从git上下载代码到用户的家目录中，并取名为.emacs.d，
+
+如果之前运行过emacs，且windows的家目录下有.emacs文件和.emacs.d目录，请删除掉
+
+git clone https://github.com/syl20bnr/spacemacs.git .emacs.d
+
+首次运行emacs让其生成.spacemacs文件 修改.spacemacs文件的插件数据源
+</pre>
+</div>
+</div>
+
+
+
+<div id="outline-container-org69f5dac" class="outline-3">
+<h3 id="org69f5dac"><span class="section-number-3">2.3</span> 相关工具的安装</h3>
+<div class="outline-text-3" id="text-2-3">
+<ul class="org-ul">
+<li>安装 aspell</li>
+</ul>
+<pre class="example">
+windows:
+http://aspell.net/win32/ 下载Aspell-0-50-3-3-Setup.exe，Aspell-en-0.50-2-3.exe两个软件
+先安装Aspell-0-50-3-3-Setup.exe，再安装Aspell-en-0.50-2-3.exe（属于字典库）
+安装后的bin添加到PATH环境变量中去
+
+linux:
+sudo apt-get install aspell  (aspell-en英语字典库自动安装了)
+sudo apt-get install aspell-hy(美语)
+</pre>
+
+<ul class="org-ul">
+<li>安装 tern</li>
+</ul>
+<pre class="example">
+windows:
+采用nmp包管理工具安装，没有npm的话，先需先安装nodejs
+npm install -g tern
+
+linux:
+采用nmp包管理工具安装，没有npm的话，先需先安装nodejs(这种安装方式可能有坑)
+sudo apt-get install nodejs
+sudo apt-get install npm
+sudo npm install -g tern
+</pre>
+
+<ul class="org-ul">
+<li>安装 source code font 字体</li>
+</ul>
+<pre class="example">
+https://github.com/adobe-fonts/source-code-pro/downloads 下载 source code font 字体
+
+TTF下所有文件拷贝到c:/windows/font
+</pre>
+
+<ul class="org-ul">
+<li>安装 zlib</li>
+</ul>
+<pre class="example">
+http://gnuwin32.sourceforge.net/packages/zlib.htm 下载windows版本的zlib
+
+安装zlib，一路回车法，将安装后的bin添加到PATH环境变量中去
+</pre>
+
+<ul class="org-ul">
+<li>安装 diff</li>
+</ul>
+<pre class="example">
+https://sourceforge.net/projects/kdiff3/files/kdiff3/0.9.98/
+
+下载KDiff3-64bit-Setup_0.9.98-2.exe
+
+一路回车法安装diff,安装后的bin添加到PATH环境变量中去
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orga60a21a" class="outline-2">
+<h2 id="orga60a21a"><span class="section-number-2">3</span> prelude 安装</h2>
+<div class="outline-text-2" id="text-3">
+</div><div id="outline-container-org4072a8f" class="outline-3">
+<h3 id="org4072a8f"><span class="section-number-3">3.1</span> Windows</h3>
+<div class="outline-text-3" id="text-3-1">
+<ul class="org-ul">
+<li>安装prelude</li>
+</ul>
+<pre class="example">
+github上下载源代码
+
+git clone https://github.com/bbatsov/prelude.git ~/.emacs.d
+
+cp ~/.emacs.d/sample/prelude-modules.el ~/.emacs.d/  修改该文件，打开需要模块
+
+注意：'prelude-evil是vim操作模式，如果是emacs的操作风格请不要放开
+
+复制准备好的插件包elpa到~/.emacs.d/下
+
+复制my@prelude.el文件到~/.emacs.d/personal/目录下
+
+设置字体F10-&gt;option-&gt;set default font
+保存设置F10-&gt;option-&gt;save
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org2154bde" class="outline-3">
+<h3 id="org2154bde"><span class="section-number-3">3.2</span> Linux</h3>
+<div class="outline-text-3" id="text-3-2">
+<ul class="org-ul">
+<li>安装prelude</li>
+</ul>
+<pre class="example">
+github上下载源代码
+git clone https://github.com/bbatsov/prelude.git ~/.emacs.d
+
+cp ~/.emacs.d/sample/prelude-modules.el ~/.emacs.d/  修改该文件，打开需要模块
+
+修改插件源
+vim  ~/.emacs.d/core/prelude-packages.el
+("melpa" . "http://elpa.emacs-china.org/melpa/")
+            
+
+复制自己的配置文件my@prelude.el文件到~/.emacs.d/personal/目录下
+
+
+ad-handle-definition: `ido-completing-read' got redefined有卡死現象
+（應該是網絡環境引起的ssh客戶端不能測試鏈接）
+暂且修改
+sudo vim /etc/ssh/ssh_config 
+ConnectTimeout 1
+</pre>
+<ul class="org-ul">
+<li>开启xterm终端256色</li>
+</ul>
+<pre class="example">
+bash shell
+vim ~/.bashrc
+if [ "$TERM" == "xterm" ]; then
+    export TERM=xterm-256color
+fi
+
+fish shell
+vim ~/.config/fish/config.fish
+set -x TERM xterm-256color
+</pre>
+
+<ul class="org-ul">
+<li>更新插件</li>
+</ul>
+<pre class="example">
+如果采用打包好的elpa插件源，由于平台的不同，肯能要更新下
+package-list-packages 进入列表
+package-menu-mark-upgrade [U] 设置更新标识
+package-menu-execute [x]执行更新操作
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgfe9978b" class="outline-2">
+<h2 id="orgfe9978b"><span class="section-number-2">4</span> TUTORIAL学习</h2>
+<div class="outline-text-2" id="text-4">
+<ul class="org-ul">
+<li>常用键定义</li>
+</ul>
+<pre class="example">
+C :Ctrl
+M :Alt(或者ESC)
+</pre>
+
+<ul class="org-ul">
+<li>基本操作</li>
+</ul>
+<pre class="example">
+C-V : 向下移动一屏幕
+M-V : 向上移动一屏幕
+C-l : 将光标所在的行重绘于屏幕的上，中，下
+C-p : 上一行
+C-n : 下一行
+C-f : 右移一个字符
+C-b : 左移一个字符
+M-f : 右移一个词
+M-b : 左移一个词
+C-a : 移到一行行首
+C-e : 移到一行行尾
+M-a : 移到一段段首
+M-e : 移到一段段尾
+M-&lt; : 跳到行首
+M-&gt; : 跳到行尾
+C-u 数字 command : 指定的command执行重复的次数
+M-数字 : 选择窗口
+C-g : 终止命令
+C-x 1 : 保留光标所在的窗格，关闭掉其它所有的窗格
+C-h k command : 显示某个命令的用法文档
+C-x : 代表和窗口，文件，缓冲区有关的命令
+DEL : Backspace
+C-d : 删除光标后一个字符
+M-DEL : 删除光标前一个单词（C-DEL也是一样）
+M-d : 删除光标后一个单词
+C-k : 删除光标到行尾
+M-k : 删除光标到段尾
+C-y : 粘贴
+M-y : 必须紧接着C-y后操作，可以恢复剪切缓冲区之前的内容
+C-/ : 恢复到前一次的操作(C-_也是一样）
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orged23720" class="outline-2">
+<h2 id="orged23720"><span class="section-number-2">5</span> 文件（FILE）</h2>
+</div>
+
+
+<div id="outline-container-org5c7015b" class="outline-2">
+<h2 id="org5c7015b"><span class="section-number-2">6</span> org-mode</h2>
+<div class="outline-text-2" id="text-6">
+<ul class="org-ul">
+<li>文档标题</li>
+</ul>
+<pre class="example">
+#+TITLE: 文档标题名
+</pre>
+
+<ul class="org-ul">
+<li>引入外部css文件</li>
+</ul>
+<pre class="example">
+#+HTML_HEAD: &lt;link rel="stylesheet" type="text/css" href="../style/my-org-worg.css" /&gt;
+</pre>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgf730721" class="outline-2">
+<h2 id="orgf730721"><span class="section-number-2">7</span> tramp</h2>
+<div class="outline-text-2" id="text-7">
+<ul class="org-ul">
+<li>tramp简介</li>
+</ul>
+<pre class="example">
+tramp主要实现远程访问Linux服务器，可以直接编辑远程服务器上的文件
+</pre>
+
+<ul class="org-ul">
+<li>安装</li>
+</ul>
+<pre class="example">
+1 emacs-24.5以上版本已经自带tramp包
+
+2 安装plink.exe，将plink.exe放置到emacs的bin目录下，plink.exe从ssh的客户端工具putty中拷贝过来
+</pre>
+
+<ul class="org-ul">
+<li>配置</li>
+</ul>
+<pre class="example">
+(require 'tramp)
+(setq tramp-default-method "plink")
+例如：spacemacs中
+     在dotspacemacs/user-config ()函数中加入上面代码
+</pre>
+
+<ul class="org-ul">
+<li>操作方式</li>
+</ul>
+<pre class="example">
+/user@ip:
+</pre>
+
+<ul class="org-ul">
+<li>issue</li>
+</ul>
+<pre class="example">
+首次要在windows的cmd行下，运用plink访问一次目标主机，否则因为没有添加公钥会一直卡死
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org929f10c" class="outline-2">
+<h2 id="org929f10c"><span class="section-number-2">8</span> 常用快捷键</h2>
+<div class="outline-text-2" id="text-8">
+<ul class="org-ul">
+<li>C-M-\ (M-x indent-region)</li>
+</ul>
+<pre class="example">
+格式化代码
+</pre>
+
+<ul class="org-ul">
+<li>C-@ (Ctrl+Shift+2)</li>
+</ul>
+<pre class="example">
+打标 mark set
+</pre>
+
+<ul class="org-ul">
+<li>M-;</li>
+</ul>
+<pre class="example">
+注释掉选择区的代码
+</pre>
+
+<ul class="org-ul">
+<li>M-% (Alt+Shift+5)</li>
+</ul>
+<pre class="example">
+查找替换，y确认
+</pre>
+
+<ul class="org-ul">
+<li>M-d</li>
+</ul>
+<pre class="example">
+向后删除一个单词
+</pre>
+
+<ul class="org-ul">
+<li>M-DEL(DEL可以是Delete或者Backspace)</li>
+</ul>
+<pre class="example">
+向前删除一个单词
+</pre>
+
+<ul class="org-ul">
+<li>M-w 或者 M-W (M-w 可能被qq语音输入占用)</li>
+</ul>
+<pre class="example">
+复制选择的块
+</pre>
+
+<ul class="org-ul">
+<li>C-y</li>
+</ul>
+<pre class="example">
+粘贴buf中复制的块或剪切的块
+</pre>
+
+<ul class="org-ul">
+<li>C-w</li>
+</ul>
+<pre class="example">
+剪切(删除)选择的区域块，可以用C-y粘贴恢复回来
+</pre>
+
+<ul class="org-ul">
+<li>C-k</li>
+</ul>
+<pre class="example">
+剪切(删除)光标所在的行，可以用C-y粘贴恢复回来
+</pre>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgf99897d" class="outline-2">
+<h2 id="orgf99897d"><span class="section-number-2">9</span> spacemacs教程</h2>
+<div class="outline-text-2" id="text-9">
+</div><div id="outline-container-orgda3e796" class="outline-3">
+<h3 id="orgda3e796"><span class="section-number-3">9.1</span> 常用快捷键</h3>
+<div class="outline-text-3" id="text-9-1">
+<pre class="example">
+M-数字 : 选择窗口
+</pre>
+</div>
+</div>
+<div id="outline-container-org3afac16" class="outline-3">
+<h3 id="org3afac16"><span class="section-number-3">9.2</span> shell-mode</h3>
+<div class="outline-text-3" id="text-9-2">
+<ul class="org-ul">
+<li>C-c :</li>
+</ul>
+<pre class="example">
+设置当前shell脚本类型（bash，sh，ksh）
+</pre>
+
+<ul class="org-ul">
+<li>C-c (</li>
+</ul>
+<pre class="example">
+快速定义一个函数
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgf239087" class="outline-3">
+<h3 id="orgf239087"><span class="section-number-3">9.3</span> golang-mode</h3>
+<div class="outline-text-3" id="text-9-3">
+<ul class="org-ul">
+<li>C-c C-a</li>
+</ul>
+<pre class="example">
+快速import一个库
+</pre>
+
+<ul class="org-ul">
+<li>C-c C-d</li>
+</ul>
+<pre class="example">
+查看一个函数的声明
+</pre>
+
+<ul class="org-ul">
+<li>C-c C-j</li>
+</ul>
+<pre class="example">
+查看一个函数的详细定义
+</pre>
+
+<ul class="org-ul">
+<li>M-*</li>
+</ul>
+<pre class="example">
+跳回到原处
+</pre>
+
+<ul class="org-ul">
+<li>M-RET i r</li>
+</ul>
+<pre class="example">
+删除多余的import包
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org591ba8d" class="outline-3">
+<h3 id="org591ba8d"><span class="section-number-3">9.4</span> python-mode</h3>
+</div>
+
+<div id="outline-container-orgc8996e1" class="outline-3">
+<h3 id="orgc8996e1"><span class="section-number-3">9.5</span> javascript-mode</h3>
+</div>
+</div>
+
+
+<div id="outline-container-org84d49fb" class="outline-2">
+<h2 id="org84d49fb"><span class="section-number-2">10</span> issue</h2>
+<div class="outline-text-2" id="text-10">
+</div><div id="outline-container-org2dc3864" class="outline-3">
+<h3 id="org2dc3864"><span class="section-number-3">10.1</span> windows</h3>
+<div class="outline-text-3" id="text-10-1">
+<ul class="org-ul">
+<li>Error: (file-error “Searching for program” “no such file or directory” “diff”)</li>
+</ul>
+<pre class="example">
+需要安装diff工具
+下载https://sourceforge.net/projects/kdiff3/files/kdiff3/0.9.98/
+安装KDiff3-64bit-Setup_0.9.98-2.exe，并将配置到环境变量中去
+</pre>
+
+
+<ul class="org-ul">
+<li>The directory ~/.emacs.d/server is unsafe</li>
+</ul>
+<pre class="example">
+~/.emacs.d/server 目录属主修改为当前用户
+右键 --&gt; 属性 --&gt; 安全 --&gt; 高级 --&gt;修改所有者
+</pre>
+
+<ul class="org-ul">
+<li>javascript格式化代码</li>
+</ul>
+<pre class="example">
+npm -g install js-beautify
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org5e31fdc" class="outline-3">
+<h3 id="org5e31fdc"><span class="section-number-3">10.2</span> linux</h3>
+</div>
+</div>
+
+
+<div id="outline-container-orgf4a56b9" class="outline-2">
+<h2 id="orgf4a56b9"><span class="section-number-2">11</span> lisp</h2>
+<div class="outline-text-2" id="text-11">
+<ul class="org-ul">
+<li>C-x C-e</li>
+</ul>
+<pre class="example">
+运算lisp
+</pre>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2017-03-12 周日 21:59</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

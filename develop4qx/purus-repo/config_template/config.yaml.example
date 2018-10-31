@@ -1,0 +1,18 @@
+database:
+    repo:   'mysql+mysqlconnector://repo:repo@192.168.1.162/repo'
+
+config:
+  port: 8907
+  debug: True
+
+cache:
+  db: 4
+  hosts:
+  - { ip: "192.168.1.162", port: 26379 }
+
+
+safety:
+  white_list:
+    - '127.0.0.1'
+    - '::1'
+  secret: 'FUMTULMHACDGXONN'

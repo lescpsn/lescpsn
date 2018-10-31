@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="zh-cn"><head>
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Anaconda多环境多版本python配置指导 - _harvey - 博客园</title>
+<link type="text/css" rel="stylesheet" href="Anaconda%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="Anaconda%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B_files/bundle-AnotherEon001.css">
+<link id="mobile-style" media="only screen and (max-width: 768px)" type="text/css" rel="stylesheet" href="Anaconda%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B_files/bundle-AnotherEon001-mobile.css">
+<link title="RSS" type="application/rss+xml" rel="alternate" href="http://www.cnblogs.com/harvey888/rss">
+<link title="RSD" type="application/rsd+xml" rel="EditURI" href="http://www.cnblogs.com/harvey888/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="http://www.cnblogs.com/harvey888/wlwmanifest.xml">
+<script src="Anaconda%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B_files/jquery.js" type="text/javascript"></script>  
+<script type="text/javascript">var currentBlogApp = 'harvey888', cb_enable_mathjax=false;var isLogined=false;</script>
+<script src="Anaconda%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B_files/blog-common.js" type="text/javascript"></script>
+</head>
+<body>
+<a name="top"></a>
+
+<div id="wrapper">
+<div id="header">
+
+<div id="top">
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="http://www.cnblogs.com/harvey888/">_harvey</a></h1>
+<div id="subtitle"></div>
+</div>
+<div id="sub"><div id="blog_stats">
+<div class="BlogStats">随笔 - 82, 文章 - 3, 评论 - 1, 引用 - 0</div>
+</div></div>
+
+
+
+</div>
+<div id="main_container">
+<div id="main_content">
+<div id="content">
+	
+<div id="post_detail">
+	<div class="post">
+		<h2>
+			<a id="cb_post_title_url" href="http://www.cnblogs.com/harvey888/p/5465452.html">Anaconda多环境多版本python配置指导</a>
+		</h2>
+		<div class="postbody">
+		<div id="cnblogs_post_body"><h1 class="title">Anaconda多环境多版本python配置指导</h1>
+<div class="meta-top"><span class="wordage">字数3696 <span class="views-count">阅读644 <span class="comments-count">评论0 <span class="likes-count">喜欢0 </span></span></span></span></div>
+<div class="show-content">
+<p>最近学python，读完了语法后在GitHub找了一些练习来做，由 
+于学的是python3.x语法，而GitHub上的好多数练习源码都是基于2.x的，而有些有些module在python3.x上没有，因此为装这些
+ 
+包折腾了好久，浪费了好些时间，这两天才发现Anaconda这个神奇的软件，它是python科学计算的一个分发版，据说常用的包都打包在里边了。并由
+ 
+此得知还有不少该类型的软件。安装完成之后也遇到了不少麻烦，可能是由于初学，不习惯用命令行的缘故，因此网上有不少中文教程，但总是解决不了我的问题，
+ 最后还是官方文档比较详细，在此翻译如下，希望帮助到英语不行的同学。</p>
+<p>原文地址：<a href="http://conda.pydata.org/docs/test-drive.html" target="_blank">http://conda.pydata.org/docs/test-drive.html</a></p>
+<hr>
+<h1>conda测试指南</h1>
+<p>在开始这个conda测试之前，你应该已经下载并安装好了Anaconda或者Miniconda<br><strong>注意：</strong>在安装之后，你应该关闭并重新打开windows命令行。</p>
+<h1>一、Conda测试过程：</h1>
+<ol>
+<li>使用conda。首先我们将要确认你已经安装好了conda</li>
+<li>配置环境。下一步我们将通过创建几个环境来展示conda的环境管理功能。使你更加轻松的了解关于环境的一切。我们将学习如何确认你在哪个环境中，以及如何做复制一个环境作为备份。</li>
+<li>测试python。然后我们将检查哪一个版本的python可以被安装，以及安装另一个版本的python，还有在两个版本的python之间的切换。</li>
+<li>检查包。我们将1)罗列出安装在我们电脑上的包，2)浏览可用的包，3)使用conda 
+install命令来来安装以及移除一些包。对于一些不能使用conda安装的包，我们将4)在Anaconda.org网站上搜索。对于那些在其它位置
+的包，我们将5)使用pip命令来实现安装。我们还会安装一个可以免费试用30天的商业包IOPro</li>
+<li>移除包、环境以及conda.我们将以学习删除你的包、环境以及conda来结束这次测试。</li>
+
+</ol>
+<h1>二、完整过程</h1>
+<p><strong>提示：</strong>在任何时候你可以通过在命令后边跟上-help来获得该命令的完整文档。例如，你可以通过如下的命令来学习conda的update命令。</p>
+<pre class="hljs sql"><code class="sql">conda <span class="hljs-operator"><span class="hljs-keyword">update <span class="hljs-comment">--help</span></span></span></code></pre>
+<h2>1. 管理conda：</h2>
+<p>Conda既是一个包管理器又是一个环境管理器。你肯定知道包管理器，它可以帮你发现和查看包。但是如果当我们想要安装一个包，但是这个包只支持跟
+ 
+我们目前使用的python不同的版本时。你只需要几行命令，就可以搭建起一个可以运行另外python版本的环境。，这就是conda环境管理器的强大
+ 功能。<br>提示：无论你使用Linux、OS X或者Windows命令行工具，在你的命令行终端conda指令都是一样的，除非有特别说明。</p>
+<h3>检查conda已经被安装。</h3>
+<p>为了确保你已经在正确的位置安装好了conda，让我们来检查你是否已经成功安装好了Anaconda。在你的命令行终端窗口，输入如下代码：</p>
+<pre class="hljs sql"><code class="sql">conda <span class="hljs-comment">--version</span></code></pre>
+<p>Conda会返回你安装Anaconda软件的版本。<br><strong>提示</strong>：如果你看到了错误信息，检查你是否在安装过程中选择了仅为当前用户按安装，并且是否以同样的账户来操作。确保用同样的账户登录安装了之后重新打开命令行终端窗口。</p>
+<h3>升级当前版本的conda</h3>
+<p>接下来，让我们通过使用如下update命令来升级conda：</p>
+<pre class="hljs sql"><code class="sql">conda <span class="hljs-operator"><span class="hljs-keyword">update conda</span></span></code></pre>
+<p>conda将会比较新旧版本并且告诉你哪一个版本的conda可以被安装。它也会通知你伴随这次升级其它包同时升级的情况。<br>如果新版本的conda可用，它会提示你输入y进行升级.  </p>
+<pre class="hljs undefined"><code>proceed ([y]/n)? y</code></pre>
+<p>conda更新到最新版后，我们将进入下一个主题。</p>
+<h2>2. 管理环境。</h2>
+<p>现在我们通过创建一些环境来展示conda的环境操作，然后移动它们。</p>
+<h3>创建并激活一个环境</h3>
+<p>使用conda create命令，后边跟上你希望用来称呼它的任何名字：</p>
+<pre class="hljs sql"><code class="sql">conda <span class="hljs-operator"><span class="hljs-keyword">create <span class="hljs-comment">--name snowflake biopython</span></span></span></code></pre>
+<p>这条命令将会给Biopython创建一个新的环境，位置在/envs/snowflakes<br><strong>小技巧：</strong>很多跟在--后边常用的命令选项，可以被略写为一个短线加命令首字母。所以--name选项和-n的作用是一样的。通过conda -h或conda –-help来看大量的缩写。</p>
+<h3>激活这个新环境</h3>
+<pre class="hljs bash"><code class="bash">Linux，OS X: <span class="hljs-built_in">source activate snowflakes
+Windows：activate snowflake`</span></code></pre>
+<p><strong>小技巧</strong>：新的开发环境会被默认安装在你conda目录下的envs文件目录下。你可以指定一个其他的路径；去通过conda create -h了解更多信息吧。<br><strong>小技巧</strong>：如果我们没有指定安装python的版本，donda会安装我们最初安装conda时所装的那个版本的python。</p>
+<h3>创建第二个环境</h3>
+<p>这次让我们来创建并命名一个新环境，然后安装另一个版本的python以及两个包 Astroid 和 Babel。 </p>
+<pre class="hljs sql"><code class="sql">conda <span class="hljs-operator"><span class="hljs-keyword">create -<span class="hljs-keyword">n bunnies python=<span class="hljs-number">3 Astroid Babel</span></span></span></span></code></pre>
+<p>这将创建第二个基于python3 和Astroid and Babel 的新环境，在/envs/bunnies文件夹里。<br><strong>小技巧</strong>：在此同时安装你想在这个环境中运行的程序，<br><strong>小提示：</strong>在你创建环境的同时安装好所有你想要的程序，在后来依次安装可能会导致依赖性问题。<br><strong>小技巧</strong>：你可以在conda create命令后边附加跟多的条件，键入conda create –h 查看更多细节。</p>
+<h3>列出所有的环境</h3>
+<p>现在让我们来检查一下截至目前你所安装的环境，使用conda environment info 命令来查看它:</p>
+<pre class="hljs undefined"><code>conda info -envis</code></pre>
+<p>你将会看到如下的环境列表：</p>
+<p><code>conda environments:</code></p>
+<pre class="hljs javascript"><code class="javascript"> snowflakes          * <span class="hljs-regexp">/home/username/miniconda/envs/snowflakes
+
+ bunnies               /home/username/miniconda/envs/bunnies
+
+ root                  /home/username/miniconda</span></code></pre>
+<h3>确认当前环境</h3>
+<p>你现在处于哪个环境中呢？snowflakes还是bunnies？想要确定它，输入下面的代码：</p>
+<pre class="hljs undefined"><code>conda info -envis</code></pre>
+<p>conda将会显示所有环境的列表，当前环境会显示在一个括号内。</p>
+<pre class="hljs lisp"><code class="lisp"><span class="hljs-list">(<span class="hljs-keyword">snowflakes)</span></span></code></pre>
+<p>注意：conda有时也会在目前活动的环境前边加上*号。</p>
+<h3>切换到另一个环境(activate/deactivate)</h3>
+<p>为了切换到另一个环境，键入下列命令以及所需环境的名字。</p>
+<pre class="hljs bash"><code class="bash">Linux，OS X: <span class="hljs-built_in">source activate snowflakes
+Windows：activate snowflakes</span></code></pre>
+<p>如果要从你当前工作环境的路径切换到系统根目录时，键入：</p>
+<pre class="hljs bash"><code class="bash">Linux，OS X: <span class="hljs-built_in">source deactivate
+Windows: deactivate</span></code></pre>
+<p>当该环境不再活动时，将不再被提前显示。</p>
+<h3>复制一个环境</h3>
+<p>通过克隆来复制一个环境。这儿将通过克隆snowfllakes来创建一个称为flowers的副本。</p>
+<pre class="hljs sql"><code class="sql">conda <span class="hljs-operator"><span class="hljs-keyword">create -<span class="hljs-keyword">n flowers <span class="hljs-comment">--clone snowflakes</span></span></span></span></code></pre>
+<p>通过conda info –-envs来检查环境<br>你现在应该可以看到一个环境列表：flowers, bunnies, and snowflakes.</p>
+<h3>删除一个环境</h3>
+<p>如果你不想要这个名为flowers的环境，就按照如下方法移除该环境：</p>
+<pre class="hljs sql"><code class="sql">conda remove -n flowers <span class="hljs-comment">--all</span></code></pre>
+<p>为了确定这个名为flowers的环境已经被移除，输入以下命令：</p>
+<pre class="hljs bash"><code class="bash">conda info <span class="hljs-operator">-e</span></code></pre>
+<p>flowers 已经不再在你的环境列表里了，所以我们知道它被删除了。</p>
+<h3>学习更多关于环境的知识</h3>
+<p>如果你想学习更多关于conda的命令，就在该命令后边跟上 <code>-h</code></p>
+<pre class="hljs undefined"><code>conda remove -h</code></pre>
+<h2>3. 管理Python</h2>
+<p>conda对Python的管理跟其他包的管理类似，所以可以很轻松地管理和升级多个安装。</p>
+<h3>检查python版本</h3>
+<p>首先让我们检查那个版本的python可以被安装：</p>
+<pre class="hljs sql"><code class="sql">conda search <span class="hljs-comment">--full --name python</span></code></pre>
+<p>你可以使用conda search python来看到所有名字中含有“python”的包或者加上<code>--full --name</code>命令选项来列出完全与“python”匹配的包。</p>
+<h3>安装一个不同版本的python</h3>
+<p>现在我们假设你需要python3来编译程序，但是你不想覆盖掉你的python2.7来升级，你可以创建并激活一个名为snakes的环境，并通过下面的命令来安装最新版本的python3：</p>
+<pre class="hljs sql"><code class="sql">conda <span class="hljs-operator"><span class="hljs-keyword">create -<span class="hljs-keyword">n snakes python=３
+·Linux，OS X：<span class="hljs-keyword">source <span class="hljs-keyword">activate snakes
+·Windows： <span class="hljs-keyword">activate snakes</span></span></span></span></span></span></code></pre>
+<p><strong>小提示：</strong>给环境取一个很形象的名字，例如“Python3”是很明智的，但是并不有趣。</p>
+<h3>确定环境添加成功</h3>
+<p>为了确保snakes环境已经被安装了，键入如下命令：</p>
+<pre class="hljs bash"><code class="bash">conda info <span class="hljs-operator">-e</span></code></pre>
+<p>conda会显示环境列表，当前活动的环境会被括号括起来<code>（snakes）</code></p>
+<h3>检查新的环境中的python版本</h3>
+<p>确保snakes环境中运行的是python3：</p>
+<pre class="hljs sql"><code class="sql">python <span class="hljs-comment">--version</span></code></pre>
+<h3>使用不同版本的python</h3>
+<p>为了使用不同版本的python，你可以切换环境，通过简单的激活它就可以，让我们看看如何返回默认2.7</p>
+<pre class="hljs bash"><code class="bash">·Linux，OS X: <span class="hljs-built_in">source activate snowflakes
+·Windows：activate snowflakes</span></code></pre>
+<h3>检查python版本：</h3>
+<p>确保snowflakes环境中仍然在运行你安装conda时安装的那个版本的python。</p>
+<pre class="hljs sql"><code class="sql">python <span class="hljs-comment">--version</span></code></pre>
+<h3>注销该环境</h3>
+<p>当你完成了在snowflakes环境中的工作室，注销掉该环境并转换你的路径到先前的状态：</p>
+<pre class="hljs bash"><code class="bash">·Linux，OS X：<span class="hljs-built_in">source deactivate
+·Windows：deactivate</span></code></pre>
+<h2>4. 管理包</h2>
+<p>现在让我们来演示包。我们已经安装了一些包（Astroid，Babel和一些特定版本的python），当我们创建一个新环境时。我们检查我们已
+ 经安装了那些包，检查哪些是可用的，寻找特定的包并安装它。接下来我们在Anconda.org仓库中查找并安装一些指定的包，用conda来完成更多
+ pip可以实现的安装，并安装一个商业包。</p>
+<h3>查看该环境中包和其版本的列表：</h3>
+<p>使用这条命令来查看哪个版本的python或其他程序安装在了该环境中，或者确保某些包已经被安装了或被删除了。在你的终端窗口中输入：</p>
+<pre class="hljs php"><code class="php">conda <span class="hljs-keyword">list</span></code></pre>
+<h3>使用conda命令查看可用包的列表</h3>
+<p>一个可用conda安装的包的列表，按照Python版本分类，可以从这个地址获得：<br> <a href="http://docs.continuum.io/anaconda/pkg-docs.html" target="_blank">http://docs.continuum.io/anaconda/pkg-docs.html</a></p>
+<h3>查找一个包</h3>
+<p>首先让我们来检查我们需要的这个包是否可以通过conda来安装：</p>
+<pre class="hljs undefined"><code>conda search beautifulsoup4</code></pre>
+<p>它展示了这个包，所以我们知道它是可用的。</p>
+<h3>安装一个新包</h3>
+<p>我们将在当前环境中安装这个Beautiful Soup包，使用conda命令如下；<br>    conda install --name bunnies beautifulsoup4<br><strong>提示：</strong>你必须告诉conda你要安装环境的名字（<code>-n bunies</code>）否则它将会被安装到当前环境中。<br>现在激活bunnies环境，并且用conda list来显示哪些程序被安装了。</p>
+<pre class="hljs bash"><code class="bash">·Linux，OS X：<span class="hljs-built_in">source activate bunnies
+·Windows：activate bunnies
+所有的平台：
+conda list</span></code></pre>
+<h3>从Anaconda.org安装一个包</h3>
+<p>如果一个包不能使用conda安装，我们接下来将在Anaconda.org网站查找。Anaconda.org向公开和私有包仓库提供包管理服务。Anaconda.org是一个连续分析产品。<br><strong>提示：</strong>你在Anaconda.org下载东西的时候不强制要求注册。<br>为了从Anaconda.org下载到当前的环境中，我们需要通过指定Anaconda.org为一个特定通道，通过输入这个包的完整路径来实现。<br>在浏览器中，去 <a href="http://anaconda.org/" target="_blank">http://anaconda.org</a> 网站。我们查找一个叫“bottleneck”的包，所以在左上角的叫“Search Anaconda Cloud”搜索框中输入“bottleneck”并点击search按钮。<br>Anaconda.org上会有超过一打的bottleneck包的版本可用，但是我们想要那个被下载最频繁的版本。所以你可以通过下载量来排序，通过点击Download栏。<br>点击包的名字来选择最常被下载的包。它会链接到Anaconda.org详情页显示下载的具体命令：</p>
+<pre class="hljs sql"><code class="sql">conda <span class="hljs-operator"><span class="hljs-keyword">install <span class="hljs-comment">--channel https：//conda .anaconda.ort/pandas bottleneck</span></span></span></code></pre>
+<h3>检查被下载的包</h3>
+<pre class="hljs php"><code class="php">conda <span class="hljs-keyword">list</span></code></pre>
+<h3>通过pip命令来安装包</h3>
+<p>对于那些无法通过conda安装或者从Anaconda.org获得的包，我们通常可以用pip（“pip install packages”的简称）来安装包。<br><strong>提示：</strong>
+ 
+pip只是一个包管理器，所以它不能为你管理环境。pip甚至不能升级python，因为它不像conda一样把python当做包来处理。但是它可以安
+装一些conda安装不了的包，和vice versa（此处不会翻译）。pip和conda都集成在Anaconda或miniconda里边。</p>
+<p>我们激活我们想放置程序的环境，然后通过pip安装一个叫“See”的程序。</p>
+<pre class="hljs bash"><code class="bash">·Linux，OS X： <span class="hljs-built_in">source activate bunnies
+·Windows：activate bunnies
+所有平台：
+pip install see</span></code></pre>
+<h3>检查pip安装</h3>
+<p>检查See是否被安装：</p>
+<pre class="hljs php"><code class="php">conda <span class="hljs-keyword">list</span></code></pre>
+<h3>安装商业包</h3>
+<p>安装商业包与你安装其他的包的过程异常。举个例子，让我们安装并删除一个更新的商业包的免费试用 IOPro，可以加速你的python处理速度：</p>
+<pre class="hljs sql"><code class="sql">conda <span class="hljs-operator"><span class="hljs-keyword">install iopro</span></span></code></pre>
+<p><strong>提示：</strong>除了学术使用，该版本在30天后试用期满</p>
+<p>你现在可以安装以及检查你想用conda安装的任何包，无论使用conda命令、从Anaconda.org下载或者使用pip安装，无论开源软件还是商业包。</p>
+<h2>5. 移除包、环境、或者conda</h2>
+<p>如果你愿意的话。让我们通过移除一个或多个试验包、环境以及conda来结束这次测试指导。</p>
+<h3>移除包</h3>
+<p>假设你决定不再使用商业包IOPro。你可以在bunnies环境中移除它。</p>
+<pre class="hljs undefined"><code>conda remove -n bunnies iopro</code></pre>
+<h3>确认包已经被移除</h3>
+<p>使用conda list命令来确认IOPro已经被移除了</p>
+<pre class="hljs php"><code class="php">conda <span class="hljs-keyword">list</span></code></pre>
+<h3>移除环境</h3>
+<p> 我们不再需要snakes环境了，所以输入以下命令：<br> conda remove -n snakes --all</p>
+<h3>确认环境被移除</h3>
+<p> 为了确认snakes环境已经被移除了，输入以下命令：</p>
+<pre class="hljs sql"><code class="sql"> conda info <span class="hljs-comment">--envis</span></code></pre>
+<p>snakes不再显示在环境列表里了，所以我们知道它已经被删除了</p>
+<h3>删除conda</h3>
+<ul>
+<li>Linux，OS X：<br>移除Anaconda 或 Miniconda 安装文件夹</li>
+
+</ul>
+<pre class="hljs php"><code class="php">rm -rf ~/miniconda <span class="hljs-keyword">OR  rm -rf ~/anaconda</span></code></pre>
+<ul>
+<li>Windows：<br>去控制面板，点击“添加或删除程序”，选择“Python2.7（Anaconda）”或“Python2.7（Miniconda）”并点击删除程序。</li>
+
+</ul>
+
+
+</div></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory"></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(5465452,cb_blogId,1);green_channel_success(this,'谢谢推荐！');">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow('298fb053-cd12-e611-9fc1-ac853d9f53cc');" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="Anaconda%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="Anaconda%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/harvey888/" target="_blank"><img src="Anaconda%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B_files/sample_face.gif" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/harvey888/">_harvey</a><br>
+            <a href="http://home.cnblogs.com/u/harvey888/followees">关注 - 1</a><br>
+            <a href="http://home.cnblogs.com/u/harvey888/followers">粉丝 - 6</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow('298fb053-cd12-e611-9fc1-ac853d9f53cc');return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(5465452,'Digg')">
+        <span class="diggnum" id="digg_count">0</span>
+    </div>
+    <div class="buryit" onclick="votePost(5465452,'Bury')">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+</div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="http://www.cnblogs.com/harvey888/p/5467276.html" class="p_n_p_prefix">» </a> 下一篇：<a href="http://www.cnblogs.com/harvey888/p/5467276.html" title="发布于2016-05-06 22:14">PIP安装Python的scipy,scrapy等包出现“failed building wheel for xxx”问题解决办法</a><br></div>
+</div>
+
+
+		</div>
+		<p class="postfoot">
+			posted on <span id="post-date">2016-05-06 14:18</span> <a href="http://www.cnblogs.com/harvey888/">_harvey</a> 阅读(<span id="post_view_count">8653</span>) 评论(<span id="post_comment_count">0</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=5465452" rel="nofollow">编辑</a> <a href="#" onclick="AddToWz(5465452);return false;">收藏</a>
+		</p>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=283797,cb_entryId=5465452,cb_blogApp=currentBlogApp,cb_blogUserGuid='298fb053-cd12-e611-9fc1-ac853d9f53cc',cb_entryCreatedDate='2016/5/6 14:18:00';loadViewCount(cb_entryId);</script>
+	
+	</div><a name="!comments"></a><div id="blog-comments-placeholder"></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="#" onclick="return RefreshPage();">刷新页面</a><a href="#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login('commentform');">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank">【推荐】50万行VC++源码: 大型组态工控、电力仿真CAD与GIS源码库</a><br><a href="https://click.aliyun.com/m/11519/" target="_blank">【推荐】开源大咖专业分享，一起感受开源之力！</a><br><a href="http://www.rongcloud.cn/" target="_blank">【推荐】融云即时通讯云－豆果美食、Faceu等亿级APP都在用</a><br><a href="http://cn.udacity.com/fend/?utm_source=cnblogs&amp;utm_medium=referral&amp;utm_campaign=newFEND" target="_blank">【推荐】Google+GitHub联手打造前端工程师课程</a><br><a href="https://group.cnblogs.com/topic/76017.html" target="_blank">【活动】一元专享1500元微软智能云Azure</a><br></div>
+<div id="opt_under_post"></div>
+<div id="ad_c1" class="c_ad_block"><a href="http://cn.udacity.com/fend/?utm_source=cnblogs&amp;utm_medium=referral&amp;utm_campaign=newFEND" target="_blank"><img src="Anaconda%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B_files/24442-20170222122838835-309099051.jpg" alt="" height="250" width="300"></a></div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>最新IT新闻</b>:<br> ·  <a href="http://news.cnblogs.com/n/563695/" target="_blank">这家公司因为侵权被任天堂告了，然后发生了意想不到的事</a><br> ·  <a href="http://news.cnblogs.com/n/563693/" target="_blank">火箭为什么要斜着上天呢？</a><br> ·  <a href="http://news.cnblogs.com/n/563694/" target="_blank">Google回应意外帐户登出问题</a><br> ·  <a href="http://news.cnblogs.com/n/563692/" target="_blank">良心发现：育碧游戏全面官方中文！</a><br> ·  <a href="http://news.cnblogs.com/n/563691/" target="_blank">知乎作了什么恶？</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="ad_c2" class="c_ad_block"><a href="http://bbs.h3bpm.com/index.php?m=app&amp;app=product_download&amp;a=reg&amp;utm_source=csdn&amp;utm_medium=pic&amp;utm_campaign=show&amp;utm_content=v10&amp;utm_term=%E5%85%8D%E8%B4%B9%E4%B8%8B%E8%BD%BD" target="_blank"><img src="Anaconda%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B_files/24442-20170118152220281-363324784.jpg" alt="" height="60" width="468"></a></div>
+<div id="under_post_kb"><div class="itnews c_ad_block" id="kb_block"><b>最新知识库文章</b>:<br><div id="kb_recent"> ·  <a href="http://kb.cnblogs.com/page/563320/" target="_blank">程序员的沟通之痛</a><br> ·  <a href="http://kb.cnblogs.com/page/562830/" target="_blank">技术文章如何写作才能有较好的阅读体验</a><br> ·  <a href="http://kb.cnblogs.com/page/554260/" target="_blank">「代码家」的学习过程和学习经验分享</a><br> ·  <a href="http://kb.cnblogs.com/page/556770/" target="_blank">写给未来的程序媛</a><br> ·  <a href="http://kb.cnblogs.com/page/558087/" target="_blank">高质量的工程代码为什么难写</a><br></div>» <a href="http://kb.cnblogs.com/" target="_blank">更多知识库文章...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverAdT2();
+    deliverAdC1();
+    deliverAdC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);   
+</script>
+</div>
+
+
+</div>
+</div>
+<div id="leftmenu">
+
+
+<h3>导航</h3>
+<ul>
+<li>
+<a id="blog_nav_sitehome" href="http://www.cnblogs.com/">博客园</a></li>
+<li>
+<a id="blog_nav_myhome" class="two_words" href="http://www.cnblogs.com/harvey888/">首页</a></li>
+<li>
+<a id="blog_nav_newpost" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+<li>
+<a id="blog_nav_contact" accesskey="9" class="two_words" rel="nofollow" href="https://msg.cnblogs.com/send/_harvey">联系</a></li>
+<li>
+<a id="blog_nav_rss" class="two_words" href="http://www.cnblogs.com/harvey888/rss">订阅</a>
+<a id="blog_nav_rss_image" href="http://www.cnblogs.com/harvey888/rss"><img src="Anaconda%E8%AF%A6%E7%BB%86%E6%95%99%E7%A8%8B_files/xml.gif" alt="订阅"></a>
+</li>
+<li>
+<a id="blog_nav_admin" class="two_words" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+</ul>
+
+<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" title="Calendar" cellspacing="0" cellpadding="0">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar('2017/01/01');return false;">&lt;</a></td><td align="center">2017年2月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar('2017/03/01');return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" abbr="日" scope="col" align="center">日</th><th class="CalDayHeader" abbr="一" scope="col" align="center">一</th><th class="CalDayHeader" abbr="二" scope="col" align="center">二</th><th class="CalDayHeader" abbr="三" scope="col" align="center">三</th><th class="CalDayHeader" abbr="四" scope="col" align="center">四</th><th class="CalDayHeader" abbr="五" scope="col" align="center">五</th><th class="CalDayHeader" abbr="六" scope="col" align="center">六</th></tr><tr><td class="CalOtherMonthDay" align="center">29</td><td class="CalOtherMonthDay" align="center">30</td><td class="CalOtherMonthDay" align="center">31</td><td align="center">1</td><td align="center">2</td><td align="center">3</td><td class="CalWeekendDay" align="center">4</td></tr><tr><td class="CalWeekendDay" align="center">5</td><td align="center">6</td><td align="center">7</td><td align="center">8</td><td align="center"><a href="http://www.cnblogs.com/harvey888/archive/2017/02/09.html"><u>9</u></a></td><td align="center"><a href="http://www.cnblogs.com/harvey888/archive/2017/02/10.html"><u>10</u></a></td><td class="CalWeekendDay" align="center"><a href="http://www.cnblogs.com/harvey888/archive/2017/02/11.html"><u>11</u></a></td></tr><tr><td class="CalWeekendDay" align="center">12</td><td align="center">13</td><td align="center">14</td><td align="center"><a href="http://www.cnblogs.com/harvey888/archive/2017/02/15.html"><u>15</u></a></td><td align="center">16</td><td align="center">17</td><td class="CalWeekendDay" align="center"><a href="http://www.cnblogs.com/harvey888/archive/2017/02/18.html"><u>18</u></a></td></tr><tr><td class="CalWeekendDay" align="center">19</td><td align="center">20</td><td align="center">21</td><td align="center">22</td><td align="center">23</td><td align="center">24</td><td class="CalWeekendDay" align="center">25</td></tr><tr><td class="CalTodayDay" align="center">26</td><td align="center">27</td><td align="center">28</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td></tr><tr><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td><td class="CalOtherMonthDay" align="center">9</td><td class="CalOtherMonthDay" align="center">10</td><td class="CalOtherMonthDay" align="center">11</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script>
+<meta name="vs_showGrid" content="False">
+
+<h3>公告</h3>
+<div id="blog-news"><div id="profile_block">昵称：<a href="http://home.cnblogs.com/u/harvey888/">_harvey</a><br>园龄：<a href="http://home.cnblogs.com/u/harvey888/" title="入园时间：2016-05-05">9个月</a><br>粉丝：<a href="http://home.cnblogs.com/u/harvey888/followers/">6</a><br>关注：<a href="http://home.cnblogs.com/u/harvey888/followees/">1</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow('298fb053-cd12-e611-9fc1-ac853d9f53cc')">+加关注</a></div></div></div><script type="text/javascript">loadBlogNews();</script>
+
+<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk" type="text">&nbsp;<input onclick="zzk_go()" value="找找看" id="btnZzk" class="btn_my_zzk" type="button"></div>
+<div id="widget_my_google" class="div_my_zzk"><input name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk" type="text">&nbsp;<input onclick="google_go()" value="谷歌搜索" class="btn_my_zzk" type="button"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="http://www.cnblogs.com/harvey888/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="http://www.cnblogs.com/harvey888/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="http://www.cnblogs.com/harvey888/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="http://www.cnblogs.com/harvey888/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="http://www.cnblogs.com/harvey888/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+
+</div></div><div id="sidebar_toptags" class="sidebar-block"></div><div id="sidebar_categories">
+		<h3>随笔分类</h3>
+		
+				<ul>
+			
+				<li><a id="CatList_LinkList_0_Link_0" href="http://www.cnblogs.com/harvey888/category/919277.html">data mining(4)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_1" href="http://www.cnblogs.com/harvey888/category/918649.html">hadoop/spark(3)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_2" href="http://www.cnblogs.com/harvey888/category/931177.html">Java(3)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_3" href="http://www.cnblogs.com/harvey888/category/946295.html">Linux(1)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_4" href="http://www.cnblogs.com/harvey888/category/901705.html">mysql</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_5" href="http://www.cnblogs.com/harvey888/category/889261.html">oracle(4)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_6" href="http://www.cnblogs.com/harvey888/category/889262.html">python(12)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_7" href="http://www.cnblogs.com/harvey888/category/889263.html">R</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_8" href="http://www.cnblogs.com/harvey888/category/931178.html">Scala(4)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_9" href="http://www.cnblogs.com/harvey888/category/844315.html">scikit-learn(4)</a></li>
+			
+				<li><a id="CatList_LinkList_0_Link_10" href="http://www.cnblogs.com/harvey888/category/889336.html">statistics(1)</a></li>
+			
+				</ul>
+			
+	
+		<h3>随笔档案</h3>
+		
+				<ul>
+			
+				<li><a id="CatList_LinkList_1_Link_0" href="http://www.cnblogs.com/harvey888/archive/2017/02.html">2017年2月 (6)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_1" href="http://www.cnblogs.com/harvey888/archive/2017/01.html">2017年1月 (3)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_2" href="http://www.cnblogs.com/harvey888/archive/2016/12.html">2016年12月 (9)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_3" href="http://www.cnblogs.com/harvey888/archive/2016/11.html">2016年11月 (1)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_4" href="http://www.cnblogs.com/harvey888/archive/2016/10.html">2016年10月 (14)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_5" href="http://www.cnblogs.com/harvey888/archive/2016/09.html">2016年9月 (19)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_6" href="http://www.cnblogs.com/harvey888/archive/2016/08.html">2016年8月 (4)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_7" href="http://www.cnblogs.com/harvey888/archive/2016/07.html">2016年7月 (7)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_8" href="http://www.cnblogs.com/harvey888/archive/2016/06.html">2016年6月 (10)</a></li>
+			
+				<li><a id="CatList_LinkList_1_Link_9" href="http://www.cnblogs.com/harvey888/archive/2016/05.html">2016年5月 (9)</a></li>
+			
+				</ul>
+			
+	</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<h3 class="catListTitle">最新评论</h3>
+<div class="RecentComment" id="RecentComments">
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="http://www.cnblogs.com/harvey888/p/5505511.html#3544163">1. Re:Adaboost 算法的原理与推导</a></li>
+        <li class="recent_comment_body">非常好，讲解很透彻，思路很清晰！</li>
+        <li class="recent_comment_author">--橙之</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<h3 class="catListTitle">阅读排行榜</h3>
+<div class="RecentComment" id="TopViewPosts"> 
+	<div id="TopViewPostsBlock"><ul><li><a href="http://www.cnblogs.com/harvey888/p/5465452.html">1. Anaconda多环境多版本python配置指导(8654)</a></li><li><a href="http://www.cnblogs.com/harvey888/p/5467276.html">2. PIP安装Python的scipy,scrapy等包出现“failed building wheel for xxx”问题解决办法(2834)</a></li><li><a href="http://www.cnblogs.com/harvey888/p/5606575.html">3. 结合Scikit-learn介绍几种常用的特征选择方法(1673)</a></li><li><a href="http://www.cnblogs.com/harvey888/p/5505511.html">4. Adaboost 算法的原理与推导(1329)</a></li><li><a href="http://www.cnblogs.com/harvey888/p/6006200.html">5. python pandas.DataFrame选取、修改数据最好用.loc，.iloc，.ix(1074)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<h3 class="catListTitle">评论排行榜</h3>
+<div class="RecentComment" id="TopCommentsPosts">
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="http://www.cnblogs.com/harvey888/p/5505511.html">1. Adaboost 算法的原理与推导(1)</a></li></ul></div>
+</div></div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div class="RecentComment">
+	<div id="TopDiggPostsBlock"><ul><li><a href="http://www.cnblogs.com/harvey888/p/5467276.html">1. PIP安装Python的scipy,scrapy等包出现“failed building wheel for xxx”问题解决办法(1)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+
+</div>
+</div>
+<div class="clear"></div>
+<div id="footer">
+
+<p id="footer">
+	Powered by: 
+	<br>
+	
+	<a id="Footer1_Hyperlink3" name="Hyperlink1" href="http://www.cnblogs.com/" style="font-family:Verdana;font-size:12px;">博客园</a>
+	<br>
+	Copyright © _harvey
+</p>
+</div>
+</div>
+
+
+
+</body></html>

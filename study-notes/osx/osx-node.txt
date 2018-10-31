@@ -1,0 +1,29 @@
+一、osx系统下软件开发工具链
+    1、osx系统中新建一个开发用户（具有管理员权限）
+
+    2、安装蓝灯Lantern翻墙软件
+       http://mac.softpedia.com
+
+    3、安装软件包自动化管理工具brew
+       ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+    4、安装fish shell（非常完美的高效率shell）
+       a、brew install fish
+       b、安装fish shell的配置工具（oh-my-fish）
+          curl -L https://github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
+
+    5、安装命令行终端工具iterm2（比osx系统自带的终端强大）
+
+    6、安装最新稳定版本的emacs for port
+       brew tap railwaycat/emacsmacport
+       brew install emacs-mac
+
+    7、安装键盘映射工具（capslock为特殊键需要借助seil）
+       Karabiner和seil（可以高度定制键盘的各个键的位置）
+
+       karabiner的修改（完成Command_R和Contorl_L的交换）
+       Change Command_R Key to Control_L
+
+       seil的修改（完成esc和capslock的交换）：
+       Change the caps lock key (勾选，并且修改其keycode为53[esc键盘码])
+       Change Escape (勾选，并且修改其keycode为57[capslock键盘码])

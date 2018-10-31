@@ -1,0 +1,847 @@
+['fix/fix-order.py', '-r']
+DRY RUN: False
+TASK ORDER START
+2014-12-06 09:20:10,557 INFO sqlalchemy.engine.base.Engine SHOW VARIABLES LIKE 'sql_mode'
+2014-12-06 09:20:10,558 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:20:10,566 INFO sqlalchemy.engine.base.Engine SELECT DATABASE()
+2014-12-06 09:20:10,566 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:20:10,582 INFO sqlalchemy.engine.base.Engine SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:20:10,582 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:20:10,590 INFO sqlalchemy.engine.base.Engine SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:20:10,590 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:20:10,599 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:20:10,604 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:20:10,605 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014111410034310000208'}
+FIX ORDER Q2014111410034310000208; need_fix=True / 101103
+JUST SKIP THE ORDER
+EXPIRE order:Q2014111410034310000208
+SREM %s Q2014111410034310000208
+2014-12-06 09:20:10,618 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:20:10,619 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014111410144410000209'}
+FIX ORDER Q2014111410144410000209; need_fix=True / 101103
+JUST SKIP THE ORDER
+EXPIRE order:Q2014111410144410000209
+SREM %s Q2014111410144410000209
+2014-12-06 09:20:10,631 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:20:10,632 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014111410231110000210'}
+FIX ORDER Q2014111410231110000210; need_fix=True / 101103
+JUST SKIP THE ORDER
+EXPIRE order:Q2014111410231110000210
+SREM %s Q2014111410231110000210
+2014-12-06 09:20:10,645 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:20:10,646 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014111410241610000211'}
+FIX ORDER Q2014111410241610000211; need_fix=True / 101103
+JUST SKIP THE ORDER
+EXPIRE order:Q2014111410241610000211
+SREM %s Q2014111410241610000211
+2014-12-06 09:20:10,657 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:20:10,658 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014111410242010000212'}
+FIX ORDER Q2014111410242010000212; need_fix=True / 101103
+JUST SKIP THE ORDER
+EXPIRE order:Q2014111410242010000212
+SREM %s Q2014111410242010000212
+2014-12-06 09:20:10,665 INFO sqlalchemy.engine.base.Engine ROLLBACK
+TASK ORDER FINISH
+['fix/fix-order.py', '-r']
+DRY RUN: False
+TASK ORDER START
+2014-12-06 09:20:48,482 INFO sqlalchemy.engine.base.Engine SHOW VARIABLES LIKE 'sql_mode'
+2014-12-06 09:20:48,482 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:20:48,491 INFO sqlalchemy.engine.base.Engine SELECT DATABASE()
+2014-12-06 09:20:48,491 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:20:48,506 INFO sqlalchemy.engine.base.Engine SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:20:48,506 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:20:48,514 INFO sqlalchemy.engine.base.Engine SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:20:48,514 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:20:48,522 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:20:48,527 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:20:48,528 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014111410243910000213', 'param_1': 1}
+FIX ORDER Q2014111410243910000213; need_fix=True / 101103
+JUST SKIP THE ORDER
+EXPIRE order:Q2014111410243910000213
+SREM %s Q2014111410243910000213
+2014-12-06 09:20:48,540 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:20:48,541 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014111410390710000214', 'param_1': 1}
+FIX ORDER Q2014111410390710000214; need_fix=True / 101103
+JUST SKIP THE ORDER
+EXPIRE order:Q2014111410390710000214
+SREM %s Q2014111410390710000214
+2014-12-06 09:20:48,552 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:20:48,553 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014111410392210000215', 'param_1': 1}
+FIX ORDER Q2014111410392210000215; need_fix=True / 101103
+JUST SKIP THE ORDER
+EXPIRE order:Q2014111410392210000215
+SREM %s Q2014111410392210000215
+2014-12-06 09:20:48,565 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:20:48,566 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014111410423510000216', 'param_1': 1}
+FIX ORDER Q2014111410423510000216; need_fix=True / 101103
+JUST SKIP THE ORDER
+EXPIRE order:Q2014111410423510000216
+SREM %s Q2014111410423510000216
+2014-12-06 09:20:48,578 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:20:48,578 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014111410433010000217', 'param_1': 1}
+FIX ORDER Q2014111410433010000217; need_fix=True / 101103
+JUST SKIP THE ORDER
+EXPIRE order:Q2014111410433010000217
+SREM %s Q2014111410433010000217
+2014-12-06 09:20:48,586 INFO sqlalchemy.engine.base.Engine ROLLBACK
+TASK ORDER FINISH
+['fix/fix-order.py', '-r']
+DRY RUN: False
+TASK ORDER START
+2014-12-06 09:21:13,053 INFO sqlalchemy.engine.base.Engine SHOW VARIABLES LIKE 'sql_mode'
+2014-12-06 09:21:13,053 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:21:13,061 INFO sqlalchemy.engine.base.Engine SELECT DATABASE()
+2014-12-06 09:21:13,062 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:21:13,076 INFO sqlalchemy.engine.base.Engine SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:21:13,077 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:21:13,085 INFO sqlalchemy.engine.base.Engine SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:21:13,085 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:21:13,093 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:21:13,099 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:21:13,099 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014111410435010000218', 'param_1': 1}
+FIX ORDER Q2014111410435010000218; need_fix=True / 101103
+JUST SKIP THE ORDER
+EXPIRE order:Q2014111410435010000218
+SREM %s Q2014111410435010000218
+2014-12-06 09:21:13,112 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:21:13,113 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014111410460610000219', 'param_1': 1}
+FIX ORDER Q2014111410460610000219; need_fix=True / 101103
+JUST SKIP THE ORDER
+EXPIRE order:Q2014111410460610000219
+SREM %s Q2014111410460610000219
+2014-12-06 09:21:13,124 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:21:13,125 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014111410462210000220', 'param_1': 1}
+FIX ORDER Q2014111410462210000220; need_fix=True / 101103
+JUST SKIP THE ORDER
+EXPIRE order:Q2014111410462210000220
+SREM %s Q2014111410462210000220
+2014-12-06 09:21:13,137 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:21:13,137 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014111410464510000221', 'param_1': 1}
+FIX ORDER Q2014111410464510000221; need_fix=True / 101103
+JUST SKIP THE ORDER
+EXPIRE order:Q2014111410464510000221
+SREM %s Q2014111410464510000221
+2014-12-06 09:21:13,152 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:21:13,152 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014111914104010000279', 'param_1': 1}
+FIX ORDER Q2014111914104010000279; need_fix=True / 101103
+	FIX1: MOBILE INVALID
+2014-12-06 09:21:13,165 INFO sqlalchemy.engine.base.Engine INSERT INTO order_101103 (order_id, user_id, price, mobile, sp_order_id, req_time, resp_time, back_time, result, back_result, value, balance, area, product) VALUES (%(order_id)s, %(user_id)s, %(price)s, %(mobile)s, %(sp_order_id)s, %(req_time)s, %(resp_time)s, %(back_time)s, %(result)s, %(back_result)s, %(value)s, %(balance)s, %(area)s, %(product)s)
+2014-12-06 09:21:13,166 INFO sqlalchemy.engine.base.Engine {'mobile': '18922426018', 'req_time': datetime.datetime(2014, 11, 19, 14, 10, 40), 'order_id': 'Q2014111914104010000279', 'sp_order_id': '1416377437008', 'price': 0, 'product': 'data', 'value': 0, 'back_result': '9', 'balance': 1961200, 'back_time': datetime.datetime(2014, 11, 19, 14, 10, 41), 'resp_time': datetime.datetime(2014, 11, 19, 14, 10, 40), 'area': '3:GD', 'user_id': '101103', 'result': '00000'}
+2014-12-06 09:21:13,170 INFO sqlalchemy.engine.base.Engine COMMIT
+2014-12-06 09:21:13,185 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:21:13,191 INFO sqlalchemy.engine.base.Engine SELECT up_order_101103.id AS up_order_101103_id, up_order_101103.stage AS up_order_101103_stage, up_order_101103.order_id AS up_order_101103_order_id, up_order_101103.up_order_id AS up_order_101103_up_order_id, up_order_101103.route AS up_order_101103_route, up_order_101103.price AS up_order_101103_price, up_order_101103.cost AS up_order_101103_cost, up_order_101103.up_cost AS up_order_101103_up_cost, up_order_101103.up_req_time AS up_order_101103_up_req_time, up_order_101103.up_resp_time AS up_order_101103_up_resp_time, up_order_101103.up_back_time AS up_order_101103_up_back_time, up_order_101103.up_result AS up_order_101103_up_result, up_order_101103.up_back_result AS up_order_101103_up_back_result 
+FROM up_order_101103 
+WHERE up_order_101103.order_id = %(order_id_1)s AND up_order_101103.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:21:13,191 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014111914104010000279', 'stage_1': 2, 'param_1': 1}
+	FIX UP_ORDER Q2014111914104010000279(1) need_fix=True
+2014-12-06 09:21:13,202 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_101103 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:21:13,202 INFO sqlalchemy.engine.base.Engine {'up_req_time': datetime.datetime(2014, 11, 19, 14, 10, 40), 'cost': 0, 'order_id': 'Q2014111914104010000279', 'up_back_time': None, 'price': 0, 'up_back_result': None, 'up_cost': '0', 'stage': 1, 'up_order_id': 'None', 'up_resp_time': datetime.datetime(2014, 11, 19, 14, 10, 40), 'up_result': 'None', 'route': '21cn-test'}
+2014-12-06 09:21:13,207 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014111914104010000279
+SREM %s Q2014111914104010000279
+TASK ORDER FINISH
+['fix/fix-order.py', '-r']
+DRY RUN: False
+TASK ORDER START
+2014-12-06 09:22:44,535 INFO sqlalchemy.engine.base.Engine SHOW VARIABLES LIKE 'sql_mode'
+2014-12-06 09:22:44,536 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:22:44,544 INFO sqlalchemy.engine.base.Engine SELECT DATABASE()
+2014-12-06 09:22:44,544 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:22:44,558 INFO sqlalchemy.engine.base.Engine SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:22:44,559 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:22:44,566 INFO sqlalchemy.engine.base.Engine SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:22:44,566 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:22:44,573 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:22:44,579 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:22:44,579 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014111914112010000280'}
+FIX ORDER Q2014111914112010000280; need_fix=True / 101103
+JUST SKIP THE ORDER
+EXPIRE order:Q2014111914112010000280
+SREM %s Q2014111914112010000280
+2014-12-06 09:22:44,592 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:22:44,592 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014112014513710000307'}
+FIX ORDER Q2014112014513710000307; need_fix=True / 101103
+	FIX1: MOBILE INVALID
+2014-12-06 09:22:44,603 INFO sqlalchemy.engine.base.Engine INSERT INTO order_101103 (order_id, user_id, price, mobile, sp_order_id, req_time, resp_time, back_time, result, back_result, value, balance, area, product) VALUES (%(order_id)s, %(user_id)s, %(price)s, %(mobile)s, %(sp_order_id)s, %(req_time)s, %(resp_time)s, %(back_time)s, %(result)s, %(back_result)s, %(value)s, %(balance)s, %(area)s, %(product)s)
+2014-12-06 09:22:44,603 INFO sqlalchemy.engine.base.Engine {'product': 'data', 'area': '3:GD', 'balance': 1941800, 'back_result': '9', 'order_id': 'Q2014112014513710000307', 'resp_time': datetime.datetime(2014, 11, 20, 14, 51, 37), 'back_time': datetime.datetime(2014, 11, 20, 14, 51, 40), 'price': 0, 'req_time': datetime.datetime(2014, 11, 20, 14, 51, 37), 'sp_order_id': '1416466296398', 'user_id': '101103', 'value': 0, 'result': '00000', 'mobile': '18922426018'}
+2014-12-06 09:22:44,608 INFO sqlalchemy.engine.base.Engine COMMIT
+2014-12-06 09:22:44,622 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:22:44,627 INFO sqlalchemy.engine.base.Engine SELECT up_order_101103.id AS up_order_101103_id, up_order_101103.stage AS up_order_101103_stage, up_order_101103.order_id AS up_order_101103_order_id, up_order_101103.up_order_id AS up_order_101103_up_order_id, up_order_101103.route AS up_order_101103_route, up_order_101103.price AS up_order_101103_price, up_order_101103.cost AS up_order_101103_cost, up_order_101103.up_cost AS up_order_101103_up_cost, up_order_101103.up_req_time AS up_order_101103_up_req_time, up_order_101103.up_resp_time AS up_order_101103_up_resp_time, up_order_101103.up_back_time AS up_order_101103_up_back_time, up_order_101103.up_result AS up_order_101103_up_result, up_order_101103.up_back_result AS up_order_101103_up_back_result 
+FROM up_order_101103 
+WHERE up_order_101103.order_id = %(order_id_1)s AND up_order_101103.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:22:44,627 INFO sqlalchemy.engine.base.Engine {'stage_1': 2, 'param_1': 1, 'order_id_1': 'Q2014112014513710000307'}
+	FIX UP_ORDER Q2014112014513710000307(1) need_fix=True
+2014-12-06 09:22:44,638 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_101103 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:22:44,638 INFO sqlalchemy.engine.base.Engine {'up_order_id': 'None', 'up_cost': '0', 'stage': 1, 'up_req_time': datetime.datetime(2014, 11, 20, 14, 51, 37), 'up_result': 'None', 'up_resp_time': datetime.datetime(2014, 11, 20, 14, 51, 39), 'price': 0, 'route': '21cn-test', 'cost': 0, 'order_id': 'Q2014112014513710000307', 'up_back_time': None, 'up_back_result': None}
+2014-12-06 09:22:44,642 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014112014513710000307
+SREM %s Q2014112014513710000307
+2014-12-06 09:22:44,653 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:22:44,659 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:22:44,659 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014112014520610000308'}
+FIX ORDER Q2014112014520610000308; need_fix=True / 101103
+	FIX1: MOBILE INVALID
+2014-12-06 09:22:44,669 INFO sqlalchemy.engine.base.Engine INSERT INTO order_101103 (order_id, user_id, price, mobile, sp_order_id, req_time, resp_time, back_time, result, back_result, value, balance, area, product) VALUES (%(order_id)s, %(user_id)s, %(price)s, %(mobile)s, %(sp_order_id)s, %(req_time)s, %(resp_time)s, %(back_time)s, %(result)s, %(back_result)s, %(value)s, %(balance)s, %(area)s, %(product)s)
+2014-12-06 09:22:44,669 INFO sqlalchemy.engine.base.Engine {'product': 'data', 'area': '3:GD', 'balance': 1941800, 'back_result': '9', 'order_id': 'Q2014112014520610000308', 'resp_time': datetime.datetime(2014, 11, 20, 14, 52, 6), 'back_time': datetime.datetime(2014, 11, 20, 14, 52, 7), 'price': 0, 'req_time': datetime.datetime(2014, 11, 20, 14, 52, 6), 'sp_order_id': '1416466326432', 'user_id': '101103', 'value': 0, 'result': '00000', 'mobile': '18922426018'}
+2014-12-06 09:22:44,674 INFO sqlalchemy.engine.base.Engine COMMIT
+2014-12-06 09:22:44,682 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:22:44,687 INFO sqlalchemy.engine.base.Engine SELECT up_order_101103.id AS up_order_101103_id, up_order_101103.stage AS up_order_101103_stage, up_order_101103.order_id AS up_order_101103_order_id, up_order_101103.up_order_id AS up_order_101103_up_order_id, up_order_101103.route AS up_order_101103_route, up_order_101103.price AS up_order_101103_price, up_order_101103.cost AS up_order_101103_cost, up_order_101103.up_cost AS up_order_101103_up_cost, up_order_101103.up_req_time AS up_order_101103_up_req_time, up_order_101103.up_resp_time AS up_order_101103_up_resp_time, up_order_101103.up_back_time AS up_order_101103_up_back_time, up_order_101103.up_result AS up_order_101103_up_result, up_order_101103.up_back_result AS up_order_101103_up_back_result 
+FROM up_order_101103 
+WHERE up_order_101103.order_id = %(order_id_1)s AND up_order_101103.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:22:44,687 INFO sqlalchemy.engine.base.Engine {'stage_1': 2, 'param_1': 1, 'order_id_1': 'Q2014112014520610000308'}
+	FIX UP_ORDER Q2014112014520610000308(1) need_fix=True
+2014-12-06 09:22:44,696 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_101103 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:22:44,696 INFO sqlalchemy.engine.base.Engine {'up_order_id': 'None', 'up_cost': '0', 'stage': 1, 'up_req_time': datetime.datetime(2014, 11, 20, 14, 52, 6), 'up_result': 'None', 'up_resp_time': datetime.datetime(2014, 11, 20, 14, 52, 7), 'price': 0, 'route': '21cn-test', 'cost': 0, 'order_id': 'Q2014112014520610000308', 'up_back_time': None, 'up_back_result': None}
+2014-12-06 09:22:44,701 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014112014520610000308
+SREM %s Q2014112014520610000308
+2014-12-06 09:22:44,710 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:22:44,714 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:22:44,714 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014112415062210000611'}
+FIX ORDER Q2014112415062210000611; need_fix=True / 101103
+	FIX1: MOBILE INVALID
+2014-12-06 09:22:44,725 INFO sqlalchemy.engine.base.Engine INSERT INTO order_101103 (order_id, user_id, price, mobile, sp_order_id, req_time, resp_time, back_time, result, back_result, value, balance, area, product) VALUES (%(order_id)s, %(user_id)s, %(price)s, %(mobile)s, %(sp_order_id)s, %(req_time)s, %(resp_time)s, %(back_time)s, %(result)s, %(back_result)s, %(value)s, %(balance)s, %(area)s, %(product)s)
+2014-12-06 09:22:44,725 INFO sqlalchemy.engine.base.Engine {'product': 'data', 'area': '3:GD', 'balance': 2141200, 'back_result': '9', 'order_id': 'Q2014112415062210000611', 'resp_time': datetime.datetime(2014, 11, 24, 15, 6, 22), 'back_time': datetime.datetime(2014, 11, 24, 15, 6, 22), 'price': 2, 'req_time': datetime.datetime(2014, 11, 24, 15, 6, 22), 'sp_order_id': '1416812778454', 'user_id': '101103', 'value': 19600, 'result': '00000', 'mobile': '18922426018'}
+2014-12-06 09:22:44,730 INFO sqlalchemy.engine.base.Engine COMMIT
+2014-12-06 09:22:44,738 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:22:44,742 INFO sqlalchemy.engine.base.Engine SELECT up_order_101103.id AS up_order_101103_id, up_order_101103.stage AS up_order_101103_stage, up_order_101103.order_id AS up_order_101103_order_id, up_order_101103.up_order_id AS up_order_101103_up_order_id, up_order_101103.route AS up_order_101103_route, up_order_101103.price AS up_order_101103_price, up_order_101103.cost AS up_order_101103_cost, up_order_101103.up_cost AS up_order_101103_up_cost, up_order_101103.up_req_time AS up_order_101103_up_req_time, up_order_101103.up_resp_time AS up_order_101103_up_resp_time, up_order_101103.up_back_time AS up_order_101103_up_back_time, up_order_101103.up_result AS up_order_101103_up_result, up_order_101103.up_back_result AS up_order_101103_up_back_result 
+FROM up_order_101103 
+WHERE up_order_101103.order_id = %(order_id_1)s AND up_order_101103.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:22:44,743 INFO sqlalchemy.engine.base.Engine {'stage_1': 2, 'param_1': 1, 'order_id_1': 'Q2014112415062210000611'}
+	FIX UP_ORDER Q2014112415062210000611(1) need_fix=True
+2014-12-06 09:22:44,752 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_101103 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:22:44,753 INFO sqlalchemy.engine.base.Engine {'up_order_id': 'Q2014112415062210000611', 'up_cost': '19000', 'stage': 1, 'up_req_time': datetime.datetime(2014, 11, 24, 15, 6, 22), 'up_result': '10001', 'up_resp_time': datetime.datetime(2014, 11, 24, 15, 6, 22), 'price': 2, 'route': '21cn', 'cost': 19000, 'order_id': 'Q2014112415062210000611', 'up_back_time': None, 'up_back_result': None}
+2014-12-06 09:22:44,757 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014112415062210000611
+SREM %s Q2014112415062210000611
+2014-12-06 09:22:44,766 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:22:44,770 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:22:44,770 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014112415371910000620'}
+FIX ORDER Q2014112415371910000620; need_fix=True / 101103
+	FIX1: MOBILE INVALID
+2014-12-06 09:22:44,780 INFO sqlalchemy.engine.base.Engine INSERT INTO order_101103 (order_id, user_id, price, mobile, sp_order_id, req_time, resp_time, back_time, result, back_result, value, balance, area, product) VALUES (%(order_id)s, %(user_id)s, %(price)s, %(mobile)s, %(sp_order_id)s, %(req_time)s, %(resp_time)s, %(back_time)s, %(result)s, %(back_result)s, %(value)s, %(balance)s, %(area)s, %(product)s)
+2014-12-06 09:22:44,781 INFO sqlalchemy.engine.base.Engine {'product': 'data', 'area': '3:GD', 'balance': 2082400, 'back_result': '9', 'order_id': 'Q2014112415371910000620', 'resp_time': datetime.datetime(2014, 11, 24, 15, 37, 19), 'back_time': datetime.datetime(2014, 11, 24, 15, 37, 19), 'price': 2, 'req_time': datetime.datetime(2014, 11, 24, 15, 37, 19), 'sp_order_id': '1416814635152', 'user_id': '101103', 'value': 19600, 'result': '00000', 'mobile': '18922426018'}
+2014-12-06 09:22:44,785 INFO sqlalchemy.engine.base.Engine COMMIT
+2014-12-06 09:22:44,793 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:22:44,797 INFO sqlalchemy.engine.base.Engine SELECT up_order_101103.id AS up_order_101103_id, up_order_101103.stage AS up_order_101103_stage, up_order_101103.order_id AS up_order_101103_order_id, up_order_101103.up_order_id AS up_order_101103_up_order_id, up_order_101103.route AS up_order_101103_route, up_order_101103.price AS up_order_101103_price, up_order_101103.cost AS up_order_101103_cost, up_order_101103.up_cost AS up_order_101103_up_cost, up_order_101103.up_req_time AS up_order_101103_up_req_time, up_order_101103.up_resp_time AS up_order_101103_up_resp_time, up_order_101103.up_back_time AS up_order_101103_up_back_time, up_order_101103.up_result AS up_order_101103_up_result, up_order_101103.up_back_result AS up_order_101103_up_back_result 
+FROM up_order_101103 
+WHERE up_order_101103.order_id = %(order_id_1)s AND up_order_101103.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:22:44,798 INFO sqlalchemy.engine.base.Engine {'stage_1': 2, 'param_1': 1, 'order_id_1': 'Q2014112415371910000620'}
+	FIX UP_ORDER Q2014112415371910000620(1) need_fix=True
+2014-12-06 09:22:44,807 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_101103 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:22:44,808 INFO sqlalchemy.engine.base.Engine {'up_order_id': 'Q2014112415371910000620', 'up_cost': '19000', 'stage': 1, 'up_req_time': datetime.datetime(2014, 11, 24, 15, 37, 19), 'up_result': '10001', 'up_resp_time': datetime.datetime(2014, 11, 24, 15, 37, 19), 'price': 2, 'route': '21cn', 'cost': 19000, 'order_id': 'Q2014112415371910000620', 'up_back_time': None, 'up_back_result': None}
+2014-12-06 09:22:44,812 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014112415371910000620
+SREM %s Q2014112415371910000620
+TASK ORDER FINISH
+['fix/fix-order.py', '-r']
+DRY RUN: False
+TASK ORDER START
+2014-12-06 09:23:55,188 INFO sqlalchemy.engine.base.Engine SHOW VARIABLES LIKE 'sql_mode'
+2014-12-06 09:23:55,188 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:23:55,210 INFO sqlalchemy.engine.base.Engine SELECT DATABASE()
+2014-12-06 09:23:55,210 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:23:55,228 INFO sqlalchemy.engine.base.Engine SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:23:55,228 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:23:55,235 INFO sqlalchemy.engine.base.Engine SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:23:55,236 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:23:55,243 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:23:55,249 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:23:55,249 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014112415582810000627', 'param_1': 1}
+FIX ORDER Q2014112415582810000627; need_fix=True / 101103
+	FIX1: MOBILE INVALID
+2014-12-06 09:23:55,261 INFO sqlalchemy.engine.base.Engine INSERT INTO order_101103 (order_id, user_id, price, mobile, sp_order_id, req_time, resp_time, back_time, result, back_result, value, balance, area, product) VALUES (%(order_id)s, %(user_id)s, %(price)s, %(mobile)s, %(sp_order_id)s, %(req_time)s, %(resp_time)s, %(back_time)s, %(result)s, %(back_result)s, %(value)s, %(balance)s, %(area)s, %(product)s)
+2014-12-06 09:23:55,262 INFO sqlalchemy.engine.base.Engine {'mobile': '18922426018', 'order_id': 'Q2014112415582810000627', 'area': '3:GD', 'product': 'data', 'value': 19600, 'sp_order_id': '1416815904402', 'back_time': datetime.datetime(2014, 11, 24, 15, 58, 28), 'result': '00000', 'resp_time': datetime.datetime(2014, 11, 24, 15, 58, 28), 'req_time': datetime.datetime(2014, 11, 24, 15, 58, 28), 'back_result': '9', 'balance': 1932800, 'user_id': '101103', 'price': 2}
+2014-12-06 09:23:55,266 INFO sqlalchemy.engine.base.Engine COMMIT
+2014-12-06 09:23:55,280 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:23:55,285 INFO sqlalchemy.engine.base.Engine SELECT up_order_101103.id AS up_order_101103_id, up_order_101103.stage AS up_order_101103_stage, up_order_101103.order_id AS up_order_101103_order_id, up_order_101103.up_order_id AS up_order_101103_up_order_id, up_order_101103.route AS up_order_101103_route, up_order_101103.price AS up_order_101103_price, up_order_101103.cost AS up_order_101103_cost, up_order_101103.up_cost AS up_order_101103_up_cost, up_order_101103.up_req_time AS up_order_101103_up_req_time, up_order_101103.up_resp_time AS up_order_101103_up_resp_time, up_order_101103.up_back_time AS up_order_101103_up_back_time, up_order_101103.up_result AS up_order_101103_up_result, up_order_101103.up_back_result AS up_order_101103_up_back_result 
+FROM up_order_101103 
+WHERE up_order_101103.order_id = %(order_id_1)s AND up_order_101103.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:23:55,285 INFO sqlalchemy.engine.base.Engine {'stage_1': 2, 'order_id_1': 'Q2014112415582810000627', 'param_1': 1}
+	FIX UP_ORDER Q2014112415582810000627(1) need_fix=True
+2014-12-06 09:23:55,296 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_101103 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:23:55,296 INFO sqlalchemy.engine.base.Engine {'cost': 19000, 'order_id': 'Q2014112415582810000627', 'price': 2, 'up_back_result': None, 'up_result': '10001', 'route': '21cn', 'stage': 1, 'up_resp_time': datetime.datetime(2014, 11, 24, 15, 58, 28), 'up_cost': '19000', 'up_order_id': 'Q2014112415582810000627', 'up_req_time': datetime.datetime(2014, 11, 24, 15, 58, 28), 'up_back_time': None}
+2014-12-06 09:23:55,300 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014112415582810000627
+SREM %s Q2014112415582810000627
+2014-12-06 09:23:55,316 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:23:55,320 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:23:55,321 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014120411194510002895', 'param_1': 1}
+FIX ORDER Q2014120411194510002895; need_fix=False / 700116
+2014-12-06 09:23:55,336 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:23:55,336 INFO sqlalchemy.engine.base.Engine {'stage_1': 1, 'order_id_1': 'Q2014120411194510002895', 'param_1': 1}
+	FIX UP_ORDER Q2014120411194510002895(1) need_fix=True
+2014-12-06 09:23:55,346 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:23:55,346 INFO sqlalchemy.engine.base.Engine {'cost': 285000, 'order_id': 'Q2014120411194510002895', 'up_back_time': datetime.datetime(2014, 12, 4, 11, 21, 30), 'price': 30, 'stage': 1, 'route': '21cn', 'up_result': '0', 'up_resp_time': datetime.datetime(2014, 12, 4, 11, 19, 45), 'up_cost': '285000', 'up_order_id': 'Q2014120411194510002895', 'up_back_result': '00000', 'up_req_time': datetime.datetime(2014, 12, 4, 11, 19, 45)}
+2014-12-06 09:23:55,350 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120411194510002895
+SREM %s Q2014120411194510002895
+2014-12-06 09:23:55,359 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:23:55,365 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:23:55,366 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014120412221710002911', 'param_1': 1}
+FIX ORDER Q2014120412221710002911; need_fix=False / 700116
+2014-12-06 09:23:55,375 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:23:55,375 INFO sqlalchemy.engine.base.Engine {'stage_1': 1, 'order_id_1': 'Q2014120412221710002911', 'param_1': 1}
+	FIX UP_ORDER Q2014120412221710002911(1) need_fix=True
+2014-12-06 09:23:55,383 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:23:55,384 INFO sqlalchemy.engine.base.Engine {'cost': 142500, 'order_id': 'Q2014120412221710002911', 'up_back_time': datetime.datetime(2014, 12, 4, 12, 25, 10), 'price': 15, 'stage': 1, 'route': '21cn', 'up_result': '0', 'up_resp_time': datetime.datetime(2014, 12, 4, 12, 22, 17), 'up_cost': '142500', 'up_order_id': 'Q2014120412221710002911', 'up_back_result': '00000', 'up_req_time': datetime.datetime(2014, 12, 4, 12, 22, 17)}
+2014-12-06 09:23:55,388 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120412221710002911
+SREM %s Q2014120412221710002911
+2014-12-06 09:23:55,399 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:23:55,403 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:23:55,404 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014120417145810002984', 'param_1': 1}
+FIX ORDER Q2014120417145810002984; need_fix=False / 700116
+2014-12-06 09:23:55,413 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:23:55,413 INFO sqlalchemy.engine.base.Engine {'stage_1': 1, 'order_id_1': 'Q2014120417145810002984', 'param_1': 1}
+	FIX UP_ORDER Q2014120417145810002984(1) need_fix=True
+2014-12-06 09:23:55,421 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:23:55,422 INFO sqlalchemy.engine.base.Engine {'cost': 285000, 'order_id': 'Q2014120417145810002984', 'up_back_time': datetime.datetime(2014, 12, 4, 17, 22, 17), 'price': 30, 'stage': 1, 'route': '21cn', 'up_result': '0', 'up_resp_time': datetime.datetime(2014, 12, 4, 17, 14, 58), 'up_cost': '285000', 'up_order_id': 'Q2014120417145810002984', 'up_back_result': '00000', 'up_req_time': datetime.datetime(2014, 12, 4, 17, 14, 58)}
+2014-12-06 09:23:55,426 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120417145810002984
+SREM %s Q2014120417145810002984
+2014-12-06 09:23:55,436 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:23:55,440 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:23:55,441 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014120418333010003002', 'param_1': 1}
+FIX ORDER Q2014120418333010003002; need_fix=False / 700116
+2014-12-06 09:23:55,450 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:23:55,451 INFO sqlalchemy.engine.base.Engine {'stage_1': 2, 'order_id_1': 'Q2014120418333010003002', 'param_1': 1}
+	FIX UP_ORDER Q2014120418333010003002(1) need_fix=True
+2014-12-06 09:23:55,460 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:23:55,460 INFO sqlalchemy.engine.base.Engine {'cost': 95000, 'order_id': 'Q2014120418333010003002', 'up_back_time': datetime.datetime(2014, 12, 4, 22, 31, 16), 'price': 10, 'stage': 1, 'route': '21cn', 'up_result': '0', 'up_resp_time': datetime.datetime(2014, 12, 4, 18, 33, 31), 'up_cost': '95000', 'up_order_id': 'Q2014120418333010003002', 'up_back_result': '90004', 'up_req_time': datetime.datetime(2014, 12, 4, 18, 33, 30)}
+2014-12-06 09:23:55,464 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120418333010003002
+SREM %s Q2014120418333010003002
+TASK ORDER FINISH
+['fix/fix-order.py', '-r']
+DRY RUN: False
+TASK ORDER START
+2014-12-06 09:24:33,557 INFO sqlalchemy.engine.base.Engine SHOW VARIABLES LIKE 'sql_mode'
+2014-12-06 09:24:33,557 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:24:33,565 INFO sqlalchemy.engine.base.Engine SELECT DATABASE()
+2014-12-06 09:24:33,566 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:24:33,580 INFO sqlalchemy.engine.base.Engine SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:24:33,580 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:24:33,587 INFO sqlalchemy.engine.base.Engine SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:24:33,588 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:24:33,595 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:24:33,600 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:33,601 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120418513810003008'}
+FIX ORDER Q2014120418513810003008; need_fix=False / 700116
+2014-12-06 09:24:33,620 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:33,620 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120418513810003008', 'stage_1': 1}
+	FIX UP_ORDER Q2014120418513810003008(1) need_fix=True
+2014-12-06 09:24:33,630 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:24:33,630 INFO sqlalchemy.engine.base.Engine {'route': '21cn', 'price': 10, 'up_req_time': datetime.datetime(2014, 12, 4, 18, 51, 38), 'up_back_time': datetime.datetime(2014, 12, 4, 19, 57, 10), 'cost': 95000, 'stage': 1, 'order_id': 'Q2014120418513810003008', 'up_back_result': '00000', 'up_resp_time': datetime.datetime(2014, 12, 4, 18, 51, 38), 'up_cost': '95000', 'up_result': '0', 'up_order_id': 'Q2014120418513810003008'}
+2014-12-06 09:24:33,634 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120418513810003008
+SREM %s Q2014120418513810003008
+2014-12-06 09:24:33,644 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:24:33,648 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:33,649 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120419412410003022'}
+FIX ORDER Q2014120419412410003022; need_fix=False / 700116
+2014-12-06 09:24:33,658 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:33,659 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'stage_1': 1, 'order_id_1': 'Q2014120419412410003022'}
+	FIX UP_ORDER Q2014120419412410003022(1) need_fix=True
+2014-12-06 09:24:33,667 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:24:33,667 INFO sqlalchemy.engine.base.Engine {'route': '21cn', 'price': 15, 'up_req_time': datetime.datetime(2014, 12, 4, 19, 41, 24), 'up_back_time': datetime.datetime(2014, 12, 4, 19, 43, 42), 'cost': 142500, 'stage': 1, 'order_id': 'Q2014120419412410003022', 'up_back_result': '00000', 'up_resp_time': datetime.datetime(2014, 12, 4, 19, 41, 24), 'up_cost': '142500', 'up_result': '0', 'up_order_id': 'Q2014120419412410003022'}
+2014-12-06 09:24:33,671 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120419412410003022
+SREM %s Q2014120419412410003022
+2014-12-06 09:24:33,680 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:24:33,685 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:33,685 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120420073210003031'}
+FIX ORDER Q2014120420073210003031; need_fix=False / 700116
+2014-12-06 09:24:33,694 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:33,694 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'stage_1': 1, 'order_id_1': 'Q2014120420073210003031'}
+	FIX UP_ORDER Q2014120420073210003031(1) need_fix=True
+2014-12-06 09:24:33,703 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:24:33,703 INFO sqlalchemy.engine.base.Engine {'route': '21cn', 'price': 30, 'up_req_time': datetime.datetime(2014, 12, 4, 20, 7, 32), 'up_back_time': datetime.datetime(2014, 12, 4, 20, 52, 52), 'cost': 285000, 'stage': 1, 'order_id': 'Q2014120420073210003031', 'up_back_result': '00000', 'up_resp_time': datetime.datetime(2014, 12, 4, 20, 7, 32), 'up_cost': '285000', 'up_result': '0', 'up_order_id': 'Q2014120420073210003031'}
+2014-12-06 09:24:33,707 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120420073210003031
+SREM %s Q2014120420073210003031
+2014-12-06 09:24:33,723 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:24:33,727 INFO sqlalchemy.engine.base.Engine SELECT order_700105.id AS order_700105_id, order_700105.order_id AS order_700105_order_id, order_700105.user_id AS order_700105_user_id, order_700105.price AS order_700105_price, order_700105.mobile AS order_700105_mobile, order_700105.sp_order_id AS order_700105_sp_order_id, order_700105.req_time AS order_700105_req_time, order_700105.resp_time AS order_700105_resp_time, order_700105.back_time AS order_700105_back_time, order_700105.result AS order_700105_result, order_700105.back_result AS order_700105_back_result, order_700105.value AS order_700105_value, order_700105.balance AS order_700105_balance, order_700105.area AS order_700105_area, order_700105.product AS order_700105_product 
+FROM order_700105 
+WHERE order_700105.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:33,728 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120420101010003032'}
+FIX ORDER Q2014120420101010003032; need_fix=False / 700114
+2014-12-06 09:24:33,743 INFO sqlalchemy.engine.base.Engine SELECT up_order_700105.id AS up_order_700105_id, up_order_700105.stage AS up_order_700105_stage, up_order_700105.order_id AS up_order_700105_order_id, up_order_700105.up_order_id AS up_order_700105_up_order_id, up_order_700105.route AS up_order_700105_route, up_order_700105.price AS up_order_700105_price, up_order_700105.cost AS up_order_700105_cost, up_order_700105.up_cost AS up_order_700105_up_cost, up_order_700105.up_req_time AS up_order_700105_up_req_time, up_order_700105.up_resp_time AS up_order_700105_up_resp_time, up_order_700105.up_back_time AS up_order_700105_up_back_time, up_order_700105.up_result AS up_order_700105_up_result, up_order_700105.up_back_result AS up_order_700105_up_back_result 
+FROM up_order_700105 
+WHERE up_order_700105.order_id = %(order_id_1)s AND up_order_700105.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:33,744 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'stage_1': 1, 'order_id_1': 'Q2014120420101010003032'}
+	FIX UP_ORDER Q2014120420101010003032(1) need_fix=True
+2014-12-06 09:24:33,753 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700105 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:24:33,753 INFO sqlalchemy.engine.base.Engine {'cost': 285000, 'price': 30, 'up_req_time': datetime.datetime(2014, 12, 4, 20, 10, 10), 'up_back_time': datetime.datetime(2014, 12, 4, 20, 51, 32), 'route': '21cn', 'stage': 1, 'order_id': 'Q2014120420101010003032', 'up_back_result': '00000', 'up_resp_time': datetime.datetime(2014, 12, 4, 20, 10, 10), 'up_cost': '285000', 'up_result': '0', 'up_order_id': 'Q2014120420101010003032'}
+2014-12-06 09:24:33,757 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120420101010003032
+SREM %s Q2014120420101010003032
+2014-12-06 09:24:33,766 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:24:33,772 INFO sqlalchemy.engine.base.Engine SELECT order_700105.id AS order_700105_id, order_700105.order_id AS order_700105_order_id, order_700105.user_id AS order_700105_user_id, order_700105.price AS order_700105_price, order_700105.mobile AS order_700105_mobile, order_700105.sp_order_id AS order_700105_sp_order_id, order_700105.req_time AS order_700105_req_time, order_700105.resp_time AS order_700105_resp_time, order_700105.back_time AS order_700105_back_time, order_700105.result AS order_700105_result, order_700105.back_result AS order_700105_back_result, order_700105.value AS order_700105_value, order_700105.balance AS order_700105_balance, order_700105.area AS order_700105_area, order_700105.product AS order_700105_product 
+FROM order_700105 
+WHERE order_700105.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:33,772 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120420262810003037'}
+FIX ORDER Q2014120420262810003037; need_fix=False / 700114
+2014-12-06 09:24:33,782 INFO sqlalchemy.engine.base.Engine SELECT up_order_700105.id AS up_order_700105_id, up_order_700105.stage AS up_order_700105_stage, up_order_700105.order_id AS up_order_700105_order_id, up_order_700105.up_order_id AS up_order_700105_up_order_id, up_order_700105.route AS up_order_700105_route, up_order_700105.price AS up_order_700105_price, up_order_700105.cost AS up_order_700105_cost, up_order_700105.up_cost AS up_order_700105_up_cost, up_order_700105.up_req_time AS up_order_700105_up_req_time, up_order_700105.up_resp_time AS up_order_700105_up_resp_time, up_order_700105.up_back_time AS up_order_700105_up_back_time, up_order_700105.up_result AS up_order_700105_up_result, up_order_700105.up_back_result AS up_order_700105_up_back_result 
+FROM up_order_700105 
+WHERE up_order_700105.order_id = %(order_id_1)s AND up_order_700105.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:33,782 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120420262810003037', 'stage_1': 1}
+	FIX UP_ORDER Q2014120420262810003037(1) need_fix=True
+2014-12-06 09:24:33,791 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700105 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:24:33,791 INFO sqlalchemy.engine.base.Engine {'cost': 285000, 'price': 30, 'up_req_time': datetime.datetime(2014, 12, 4, 20, 26, 28), 'up_back_time': datetime.datetime(2014, 12, 4, 20, 50, 51), 'route': '21cn', 'stage': 1, 'order_id': 'Q2014120420262810003037', 'up_back_result': '00000', 'up_resp_time': datetime.datetime(2014, 12, 4, 20, 26, 28), 'up_cost': '285000', 'up_result': '0', 'up_order_id': 'Q2014120420262810003037'}
+2014-12-06 09:24:33,796 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120420262810003037
+SREM %s Q2014120420262810003037
+TASK ORDER FINISH
+['fix/fix-order.py', '-r']
+DRY RUN: False
+TASK ORDER START
+2014-12-06 09:24:46,555 INFO sqlalchemy.engine.base.Engine SHOW VARIABLES LIKE 'sql_mode'
+2014-12-06 09:24:46,555 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:24:46,563 INFO sqlalchemy.engine.base.Engine SELECT DATABASE()
+2014-12-06 09:24:46,563 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:24:46,578 INFO sqlalchemy.engine.base.Engine SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:24:46,579 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:24:46,587 INFO sqlalchemy.engine.base.Engine SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:24:46,587 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:24:46,595 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:24:46,600 INFO sqlalchemy.engine.base.Engine SELECT order_700105.id AS order_700105_id, order_700105.order_id AS order_700105_order_id, order_700105.user_id AS order_700105_user_id, order_700105.price AS order_700105_price, order_700105.mobile AS order_700105_mobile, order_700105.sp_order_id AS order_700105_sp_order_id, order_700105.req_time AS order_700105_req_time, order_700105.resp_time AS order_700105_resp_time, order_700105.back_time AS order_700105_back_time, order_700105.result AS order_700105_result, order_700105.back_result AS order_700105_back_result, order_700105.value AS order_700105_value, order_700105.balance AS order_700105_balance, order_700105.area AS order_700105_area, order_700105.product AS order_700105_product 
+FROM order_700105 
+WHERE order_700105.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:46,600 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014120420362710003043', 'param_1': 1}
+FIX ORDER Q2014120420362710003043; need_fix=False / 700114
+2014-12-06 09:24:46,617 INFO sqlalchemy.engine.base.Engine SELECT up_order_700105.id AS up_order_700105_id, up_order_700105.stage AS up_order_700105_stage, up_order_700105.order_id AS up_order_700105_order_id, up_order_700105.up_order_id AS up_order_700105_up_order_id, up_order_700105.route AS up_order_700105_route, up_order_700105.price AS up_order_700105_price, up_order_700105.cost AS up_order_700105_cost, up_order_700105.up_cost AS up_order_700105_up_cost, up_order_700105.up_req_time AS up_order_700105_up_req_time, up_order_700105.up_resp_time AS up_order_700105_up_resp_time, up_order_700105.up_back_time AS up_order_700105_up_back_time, up_order_700105.up_result AS up_order_700105_up_result, up_order_700105.up_back_result AS up_order_700105_up_back_result 
+FROM up_order_700105 
+WHERE up_order_700105.order_id = %(order_id_1)s AND up_order_700105.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:46,618 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014120420362710003043', 'stage_1': 1, 'param_1': 1}
+	FIX UP_ORDER Q2014120420362710003043(1) need_fix=True
+2014-12-06 09:24:46,628 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700105 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:24:46,628 INFO sqlalchemy.engine.base.Engine {'up_result': '0', 'up_resp_time': datetime.datetime(2014, 12, 4, 20, 36, 27), 'up_back_time': datetime.datetime(2014, 12, 4, 20, 46, 29), 'cost': 285000, 'up_req_time': datetime.datetime(2014, 12, 4, 20, 36, 27), 'up_order_id': 'Q2014120420362710003043', 'up_cost': '285000', 'stage': 1, 'order_id': 'Q2014120420362710003043', 'up_back_result': '00000', 'route': '21cn', 'price': 30}
+2014-12-06 09:24:46,633 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120420362710003043
+SREM %s Q2014120420362710003043
+2014-12-06 09:24:46,649 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:24:46,654 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:46,654 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014120420450610003045', 'param_1': 1}
+FIX ORDER Q2014120420450610003045; need_fix=False / 700116
+2014-12-06 09:24:46,670 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:46,671 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014120420450610003045', 'stage_1': 1, 'param_1': 1}
+	FIX UP_ORDER Q2014120420450610003045(1) need_fix=True
+2014-12-06 09:24:46,680 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:24:46,680 INFO sqlalchemy.engine.base.Engine {'up_result': '0', 'up_resp_time': datetime.datetime(2014, 12, 4, 20, 45, 6), 'up_back_time': datetime.datetime(2014, 12, 4, 20, 47, 11), 'cost': 285000, 'up_req_time': datetime.datetime(2014, 12, 4, 20, 45, 6), 'up_order_id': 'Q2014120420450610003045', 'up_cost': '285000', 'stage': 1, 'order_id': 'Q2014120420450610003045', 'up_back_result': '00000', 'route': '21cn', 'price': 30}
+2014-12-06 09:24:46,685 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120420450610003045
+SREM %s Q2014120420450610003045
+2014-12-06 09:24:46,694 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:24:46,699 INFO sqlalchemy.engine.base.Engine SELECT order_700105.id AS order_700105_id, order_700105.order_id AS order_700105_order_id, order_700105.user_id AS order_700105_user_id, order_700105.price AS order_700105_price, order_700105.mobile AS order_700105_mobile, order_700105.sp_order_id AS order_700105_sp_order_id, order_700105.req_time AS order_700105_req_time, order_700105.resp_time AS order_700105_resp_time, order_700105.back_time AS order_700105_back_time, order_700105.result AS order_700105_result, order_700105.back_result AS order_700105_back_result, order_700105.value AS order_700105_value, order_700105.balance AS order_700105_balance, order_700105.area AS order_700105_area, order_700105.product AS order_700105_product 
+FROM order_700105 
+WHERE order_700105.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:46,699 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014120420550310003047', 'param_1': 1}
+FIX ORDER Q2014120420550310003047; need_fix=False / 700114
+2014-12-06 09:24:46,709 INFO sqlalchemy.engine.base.Engine SELECT up_order_700105.id AS up_order_700105_id, up_order_700105.stage AS up_order_700105_stage, up_order_700105.order_id AS up_order_700105_order_id, up_order_700105.up_order_id AS up_order_700105_up_order_id, up_order_700105.route AS up_order_700105_route, up_order_700105.price AS up_order_700105_price, up_order_700105.cost AS up_order_700105_cost, up_order_700105.up_cost AS up_order_700105_up_cost, up_order_700105.up_req_time AS up_order_700105_up_req_time, up_order_700105.up_resp_time AS up_order_700105_up_resp_time, up_order_700105.up_back_time AS up_order_700105_up_back_time, up_order_700105.up_result AS up_order_700105_up_result, up_order_700105.up_back_result AS up_order_700105_up_back_result 
+FROM up_order_700105 
+WHERE up_order_700105.order_id = %(order_id_1)s AND up_order_700105.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:46,710 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014120420550310003047', 'stage_1': 1, 'param_1': 1}
+	FIX UP_ORDER Q2014120420550310003047(1) need_fix=True
+2014-12-06 09:24:46,720 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700105 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:24:46,720 INFO sqlalchemy.engine.base.Engine {'up_result': '0', 'up_resp_time': datetime.datetime(2014, 12, 4, 20, 55, 3), 'up_back_time': datetime.datetime(2014, 12, 4, 20, 56, 12), 'cost': 19000, 'up_req_time': datetime.datetime(2014, 12, 4, 20, 55, 3), 'up_order_id': 'Q2014120420550310003047', 'up_cost': '19000', 'stage': 1, 'order_id': 'Q2014120420550310003047', 'up_back_result': '00000', 'route': '21cn', 'price': 2}
+2014-12-06 09:24:46,725 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120420550310003047
+SREM %s Q2014120420550310003047
+2014-12-06 09:24:46,734 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:24:46,739 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:46,740 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014120421482610003066', 'param_1': 1}
+FIX ORDER Q2014120421482610003066; need_fix=False / 700116
+2014-12-06 09:24:46,750 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:46,750 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014120421482610003066', 'stage_1': 1, 'param_1': 1}
+	FIX UP_ORDER Q2014120421482610003066(1) need_fix=True
+2014-12-06 09:24:46,759 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:24:46,759 INFO sqlalchemy.engine.base.Engine {'up_result': '0', 'up_resp_time': datetime.datetime(2014, 12, 4, 21, 48, 26), 'up_back_time': datetime.datetime(2014, 12, 4, 21, 50, 39), 'cost': 285000, 'up_req_time': datetime.datetime(2014, 12, 4, 21, 48, 26), 'up_order_id': 'Q2014120421482610003066', 'up_cost': '285000', 'stage': 1, 'order_id': 'Q2014120421482610003066', 'up_back_result': '00000', 'route': '21cn', 'price': 30}
+2014-12-06 09:24:46,764 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120421482610003066
+SREM %s Q2014120421482610003066
+2014-12-06 09:24:46,774 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:24:46,778 INFO sqlalchemy.engine.base.Engine SELECT order_700105.id AS order_700105_id, order_700105.order_id AS order_700105_order_id, order_700105.user_id AS order_700105_user_id, order_700105.price AS order_700105_price, order_700105.mobile AS order_700105_mobile, order_700105.sp_order_id AS order_700105_sp_order_id, order_700105.req_time AS order_700105_req_time, order_700105.resp_time AS order_700105_resp_time, order_700105.back_time AS order_700105_back_time, order_700105.result AS order_700105_result, order_700105.back_result AS order_700105_back_result, order_700105.value AS order_700105_value, order_700105.balance AS order_700105_balance, order_700105.area AS order_700105_area, order_700105.product AS order_700105_product 
+FROM order_700105 
+WHERE order_700105.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:46,779 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014120423094210003082', 'param_1': 1}
+FIX ORDER Q2014120423094210003082; need_fix=False / 700114
+2014-12-06 09:24:46,789 INFO sqlalchemy.engine.base.Engine SELECT up_order_700105.id AS up_order_700105_id, up_order_700105.stage AS up_order_700105_stage, up_order_700105.order_id AS up_order_700105_order_id, up_order_700105.up_order_id AS up_order_700105_up_order_id, up_order_700105.route AS up_order_700105_route, up_order_700105.price AS up_order_700105_price, up_order_700105.cost AS up_order_700105_cost, up_order_700105.up_cost AS up_order_700105_up_cost, up_order_700105.up_req_time AS up_order_700105_up_req_time, up_order_700105.up_resp_time AS up_order_700105_up_resp_time, up_order_700105.up_back_time AS up_order_700105_up_back_time, up_order_700105.up_result AS up_order_700105_up_result, up_order_700105.up_back_result AS up_order_700105_up_back_result 
+FROM up_order_700105 
+WHERE up_order_700105.order_id = %(order_id_1)s AND up_order_700105.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:46,789 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014120423094210003082', 'stage_1': 1, 'param_1': 1}
+	FIX UP_ORDER Q2014120423094210003082(1) need_fix=True
+2014-12-06 09:24:46,798 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700105 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:24:46,798 INFO sqlalchemy.engine.base.Engine {'up_result': '0', 'up_resp_time': datetime.datetime(2014, 12, 4, 23, 9, 43), 'up_back_time': datetime.datetime(2014, 12, 5, 1, 25, 54), 'cost': 95000, 'up_req_time': datetime.datetime(2014, 12, 4, 23, 9, 42), 'up_order_id': 'Q2014120423094210003082', 'up_cost': '95000', 'stage': 1, 'order_id': 'Q2014120423094210003082', 'up_back_result': '00000', 'route': '21cn', 'price': 10}
+2014-12-06 09:24:46,803 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120423094210003082
+SREM %s Q2014120423094210003082
+TASK ORDER FINISH
+['fix/fix-order.py', '-r']
+DRY RUN: False
+TASK ORDER START
+2014-12-06 09:24:52,489 INFO sqlalchemy.engine.base.Engine SHOW VARIABLES LIKE 'sql_mode'
+2014-12-06 09:24:52,489 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:24:52,498 INFO sqlalchemy.engine.base.Engine SELECT DATABASE()
+2014-12-06 09:24:52,498 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:24:52,512 INFO sqlalchemy.engine.base.Engine SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:24:52,513 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:24:52,520 INFO sqlalchemy.engine.base.Engine SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:24:52,520 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:24:52,528 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:24:52,533 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:52,534 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120509105110003128'}
+FIX ORDER Q2014120509105110003128; need_fix=False / 700116
+2014-12-06 09:24:52,551 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:52,552 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'stage_1': 1, 'order_id_1': 'Q2014120509105110003128'}
+	FIX UP_ORDER Q2014120509105110003128(1) need_fix=True
+2014-12-06 09:24:52,562 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:24:52,562 INFO sqlalchemy.engine.base.Engine {'up_cost': '142500', 'up_req_time': datetime.datetime(2014, 12, 5, 9, 10, 51), 'cost': 142500, 'order_id': 'Q2014120509105110003128', 'stage': 1, 'up_result': '0', 'up_back_time': datetime.datetime(2014, 12, 5, 9, 13, 21), 'up_back_result': '00000', 'up_resp_time': datetime.datetime(2014, 12, 5, 9, 10, 51), 'price': 15, 'up_order_id': 'Q2014120509105110003128', 'route': '21cn'}
+2014-12-06 09:24:52,567 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120509105110003128
+SREM %s Q2014120509105110003128
+2014-12-06 09:24:52,576 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:24:52,580 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:52,580 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120509111510003129'}
+FIX ORDER Q2014120509111510003129; need_fix=False / 700116
+2014-12-06 09:24:52,590 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:52,590 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'stage_1': 1, 'order_id_1': 'Q2014120509111510003129'}
+	FIX UP_ORDER Q2014120509111510003129(1) need_fix=True
+2014-12-06 09:24:52,599 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:24:52,599 INFO sqlalchemy.engine.base.Engine {'up_cost': '142500', 'up_req_time': datetime.datetime(2014, 12, 5, 9, 11, 15), 'cost': 142500, 'order_id': 'Q2014120509111510003129', 'stage': 1, 'up_result': '0', 'up_back_time': datetime.datetime(2014, 12, 5, 9, 14, 41), 'up_back_result': '00000', 'up_resp_time': datetime.datetime(2014, 12, 5, 9, 11, 15), 'price': 15, 'up_order_id': 'Q2014120509111510003129', 'route': '21cn'}
+2014-12-06 09:24:52,603 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120509111510003129
+SREM %s Q2014120509111510003129
+2014-12-06 09:24:52,619 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:24:52,624 INFO sqlalchemy.engine.base.Engine SELECT order_700109.id AS order_700109_id, order_700109.order_id AS order_700109_order_id, order_700109.user_id AS order_700109_user_id, order_700109.price AS order_700109_price, order_700109.mobile AS order_700109_mobile, order_700109.sp_order_id AS order_700109_sp_order_id, order_700109.req_time AS order_700109_req_time, order_700109.resp_time AS order_700109_resp_time, order_700109.back_time AS order_700109_back_time, order_700109.result AS order_700109_result, order_700109.back_result AS order_700109_back_result, order_700109.value AS order_700109_value, order_700109.balance AS order_700109_balance, order_700109.area AS order_700109_area, order_700109.product AS order_700109_product 
+FROM order_700109 
+WHERE order_700109.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:52,624 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120509112410003130'}
+FIX ORDER Q2014120509112410003130; need_fix=False / 700109
+2014-12-06 09:24:52,640 INFO sqlalchemy.engine.base.Engine SELECT up_order_700109.id AS up_order_700109_id, up_order_700109.stage AS up_order_700109_stage, up_order_700109.order_id AS up_order_700109_order_id, up_order_700109.up_order_id AS up_order_700109_up_order_id, up_order_700109.route AS up_order_700109_route, up_order_700109.price AS up_order_700109_price, up_order_700109.cost AS up_order_700109_cost, up_order_700109.up_cost AS up_order_700109_up_cost, up_order_700109.up_req_time AS up_order_700109_up_req_time, up_order_700109.up_resp_time AS up_order_700109_up_resp_time, up_order_700109.up_back_time AS up_order_700109_up_back_time, up_order_700109.up_result AS up_order_700109_up_result, up_order_700109.up_back_result AS up_order_700109_up_back_result 
+FROM up_order_700109 
+WHERE up_order_700109.order_id = %(order_id_1)s AND up_order_700109.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:52,641 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'stage_1': 1, 'order_id_1': 'Q2014120509112410003130'}
+	FIX UP_ORDER Q2014120509112410003130(1) need_fix=True
+2014-12-06 09:24:52,650 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700109 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:24:52,651 INFO sqlalchemy.engine.base.Engine {'up_cost': '142500', 'up_req_time': datetime.datetime(2014, 12, 5, 9, 11, 24), 'cost': 142500, 'order_id': 'Q2014120509112410003130', 'stage': 1, 'up_result': '0', 'up_back_time': datetime.datetime(2014, 12, 5, 9, 14, 40), 'up_back_result': '00000', 'up_resp_time': datetime.datetime(2014, 12, 5, 9, 11, 24), 'price': 15, 'up_order_id': 'Q2014120509112410003130', 'route': '21cn'}
+2014-12-06 09:24:52,655 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120509112410003130
+SREM %s Q2014120509112410003130
+2014-12-06 09:24:52,664 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:24:52,669 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:52,669 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120510160610003176'}
+FIX ORDER Q2014120510160610003176; need_fix=False / 700116
+2014-12-06 09:24:52,680 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:52,681 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'stage_1': 1, 'order_id_1': 'Q2014120510160610003176'}
+	FIX UP_ORDER Q2014120510160610003176(1) need_fix=True
+2014-12-06 09:24:52,689 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:24:52,689 INFO sqlalchemy.engine.base.Engine {'up_cost': '285000', 'up_req_time': datetime.datetime(2014, 12, 5, 10, 16, 6), 'cost': 285000, 'order_id': 'Q2014120510160610003176', 'stage': 1, 'up_result': '0', 'up_back_time': datetime.datetime(2014, 12, 5, 10, 50, 47), 'up_back_result': '00000', 'up_resp_time': datetime.datetime(2014, 12, 5, 10, 16, 6), 'price': 30, 'up_order_id': 'Q2014120510160610003176', 'route': '21cn'}
+2014-12-06 09:24:52,693 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120510160610003176
+SREM %s Q2014120510160610003176
+2014-12-06 09:24:52,703 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:24:52,707 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:52,707 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120510540910003198'}
+FIX ORDER Q2014120510540910003198; need_fix=False / 700116
+2014-12-06 09:24:52,716 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:24:52,717 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'stage_1': 1, 'order_id_1': 'Q2014120510540910003198'}
+	FIX UP_ORDER Q2014120510540910003198(1) need_fix=True
+2014-12-06 09:24:52,725 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:24:52,725 INFO sqlalchemy.engine.base.Engine {'up_cost': '142500', 'up_req_time': datetime.datetime(2014, 12, 5, 10, 54, 9), 'cost': 142500, 'order_id': 'Q2014120510540910003198', 'stage': 1, 'up_result': '0', 'up_back_time': datetime.datetime(2014, 12, 5, 10, 56, 26), 'up_back_result': '00000', 'up_resp_time': datetime.datetime(2014, 12, 5, 10, 54, 9), 'price': 15, 'up_order_id': 'Q2014120510540910003198', 'route': '21cn'}
+2014-12-06 09:24:52,730 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120510540910003198
+SREM %s Q2014120510540910003198
+TASK ORDER FINISH
+['fix/fix-order.py', '-r']
+DRY RUN: False
+TASK ORDER START
+2014-12-06 09:25:01,388 INFO sqlalchemy.engine.base.Engine SHOW VARIABLES LIKE 'sql_mode'
+2014-12-06 09:25:01,389 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:25:01,396 INFO sqlalchemy.engine.base.Engine SELECT DATABASE()
+2014-12-06 09:25:01,397 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:25:01,412 INFO sqlalchemy.engine.base.Engine SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:25:01,412 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:25:01,419 INFO sqlalchemy.engine.base.Engine SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:25:01,419 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:25:01,427 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:25:01,432 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:25:01,432 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120510575210003202'}
+FIX ORDER Q2014120510575210003202; need_fix=False / 700116
+2014-12-06 09:25:01,449 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:25:01,449 INFO sqlalchemy.engine.base.Engine {'stage_1': 1, 'param_1': 1, 'order_id_1': 'Q2014120510575210003202'}
+	FIX UP_ORDER Q2014120510575210003202(1) need_fix=True
+2014-12-06 09:25:01,462 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:25:01,463 INFO sqlalchemy.engine.base.Engine {'up_cost': '285000', 'up_req_time': datetime.datetime(2014, 12, 5, 10, 57, 52), 'up_resp_time': datetime.datetime(2014, 12, 5, 10, 57, 52), 'stage': 1, 'up_result': '0', 'cost': 285000, 'order_id': 'Q2014120510575210003202', 'price': 30, 'route': '21cn', 'up_back_result': '00000', 'up_back_time': datetime.datetime(2014, 12, 5, 10, 59, 22), 'up_order_id': 'Q2014120510575210003202'}
+2014-12-06 09:25:01,467 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120510575210003202
+SREM %s Q2014120510575210003202
+2014-12-06 09:25:01,477 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:25:01,481 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:25:01,481 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120511025510003204'}
+FIX ORDER Q2014120511025510003204; need_fix=False / 700116
+2014-12-06 09:25:01,491 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:25:01,491 INFO sqlalchemy.engine.base.Engine {'stage_1': 1, 'param_1': 1, 'order_id_1': 'Q2014120511025510003204'}
+	FIX UP_ORDER Q2014120511025510003204(1) need_fix=True
+2014-12-06 09:25:01,500 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:25:01,500 INFO sqlalchemy.engine.base.Engine {'up_cost': '142500', 'up_req_time': datetime.datetime(2014, 12, 5, 11, 2, 55), 'up_resp_time': datetime.datetime(2014, 12, 5, 11, 2, 55), 'stage': 1, 'up_result': '0', 'cost': 142500, 'order_id': 'Q2014120511025510003204', 'price': 15, 'route': '21cn', 'up_back_result': '00000', 'up_back_time': datetime.datetime(2014, 12, 5, 11, 22, 13), 'up_order_id': 'Q2014120511025510003204'}
+2014-12-06 09:25:01,504 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120511025510003204
+SREM %s Q2014120511025510003204
+2014-12-06 09:25:01,513 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:25:01,517 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:25:01,519 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120511214110003206'}
+FIX ORDER Q2014120511214110003206; need_fix=False / 700116
+2014-12-06 09:25:01,529 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:25:01,529 INFO sqlalchemy.engine.base.Engine {'stage_1': 1, 'param_1': 1, 'order_id_1': 'Q2014120511214110003206'}
+	FIX UP_ORDER Q2014120511214110003206(1) need_fix=True
+2014-12-06 09:25:01,538 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:25:01,538 INFO sqlalchemy.engine.base.Engine {'up_cost': '142500', 'up_req_time': datetime.datetime(2014, 12, 5, 11, 21, 41), 'up_resp_time': datetime.datetime(2014, 12, 5, 11, 21, 41), 'stage': 1, 'up_result': '0', 'cost': 142500, 'order_id': 'Q2014120511214110003206', 'price': 15, 'route': '21cn', 'up_back_result': '00000', 'up_back_time': datetime.datetime(2014, 12, 5, 11, 52, 2), 'up_order_id': 'Q2014120511214110003206'}
+2014-12-06 09:25:01,542 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120511214110003206
+SREM %s Q2014120511214110003206
+2014-12-06 09:25:01,551 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:25:01,557 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:25:01,557 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120514231010003292'}
+FIX ORDER Q2014120514231010003292; need_fix=False / 700116
+2014-12-06 09:25:01,567 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:25:01,567 INFO sqlalchemy.engine.base.Engine {'stage_1': 1, 'param_1': 1, 'order_id_1': 'Q2014120514231010003292'}
+	FIX UP_ORDER Q2014120514231010003292(1) need_fix=True
+2014-12-06 09:25:01,581 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:25:01,581 INFO sqlalchemy.engine.base.Engine {'up_cost': '142500', 'up_req_time': datetime.datetime(2014, 12, 5, 14, 23, 10), 'up_resp_time': datetime.datetime(2014, 12, 5, 14, 23, 11), 'stage': 1, 'up_result': '0', 'cost': 142500, 'order_id': 'Q2014120514231010003292', 'price': 15, 'route': '21cn', 'up_back_result': '00000', 'up_back_time': datetime.datetime(2014, 12, 5, 14, 26, 14), 'up_order_id': 'Q2014120514231010003292'}
+2014-12-06 09:25:01,585 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120514231010003292
+SREM %s Q2014120514231010003292
+2014-12-06 09:25:01,594 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:25:01,599 INFO sqlalchemy.engine.base.Engine SELECT order_700113.id AS order_700113_id, order_700113.order_id AS order_700113_order_id, order_700113.user_id AS order_700113_user_id, order_700113.price AS order_700113_price, order_700113.mobile AS order_700113_mobile, order_700113.sp_order_id AS order_700113_sp_order_id, order_700113.req_time AS order_700113_req_time, order_700113.resp_time AS order_700113_resp_time, order_700113.back_time AS order_700113_back_time, order_700113.result AS order_700113_result, order_700113.back_result AS order_700113_back_result, order_700113.value AS order_700113_value, order_700113.balance AS order_700113_balance, order_700113.area AS order_700113_area, order_700113.product AS order_700113_product 
+FROM order_700113 
+WHERE order_700113.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:25:01,599 INFO sqlalchemy.engine.base.Engine {'param_1': 1, 'order_id_1': 'Q2014120514500610003311'}
+FIX ORDER Q2014120514500610003311; need_fix=False / 700116
+2014-12-06 09:25:01,609 INFO sqlalchemy.engine.base.Engine SELECT up_order_700113.id AS up_order_700113_id, up_order_700113.stage AS up_order_700113_stage, up_order_700113.order_id AS up_order_700113_order_id, up_order_700113.up_order_id AS up_order_700113_up_order_id, up_order_700113.route AS up_order_700113_route, up_order_700113.price AS up_order_700113_price, up_order_700113.cost AS up_order_700113_cost, up_order_700113.up_cost AS up_order_700113_up_cost, up_order_700113.up_req_time AS up_order_700113_up_req_time, up_order_700113.up_resp_time AS up_order_700113_up_resp_time, up_order_700113.up_back_time AS up_order_700113_up_back_time, up_order_700113.up_result AS up_order_700113_up_result, up_order_700113.up_back_result AS up_order_700113_up_back_result 
+FROM up_order_700113 
+WHERE up_order_700113.order_id = %(order_id_1)s AND up_order_700113.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:25:01,610 INFO sqlalchemy.engine.base.Engine {'stage_1': 1, 'param_1': 1, 'order_id_1': 'Q2014120514500610003311'}
+	FIX UP_ORDER Q2014120514500610003311(1) need_fix=True
+2014-12-06 09:25:01,618 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_700113 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:25:01,618 INFO sqlalchemy.engine.base.Engine {'up_cost': '285000', 'up_req_time': datetime.datetime(2014, 12, 5, 14, 50, 6), 'up_resp_time': datetime.datetime(2014, 12, 5, 14, 50, 7), 'stage': 1, 'up_result': '0', 'cost': 285000, 'order_id': 'Q2014120514500610003311', 'price': 30, 'route': '21cn', 'up_back_result': '00000', 'up_back_time': datetime.datetime(2014, 12, 5, 14, 55, 31), 'up_order_id': 'Q2014120514500610003311'}
+2014-12-06 09:25:01,623 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120514500610003311
+SREM %s Q2014120514500610003311
+TASK ORDER FINISH
+['fix/fix-order.py', '-r']
+DRY RUN: False
+TASK ORDER START
+2014-12-06 09:25:06,446 INFO sqlalchemy.engine.base.Engine SHOW VARIABLES LIKE 'sql_mode'
+2014-12-06 09:25:06,446 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:25:06,454 INFO sqlalchemy.engine.base.Engine SELECT DATABASE()
+2014-12-06 09:25:06,454 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:25:06,468 INFO sqlalchemy.engine.base.Engine SELECT CAST('test plain returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:25:06,468 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:25:06,475 INFO sqlalchemy.engine.base.Engine SELECT CAST('test unicode returns' AS CHAR(60)) AS anon_1
+2014-12-06 09:25:06,476 INFO sqlalchemy.engine.base.Engine {}
+2014-12-06 09:25:06,491 INFO sqlalchemy.engine.base.Engine BEGIN (implicit)
+2014-12-06 09:25:06,499 INFO sqlalchemy.engine.base.Engine SELECT order_101103.id AS order_101103_id, order_101103.order_id AS order_101103_order_id, order_101103.user_id AS order_101103_user_id, order_101103.price AS order_101103_price, order_101103.mobile AS order_101103_mobile, order_101103.sp_order_id AS order_101103_sp_order_id, order_101103.req_time AS order_101103_req_time, order_101103.resp_time AS order_101103_resp_time, order_101103.back_time AS order_101103_back_time, order_101103.result AS order_101103_result, order_101103.back_result AS order_101103_back_result, order_101103.value AS order_101103_value, order_101103.balance AS order_101103_balance, order_101103.area AS order_101103_area, order_101103.product AS order_101103_product 
+FROM order_101103 
+WHERE order_101103.order_id = %(order_id_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:25:06,499 INFO sqlalchemy.engine.base.Engine {'order_id_1': 'Q2014120514552410003317', 'param_1': 1}
+FIX ORDER Q2014120514552410003317; need_fix=False / 101103
+2014-12-06 09:25:06,520 INFO sqlalchemy.engine.base.Engine SELECT up_order_101103.id AS up_order_101103_id, up_order_101103.stage AS up_order_101103_stage, up_order_101103.order_id AS up_order_101103_order_id, up_order_101103.up_order_id AS up_order_101103_up_order_id, up_order_101103.route AS up_order_101103_route, up_order_101103.price AS up_order_101103_price, up_order_101103.cost AS up_order_101103_cost, up_order_101103.up_cost AS up_order_101103_up_cost, up_order_101103.up_req_time AS up_order_101103_up_req_time, up_order_101103.up_resp_time AS up_order_101103_up_resp_time, up_order_101103.up_back_time AS up_order_101103_up_back_time, up_order_101103.up_result AS up_order_101103_up_result, up_order_101103.up_back_result AS up_order_101103_up_back_result 
+FROM up_order_101103 
+WHERE up_order_101103.order_id = %(order_id_1)s AND up_order_101103.stage = %(stage_1)s 
+ LIMIT %(param_1)s
+2014-12-06 09:25:06,521 INFO sqlalchemy.engine.base.Engine {'stage_1': 2, 'order_id_1': 'Q2014120514552410003317', 'param_1': 1}
+	FIX UP_ORDER Q2014120514552410003317(1) need_fix=True
+2014-12-06 09:25:06,532 INFO sqlalchemy.engine.base.Engine INSERT INTO up_order_101103 (stage, order_id, up_order_id, route, price, cost, up_cost, up_req_time, up_resp_time, up_back_time, up_result, up_back_result) VALUES (%(stage)s, %(order_id)s, %(up_order_id)s, %(route)s, %(price)s, %(cost)s, %(up_cost)s, %(up_req_time)s, %(up_resp_time)s, %(up_back_time)s, %(up_result)s, %(up_back_result)s)
+2014-12-06 09:25:06,532 INFO sqlalchemy.engine.base.Engine {'up_result': '0', 'route': '21cn', 'up_back_time': datetime.datetime(2014, 12, 5, 14, 55, 30), 'cost': 285000, 'price': 30, 'up_req_time': datetime.datetime(2014, 12, 5, 14, 55, 24), 'stage': 1, 'up_resp_time': datetime.datetime(2014, 12, 5, 14, 55, 24), 'up_order_id': 'Q2014120514552410003317', 'up_cost': '285000', 'up_back_result': '99999', 'order_id': 'Q2014120514552410003317'}
+2014-12-06 09:25:06,536 INFO sqlalchemy.engine.base.Engine COMMIT
+EXPIRE order:Q2014120514552410003317
+SREM %s Q2014120514552410003317
+TASK ORDER FINISH

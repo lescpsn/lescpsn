@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Karmanta - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Karmanta, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="img/favicon.png">
+    <title>SOG(Security Operations Gateway) SYSTEM</title>
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <!-- Custom styles -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet" />
+  </head>
+  <body>
+    <!-- container section start -->
+    <section id="container" class="">
+      <header class="header white-bg">
+        
+        <div class="toggle-nav">
+          <div class="icon-reorder tooltips" data-original-title="Toggle Navigation" data-placement="bottom"></div>
+        </div>
+        
+        <!--logo start-->
+        
+        <!--logo end-->
+        <div class="top-nav notification-row">
+          <!-- notificatoin dropdown start-->
+          <ul class="nav pull-right top-menu">
+            <!-- task notificatoin start -->
+            <!-- task notificatoin end -->
+            <!-- inbox notificatoin start-->
+            <!-- inbox notificatoin end -->
+            <!-- alert notification start-->
+            <!-- alert notification end-->
+            <!-- user login dropdown start-->
+            <li class="dropdown">
+              <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <span class="profile-ava">
+                  <img alt="" src="img/avatar1_small.jpg">
+                </span>
+                <span class="username">che hengjun</span>
+                <b class="caret"></b>
+              </a>
+              <ul class="dropdown-menu extended logout">
+                <div class="log-arrow-up"></div>
+
+                <li>
+                  <a href="login.html"><i class="icon_key_alt"></i> Log Out</a>
+                </li>
+              </ul>
+            </li>
+            <!-- user login dropdown end -->
+          </ul>
+          <!-- notificatoin dropdown end-->
+        </div>
+      </header>    
+      <aside>
+        <div id="sidebar"  class="nav-collapse nav-300">
+          <!-- sidebar menu start-->
+          <ul class="sidebar-menu">
+            <li class="sub-menu active">
+              <a href="javascript:;" class="">
+                <i class="icon_desktop"></i>
+                <span>主机列表</span>
+                <span class="menu-arrow arrow_carrot-right"></span>
+              </a>
+            
+
+              <ul class="sub-menu active">
+                <a href="javascript:;" class="">
+                  <span>mysql服务器</span>
+                  <span class="menu-arrow arrow_carrot-right"></span>
+                  <a href="index.html">200001:carhj@192.168.1.109:8022</a>
+              </ul>
+
+              <ul class="sub-menu">
+                <a href="javascript:;" class="">
+                  <span>一起充核心机器</span>
+                  <span class="menu-arrow arrow_carrot-right"></span>
+                  <a href="index.html">200002:carhj@192.168.1.159:22</a>
+              </ul>
+
+              <ul class="sub-menu">
+                <a href="javascript:;" class="">
+                  <span>mongodb服务器</span>
+                  <span class="menu-arrow arrow_carrot-right"></span>
+                  <a href="index.html">200003:carhj@192.168.1.169:7022</a>
+              </ul>
+            </li>
+
+          </ul>
+        </div>
+      </aside>
+
+      <!--main content start-->
+      <section id="main-content">
+        <section class="wrapper">
+          <div class="text-center">当前访问的主机;abb@192.168.1.159:8022</div>,
+          <!-- page start-->
+          <div class="row">
+            <div class="col-lg-12">
+	      <section class="panel">
+	        <table class="table table-striped border-top" id="sample_1">
+	          <thead>
+	            <tr>
+                      <th>
+                        主机ID
+                      </th>
+		      <th>
+		        主机名称
+		      </th>
+		      <th>
+		        登陆用户
+		      </th>
+		      <th>
+		        IP地址
+		      </th>
+		      <th>
+		        ssh端口号
+		      </th>
+		      <th>
+		        动作
+		      </th>
+	            </tr>
+	          </thead>
+	          <tbody> 
+	            <tr class="odd gradeX">
+                      <td>
+                        200001
+                      </td>
+		      <td>
+		        一起充核心机器
+		      </td>
+		      <td>
+		        carhj
+		      </td>
+		      <td>
+		        192.168.1.159
+		      </td>
+		      <td>
+		        22
+		      </td>
+		      <td>
+		        断开
+		      </td>
+	            </tr>
+	            <tr class="odd gradeX">
+                      <td>
+                        200002
+                      </td>
+		      <td>
+		        mysql数据库服务器
+		      </td>
+		      <td>
+		        abb
+		      </td>
+		      <td>
+		        192.168.1.109
+		      </td>
+		      <td>
+		        7022
+		      </td>
+		      <td>
+		        断开
+		      </td>
+	            </tr>
+	            <tr class="odd gradeX">
+                      <td>
+                        200003
+                      </td>                
+		      <td>
+		        mongodb数据库服务器
+		      </td>
+		      <td>
+		        abb
+		      </td>
+		      <td>
+		        192.168.1.119
+		      </td>
+		      <td>
+		        8022
+		      </td>
+		      <td>
+		        断开
+		      </td>
+	            </tr>
+</tr>
+</tbody>
+</table>
+</section>
+</div>
+
+<!-- page end-->
+<textarea class="text-left text-command">
+  硬盘：/dev/sda1      19478204 3257068 15208656   18% /
+  内存：998868 308732 690136
+  负载： 0.16 0.08 0.06
+</textarea>
+
+
+<div class="">
+  <input type="text" style="height:30px;width:800px" name="command"/>
+  <button type="button"  style="width:100px;height:30px;" >执行</button>
+</div>
+</section>
+
+</section>
+
+<!--main content end-->
+</section>
+<!-- container section end -->
+
+<!-- javascripts -->
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+<!-- nice scroll -->
+<script src="js/jquery.scrollTo.min.js"></script>
+<script src="js/jquery.nicescroll.js" type="text/javascript"></script>
+<!-- data tables js -->
+<script type="text/javascript" src="assets/data-tables/jquery.dataTables.js"></script>
+<script type="text/javascript" src="assets/data-tables/DT_bootstrap.js"></script>
+<!-- dynamic table cuatom script for this page only-->
+<!-- <script src="js/dynamic-table.js"></script>
+  --><!--custome script for all page-->
+<script src="js/scripts.js"></script>
+</body>
+</html>

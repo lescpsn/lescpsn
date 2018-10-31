@@ -1,0 +1,67 @@
+Ghttp://wiki.ngs.tech/pages/viewpage.action?pageId=7045127
+git clone http://bitbucket.ngs.tech/scm/mean/dream.git
+
+
+源码版本库url
+git clone http://bitbucket.ngs.tech/scm/mean/athena
+git clone http://bitbucket.ngs.tech/scm/mean/dream
+git clone http://bitbucket.ngs.tech/scm/mean/hermes
+git clone http://bitbucket.ngs.tech/scm/mean/houston
+git clone http://bitbucket.ngs.tech/scm/mean/muqiniu
+
+源码版本库url
+http://git.ngs.tech/scm/mean/houston.git
+
+curl -X GET "192.168.1.110:8080/v1/diarymixphoto/list"
+curl -X GET "192.168.1.110:8080/v1/diarymixphoto/insert"
+curl -X GET "192.168.1.110:8080/v1/diarymixphoto/usrid/10000"
+http://Hengjun%20Che@git.ngs.tech/scm/mean/sms.git
+http://jira.ngs.tech/login.jsp?permissionViolation=true&os_destination=%2Fbrowse%2FKRA-1899%3Ffilter%3D-1&page_caps=&user_role=
+
+
+http://houston-api.daoapp.io/public-html
+
+http://api.dev.tusoapp.com:8080/
+
+http://api.dev.tusoapp.com:8080/v1/diary/id/8
+http://git.ngs.tech/projects/MEAN/repos/api_doc/browse
+
+
+
+API接口文档
+http://houston-api.daoapp.io/public-html/?http#%E9%A6%96%E9%A1%B5
+
+git 版本库
+http://git.ngs.tech/projects/MEAN
+
+
+打开SQL日志调试模式：
+DB.LogMode(true)
+
+
+【API接口调用方法】：
+1、日志和图片混排列表混排
+curl -v "192.168.1.114:8080/v1/diarymixphoto/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+Method  : GET
+
+
+2、根据raw_photo_uuid删除
+curl -v -X DELETE http://192.168.1.114:8080/v1/photos/delete -d  '{"uuids":["62527480-06a3-4391-acfc-1d9a9cdc82e7"]}'
+Method	: DELETE
+
+
+
+
+SQL用法：
+SELECT * FROM "raw_photos"  WHERE "raw_photos".deleted_at IS NULL AND ((uuid in ('62527480-06a3-4391-acfc-1d9a9cdc82e7')))
+SELECT * FROM "raw_photos"  WHERE (uuid in ('62527480-06a3-4391-acfc-1d9a9cdc82e7'));
+SELECT * FROM photos where raw_photo_uuid='62527480-06a3-4391-acfc-1d9a9cdc82e7';
+
+
+ssh -i sshkey/kp-2t5jofua    root@124.42.118.124
+scp -P 22 -C -i ~/sshkey/kp-2t5jofua  houston root@124.42.118.124:~/8081
+scp -P 22 -C -i ~/sshkey/kp-2t5jofua  root@124.42.118.124:~/diary_mix_photo.dat  ~/ngsenv
+
+
+
+curl -v -H "X-Tuso-Device-Token:iOS-Simulator" -H "X-Tuso-Authentication-Token:G1SyHxSoJIAyW5TE1rQOZIQTpkUl24ud" -H "Content-Type:multipart/form-data" https://up.qbox.me -F "file=/home/carhj/goprojects/src/git.ngs.tech/mean/trial/tmpdata/aaa.jpg" -F "token=X0W-1LWpcdD0eOQr0MUwOz1hQvuAPYxR9XAzbzHf:4DdW0w6XweZZq4zgGWTnKoMU56o=:eyJzY29wZSI6InR1c28iLCJkZWFkbGluZSI6MjkzNjk3MzExOCwiY2FsbGJhY2tVcmwiOiJodHRwOi8vYXBpLmRldi50dXNvYXBwLmNvbTo4MDgwL3Zici9hdmF0YXJfY2FsbGJhY2siLCJjYWxsYmFja0JvZHkiOiJidWNrZXQ9JChidWNrZXQpXHUwMDI2a2V5PSQoa2V5KVx1MDAyNmhhc2g9JChldGFnKVx1MDAyNmZzaXplPSQoZnNpemUpXHUwMDI2d2lkdGg9JCh4OndpZHRoKVx1MDAyNmhlaWdodD0kKHg6aGVpZ2h0KVx1MDAyNmV4aWY9JCh4OmV4aWYpXHUwMDI2cHJpdmFjeT0kKHg6cHJpdmFjeSlcdTAwMjZtZDU9JCh4Om1kNSlcdTAwMjZwcmltYXJ5X2NvbG9yPSQoeDpwcmltYXJ5X2NvbG9yKVx1MDAyNmdlb2xvY2F0aW9uPSQoeDpnZW9sb2NhdGlvbilcdTAwMjZlZGl0X3BhcmFtcz0kKHg6ZWRpdF9wYXJhbXMpXHUwMDI2dGltZXN0YW1wPSQoeDp0aW1lc3RhbXApXHUwMDI2dXQ9JCh4OnV0KSIsImNhbGxiYWNrQm9keVR5cGUiOiJhcHBsaWNhdGlvbi94LXd3dy1mb3JtLXVybGVuY29kZWQifQ==" -F "x:timestamp=2002-10-02T10:00:00-05:00" -F "x:ut=G1SyHxSoJIAyW5TE1rQOZIQTpkUl24ud"

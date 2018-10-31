@@ -1,0 +1,90 @@
+syntax = "proto3";
+
+import "nulltype.proto";
+import "user.proto";
+
+package proto;
+
+message BasePhoto {
+    int64 ID = 1;
+    string UUID = 2;
+    IntegerType Width = 3;
+    IntegerType Height = 4;
+    StringType FileURL = 5;
+    string FileUUID = 6;
+    IntegerType FileSize = 7;
+    StringType PrimaryColor = 8;
+}
+
+enum PhotoType {
+    photo_type_null = 0;
+    photo_type_system = 1;
+    photo_type_edited = 2;
+}
+
+enum PhotoPrivacy {
+    photo_privacy_null = 0;
+    photo_privacy_public = 1;
+    photo_privacy_private = 2;
+}
+
+message Photo {
+    int64 ID = 1;
+    string UUID = 2;
+    string CreatedAt = 3;
+    User User = 4;
+    string UserUUID = 5;
+    BasePhoto RawPhoto = 6;
+    IntegerType Width = 7;
+    IntegerType Height = 8;
+    BooleanType InPipeline = 9;
+    PhotoType PhotoType = 10;
+    string FileUUID = 11;
+    IntegerType FileSize = 12;
+    StringType FileURL = 13;
+    StringType Identifier = 14;
+    PhotoPrivacy PhotoPrivacy = 15;
+    StringType PrimaryColor = 16;
+    StringType GEOLocation = 17;
+    Note Note = 18;
+    string NoteUUID = 19;
+    StringType URL = 20;
+    IntegerType DisplayVersion = 21;
+    StringType EditParam = 22;
+    BooleanType IsAvatar = 23;
+    BooleanType IsTuso = 24;
+    IntegerType CommentsCount = 25;
+    string Timestamp = 26;
+    StringType Exif = 27;
+}
+
+message Note {
+    int64 ID = 1;
+    string UUID = 2;
+    string CreatedAt = 3;
+    string UserUUID = 4;
+    StringType Title = 5;
+    StringType Content = 6;
+    StringType Style = 7;
+    string Timestamp = 8;
+}
+
+enum PersistentType {
+    persistent_type_null = 0;
+    persistent_type_new_photo = 1;
+    persistent_type_new_edited_photo = 2;
+    persistent_type_edited_photo = 3;
+    persistent_type_edited_avatar = 4;
+}
+
+message File {
+    int64 ID = 1;
+    string UUID = 2;
+    string CreatedAt = 3;
+    string UserUUID = 4;
+    StringType Bucket = 5;
+    StringType Key = 6;
+    IntegerType Size = 7;
+    StringType PersistentID = 8;
+    PersistentType PersistentType = 9;
+}

@@ -1,0 +1,2 @@
+1、安装Pillow包时需要安装下列开发库
+   sudo apt-get install libjpeg-dev libpng-dev libfreetype6-dev

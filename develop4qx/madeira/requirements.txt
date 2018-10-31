@@ -1,0 +1,9 @@
+PyYAML>=3.11
+SQLAlchemy>=0.9.8
+XlsxWriter>=0.6.0
+mysql-connector-python>=2.0.1
+onetimepass>=0.3.0
+pycrypto>=2.6.1
+redis>=2.10.3
+six>=1.8.0
+tornado>=4.0.2

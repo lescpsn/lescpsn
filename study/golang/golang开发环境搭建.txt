@@ -1,0 +1,64 @@
+                Golang开发环境搭建
+1 windows下的Golang开发环境搭建
+    http://www.golangtc.com/download
+    1.1 下载windows对应版本的Golang安装包（当前为version-1.7）
+
+    1.2 采用默认安装方式，如有要求请指定Golang的安装路径，其它一路回车法
+
+    1.3 添加GOPATH环境变量（windows下如何添加环境变量，自行百度），项目工程目录必须放在%GOPATH%/src目录下
+        如：
+        %GOPATH%/src/username/projectname1
+        %GOPATH%/src/username/projectname2
+        如何设置GOPATH的值，请根据自己的目录规划习惯了
+
+    1.4 将%GOPATH%/bin，%GOROOT%/bin路径追加到%PATH%环境变量中
+
+
+3. 安装Golang常用工具
+   1 x/tools 安装
+     golang.org/x/tools = github.com/golang/tools
+     1 go get -v -u -x github.com/golang/tools
+       mkdir golang.org/x
+       cp  github.com/golang/tools golang.org/x/tools
+
+   go install golang.org/x/tools/cmd/goimports
+
+
+
+
+
+   lint: 检查代码规范性 go get -v -u -x github.com/golang/lint 出问题（需要golang.org/x/tools）
+   下载，手工安装
+   git clone  https://github.com/golang/lint
+   go install github.com/golang/lint(这个没有用)
+   go install github.com/golang/lint/golint(这个有用)
+
+
+   go get -v -u -x github.com/golang/lint/golint
+
+   dlv: 调试插件
+
+   go get -v -u github.com/peterh/liner
+   go get -u -v -x github.com/derekparker/delve/cmd/dlv
+
+   git clone https://github.com/derekparker/delve
+   go install github.com/derekparker/delve/cmd/dlv
+
+
+   go get -u -v -x github.com/tpng/gopkgs
+   go get -u -v -x github.com/lukehoban/go-outline
+
+   go get -u -v -x github.com/alecthomas/gometalinter
+   go get -v -x sourcegraph.com/sqs/goreturns
+
+
+go get gopkg.in/yaml.v1 -->https://github.com/go-yaml/yaml
+go get gopkg.in/pg.v4"  -->go get -u -v -x github.com/go-pg/pg
+
+
+go get -u -v -x gopkg.in/robfig/cron.v2
+go get -u -v -x github.com/go-pg/robfig/cron.v2
+
+
+
+

@@ -1,0 +1,12 @@
+1、安装sys
+   root用户执行system_root.sh
+2、安装db
+   root用户执行postgresql-install_root.sh
+3、安装mongodb
+   root用户执行postgresql-install_root.sh
+4、安装emacs
+   普通用户执行emacs_user.sh
+5、安装oh-my-fish
+   普通用户执行fish_user.sh
+6、安装golang
+   普通用户执行golang_user.sh

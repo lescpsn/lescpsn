@@ -1,0 +1,26 @@
+[ 路由管理 ]
+  ->[ 货源管理 ]
+    1、[ 增加删除按钮 ]
+        route_supply.py增加删除api       : /api/route/supply/delete
+        客户端模拟测试                   : curl -d "domain_id=000000&id=43" -v "http://192.168.1.162:8907/api/route/supply/delete"
+        前端route-supply.js调用的url     : url: '/api/route/supply/delete',
+
+
+[ 路由管理 ]
+  ->[ 接口管理 ]
+    1、[ 增加手工评分 ]
+        route_interface.py增加删除api    : /api/route/interface/score
+        客户端模拟测试                   : curl -d "domain_id=000000&interface_id=21cn-leliu&score=50" -v "http://192.168.1.162:8907/api/route/interface/score"
+        前端route-interface.js调用的url  : url: '/api/route/interface/score'
+
+
+[ 客户管理 ]
+  ->[ 密价 ]
+    1、[ 密价增加搜索过滤条件 ]
+        api接口                          : 保持原先的不变
+        过滤条件所传参数名               : 以数据库表repo_product对应的字段名为准
+
+    2、[ ApiSpecialHandler类修改 ]
+        special.py中的api保持不变        : remain
+        数据库中repo_special表中增加了update_value_time，update_supply_time，update_status_time三个字段名
+        分别对应的返回变量名为tsp_value，tsp_supply，tsp_status，前端根据需求自行获取

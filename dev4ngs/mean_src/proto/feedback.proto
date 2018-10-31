@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+import "user.proto";
+
+package proto;
+
+message Feedback {
+    int64 ID = 1;
+    string UUID = 2;
+    string CreatedAt = 3;
+    string Suggest = 4;
+    User User = 5;
+    string UserUUID = 6;
+    string ConnectInfo = 7;
+    int32 From = 8;
+    int32 Type = 9;
+}

@@ -1,0 +1,2 @@
+downstream:
+  '100001': { name: '趣讯管理员', shard: '100001', master: '100001', pass: 'CDG1QGlAy2K5YnMx', iv: '4172630993624476', key: 'WsIl7gEdvDL836fn5BWodxP3mU3y8hUb', back_url: 'http://localhost:8976/data/callback'}

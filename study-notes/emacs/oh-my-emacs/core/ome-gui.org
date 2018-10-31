@@ -1,0 +1,206 @@
+#+TITLE: Oh My Emacs GUI
+#+OPTIONS: toc:nil num:nil ^:nil
+
+This is part of [[https://github.com/xiaohanyu/oh-my-emacs][oh-my-emacs]].
+
+* El-get packages
+  :PROPERTIES:
+  :CUSTOM_ID: gui-el-get-packages
+  :END:
+
+#+NAME: gui-el-get-packages
+#+CAPTION: El-get packages for ome-gui module
+| Package         | Status   | Description                            |
+|-----------------+----------+----------------------------------------|
+| [[https://github.com/bbatsov/solarized-emacs][solarized-emacs]] | Required | Adopt this as the default color-theme. |
+| [[https://github.com/jonathanchu/emacs-powerline][emacs-powerline]] | Required | Eye candy for Emacs mode line.         |
+| [[https://github.com/coldnew/linum-relative][linum-relative]]  | Required | Eye candy for Emacs linum-mode.        |
+
+* Basic GUI Settings
+#+NAME: gui-basics
+#+BEGIN_SRC emacs-lisp
+;; show column number and line number
+(dolist (mode '(column-number-mode line-number-mode))
+  (when (fboundp mode) (funcall mode t)))
+
+(dolist (mode-hook '(text-mode-hook prog-mode-hook conf-mode-hook))
+  (add-hook mode-hook
+            (lambda ()
+              (linum-mode 1))))
+
+;; make the fringe thinner (default is 8 in pixels)
+(fringe-mode 4)
+
+;; show parenthesis match
+(show-paren-mode 1)
+(setq show-paren-style 'expression)
+
+;; Toggle line highlighting in all buffers
+(global-hl-line-mode t)
+
+;; http://stackoverflow.com/questions/27758800/why-does-emacs-leave-a-gap-when-trying-to-maximize-the-frame
+(setq frame-resize-pixelwise t)
+#+END_SRC
+
+* Choose Monaco as the Default English Font
+  :PROPERTIES:
+  :CUSTOM_ID: font
+  :END:
+
+Choosing a good and comfortable font is quite important in your whole coding
+life. Although the default font of emacs is good enough, I believe there're
+better choices. And you can refer to [[http://hivelogic.com/articles/top-10-programming-fonts][TOP 10 PROGRAMMING FONTS]] and [[http://www.sitepoint.com/top-10-programming-fonts/][10 of the
+Best Programming Fonts]] to get some feel of various programming fonts.
+
+And I prefer [[http://en.wikipedia.org/wiki/Monaco_(typeface)][Monaco]]. However, I've googled a lot to prove that Monaco is free
+to use on non-Mac platforms, but found nothing about the official warrant. So
+I pretend that it is free. If you found any illegal issues, please tell me and
+I'll choose another free font. Thanks.
+
+Finally, about how to install Monaco fonts in Linux, see
+https://github.com/cstrap/monaco-font. If you didn't install Monaco,
+oh-my-emacs will fallback to the default font. Yeah, the so-called
+self-adapting.
+
+#+NAME: font
+#+BEGIN_SRC emacs-lisp
+;; frame font
+;; Setting English Font
+(if (member "Monaco" (font-family-list))
+    (set-face-attribute
+     'default nil :font "Monaco 12"))
+#+END_SRC
+
+* Full screen support
+  :PROPERTIES:
+  :CUSTOM_ID: fullscreen
+  :END:
+
+By default, oh-my-emacs won't bind any shortcut to function keys. There're
+two reasons:
+- Some special keyboards(such as [[http://en.wikipedia.org/wiki/Happy_Hacking_Keyboard][HHKB]]) lacks function keys.
+- Some function keys are occupied by system, either by the windows manager, the
+  operating system, or something else which you have no idea to know it before.
+
+Of course you can overrides this convention as you like, oh-my-emacs is just a
+starting point.
+
+#+BEGIN_SRC emacs-lisp
+;; http://www.emacswiki.org/emacs/FullScreen
+(defun ome-toggle-fullscreen ()
+  "Toggle full screen"
+  (interactive)
+  (set-frame-parameter
+   nil 'fullscreen
+   (when (not (frame-parameter nil 'fullscreen)) 'fullboth)))
+
+;; (global-set-key (kbd "<f11>") 'ome-toggle-fullscreen)
+#+END_SRC
+
+* Solarized Color Theme
+  :PROPERTIES:
+  :CUSTOM_ID: color-theme
+  :END:
+
+[[http://ethanschoonover.com/solarized][Solarized]] is my favourite color theme. it is available for multiple
+applications, not only for emacs. I'll set this as the default theme for
+oh-my-emacs.
+
+There're multiple el-get/elpa packages for solarized theme, and the original
+oh-my-emacs adopts [[https://github.com/sellout/emacs-color-theme-solarized.git][color-theme-solarized]] package, which requires [[http://www.nongnu.org/color-theme][color-theme]]
+package as a dependency, which failed to install sometimes. So oh-my-emacs now
+adopts [[https://github.com/bbatsov/solarized-emacs][solarized-emacs]] package. One thing you should be aware of is, you should
+use =M-x load-theme= instead of =color-theme-xxxx= to change current color
+theme.
+
+#+NAME: color-theme
+#+BEGIN_SRC emacs-lisp
+(defadvice load-theme (around ome-load-theme disable)
+  ad-do-it
+
+  ;; Remove boxes from Powerline arrows
+  (set-face-attribute 'mode-line nil :box nil)
+  (set-face-attribute 'mode-line-inactive nil :box nil))
+
+(defun ome-solarized-emacs-setup ()
+  ;; make the fringe stand out from the background
+  (setq solarized-distinct-fringe-background t)
+  ;; make the modeline high contrast
+  (setq solarized-high-contrast-mode-line t)
+  ;; Use less bolding
+  (setq solarized-use-less-bold t)
+  ;; Use more italics
+  (setq solarized-use-more-italic t)
+  ;; Use less colors for indicators such as git:gutter, flycheck and similar.
+  (setq solarized-emphasize-indicators nil)
+
+  (setq x-underline-at-descent-line t)
+
+  (ad-enable-advice 'load-theme 'around 'ome-load-theme)
+  (ad-activate 'load-theme)
+
+  (load-theme 'solarized-dark t))
+
+(ome-install 'solarized-emacs)
+#+END_SRC
+
+** Q&A
+
+Q: How to change the default solarized color theme for ome?
+
+A: Just [[http://orgmode.org/worg/org-contrib/babel/intro.html#literate-programming][untangle]]
+the related code block by convert =#+BEGIN_SRC emacs-lisp= to =#+BEGIN_SRC
+emacs-lisp :tangle no=, and choose any color-theme as you like. Check github
+[[https://github.com/xiaohanyu/oh-my-emacs/issues/58][issue]] for detailed discussion.
+
+* Powerline
+  :PROPERTIES:
+  :CUSTOM_ID: powerline
+  :END:
+
+Powerline is an eye candy for emacs [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Mode-Line.html][mode line]]. Actually, the [[https://github.com/jonathanchu/emacs-powerline][emacs-powerline]] is
+inspired by [[https://github.com/Lokaltog/vim-powerline][vim-powerline]]. There're also powerline variants for [[https://github.com/erikw/tmux-powerline][tmux]], [[https://github.com/milkbikis/powerline-shell][shell]], etc.
+
+#+NAME: powerline
+#+BEGIN_SRC emacs-lisp
+(defun ome-emacs-powerline-setup ())
+
+(ome-install 'emacs-powerline)
+#+END_SRC
+
+Actually, there're two packages as emacs's powerline:
+- https://github.com/jonathanchu/emacs-powerline
+- https://github.com/milkypostman/powerline
+
+I've used milkypostman's powerline for a long time, however, there're some tiny
+annoying problem with this package. Check this [[https://github.com/xiaohanyu/oh-my-emacs/issues/73][issue]] for example. So I've now
+decide to give janathanchu's powerline a try. Hope it works as expected.
+
+* Linum-relative
+  :PROPERTIES:
+  :CUSTOM_ID: linum-relative
+  :END:
+
+I think the inspiration of [[https://github.com/coldnew/linum-relative][linum-relative]] comes from [[https://github.com/myusuf3/numbers.vim][numbers.vim]]. Thanks
+[[https://github.com/vimeitor][vimeitor]] for methoning this for me, I tried and I found it's really useful. So
+I made it a default for oh-my-emacs.
+
+#+NAME: linum-relative
+#+BEGIN_SRC emacs-lisp
+(defun ome-linum-relative-setup ()
+  (require 'linum-relative))
+
+(ome-install 'linum-relative)
+#+END_SRC
+
+* Todo
+** Speedbar
+- Combine projectile and speedbar to provide a project navigation
+  feature. [[https://github.com/rdallasgray/graphene][graphene]] has a solution, which may be worth a try.
+
+** Color-theme
+- More color-theme support
+  - https://github.com/lvillani/el-monokai-theme
+  - https://github.com/chriskempson/tomorrow-theme
+  - https://github.com/chriskempson/base16
+  - https://github.com/hbin/molokai-theme

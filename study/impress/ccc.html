@@ -1,0 +1,388 @@
+<!doctype html></span>
+
+!</span><span class="Comment">--</span>
+<span class="Comment">    </span>
+<span class="Comment">    你想知道如何使用impress.js？</span>
+<span class="Comment">    </span>
+<span class="Comment">    你已经开始了最初又及其重要的一步 —— 你正在阅读这份代码。</span>
+<span class="Comment">    这就是 impress.js 展示的构成方式 —— 使用HTML和CSS。</span>
+<span class="Comment">    </span>
+<span class="Comment">    相信我，你必须使用精确的使用HTML和CSS来高效的使用impress.js。</span>
+<span class="Comment">    更重要的是，你得有艺术细胞，因为在impress.js展示中，我们没有准备默认的css样式和模板。</span>
+<span class="Comment">    </span>
+<span class="Comment">    你得用你聪明的大脑和勤劳的双手来规划和构筑这个东西。</span>
+<span class="Comment">    </span>
+<span class="Comment">    那么……</span>
+
+<span class="Comment">    你还是想知道如何使用impress.js么？</span>
+<span class="Comment">    </span>
+<span class="Comment">--</span><span class="Comment">></span>
+
+<span class="Function"><</span>html<span class="Function"> </span><span class="Type">lang</span><span class="Function">=</span><span class="String">"en"</span><span class="Function">></span>
+<span class="Function"><</span>head<span class="Function">></span>
+<span class="PreProc">    </span><span class="Function"><</span>meta<span class="Function"> </span><span class="Type">charset</span><span class="Function">=</span><span class="String">"utf-8"</span><span class="Function"> /></span>
+<span class="PreProc">    </span><span class="Function"><</span>meta<span class="Function"> </span><span class="Type">name</span><span class="Function">=</span><span class="String">"viewport"</span><span class="Function"> </span><span class="Type">content</span><span class="Function">=</span><span class="String">"width=1024"</span><span class="Function"> /></span>
+<span class="PreProc">    </span><span class="Function"><</span>meta<span class="Function"> </span><span class="Type">name</span><span class="Function">=</span><span class="String">"apple-mobile-web-app-capable"</span><span class="Function"> </span><span class="Type">content</span><span class="Function">=</span><span class="String">"yes"</span><span class="Function"> /></span>
+<span class="PreProc">    </span><span class="Function"><</span>title<span class="Function">></span><span class="Title">impress.js | 使用现代浏览器中css3的tranforms和trasitions特性进行展示的工具 | by Bartek Szopka @bartaz | 翻译ed by xishui @ <a href="//eyehere.net">//eyehere.net</a></span><span class="Identifier"></</span>title<span class="Identifier">></span>
+
+<span class="PreProc">    </span><span class="Comment"><!</span><span class="Comment">--</span>
+<span class="Comment">        </span>
+<span class="Comment">        Impress.js不调用任何外部的样式文件，脚本会增加所有必要的展示用样式。</span>
+<span class="Comment">        </span>
+<span class="Comment">        下面这个样式文件是为了演示用的，查阅一下它可以搞明白如何对impress.js中的元素渲染、</span>
+<span class="Comment">        已经显示一些回调的样式，不过我可不希望你直接把它用到你自己的展示中。</span>
+<span class="Comment">        </span>
+<span class="Comment">        哥们儿（or姐们儿？），来点创意，我们可不能让所有的impress.js看起来都是一个模子里处理的，对吧！</span>
+<span class="Comment">        </span>
+<span class="Comment">        当你开始制作自己的展示时，把它删了，从头开始吧，这是件有趣的事情。</span>
+<span class="Comment">        </span>
+<span class="Comment">    --</span><span class="Comment">></span>
+<span class="PreProc">    </span><span class="Function"><</span>link<span class="Function"> </span><span class="Type">href</span><span class="Function">=</span><span class="String">"css/impress-demo.css"</span><span class="Function"> </span><span class="Type">rel</span><span class="Function">=</span><span class="String">"stylesheet"</span><span class="Function"> /></span>
+<span class="PreProc">    </span>
+<span class="PreProc">    </span><span class="Function"><</span>link<span class="Function"> </span><span class="Type">rel</span><span class="Function">=</span><span class="String">"shortcut icon"</span><span class="Function"> </span><span class="Type">href</span><span class="Function">=</span><span class="String">"favicon.png"</span><span class="Function"> /></span>
+<span class="PreProc">    </span><span class="Function"><</span>link<span class="Function"> </span><span class="Type">rel</span><span class="Function">=</span><span class="String">"apple-touch-icon"</span><span class="Function"> </span><span class="Type">href</span><span class="Function">=</span><span class="String">"apple-touch-icon.png"</span><span class="Function"> /></span>
+<span class="Identifier"></</span>head<span class="Identifier">></span>
+
+<span class="Comment"><!</span><span class="Comment">--</span>
+<span class="Comment">    </span>
+<span class="Comment">    Body元素往往会被impress.js设置一些特殊的class，这个可以很方便的判断当前的浏览器是不是支持</span>
+<span class="Comment">    我们所需的css或脚本。</span>
+<span class="Comment">    </span>
+<span class="Comment">    一个非常有用的class名称是 `impress-not-supported`。这个class意味着这个浏览器不支持impress.js</span>
+<span class="Comment">    所要求的特性，所以你可以用这个类来显示一些回调的信息。</span>
+<span class="Comment">    事实上倒也不是一定要手动的加上这个class，因为impress.js检测到以后会自动加上的，不过万一你的</span>
+<span class="Comment">    浏览器连JavaScript都不能执行，还是预先加上比较保险。</span>
+<span class="Comment">    </span>
+<span class="Comment">    当impress.js检测到你的浏览器足以运行，这个class名就会被移除。</span>
+<span class="Comment">    </span>
+<span class="Comment">    事实上boday的类名也会根据当前的演示场景改变，我们会在后面说到，就在"hint"的内容里。</span>
+<span class="Comment">    </span>
+<span class="Comment">--</span><span class="Comment">></span>
+<span class="Function"><</span>body<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"impress-not-supported"</span><span class="Function">></span>
+
+<span class="Comment"><!</span><span class="Comment">--</span>
+<span class="Comment">    比如，我们加一个回调消息，仅在有`impress-not-supported`类名的body下显示。</span>
+<span class="Comment">--</span><span class="Comment">></span>
+<span class="Function"><</span>div<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"fallback-message"</span><span class="Function">></span>
+<span class="Function"><</span>p<span class="Function">></span>尊驾的浏览器太老土啦！<span class="Function"><</span>b<span class="Function">></span><span class="htmlBold">无法满足impress.js的要求</span><span class="Identifier"></</span>b<span class="Identifier">></span>，现在你只能看到一些最朴素的演示画面。<span class="Identifier"></</span>p<span class="Identifier">></span>
+<span class="Function"><</span>p<span class="Function">></span>为了欣赏漂亮的演示画面，请使用先进、优雅、快速、美丽、免费的现代浏览器，比如 <span class="Function"><</span>b<span class="Function">></span><span class="htmlBold">Chrome</span><span class="Identifier"></</span>b<span class="Identifier">></span>, <span class="Function"><</span>b<span class="Function">></span><span class="htmlBold">Safari</span><span class="Identifier"></</span>b<span class="Identifier">></span> or <span class="Function"><</span>b<span class="Function">></span><span class="htmlBold">Firefox</span><span class="Identifier"></</span>b<span class="Identifier">></span> 。<span class="Identifier"></</span>p<span class="Identifier">></span>
+<span class="Identifier"></</span>div<span class="Identifier">></span>
+
+<span class="Comment"><!</span><span class="Comment">--</span>
+<span class="Comment">    </span>
+<span class="Comment">    现在我们开始接触impress.js的核心了。</span>
+
+<span class="Comment">    我们得把所有的演示步骤包裹起来，在这个舞台里impress.js的魔法才可以施展。</span>
+<span class="Comment">    倒不一定是个`<div>`标签，只不过`id`一定得是`impress`。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    可能现在还用不到，不过我还是要给你说一些可以用在这个舞台上的选项。</span>
+
+    <span class="Comment">    用类似`data-transition-duration="2000"`这样的属性来改变切换场景的速度，默认的话，是1000（也就是1秒）。</span>
+
+    <span class="Comment">    也可以设置`data-perspective="500"`来改变透视的深度，默认是1000。如果设置为0的话，美丽的3D效果</span>
+    <span class="Comment">    就离我们远去了。</span>
+    <span class="Comment">    这个事情还是颇为复杂的，你可以参考下面的地址了解更多（还是英文的）：</span>
+    <span class="Comment">    <a href="https://developer.mozilla.org/en/CSS/perspective">https://developer.mozilla.org/en/CSS/perspective</a></span>
+    <span class="Comment">    </span>
+    <span class="Comment">    不过就像我刚刚所说的那样，你现在应该还用不着这些设置 —— 默认的就很好了。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">--</span><span class="Comment">></span>
+    <span class="Function"><</span>div<span class="Function"> </span><span class="Type">id</span><span class="Function">=</span><span class="String">"impress"</span><span class="Function">></span>
+
+    <span class="Comment"><!</span><span class="Comment">--</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        接下来就要发生一些有趣的事情了。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        所有在`#impress`中并且有`step`类名的元素都是一个场景。这些个场景会被impress.js定位、</span>
+    <span class="Comment">        旋转和缩放，我们的‘镜头’会一一的展示它们。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        位置信息也是通过data属性设置的。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        在下面这个场景里，我们给它设置了`data-x="-1000"`和`data-y="-1500`的属性。</span>
+    <span class="Comment">        这意味着这个元素的**中心**（是的，确实是中心）在整个幻灯片的(-1000px, -1500px)处。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        这个场景没有旋转和缩放。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">    --</span><span class="Comment">></span>
+    <span class="Function"><</span>div<span class="Function"> </span><span class="Type">id</span><span class="Function">=</span><span class="String">"bored"</span><span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"step slide"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-x=</span><span class="String">"-1000"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-y=</span><span class="String">"-1500"</span><span class="Function">></span>
+    <span class="Function"><</span>q<span class="Function">></span>你是不是觉得传统的幻灯片都 <span class="Function"><</span>b<span class="Function">></span><span class="htmlBold">弱爆了</span><span class="Identifier"></</span>b<span class="Identifier">></span> ？<span class="Identifier"></</span>q<span class="Identifier">></span>
+    <span class="Identifier"></</span>div<span class="Identifier">></span>
+
+    <span class="Comment"><!</span><span class="Comment">--</span>
+    <span class="Comment">        `id`属性仅仅是用来表示场景的URL的，事实上也不是必须的东西。</span>
+    <span class="Comment">        即使你没有给它定义，你依然可以使用`step-N`来找到这一幕。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        比如说下面这个场景就可以叫做`step-2`。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        这个URL的锚部分就应该是`#/step-2`。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        你也可以在一个链接里使用`#step-2`，这可以直接定位到这个场景。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        请注意，`#/step-2`虽然在链接中也可以使用，但是并不是推荐的，使用`#step-2`可以在</span>
+    <span class="Comment">        更广泛的情况是使用（比如impress.js压根儿没起作用的时候）。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">    --</span><span class="Comment">></span>
+    <span class="Function"><</span>div<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"step slide"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-x=</span><span class="String">"0"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-y=</span><span class="String">"-1500"</span><span class="Function">></span>
+    <span class="Function"><</span>q<span class="Function">></span>你有没有想过，在 <span class="Function"><</span>strong<span class="Function">></span><span class="htmlBold">现代浏览器</span><span class="Identifier"></</span>strong<span class="Identifier">></span> 光辉下，我们可以不再受限于 <span class="Function"><</span>strong<span class="Function">></span><span class="htmlBold">老旧浏览器的残忍压迫</span><span class="Identifier"></</span>strong<span class="Identifier">></span> ？<span class="Identifier"></</span>q<span class="Identifier">></span>
+    <span class="Identifier"></</span>div<span class="Identifier">></span>
+
+    <span class="Function"><</span>div<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"step slide"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-x=</span><span class="String">"1000"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-y=</span><span class="String">"-1500"</span><span class="Function">></span>
+    <span class="Function"><</span>q<span class="Function">></span>你难道不想使用 <span class="Function"><</span>strong<span class="Function">></span><span class="htmlBold">华丽的舞台效果</span><span class="Identifier"></</span>strong<span class="Identifier">></span> 来 <span class="Function"><</span>strong<span class="Function">></span><span class="htmlBold">震惊你的观众</span><span class="Identifier"></</span>strong<span class="Identifier">></span> 吗？<span class="Identifier"></</span>q<span class="Identifier">></span>
+    <span class="Identifier"></</span>div<span class="Identifier">></span>
+
+    <span class="Comment"><!</span><span class="Comment">--</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        这是一个缩放的效果。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        同样的，我们又使用了`data-`属性，这一次我们写了一个`data-scale="4"`，这样一来，</span>
+    <span class="Comment">        这个元素就会被放大成原来的4倍。</span>
+    <span class="Comment">        如果从这个场景退出，它会被还原原来的大小（缩小4倍）。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">    --</span><span class="Comment">></span>
+    <span class="Function"><</span>div<span class="Function"> </span><span class="Type">id</span><span class="Function">=</span><span class="String">"title"</span><span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"step"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-x=</span><span class="String">"0"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-y=</span><span class="String">"0"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-scale=</span><span class="String">"4"</span><span class="Function">></span>
+    <span class="Function"><</span>span<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"try"</span><span class="Function">></span>那么，您应该尝试一下<span class="Identifier"></</span>span<span class="Identifier">></span>
+    <span class="Function"><</span>h1<span class="Function">></span><span class="Title">impress.js</span><span class="Function"><</span>sup<span class="Function">></span><span class="Title">*</span><span class="Identifier"></</span>sup<span class="Identifier">></</span>h1<span class="Identifier">></span>
+    <span class="Function"><</span>span<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"footnote"</span><span class="Function">><</span>sup<span class="Function">></span>*<span class="Identifier"></</span>sup<span class="Identifier">></span>美式的小幽默，无视<span class="Identifier"></</span>span<span class="Identifier">></span>
+    <span class="Identifier"></</span>div<span class="Identifier">></span>
+
+    <span class="Comment"><!</span><span class="Comment">--</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        这个场景使用了旋转。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        写法你一定猜到了，我们使用了`data-rotate="90"`属性，这就意味着这这个场景会被</span>
+    <span class="Comment">        顺时针旋转90度。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">    --</span><span class="Comment">></span>
+    <span class="Function"><</span>div<span class="Function"> </span><span class="Type">id</span><span class="Function">=</span><span class="String">"its"</span><span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"step"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-x=</span><span class="String">"850"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-y=</span><span class="String">"3000"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-rotate=</span><span class="String">"90"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-scale=</span><span class="String">"5"</span><span class="Function">></span>
+    <span class="Function"><</span>p<span class="Function">></span>它是一个 <span class="Function"><</span>strong<span class="Function">></span><span class="htmlBold">演示工具</span><span class="Identifier"></</span>strong<span class="Identifier">></span> <span class="Function"><</span>br<span class="Function">/></span>
+    受<span class="Function"><</span>a<span class="Function"> </span><span class="Type">href</span><span class="Function">=</span><span class="String">"<a href="http://prezi.com">http://prezi.com</a>"</span><span class="Function">></span><span class="Underlined">prezi.com</span><span class="Identifier"></</span>a<span class="Identifier">></span>启发 <span class="Function"><</span>br<span class="Function">/></span>
+    基于现代浏览器中 <span class="Function"><</span>strong<span class="Function">></span><span class="htmlBold">强大的CSS3特效</span><span class="Identifier"></</span>strong<span class="Identifier">></span> 开发而成<span class="Identifier"></</span>p<span class="Identifier">></span>
+    <span class="Identifier"></</span>div<span class="Identifier">></span>
+
+    <span class="Function"><</span>div<span class="Function"> </span><span class="Type">id</span><span class="Function">=</span><span class="String">"big"</span><span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"step"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-x=</span><span class="String">"3500"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-y=</span><span class="String">"2100"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-rotate=</span><span class="String">"180"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-scale=</span><span class="String">"6"</span><span class="Function">></span>
+    <span class="Function"><</span>p<span class="Function">></span>它可以具象化您 <span class="Function"><</span>big<span class="Function"> </span><span class="Type">style</span><span class="Function">=</span><span class="String">"font-size:larger"</span><span class="Function">></span>伟大<span class="Identifier"></</span>big<span class="Identifier">></span> <span class="Identifier"></</span>p<span class="Identifier">></span>
+    <span class="Identifier"></</span>div<span class="Identifier">></span>
+
+    <span class="Comment"><!</span><span class="Comment">--</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        现在事情变得更欢乐了，我们开始进入三维的世界！</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        除了`data-x`和`data-y`以外，我们还可以定义第三个坐标，就是`data-z`。</span>
+    <span class="Comment">        我们在下一个例子上加上了`data-z="-3000"`，意味着这个场景离我们有3000px那么远。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">    --</span><span class="Comment">></span>
+    <span class="Function"><</span>div<span class="Function"> </span><span class="Type">id</span><span class="Function">=</span><span class="String">"tiny"</span><span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"step"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-x=</span><span class="String">"2825"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-y=</span><span class="String">"2325"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-z=</span><span class="String">"-3000"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-rotate=</span><span class="String">"300"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-scale=</span><span class="String">"1"</span><span class="Function">></span>
+    <span class="Function"><</span>p<span class="Function">></span>或者 <span class="Function"><</span>span<span class="Function"> </span><span class="Type">style</span><span class="Function">=</span><span class="String">"font-size:smaller"</span><span class="Function">></span>细致<span class="Identifier"></</span>span<span class="Identifier">></span> 的 <span class="Function"><</span>span<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"thoughts"</span><span class="Function">></span>想法<span class="Identifier"></</span>span<span class="Identifier">></</span>p<span class="Identifier">></span>
+    <span class="Identifier"></</span>div<span class="Identifier">></span>
+
+    <span class="Comment"><!</span><span class="Comment">--</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        下面这个场景并没有展示新的data属性，但是你应该可以看到这里面有些字是动的。</span>
+    <span class="Comment">        这些是非常基础的CSS transition动画，当这个场景开始后，我们就让它们开始播放。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        在演示刚开始的时候，所有的step元素都有一个`future`类，也就是说它们还没有开始上演。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        当舞台进入某个场景，这个场景被贴上了`present`的类标签，这就是动画的秘密——</span>
+    <span class="Comment">        字符在`present`类里面发生动画。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        当场景完毕，`present`类就被移除了，写上一个`past`的类。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        简而言之，每个场景都会具有`future`、`present`、`past`中某一个的类，只有当前</span>
+    <span class="Comment">        播放的step元素具有`present`类属性。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">    --</span><span class="Comment">></span>
+    <span class="Function"><</span>div<span class="Function"> </span><span class="Type">id</span><span class="Function">=</span><span class="String">"ing"</span><span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"step"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-x=</span><span class="String">"3500"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-y=</span><span class="String">"-850"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-rotate=</span><span class="String">"270"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-scale=</span><span class="String">"6"</span><span class="Function">></span>
+    <span class="Function"><</span>p<span class="Function">></span>它在一个无线大的画布上，展示了 <span class="Function"><</span>b<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"positioning"</span><span class="Function">></span><span class="htmlBold">定位</span><span class="Identifier"></</span>b<span class="Identifier">></span> , <span class="Function"><</span>b<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"rotating"</span><span class="Function">></span><span class="htmlBold">旋转</span><span class="Identifier"></</span>b<span class="Identifier">></span> 和 <span class="Function"><</span>b<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"scaling"</span><span class="Function">></span><span class="htmlBold">缩放</span><span class="Identifier"></</span>b<span class="Identifier">></span> 的特效<span class="Identifier"></</span>p<span class="Identifier">></span>
+    <span class="Identifier"></</span>div<span class="Identifier">></span>
+
+    <span class="Function"><</span>div<span class="Function"> </span><span class="Type">id</span><span class="Function">=</span><span class="String">"imagination"</span><span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"step"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-x=</span><span class="String">"6700"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-y=</span><span class="String">"-300"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-scale=</span><span class="String">"6"</span><span class="Function">></span>
+    <span class="Function"><</span>p<span class="Function">><</span>b<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"imagination"</span><span class="Function">></span><span class="htmlBold">心</span><span class="Identifier"></</span>b<span class="Identifier">></span>有多大，<span class="Function"><</span>b<span class="Function">></span><span class="htmlBold">舞台</span><span class="Identifier"></</span>b<span class="Identifier">></span>就有多大<span class="Identifier"></</span>p<span class="Identifier">></span>
+    <span class="Identifier"></</span>div<span class="Identifier">></span>
+
+    <span class="Function"><</span>div<span class="Function"> </span><span class="Type">id</span><span class="Function">=</span><span class="String">"source"</span><span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"step"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-x=</span><span class="String">"6300"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-y=</span><span class="String">"2000"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-rotate=</span><span class="String">"20"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-scale=</span><span class="String">"4"</span><span class="Function">></span>
+    <span class="Function"><</span>p<span class="Function">></span>想知道更多吗？<span class="Identifier"></</span>p<span class="Identifier">></span>
+    <span class="Function"><</span>q<span class="Function">><</span>a<span class="Function"> </span><span class="Type">href</span><span class="Function">=</span><span class="String">"<a href="http://github.com/bartaz/impress.js">http://github.com/bartaz/impress.js</a>"</span><span class="Function">></span><span class="Underlined">查看源码吧</span><span class="Identifier"></</span>a<span class="Identifier">></span>, 兄台!<span class="Identifier"></</span>q<span class="Identifier">></span>
+    <span class="Identifier"></</span>div<span class="Identifier">></span>
+
+    <span class="Function"><</span>div<span class="Function"> </span><span class="Type">id</span><span class="Function">=</span><span class="String">"one-more-thing"</span><span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"step"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-x=</span><span class="String">"6000"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-y=</span><span class="String">"4000"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-scale=</span><span class="String">"2"</span><span class="Function">></span>
+    <span class="Function"><</span>p<span class="Function">></span>哦，还有一件事情……<span class="Identifier"></</span>p<span class="Identifier">></span>
+    <span class="Identifier"></</span>div<span class="Identifier">></span>
+
+    <span class="Comment"><!</span><span class="Comment">--</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        最后我们演示一下impress.js强大的灵活性。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        你不仅仅可以再3D空间中定位一个物体，同样的也能在3D中旋转一个物体！</span>
+    <span class="Comment">        所以我们这里沿着X轴旋转-40度（逆时针旋转40度），沿着Y轴旋转10度（顺时针）。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        当然你也可以沿着z轴旋转`data-rotate-z`——我想你猜到了，这和`data-rotate`是一个效果。</span>
+    <span class="Comment">        </span>
+    <span class="Comment">    --</span><span class="Comment">></span>
+    <span class="Function"><</span>div<span class="Function"> </span><span class="Type">id</span><span class="Function">=</span><span class="String">"its-in-3d"</span><span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"step"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-x=</span><span class="String">"6200"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-y=</span><span class="String">"4300"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-z=</span><span class="String">"-100"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-rotate-x=</span><span class="String">"-40"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-rotate-y=</span><span class="String">"10"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-scale=</span><span class="String">"2"</span><span class="Function">></span>
+    <span class="Function"><</span>p<span class="Function">><</span>span<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"have"</span><span class="Function">></span>你<span class="Identifier"></</span>span<span class="Identifier">></span> <span class="Function"><</span>span<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"you"</span><span class="Function">></span>有没有<span class="Identifier"></</span>span<span class="Identifier">></span> <span class="Function"><</span>span<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"noticed"</span><span class="Function">></span>注意到<span class="Identifier"></</span>span<span class="Identifier">></span> <span class="Function"><</span>span<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"its"</span><span class="Function">></span>它<span class="Identifier"></</span>span<span class="Identifier">></span> <span class="Function"><</span>span<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"in"</span><span class="Function">></span>是<span class="Identifier"></</span>span<span class="Identifier">></span> <span class="Function"><</span>b<span class="Function">></span><span class="htmlBold">3D</span><span class="Function"><</span>sup<span class="Function">></span><span class="htmlBold">*</span><span class="Identifier"></</span>sup<span class="Identifier">></</span>b<span class="Identifier">></span>的？<span class="Identifier"></</span>p<span class="Identifier">></span>
+    <span class="Function"><</span>span<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"footnote"</span><span class="Function">></span>* prezi可没这能力<span class="Identifier"></</span>span<span class="Identifier">></span>
+    <span class="Identifier"></</span>div<span class="Identifier">></span>
+
+    <span class="Comment"><!</span><span class="Comment">--</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        我们最后来整理一下所有的属性：</span>
+    <span class="Comment">        </span>
+    <span class="Comment">        * `data-x`, `data-y`, `data-z` —— 它们定义了元素中心在画布的位置，默认是0；</span>
+    <span class="Comment">        * `data-rotate-x`, `data-rotate-y`, 'data-rotate-z`, `data-rotate` —— 它们定义了元素</span>
+    <span class="Comment">            沿着指定轴旋转的角度，默认是0；`data-rotate` 和 `data-rotate-z`是一回事；</span>
+    <span class="Comment">        * `data-scale` —— 定义了元素缩放的比率，默认是1；</span>
+
+    <span class="Comment">        这些值会被impress.js读取并写入CSS的transformation变化，你可以在下面网址查看更多信息：</span>
+    <span class="Comment">        <a href="https://developer.mozilla.org/en/CSS/transform">https://developer.mozilla.org/en/CSS/transform</a></span>
+    <span class="Comment">        </span>
+    <span class="Comment">    --</span><span class="Comment">></span>
+    <span class="Function"><</span>div<span class="Function"> </span><span class="Type">id</span><span class="Function">=</span><span class="String">"overview"</span><span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"step"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-x=</span><span class="String">"3000"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-y=</span><span class="String">"1500"</span><span class="Function"> </span><span class="Type">data</span><span class="Function">-scale=</span><span class="String">"10"</span><span class="Function">></span>
+    <span class="Identifier"></</span>div<span class="Identifier">></span>
+
+    <span class="Identifier"></</span>div<span class="Identifier">></span>
+
+    <span class="Comment"><!</span><span class="Comment">--</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    Hint其实和impress.js没有半点关系。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    不过它演示一种创造性的使用impress.js的方法。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    当某一个场景显示的时候，它会获得`active`类属性（译注：确实，除了上面的present以外还有一个active），</span>
+    <span class="Comment">    同时body元素会有一个`impress-on-ID`（ID就是当前显示的场景的id）的类...</span>
+    <span class="Comment">    听起来很让人迷惑，举个栗子，当我们的第一张幻灯片显示的时候，它的id是`bored`，那么我们的body</span>
+    <span class="Comment">    就有一个叫做`impress-on-bored`的类名。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    我们就是用这个类来显示下面的Hint，查看一下CSS文件，我们延时的显示了操作方法。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    ...</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    当然这里面还有一些JavaScript的代码…… 孩子，千万不要再家里模仿这样的做法：）</span>
+    <span class="Comment">    我们只是为了演示对应触摸设备的提示而随便写写的，你应该把这代码写到一个独立的JS文件里，</span>
+    <span class="Comment">    而且这个演示也应该放在HTML里的某个地方，而不是写死在代码里。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    不过我只是随口说所;)</span>
+    <span class="Comment">    </span>
+    <span class="Comment">--</span><span class="Comment">></span>
+    <span class="Function"><</span>div<span class="Function"> </span><span class="Type">class</span><span class="Function">=</span><span class="String">"hint"</span><span class="Function">></span>
+    <span class="Function"><</span>p<span class="Function">></span>使用空格或者方向键来移动<span class="Identifier"></</span>p<span class="Identifier">></span>
+    <span class="Identifier"></</span>div<span class="Identifier">></span>
+    <span class="Function"><</span><span class="Statement">script</span><span class="Function">></span>
+    <span class="Statement">if</span><span class="Special"> </span>(<span class="String">"ontouchstart"</span><span class="Special"> </span><span class="Statement">in</span><span class="Special"> </span><span class="Keyword">document</span>.<span class="Special">documentElement</span>)<span class="Special"> </span><span class="Function">{</span><span class="Special"> </span>
+    <span class="Special">    </span><span class="Keyword">document</span>.<span class="Special">querySelector</span>(<span class="String">".hint"</span>).<span class="Statement">innerHTML</span><span class="Special"> = </span><span class="String">"<p>向左或向右拖动屏幕来移动</p>"</span><span class="Special">;</span>
+    <span class="Function">}</span>
+    <span class="Identifier"></</span><span class="Statement">script</span><span class="Identifier">></span>
+
+    <span class="Comment"><!</span><span class="Comment">--</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    最后，但远远不是结束。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    为了让上述的动作顺利进行，我们必须在页面里包含impress.js这个文件。</span>
+    <span class="Comment">    建议你使用一个压缩过的文件。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    我这里包含了一个未压缩的版本，这样可以增加可读性（译注：为了省流量，我用了压缩的）。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    你同时还需要使用`impress().init()`函数来初始化impress.js，你应该在最后调用这个函数。</span>
+    <span class="Comment">    并不仅仅因为这是个好习惯，而且这样会保证当页面加载完成后执行。</span>
+    <span class="Comment">    当然你可以使用“DOM ready”事件，但是我比较懒;)</span>
+    <span class="Comment">    </span>
+    <span class="Comment">--</span><span class="Comment">></span>
+    <span class="Function"><</span><span class="Statement">script</span><span class="Function"> </span><span class="Type">src</span><span class="Function">=</span><span class="String">"js/impress.js"</span><span class="Function">></span><span class="Identifier"></</span><span class="Statement">script</span><span class="Identifier">></span>
+    <span class="Function"><</span><span class="Statement">script</span><span class="Function">></span><span class="Special">impress</span>().<span class="Special">init</span>()<span class="Special">;</span><span class="Identifier"></</span><span class="Statement">script</span><span class="Identifier">></span>
+
+    <span class="Comment"><!</span><span class="Comment">--</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    `impress()` 函数给了你一个控制演示API的方法。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    把结果放在一个变量里：</span>
+    <span class="Comment">    </span>
+    <span class="Comment">        var api = impress();</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    这样你就可以使用几个可以使用的方法：</span>
+    <span class="Comment">    </span>
+    <span class="Comment">        `api.init()` - 初始化演示；</span>
+    <span class="Comment">        `api.next()` - 播放下一个幻灯片；</span>
+    <span class="Comment">        `api.prev()` - 回到上一个幻灯片；</span>
+    <span class="Comment">        `api.goto( idx | id | element, [duration] )` - 通过知道那个id或者DOM播放指定的幻灯片</span>
+    <span class="Comment">                可以指定转换时间（单位毫秒），当然时间可以是缺省的。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    你可以随时再次调用`impress()`来再一次获得这个API，类似`impress().next()`当然也是可以的。</span>
+    <span class="Comment">    不用担心，这不会再一次的初始化impress。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">--</span><span class="Comment">></span>
+
+    <span class="Identifier"></</span>body<span class="Identifier">></span>
+    <span class="Identifier"></</span>html<span class="Identifier">></span>
+
+    <span class="Comment"><!</span><span class="Comment">--</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    OK，现在你或多或少的了解impress.js了，但是在你开始之前……</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    你从GitHub上复制了代码（译注：或者你从我博客上复制了代码)？</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    你已经在编辑器里打开了它？</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    雅美蝶！</span>
+
+    <span class="Comment">    这不是你创造你的演示的正确方法，这只是个代码，你的想法才是好的演示的根本。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    所以，如果你想做个好演示，取来一张纸一支笔，然后关了你的电脑。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    描、绘、写，现在纸上进行一场头脑风暴，试着做一个思维导图，这个才能帮助你怎样更好的</span>
+    <span class="Comment">    创建impress.js的作品。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    当你在纸上完成了工程，再回到impress.js吧，一开始就用它毫无意义，只是浪费时间而已。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    如果你觉得我在胡扯，去看看一本叫做"Presentation Zen"（中译《演说之禅》，貌似还没有中文版）</span>
+    <span class="Comment">    的书吧，这本书能给你更多更好的创建演示的方法和知识。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    请虚心接受我的意见，“因为你都不知道该说些什么，impress.js更加不知道”。</span>
+    <span class="Comment">    </span>
+    <span class="Comment">--</span><span class="Comment">></span>
+
+    <span class="Comment"><!</span><span class="Comment">--</span>
+    <span class="Comment">    </span>
+    <span class="Comment">    这里是作者的一些碎碎念，就不翻啦~</span>
+    <span class="Comment">    欢迎各位留下宝贵意见大家相互交流[<a href="//eyehere.net/impress-js-chinese-course-tutorial]">//eyehere.net/impress-js-chinese-course-tutorial]</a></span>
+    <span class="Comment">    </span>
+    <span class="Comment">--</span><span class="Comment">></span><!doctype html>
+<html>
+    <head>
+        <title>darren - Impress demo</title>
+        <meta charset="utf-8" />
+        <link href="http://bartaz.github.com/impress.js/css/impress-demo.css" rel="stylesheet" />
+    </head>
+    <body>
+        <div class="impress-not-supported">
+            <div class="fallback-message">
+                <p>你的浏览器<b>不支持</b> impress.js, 所以当前展示的是简化版。</p>
+                <p>为了获得更好的体验，请使用最新的 <b>Chrome</b>, <b>Safari</b> 或者 <b>Firefox</b> 浏览器。</p>
+            </div>
+        </div>
+        <div id="impress">
+            <div class="step" data-x="0" data-y="0">
+                Darren code - [标题]
+            </div>
+            <div class="step" data-x="500" data-y="0">
+                This is slide 2
+            </div>
+            <div class="step" data-x="500" data-y="-400">
+                This is slide 3
+            </div>
+            <div class="step" data-x="500" data-y="-800" data-scale="0.5">
+                This is slide 4
+            </div>
+            <div class="step" data-x="0" data-y="-800" data-rotate="90">
+                This is slide 5
+            </div>
+            <div class="step" data-x="-1200" data-y="0" data-rotate-x="30" data-rotate-y="-30" data-rotate-z="90" data-scale="4">
+                This is slide 6
+            </div>
+            <!-- darren code -->
+            <div id="overview" class="step" data-x="-200" data-y="-500" data-scale="3"></div>
+        </div>
+
+        <!-- <script src="http://bartaz.github.com/impress.js/js/impress.js"></script> -->
+        <script type="text/javascript" src="impress.js"></script>
+        <script>impress().init();</script>
+    </body>
+</html>

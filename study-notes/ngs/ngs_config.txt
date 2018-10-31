@@ -1,0 +1,56 @@
+windows平台配置
+
+1、启动mongodb
+D:\database\mongodb-win32-x86_64-3.0.6\bin\mongod.exe  --dbpath "D:\database\mongodb-win32-x86_64-3.0.6\data\db" --logpath "D:\database\mongodb-win32-x86_64-3.0.6\log\mongodb.log" --logappend
+
+
+2、启动consul
+   consul agent -dev -advertise=127.0.0.1 -ui
+{
+"ENV_ZIPKIN_ADDR": ["127.0.0.1"],
+"ENV_RDB_ADDR": "127.0.0.1",
+"ENV_RDB_PORT": "5432",
+"ENV_RDB_DB_NAME": "mean",
+"ENV_RDB_USERNAME": "hengjun",
+"ENV_RDB_PASSWORD": "123456",
+"ENV_RDB_SSL_MODE": "disable"
+}   
+
+2、安装jdk
+
+3、安装kafka（需要安装jdk）
+   3.1、启动zookeeper
+        ./bin/windows/zookeeper-server-start.bat config/zookeeper.properties
+
+   3.2、启动kafka
+       ./bin/windows/kafka-server-start.bat config/server.properties
+
+   3.3、注册kafka-top
+      ./kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic mean
+      ./kafka-topics.bat --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic feed
+
+常用命令：
+1、 由.proto生成.go文件
+    protoc --go_out=plugins=micro:. *.proto
+
+
+
+mongodb导出   
+    mongoexport -d mean -c news -o news.data
+    scp  -i sshkey/kp-2t5jofua   root@124.42.118.124:/root/datatmp/news.data  ~/tmp/
+    工具导入容易出问题
+    mongoimport -h 127.0.0.1 -d mean -c news --file C:\Users\chehengjun\Desktop\tmpdata\news.dat
+
+{
+"ENV_ZIPKIN_ADDR": ["127.0.0.1"],
+"ENV_RDB_ADDR": "127.0.0.1",
+"ENV_RDB_PORT": "5432",
+"ENV_RDB_DB_NAME": "mean",
+"ENV_RDB_USERNAME": "hengjun",
+"ENV_RDB_PASSWORD": "123456",
+"ENV_RDB_SSL_MODE": "disable",
+"ENV_MGO_ADDR": "127.0.0.1",
+"ENV_MGO_PORT": "27017",
+"ENV_MGO_USERNAME": "hengjun",
+"ENV_MGO_PASSWORD": "123456"
+}

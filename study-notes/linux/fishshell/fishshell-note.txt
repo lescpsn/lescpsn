@@ -1,0 +1,22 @@
+[ fish shell 安装 ]
+1、安装fish shell (注意必须是fish 2.2.0 以上版本)
+   sudo apt-get install fish 
+   apt-get upgrade  fish  (升级fish)
+
+2、修改用户的登录shell
+   将fish shell添加到/etc/shells中去 
+   sudo vim /etc/shells
+   /usr/bin/fish
+
+   sudo vim /etc/passwd
+   carhj:x:1000:1000:ubuntu-16.04-server-amd64,,,:/home/carhj:/usr/bin/fish
+   保存重新登录
+
+3、安装 fish shell 的配置 oh-my-fish
+   curl -L github.com/oh-my-fish/oh-my-fish/raw/master/bin/install | fish
+
+
+
+[ fish shell 配置文件 ]
+  1、fish shell 的配置文件在当前用户目录下 ~/.config/fish/config.fish
+     如果没有该文件，新建一个该同名文件

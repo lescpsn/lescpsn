@@ -1,0 +1,18 @@
+流量池切割管理：
+        预切割产品定义(db0中)
+                hmset pool:trafficweb100 route 乐流 carrier 移动 name 全国移动100M
+                hmset pool:trafficweb300 route 乐流 carrier 联通 name 全国联通300M
+                hmset pool:zhjxzy500 route 浙江信之源 carrier 电信 name 全国电信500M
+                hmset pool:trafficweb1000 route 上海小沃 carrier 电信 name 全国电信1G
+
+        madeira中产品数量(db1中)
+                set pool:trafficweb100 99999
+                set pool:trafficweb300 88888
+                set pool:zhjxzy500 77777
+                set pool:trafficweb1000 66666
+
+        madeira中流量池记录(db1中)
+                hmset pools:trafficweb100 route 乐流 carrier 移动 name 全国移动100M count 10000  remark
+                hmset pools:trafficweb300 route 乐流 carrier 联通 name 全国联通300M count 20000  remark
+                hmset pools:zhjxzy500 route 浙江信之源 carrier 电信 name 全国电信500M count 10000  remark
+                hmset pools:xiaowo1000 route 上海小沃 carrier 电信 name 全国电信1G count 10000  remark

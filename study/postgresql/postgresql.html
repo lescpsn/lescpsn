@@ -1,0 +1,994 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2016-12-23 周五 15:04 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>POSTGRESQL入门</title>
+<meta name="generator" content="Org mode" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="../style/my-org-worg.css" />
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">POSTGRESQL入门</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#org4dd7b32">1. postgresql安装</a></li>
+<li><a href="#orgb324647">2. 初始化设置</a></li>
+<li><a href="#orge49100f">3. 常用数据库操作</a></li>
+<li><a href="#org1587600">4. Postgresql特性</a>
+<ul>
+<li><a href="#org4495113">4.1. 数据库认证模式</a></li>
+<li><a href="#org0e79502">4.2. uuid</a></li>
+<li><a href="#orgd4a04f5">4.3. json/jsonb</a></li>
+<li><a href="#org586de08">4.4. 数组</a></li>
+<li><a href="#org2aac13d">4.5. 几何类型</a></li>
+<li><a href="#orgd76337d">4.6. fdw</a></li>
+</ul>
+</li>
+<li><a href="#org81d2df2">5. postgresql高可用性HA(High Available)</a>
+<ul>
+<li><a href="#org4220d6e">5.1. HA相关名词解释</a></li>
+<li><a href="#org829601d">5.2. HA相关软件</a></li>
+<li><a href="#orgee3aabc">5.3. 双机</a></li>
+<li><a href="#org9ec32fe">5.4. 集群</a>
+<ul>
+<li><a href="#org984cfc4">5.4.1. 组网规划</a></li>
+<li><a href="#org3f949bb">5.4.2. 主机名配置</a></li>
+<li><a href="#org597ac36">5.4.3. postgresql部署</a></li>
+<li><a href="#org1802460">5.4.4. pg-poolII的部署</a></li>
+<li><a href="#orga85b90a">5.4.5. 验证结果</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org4dd7b32" class="outline-2">
+<h2 id="org4dd7b32"><span class="section-number-2">1</span> postgresql安装</h2>
+<div class="outline-text-2" id="text-1">
+<ul class="org-ul">
+<li>网络方式安装</li>
+</ul>
+<pre class="example">
+&gt; sudo apt-get install postgresql
+
+此过程，Linux系统中自动创建了一个postgres系统用户
+
+postgresql数据库中自动创建了一个最高权限的postgres数据库用户
+</pre>
+
+<ul class="org-ul">
+<li>修改系统用户postgres和数据库用户postgres的密码</li>
+</ul>
+<pre class="example">
+修改下postgres用户密码
+&gt; sudo -i 
+
+# passwd postgres
+
+&gt; sudo -i 
+
+# su - postgres
+
+&gt; psql
+
+&gt; ALTER USER postgres with PASSWORD '123456';
+
+&gt; \q                                                     //退出psql客户端
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orgb324647" class="outline-2">
+<h2 id="orgb324647"><span class="section-number-2">2</span> 初始化设置</h2>
+<div class="outline-text-2" id="text-2">
+<ul class="org-ul">
+<li>创建数据库访问用户和数据库</li>
+</ul>
+<pre class="example">
+&gt; su - postgres
+&gt; psql
+&gt; CREATE USER hengjun WITH SUPERUSER PASSWORD '123456';  
+//SUPERUSER：超级用户的意思，权限较高
+&gt; CREATE DATABASE iotadream;
+&gt; \q                                                     //退出psql客户端
+</pre>
+
+<ul class="org-ul">
+<li>开启数据库远程访问</li>
+</ul>
+<pre class="example">
+编辑/etc/postgresql/9.5/main/postgresql.conf，允许数据库服务器监听来自任何主机的连接请求
+vim /etc/postgresql/9.5/main/postgresql.conf
+listen_addresses = '*'
+</pre>
+
+<pre class="example">
+编辑/etc/postgresql/9.5/main/pg _hba.conf，控制远程连接的客户端用户和数据库权限
+host    all             all             0.0.0.0/0                 md5
+host    replication     all             0.0.0.0/0                 md5
+注意：replication不包含在all当中，单独拿出来配置
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-orge49100f" class="outline-2">
+<h2 id="orge49100f"><span class="section-number-2">3</span> 常用数据库操作</h2>
+<div class="outline-text-2" id="text-3">
+<ul class="org-ul">
+<li>连接命令</li>
+</ul>
+<pre class="example">
+psql -U hengjun -h 192.168.161.128 iotadream -p 5432
+// 必须指定数据库，而非use db;
+</pre>
+
+<ul class="org-ul">
+<li>退出</li>
+</ul>
+<pre class="example">
+\q
+</pre>
+
+<ul class="org-ul">
+<li>查看数据库</li>
+</ul>
+<pre class="example">
+\l
+</pre>
+<ul class="org-ul">
+<li>查看数据库的表</li>
+</ul>
+<pre class="example">
+\dt
+</pre>
+
+<ul class="org-ul">
+<li>查看某张表的结构</li>
+</ul>
+<pre class="example">
+\d tablename;
+</pre>
+
+<ul class="org-ul">
+<li>创建数据库的表</li>
+</ul>
+<pre class="example">
+CREATE TABLE json_stdent(student json);
+
+INSERT INTO json_stdent(student) VALUES ('{ "id": 10001}');
+</pre>
+
+<ul class="org-ul">
+<li>删除数据库的表</li>
+</ul>
+<pre class="example">
+drop table tablename;
+</pre>
+
+<ul class="org-ul">
+<li>表中插入数据</li>
+</ul>
+<pre class="example">
+INSERT INTO table_name (列1, 列2,...) VALUES (值1, 值2,....)
+INSERT INTO company (id, name, age) VALUES (9, 'abb9', 9)
+</pre>
+<ul class="org-ul">
+<li>删除表记录</li>
+</ul>
+<pre class="example">
+DELETE FROM tablename;  // 删除整张表的记录
+DELETE FROM company WHERE id=1; // 删除一条记录
+</pre>
+
+<ul class="org-ul">
+<li>修改表中数据</li>
+</ul>
+<pre class="example">
+UPDATE tablename SET name='abb1' WHERE id=1;
+</pre>
+
+<ul class="org-ul">
+<li>查询表中数据</li>
+</ul>
+<pre class="example">
+SELECT * FROM tablename;
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org1587600" class="outline-2">
+<h2 id="org1587600"><span class="section-number-2">4</span> Postgresql特性</h2>
+<div class="outline-text-2" id="text-4">
+</div><div id="outline-container-org4495113" class="outline-3">
+<h3 id="org4495113"><span class="section-number-3">4.1</span> 数据库认证模式</h3>
+<div class="outline-text-3" id="text-4-1">
+<pre class="example">
+# METHOD can be "trust", "reject", "md5", "password", "gss", "sspi",
+# "ident", "peer", "pam", "ldap", "radius" or "cert".  Note that
+# "password" sends passwords in clear text; "md5" is preferred since
+# it sends encrypted passwords.
+user -&gt; pg1
+user -&gt; pg2
+user -&gt; linux1
+user -&gt; unix1
+方便账号集中认证，管理
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org0e79502" class="outline-3">
+<h3 id="org0e79502"><span class="section-number-3">4.2</span> uuid</h3>
+<div class="outline-text-3" id="text-4-2">
+<pre class="example">
+uuid是唯一，做主键是否优于自增的id呢？
+可以数据的保证独立性，不仅表独立，库中也是独立
+</pre>
+</div>
+</div>
+<div id="outline-container-orgd4a04f5" class="outline-3">
+<h3 id="orgd4a04f5"><span class="section-number-3">4.3</span> json/jsonb</h3>
+<div class="outline-text-3" id="text-4-3">
+<pre class="example">
+json插入的速度快，jsonb需要转换
+实现了类似Mongodb文档型数据库的功能，速度测评比Mongodb还快4倍+
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org586de08" class="outline-3">
+<h3 id="org586de08"><span class="section-number-3">4.4</span> 数组</h3>
+<div class="outline-text-3" id="text-4-4">
+<pre class="example">
+create table arry_table(id serial primary key, teacher varchar[]);
+insert into arry_table(teacher) values ('{"Mr Wang","Mrs Li"}');
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org2aac13d" class="outline-3">
+<h3 id="org2aac13d"><span class="section-number-3">4.5</span> 几何类型</h3>
+<div class="outline-text-3" id="text-4-5">
+<pre class="example">
+地图坐标相关
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgd76337d" class="outline-3">
+<h3 id="orgd76337d"><span class="section-number-3">4.6</span> fdw</h3>
+<div class="outline-text-3" id="text-4-6">
+<pre class="example">
+foreign data wrapper 可以操作外部数据
+
+oracle_fdw
+
+mysql_fdw
+
+file_fdw(csv,txt文件)，做日志分析，统计，有点像spark的sql
+
+100, John Smith, Austin, TX, 78727
+200, Joe Johnson, Dallas, TX, 75201
+300, Bob Jones, Houston, TX, 77028
+400, Andy Davis, San Antonio, TX, 78227
+500, James Williams, Austin, TX, 78727
+</pre>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org81d2df2" class="outline-2">
+<h2 id="org81d2df2"><span class="section-number-2">5</span> postgresql高可用性HA(High Available)</h2>
+<div class="outline-text-2" id="text-5">
+</div><div id="outline-container-org4220d6e" class="outline-3">
+<h3 id="org4220d6e"><span class="section-number-3">5.1</span> HA相关名词解释</h3>
+<div class="outline-text-3" id="text-5-1">
+<ul class="org-ul">
+<li>HA</li>
+</ul>
+<pre class="example">
+HA: High Available，高可用性，提供不间断服务
+</pre>
+
+<ul class="org-ul">
+<li>Hot Standby</li>
+</ul>
+<pre class="example">
+Hot Standby：双机热备。master挂了，slave顶上
+只有一台机器再工作
+</pre>
+
+<ul class="org-ul">
+<li>Cluster</li>
+</ul>
+<pre class="example">
+Cluster: 集群。集群中1台机器挂了，n-1台仍然可以工作
+
+每台机器都工作，像nginx一样
+</pre>
+
+<ul class="org-ul">
+<li>LB</li>
+</ul>
+<pre class="example">
+LB：Load Balance, 负载均衡
+</pre>
+
+<ul class="org-ul">
+<li>VIP / Float IP</li>
+</ul>
+<pre class="example">
+VIP(Float IP)：Virtual IP Addres，虚拟ip，通常也俗称浮动IP
+</pre>
+</div>
+</div>
+<div id="outline-container-org829601d" class="outline-3">
+<h3 id="org829601d"><span class="section-number-3">5.2</span> HA相关软件</h3>
+<div class="outline-text-3" id="text-5-2">
+<ul class="org-ul">
+<li>Heartbeat/KeepAlived</li>
+</ul>
+<pre class="example">
+管理vip/float_ip，监控服务的
+</pre>
+
+<ul class="org-ul">
+<li>pg-pool II</li>
+</ul>
+<pre class="example">
+pg-pool一种中间件，对pg数据库服务器来，它相当于客户端，对于app来说它又相当于数据库服务器
+
+pg连接池管理
+
+流复制  （多台pg机器之间的数据同步一致功能）
+
+双机热备/集群负载均衡
+
+内置看门狗(watchdog), 已经实现了类似 Heartbeat/KeepAlived的功能
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orgee3aabc" class="outline-3">
+<h3 id="orgee3aabc"><span class="section-number-3">5.3</span> 双机</h3>
+<div class="outline-text-3" id="text-5-3">
+<ul class="org-ul">
+<li>pg原生流复制</li>
+</ul>
+
+<div class="figure">
+<p><img src="./img/pg_base_rs.png" alt="pg_base_rs.png" />
+</p>
+</div>
+<pre class="example">
+master: 192.168.161.128  Read &amp; Write
+slave:  192.168.161.129  Read Only   
+master:坏了呢？
+</pre>
+<ul class="org-ul">
+<li>双机一</li>
+</ul>
+
+<div class="figure">
+<p><img src="./img/sj.png" alt="sj.png" />
+</p>
+</div>
+
+<pre class="example">
+pg_pool连接接口,管理主从的切换
+master: 192.168.1.128  Read &amp; Write
+slave:  192.168.1.129  Read Only
+                                -----&gt;192.168.1.128:5432 (master)
+pg_pool 192.168.1.138:9999  ---|
+                                -----&gt;192.168.1.129:5432 (slave)
+master坏了了，pg_pool让slave升级成master(Read &amp; Write)
+
+这种做法有没有问题？
+</pre>
+
+<ul class="org-ul">
+<li>双机二</li>
+</ul>
+<pre class="example">
+master: 192.168.1.128  Read &amp; Write
+slave:  192.168.1.129  Read Only
+
+                                      -----&gt;192.168.1.128:5432
+pg_pool master 192.168.1.136:9999  ---|
+                                      -----&gt;192.168.1.129:5432
+
+                                      -----&gt;192.168.1.128:5432
+pg_pool slave 192.168.1.137:9999  ---|
+                                      -----&gt;192.168.1.129:5432
+
+                                      -----&gt;192.168.1.136:9999
+vip(float_ip) 192.168.1.138:9999  ---|
+                                      -----&gt;192.168.1.137:9999
+</pre>
+
+
+
+<div class="figure">
+<p><img src="./img/sj_ok1.png" alt="sj_ok1.png" />
+</p>
+</div>
+
+
+<div class="figure">
+<p><img src="./img/sj_ok2.png" alt="sj_ok2.png" />
+</p>
+</div>
+
+
+<div class="figure">
+<p><img src="./img/sj_ok3.png" alt="sj_ok3.png" />
+</p>
+</div>
+
+
+<div class="figure">
+<p><img src="./img/sj_ok4.png" alt="sj_ok4.png" />
+</p>
+</div>
+
+<pre class="example">
+看下watchdog的效果
+pg-pool master 启动pg-pool
+pg-pool slave  启动pg-pool
+</pre>
+
+<pre class="example">
+两台机器不够怎么办？+++++++++，并想让每台机器都可以读写呢？
+上集群
+</pre>
+</div>
+</div>
+
+
+<div id="outline-container-org9ec32fe" class="outline-3">
+<h3 id="org9ec32fe"><span class="section-number-3">5.4</span> 集群</h3>
+<div class="outline-text-3" id="text-5-4">
+<pre class="example">
+集群实现负载均衡，每台机器都可以读写
+负载均衡算法：
+1 轮询（一个挨着一个）
+2 随机
+3 压力（硬件配置不一样）
+</pre>
+
+<div class="figure">
+<p><img src="./img/lb.png" alt="lb.png" />
+</p>
+</div>
+</div>
+<div id="outline-container-org984cfc4" class="outline-4">
+<h4 id="org984cfc4"><span class="section-number-4">5.4.1</span> 组网规划</h4>
+<div class="outline-text-4" id="text-5-4-1">
+<pre class="example">
+vip：192.168.161.138 
+主机IP              主机名       部署应用
+192.168.161.128    IOTA-001    db-node1 &amp; pg-pool1 
+192.168.161.129    IOTA-002    db-node1 &amp; pg-pool2 
+192.168.161.130    IOTA-003    db-node3
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org3f949bb" class="outline-4">
+<h4 id="org3f949bb"><span class="section-number-4">5.4.2</span> 主机名配置</h4>
+<div class="outline-text-4" id="text-5-4-2">
+<ul class="org-ul">
+<li>192.168.161.128主机</li>
+</ul>
+<pre class="example">
+vim /etc/hostname    
+IOTA-001
+</pre>
+
+<pre class="example">
+vim /etc/hosts
+192.168.161.128 IOTA-001
+192.168.161.129 IOTA-002
+192.168.161.130 IOTA-003
+</pre>
+
+
+<ul class="org-ul">
+<li>192.168.161.129主机</li>
+</ul>
+<pre class="example">
+vim /etc/hostname    
+IOTA-002
+</pre>
+
+<pre class="example">
+vim /etc/hosts
+192.168.161.128 IOTA-001
+192.168.161.129 IOTA-002
+192.168.161.130 IOTA-003
+</pre>
+
+
+<ul class="org-ul">
+<li>192.168.161.130主机</li>
+</ul>
+<pre class="example">
+vim /etc/hostname    
+IOTA-003
+</pre>
+
+<pre class="example">
+vim /etc/hosts
+192.168.161.128 IOTA-001
+192.168.161.129 IOTA-002
+192.168.161.130 IOTA-003
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org597ac36" class="outline-4">
+<h4 id="org597ac36"><span class="section-number-4">5.4.3</span> postgresql部署</h4>
+<div class="outline-text-4" id="text-5-4-3">
+<pre class="example">
+每一个数据库主机节点(192.168.161.128,192.168.161.129,192.168.161.130)上都要部署
+
+最好手工安装，符合自己的规划要求
+</pre>
+<ul class="org-ul">
+<li>192.168.161.128</li>
+</ul>
+<pre class="example">
+sudo apt-get install postgresql
+</pre>
+<ul class="org-ul">
+<li>192.168.161.129</li>
+</ul>
+<pre class="example">
+sudo apt-get install postgresql
+</pre>
+<ul class="org-ul">
+<li>192.168.161.130</li>
+</ul>
+<pre class="example">
+sudo apt-get install postgresql
+</pre>
+</div>
+</div>
+
+<div id="outline-container-org1802460" class="outline-4">
+<h4 id="org1802460"><span class="section-number-4">5.4.4</span> pg-poolII的部署</h4>
+<div class="outline-text-4" id="text-5-4-4">
+<pre class="example">
+pg-poolII的主备节点(192.168.161.128,192.168.161.129)上都要部署
+</pre>
+<ul class="org-ul">
+<li>192.168.161.128</li>
+</ul>
+<pre class="example">
+pg-pool安装
+</pre>
+
+<pre class="example">
+pool_passwd 文件
+
+./pg_md5 -m -u hengjun 123456
+vim pool_passwd 
+hengjun:md5f71e3919151ed71c9a1cb1460bd8e832
+</pre>
+
+<pre class="example">
+pcp.conf 文件
+./pg_md5 -p 123456
+vim pcp.conf
+hengjun:e10adc3949ba59abbe56e057f20f883e
+</pre>
+
+<pre class="example">
+pool_hba.conf 文件
+vim pool_hba.conf 
+host    all         all         0.0.0.0/0             md5
+</pre>
+
+<pre class="example">
+pgpool.conf 文件
+
+vim pgpool.conf
+&lt; listen_addresses = '*'
+---
+&gt; listen_addresses = 'localhost'
+64c64
+&lt; backend_hostname0 = 'IOTA-001'
+---
+&gt; backend_hostname0 = 'localhost'
+70,71c70
+&lt; # '/var/lib/pgsql/data'
+&lt; backend_data_directory0 = '/var/lib/postgresql/9.5/main'
+---
+&gt; backend_data_directory0 = '/var/lib/pgsql/data'
+76,86c75,79
+&lt; backend_hostname1 = 'IOTA-002'
+&lt; backend_port1 = 5432
+&lt; backend_weight1 = 1
+&lt; backend_data_directory1 = '/var/lib/postgresql/9.5/main'
+&lt; backend_flag1 = 'ALLOW_TO_FAILOVER'
+&lt; 
+&lt; backend_hostname2 = 'IOTA-003'
+&lt; backend_port2 = 5432
+&lt; backend_weight2 = 1
+&lt; backend_data_directory2 = '/var/lib/postgresql/9.5/main'
+&lt; backend_flag2 = 'ALLOW_TO_FAILOVER'
+---
+&gt; #backend_hostname1 = 'host2'
+&gt; #backend_port1 = 5433
+&gt; #backend_weight1 = 1
+&gt; #backend_data_directory1 = '/data1'
+&gt; #backend_flag1 = 'ALLOW_TO_FAILOVER'
+90c83
+&lt; enable_pool_hba = on 
+---
+&gt; enable_pool_hba = off
+224c217
+&lt; pid_file_name = '/run/pgpool.pid'
+---
+&gt; pid_file_name = '/var/run/pgpool/pgpool.pid'
+227c220
+&lt; logdir = '/var/log'
+---
+&gt; logdir = '/var/log/pgpool'
+252c245
+&lt; replication_mode = on
+---
+&gt; replication_mode = off
+292c285
+&lt; load_balance_mode = on
+---
+&gt; load_balance_mode = off
+473c466
+&lt; use_watchdog = on
+---
+&gt; use_watchdog = off
+
+&lt; wd_hostname = 'IOTA-001'
+---
+&gt; wd_hostname = ''
+513c506
+&lt; delegate_IP = '192.168.161.138'
+---
+&gt; delegate_IP = ''
+520,521c513
+&lt; # if_up_cmd = 'ip addr add $_IP_$/24 dev eth0 label eth0:0'
+&lt; if_up_cmd = 'ip addr add $_IP_$/24 dev ens33 label ens33:0'
+---
+&gt; if_up_cmd = 'ip addr add $_IP_$/24 dev eth0 label eth0:0'
+524,525c516
+&lt; # if_down_cmd = 'ip addr del $_IP_$/24 dev eth0'
+&lt; if_down_cmd = 'ip addr del $_IP_$/24 dev ens33'
+---
+&gt; if_down_cmd = 'ip addr del $_IP_$/24 dev eth0'
+580c571
+&lt; heartbeat_destination0 = 'IOTA-002'
+---
+&gt; heartbeat_destination0 = 'host0_ip1'
+621c612
+&lt; other_pgpool_hostname0 = 'IOTA-002'
+---
+&gt; #other_pgpool_hostname0 = 'host0'
+624c615
+&lt; other_pgpool_port0 = 9999
+
+&gt; #other_pgpool_port0 = 5432
+627c618
+&lt; other_wd_port0 = 9000
+---
+&gt; #other_wd_port0 = 9000
+</pre>
+</div>
+</div>
+
+<div id="outline-container-orga85b90a" class="outline-4">
+<h4 id="orga85b90a"><span class="section-number-4">5.4.5</span> 验证结果</h4>
+<div class="outline-text-4" id="text-5-4-5">
+<ul class="org-ul">
+<li>启动pg-pool2</li>
+</ul>
+<pre class="example">
+./pgpool -n
+生成vip(float_ip)
+</pre>
+
+
+<ul class="org-ul">
+<li>用vip:9999登陆数据库</li>
+</ul>
+<pre class="example">
+psql -U hengjun -h 192.168.161.138 iotadream -p 9999
+</pre>
+
+
+<ul class="org-ul">
+<li>查看节点状态</li>
+</ul>
+<pre class="example">
+多个客户端登陆，查看每次负载到哪台机器上
+psql -U hengjun -h 192.168.161.138 iotadream -p 9999
+show pool_nodes; //查看 status load_balance_node
+
+psql -U hengjun -h 192.168.161.138 iotadream -p 9999
+show pool_nodes;//查看 status load_balance_node
+</pre>
+
+<ul class="org-ul">
+<li>插入数据查看效果</li>
+</ul>
+<pre class="example">
+INSERT INTO company(id,name,age) VALUES (7,'abb7',7);
+</pre>
+
+<ul class="org-ul">
+<li>恢复修复好的故障节点</li>
+</ul>
+<pre class="example">
+sudo /etc/init.d/postgresql stop
+继续查看各个节点的状态
+
+sudo /etc/init.d/postgresql start
+pgpool上执行,无需重启pg-pool
+./pcp_attach_node -d -h IOTA-001 -U hengjun -n 1  // ./pcp_attach_node --help 查看帮助
+</pre>
+
+<ul class="org-ul">
+<li>待完善问题</li>
+</ul>
+<pre class="example">
+1 各个pg服务器时间同步问题？
+
+2 各个软件需要手工安装，便于目录组织规则，方便卸载
+
+3 各种服务的开机自启动与管理
+
+4 主键的的设计(id是否有问题，uuid？还是其它？不要自己给自己找麻烦)
+
+5 自动化搭建环境（适应各种环境，裸机已有规划好的主机）
+
+... ...
+... ...
+... ...
+</pre>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="date">Created: 2016-12-23 周五 15:04</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

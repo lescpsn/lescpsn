@@ -1,0 +1,9 @@
+1、安装HTML-CSS-JS Prettify插件，用于格式化html、css、javascript等文件
+   Ctrl+Shift+P ->install ->pretty ->HTML-CSS-JS Prettify
+   此插需要安装node.js才可以使用
+
+2、常用快捷键
+   Ctrl + +      : 放大字体
+   Ctrl + -      : 缩小字体
+   Ctrl + n      : 新建一个文件
+   Ctrl + w      : 关闭当前文件

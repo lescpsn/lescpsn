@@ -1,0 +1,7 @@
+打造完美 Windows git 命令行 环境 (http://www.v2ex.com/t/154202)
+Github for Windows(GHfW): https://windows.github.com/ 传说中最好的 git 客户端
+ConEmu: https://github.com/Maximus5/ConEmu/ 极其优秀的 Windows 命令行替代品
+
+
+
+

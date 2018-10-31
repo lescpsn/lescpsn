@@ -1,0 +1,176 @@
+                                        [ 燕十八html+css基础教程 ]
+url : http://www.tudou.com/listplay/GOUZRYjbjIk/IP8dLoSb7to.html
+[ 第一课 了解html ]
+  1、.html .htm .shtml的区别
+
+[ 第二课 开发环境准备 ]
+  1、建议采用google，火狐浏览器调试
+
+  2、sublime编辑器的使用(自学it论坛搜索全部软件打包,参见里面的sublime使用技巧)
+
+[ 第三课 认识html的组成结构 ]
+  1、<!DOCTYPE html ...>三种模式
+
+  2、html三个重要的组成部分
+     <html></html>
+     <head></head>      :设置一些和搜索引擎相关的东西
+     <body></body>      :展现给用户的界面，即自己开发的地方
+
+  3、作业
+        a、了解html的发展历史
+        b、xhtml与html的区别
+        c、doctype几种模式
+
+[ 第四课 网页布局之切豆腐 ]
+  1、<div></div>布局占位
+
+[ 第五课 css控制div显示 ]
+  1、网页采用div布局，采用css控制大小，颜色等属性
+     网页采用div布局，采用css控制大小，颜色等属性
+     网页采用div布局，采用css控制大小，颜色等属性
+     重要的话敲三遍
+
+  2、html中的id变量在css中以#开头编写其属性
+
+  3、作业
+        a、css有几种引入方式
+        b、div除了可以声明id来控制，还可以声明什么来控制
+        c、如何让2div并排显示
+
+[ 第六课 浮动布局 ]
+  1、float属性让div浮动起来，可以实现两个div的并排布局
+
+  2、作业
+        a、完成田字格的布局
+
+
+[ 第七课 清除浮动 ]
+  1、clear: left|right|both
+
+  2、作业
+        a、如果父div中有两个子div是浮动的，那父div高度有没有被子div撑起来，父div有多高
+
+[ 第八课 实战首页布局 ]
+  1、作业
+        1、完成IT自学论坛首页布局
+
+[ 第九课 新手常犯的错误 ]
+  1、不写doctype，导致低版本ie解析效果不一致
+
+  2、id取数字
+
+  3、文件编码与charset不一致
+
+  4、作业
+        a、将新手的错误全部模拟下，看下效果
+
+[ 第十课 盒模型 ]
+  1、盒子与盒子之间外边距叫margin
+
+  2、盒子内部的边框border
+
+  3、盒子内边距padding
+
+
+[ 第十一课 盒模型之margin ]
+  1、margin：10px;
+
+  2、margin-top: 10px;
+
+  3、margin-left: 10px;
+
+  4、margin-right: 10px;
+
+  5、margin：10px 20px;
+
+[ 第十二课 margin首页实战 ]
+  1、div中的id在css中以i(#)开头定义
+
+  2、div中的class在css中以点(.)开头定义
+
+[ 第十三课 盒模型之border ]
+  1、盒子边框三要素宽度、形状(实线，虚线)、颜色
+
+  2、border：10px solid green;
+
+  3、border：10px dashed green;
+
+  4、作业
+        a、用css控制div的边框，画一个三角形
+
+[ 第十四课 css画三角形 ]
+  4、作业
+        a、让border边框透明
+        a、用css画一颗圣诞树
+
+[ 第十五课 盒模型之padding ]
+  1、作业
+        a、盒子的宽高各是100px,padding为30px，再设置背景为gray色，那么背景色gray的面积是多大
+
+[ 第十六课 padding与背景 ]
+  1、padding一直铺到边框边缘
+
+[ 第十七课 padding首页实战 ]
+  1、作业
+        a、如果布局已经完成，且像素正好相容，需要增加padding，可能导致什么情况发生
+
+[ 第十八课 盒模型总结 ]
+  1、一个盒子有padding，border，margin，实际占用多少空间
+     垂直方向：height + padding-top + padding-bottom + border-top + border-bottom + margin-top + margin-botton
+     水平方向：width + padding-left + padding-right + border-left + border-right + margin-left + margin-right
+
+[ 第十九课 利用margin实现元素居中 ]
+  1、margin：auto水平自行居中
+
+  2、作业
+        a、自行研究垂直方向margin：auto的效果
+
+[ 第二十课 margin重叠现象研究 ]
+  1、上下相连的普通元素，上下边距并非两个margin值的简单相加，而是取其较大值
+
+  2、作业
+        a、测试margin重叠发生条件即现象
+        b、父子div也会发生重叠现象，写出代码测试效果图
+
+[ 第二一课 内联元素 ]
+  1、span行内元素
+  2、作业
+        a、哪些元素是div块状元素，哪些元素是内联行元素
+
+[ 第二二课 内联与块状的转换 ]
+  1、display
+  2、作业
+        a、写内联与块状，手动转换看其效果，并研究哪些把内联传块状用的多
+        b、display可以有block，inline，none还有哪些属性
+
+[ 第二三课 css控制段落 ]
+  1、作业
+        a、段落控制的各种css属性
+
+[ 第二四课 css控制文字大小字体及颜色 ]
+  1、作业
+        a、对于文字控制的各种属性
+
+[ 第二五课 css字体设置技巧 ]
+  1、自己设置的字体，客户机上未必有，则显示默认字体
+
+[ 第二六课 css设置背景图片 ]
+  1、作业
+        a、背景图和背景色都设置，显示谁
+        b、有的网站既设置背景图，又设置背景色，为什么？
+
+[ 第二七课 精确控制背景图片位置 ]
+
+[ 第二八课 css选择器 ]
+  1、css四种选择器
+        id选择器
+        class选择器,
+        标签选择器
+        派生选择器
+  2、作业
+        搜索其他选择器及其用法
+
+
+[ 第二九课 css优先级 ]
+控制的
+   标签选择器 》 id选择器 》        class选择器》        派生选择器

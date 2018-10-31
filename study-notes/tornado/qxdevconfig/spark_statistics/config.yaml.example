@@ -1,0 +1,10 @@
+config:
+  port: 4567
+  debug: False
+  exit_hour: 1
+
+spark:
+  master: 'spark://dev001-64bit:7077'
+  data_path: '/opt/qxdata'
+  executor_memory: '1g'
+  file_count: 1

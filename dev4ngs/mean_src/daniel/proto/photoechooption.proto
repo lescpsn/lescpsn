@@ -1,0 +1,11 @@
+syntax = "proto3";
+
+import "nulltype.proto";
+
+package proto;
+
+message PhotoEchoOption {
+    bool FetchBasePhoto = 1;
+    bool FetchNote = 2;
+    bool FetchUser = 3;
+}

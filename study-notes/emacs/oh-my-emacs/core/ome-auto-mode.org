@@ -1,0 +1,138 @@
+#+TITLE: Oh My Emacs Auto-mode
+#+OPTIONS: toc:nil num:nil ^:nil
+
+This is part of [[https://github.com/xiaohanyu/oh-my-emacs][oh-my-emacs]].
+
+This file contains various settings for minor file types, such as SCons build
+file, archlinux's PKGBUILD file, etc.
+
+* El-get packages
+  :PROPERTIES:
+  :CUSTOM_ID: auto-mode-el-get-packages
+  :END:
+
+#+NAME: auto-mode-el-get-packages
+#+CAPTION: el-get packages for ome-auto-mode module
+| Package   | Status   | Description                         |
+|-----------+----------+-------------------------------------|
+| [[https://github.com/yoshiki/yaml-mode.git][yaml-mode]] | Required | Major mode for editting YAML files. |
+
+* SCons
+  :PROPERTIES:
+  :CUSTOM_ID: scons
+  :END:
+
+[[http://www.scons.org/][SCons]] is a next generation build system that is much easier to configure and
+use than the traditional make utility. SCons uses the Python general purpose
+programming language as a foundation, and all SCons build files are Python
+scripts, so we just set SCons build file work with python-mode.
+
+#+NAME: scons
+#+BEGIN_SRC emacs-lisp
+(add-to-list 'auto-mode-alist '("SConstruct" . python-mode))
+#+END_SRC
+
+* Puppet
+  :PROPERTIES:
+  :CUSTOM_ID: puppet
+  :END:
+
+[[https://puppetlabs.com/][Puppet]] is configuration management tool from [[http://en.wikipedia.org/wiki/Puppet_Labs][Puppet Labs]], it is the de facto
+industry standard for IT automation. Puppet is written by ruby but has its own
+DSL, so the emacs builtin =ruby-mode= is not proper for editing puppet files.
+
+#+NAME: puppet
+#+BEGIN_SRC emacs-lisp
+(defun ome-puppet-mode-setup ()
+  (when (featurep 'evil)
+    (add-hook 'puppet-mode-hook 'turn-on-evil-mode)))
+
+(ome-install 'puppet-mode)
+#+END_SRC
+
+* ArchLinux PKGBUILD
+  :PROPERTIES:
+  :CUSTOM_ID: pkgbuild
+  :END:
+
+A PKGBUILD is an Arch Linux package build description file, which is actually
+a shell script. Thus you can edit PKGBUILD file with emacs
+=shell-script-mode=, however, =pkgbuild-mode= provides a better workflow based
+on =shell-script-mode= for PKGBUILD files, including:
+- A default PKGBUILD template as a starting point
+- Some shortcuts to update md5sum, browse package's website, build tarball,
+  etc.
+
+Just install =pkgbuild-mode= from =el-get= will bring all this goodies to your
+fingertips.
+
+#+NAME: pkgbuild
+#+BEGIN_SRC emacs-lisp
+(when (executable-find "pacman")
+  (ome-install 'pkgbuild-mode))
+#+END_SRC
+
+* Dockerfile
+  :PROPERTIES:
+  :CUSTOM_ID: dockerfile
+  :END:
+
+[[https://www.docker.com/][docker]] is a new awesome platform to building and shipping development and
+production environment.
+
+#+NAME: dockerfile-mode
+#+BEGIN_SRC emacs-lisp
+(defun dockerfile-mode-setup ())
+
+(ome-install 'dockerfile-mode)
+#+END_SRC
+
+* Wikipedia
+  :PROPERTIES:
+  :CUSTOM_ID: wikipedia
+  :END:
+
+Wikitext language, or [[http://en.wikipedia.org/wiki/Wiki_markup][wiki markup]], is a lightweight markup language used to
+write pages in wiki websites, such as Wikipedia, and is a simplified
+alternative/intermediate to HTML. Its ultimate purpose is to be converted by
+wiki software into HTML, which in turn is served to web browsers.
+
+Unfortunately, there is no commonly accepted standard wikitext language. So I
+just pick =wikipedia-mode=, which is one of the many possible packages from
+el-get, as the mode for editing wiki documents. If you have better choice,
+please tell me.
+
+#+NAME: wikipedia
+#+BEGIN_SRC emacs-lisp
+(defun ome-wikipedia-mode-setup ()
+  (add-to-list 'auto-mode-alist
+               '("\\.wiki\\'" . wikipedia-mode)))
+
+(ome-install 'wikipedia-mode)
+#+END_SRC
+* YAML
+  :PROPERTIES:
+  :CUSTOM_ID: yaml
+  :END:
+
+[[http://www.yaml.org/][YAML]] is a human friendly data serialization standard for all programming
+languages. I really like it for its simplicity and readability. However, Emacs
+didn't have a builtin mode for editing YAML files, so you know how easy to
+solve this by adopting =el-get=. Thanks =el-get= again!
+
+[[http://raml.org/][RAML]] is a spec for building RESTful APIs, it is built on top of
+YAML. Currently, as I know, there's no =raml-mode=.
+
+#+NAME: yaml
+#+BEGIN_SRC emacs-lisp
+(defun ome-yaml-mode-setup ()
+  (add-hook 'yaml-mode-hook
+            (lambda ()
+              (linum-mode 1)
+              (evil-local-mode 1)
+              (indent-guide-mode 1)))
+  (add-to-list 'auto-mode-alist '("\\.raml\\'" . yaml-mode))
+  (add-to-list 'ac-modes 'yaml-mode))
+
+(ome-install 'yaml-mode)
+#+END_SRC

@@ -1,0 +1,41 @@
+[Dream]
+database_address = localhost
+database_port = 5432
+database_name = mean
+database_username = lincan
+database_password = 123456
+database_ssl_mode = disable
+
+[Mongo]
+database_address = localhost
+database_port = 17017
+database_username = lincan
+database_password = 123456
+
+[Huston]
+address = 127.0.0.1
+port = :8080
+
+[Phoenix]
+address = localhost
+port = :8000
+
+[Redis]
+redis_port = :6379
+redis_host = localhost
+
+[Kafka]
+topic = mean
+kafka_addresses = 127.0.0.1:9092
+zookeeper_addresses = 127.0.0.1:2181
+
+[QiNiu]
+access_key = X0W-1LWpcdD0eOQr0MUwOz1hQvuAPYxR9XAzbzHf
+secret_key = 9AsdeMKGYlvBHduCZX-NTOyAXz9TLvNrC62yjcIp
+bucket_name = tuso
+bucket_url = 7xodxr.com2.z0.glb.qiniucdn.com
+callback_domain = http://api.dev.tusoapp.com:8080/
+
+[Wechat]
+app_id =
+app_secret =

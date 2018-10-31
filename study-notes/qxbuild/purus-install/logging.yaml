@@ -1,0 +1,48 @@
+version: 1
+
+loggers:
+  root:
+    level: DEBUG
+    handlers: [console]
+  tornado:
+    level: DEBUG
+    handlers: [console]
+  purus.task:
+    level: DEBUG
+    handlers: [console]
+    propagate: no
+  purus.request:
+    level: DEBUG
+    handlers: [request, console]
+    propagate: no
+  tornado.access:
+    level: DEBUG
+    handlers: [access, console]
+    propagate: no
+
+formatters:
+  simple:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+  request:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: DEBUG
+    formatter: simple
+    filename: 'logs/request-anna.log'
+    when: 'midnight'
+    interval: 1
+    backupCount: 120
+    encoding: 'utf8'
+  access:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: DEBUG
+    formatter: simple
+    filename: 'logs/access-anna.log'
+    when: 'midnight'
+    interval: 1
+    backupCount: 120

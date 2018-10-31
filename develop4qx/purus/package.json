@@ -1,0 +1,27 @@
+{
+  "name": "purus",
+  "version": "1.0.0",
+  "description": "UI for e7chong",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@git.quxun.io:7022/core/purus.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "babel-preset-react": "^6.3.13",
+    "babelify": "^7.2.0",
+    "browserify": "^13.0.0",
+    "gulp": "^3.9.0",
+    "react": "^0.14.6",
+    "react-dom": "^0.14.6",
+    "vinyl-source-stream": "^1.1.0"
+  }
+}

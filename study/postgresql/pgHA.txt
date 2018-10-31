@@ -1,0 +1,64 @@
+postgresql网络结构
+主机：192.168.161.128:5432
+备机：192.168.161.129:5432
+
+user： hengjun  // 用户的权限可以具体细分，我直接用superuser
+
+
+vim /etc/postgresql/9.5/main/pg_hba.conf
+放开最大的权限
+host    all             all             0.0.0.0/0                 md5
+
+主机
+host    replication             all             0.0.0.0/0                 md5
+
+
+vim /etc/postgresql/9.5/main/postgresql.conf
+listen_addresses = '*'
+
+
+wal_level = hot_standby
+checkpoint_timeout = 5min
+archive_mode = on
+max_wal_senders = 3
+wal_keep_segments = 1
+
+hot_standby = on                        # "on" allows queries during recovery
+
+
+checkpoint_segments = 16 //没有找到
+
+
+/usr/lib/postgresql/9.5/bin/pg_ctl
+
+pg_ctl reload 主机重新载入 和重新启动一样
+/etc/init.d/postgresql  restart
+
+配置备机
+
+pg_basebackup -h 192.168.161.128 -U hengjun -F p -x -P -R -D /var/lib/postgresql/9.5/main -l replbackup20161215
+
+ vim /etc/postgresql/9.5/main/postgresql.conf
+
+ hot_standby = on
+
+ # - Where to Log -
+
+log_destination = 'stderr'              # Valid values are combinations of
+                                        # stderr, csvlog, syslog, and eventlog,
+                                        # depending on platform.  csvlog
+                                        # requires logging_collector to be on.
+
+# This is used when logging to stderr:
+logging_collector = on          # Enable capturing of stderr and csvlog
+
+ log_directory = 'pg_log'                # directory where log files are written,
+                                         # can be absolute or relative to PGDATA
+ log_filename = 'postgresql-%Y-%m-%d_%H%M%S.log' # log file name pattern,
+
+
+
+ 在/var/lib/postgresql/9.5/main下面建立recovery.conf
+ （注意，不是在/etc/postgresql/9.5/main目录下面！）：
+
+vim /var/lib/postgresql/9.5/main/recovery.conf

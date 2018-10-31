@@ -1,0 +1,86 @@
+#+TITLE: Windows-Study
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/my-org-worg.css" />
+
+* Windows下常用开发软件
+** Notepad++
+*** Notepad++安装
+#+BEGIN_EXAMPLE
+官网 https://notepad-plus-plus.org/ 下载最新32位版本, 64位版本暂且不支持插件管理功能
+
+一路回车法安装到指定的目录下，选择创建桌面快捷方式
+#+END_EXAMPLE
+
+*** Notepad++常用技巧
++ 安装explorer穿件
+#+BEGIN_EXAMPLE
+显示系统目录结构
+#+END_EXAMPLE
+
+
+** Source Insight
+#+BEGIN_EXAMPLE
+百度 source insight 中文版 下载安装
+http://www.liangchan.net/soft/softdown.asp?softid=3947
+#+END_EXAMPLE
+
+
+* Cygwin For Windows
+#+BEGIN_EXAMPLE
+不推荐使用cygwin，体验效果非常不好，30秒之内轻松将其搞死，还是直接上VMware虚拟机干净利索
+#+END_EXAMPLE
+** 下载Cygwin
+#+BEGIN_EXAMPLE
+从 https://cygwin.com 上下载 setup-x86.exe 或 setup-x86_64.exe。
+#+END_EXAMPLE
+
+
+** 安装Cygwin
+#+BEGIN_EXAMPLE
+选择Install from Internet, 在”User URL”处输入以下地址
+
+http://mirrors.tuna.tsinghua.edu.cn/cygwin/  (清华大学的镜像)
+
+点击”Add”按钮, 然后选中”http://mirrors.tuna.tsinghua.edu.cn”, 点击”下一步”进行安装。
+#+END_EXAMPLE
+
+
+** 卸载Cygwin
+#+BEGIN_EXAMPLE
+点击最初的安装程序，选择uninstall
+#+END_EXAMPLE
+
+** 安装常用工具
+#+BEGIN_EXAMPLE
+curl,zsh
+#+END_EXAMPLE
+
+
+** 安装OpenSsh
++ OpenSsh的安装
+#+BEGIN_EXAMPLE
+搜索openss，net包中选择 openssh, openssl两个模块
+#+END_EXAMPLE
+
++ OpenSsh的配置
+#+BEGIN_EXAMPLE
+右键以管理员运行cygwin
+
+ssh-host-config
+
+ Query: Should StrictModes be used? (yes/no) no
+
+ Query: Should privilege separation be used? (yes/no) no
+
+ Query: Do you want to install sshd as a service?
+ Query: (Say "no" if it is already installed as a service) (yes/no) yes
+ Query: Enter the value of CYGWIN for the daemon: []
+
+
+ Query: Do you want to use a different name? (yes/no) no
+ Query: Create new privileged user account 'cyg_server'? (yes/no) yes
+
+
+ Query: Please enter the password: 输入密码
+ Query: Reenter: 确认密码
+ 
+#+END_EXAMPLE

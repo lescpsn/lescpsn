@@ -1,0 +1,4 @@
+1、安装jsx到js的转换工具
+   $ sudo npm install -g react-tools
+
+2、jsx --watch jsx/ js/

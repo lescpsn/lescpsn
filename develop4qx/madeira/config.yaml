@@ -1,0 +1,24 @@
+upstream:
+  shangtong:
+    method: "shangtong"
+    account: "CDG1Q"
+    url.order: "http://192.168.1.159:8900/api.ds400.com/Charge.html"
+    apikey: "ptOAdDe42lmub7mnKjPsMK5rwhrt9DuZ"
+
+database:
+  url: 'mysql+mysqlconnector://madeira:madeira_123@192.168.1.159/madeira'
+
+config:
+  site: 1
+  debug: False
+  port: 8899
+
+cache:
+  - {ip: '192.168.1.159', port: 26379}
+
+safety:
+  white_list:
+    - '127.0.0.1'
+    - '192.168.1.159'
+    - '::1'
+  secret: 'hsauZAuMg76Wr6re'

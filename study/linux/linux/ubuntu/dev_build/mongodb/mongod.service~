@@ -1,0 +1,13 @@
+[Unit]
+Description=mongodb
+After=network.target
+
+[Service]
+Type=forking
+PIDFile=/usr/local/mongodb/data/mongod.lock
+ExecStart=/usr/local/mongodb/bin/mongod.sh start
+ExecStop=/usr/local/mongodb/bin/mongod.sh stop
+ExecReload=/usr/local/mongodb/bin/mongod.sh restart
+
+[Install]
+WantedBy=multi-user.target

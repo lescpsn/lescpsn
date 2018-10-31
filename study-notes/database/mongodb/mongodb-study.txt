@@ -1,0 +1,47 @@
+一、Linux下mongodb的安装
+    1、Linux系统版本Ubuntu 15.10
+    2、mongodb软件包版本mongodb-linux-x86_64-ubuntu1404-3.2.1.tgz
+    3、安装用户为系统普通用户（非root用户，当然根据实际项目情况也可以采用root用户安装）
+    3、将mongodb-linux-x86_64-ubuntu1404-3.2.1.tgz解压到预安装的目标目录中（如~/local）
+       如果预安装的目标目录不存在，先创建
+       >mkdir -p ~/local
+       >tar -zxvf mongodb-linux-x86_64-ubuntu1404-3.2.1.tgz -C ~/local
+       >mkdir /home/carhj/local/mongodb/data (根据个人目录规划创建数据目录)
+       >touch /home/carhj/local/mongodb/logs (根据个人目录规划创建日志文件)
+
+
+二、mongodb命令行客户端常用命令
+    [ 不带认证启动mongodb数据库 ]
+    /home/carhj/local/mongodb/bin/mongod --dbpath=/home/carhj/local/mongodb/data --logpath=/home/carhj/local/mongodb/logs --logappend  --port=27017 --fork
+
+    [ 命令行连接mongodb数据库 ]
+    /home/carhj/local/mongodb/bin/mongo
+
+    [选择某个库]
+    > use mydb;
+
+    [ 创建用户 ]
+    > use mydb;
+    > db.createUser({ user: "roott", pwd: "123456", roles: [{ role: "readWrite", db: "mydb" }] })
+    注: roles是一个role的字典列表，可以是多个组合
+
+    [ mongodb数据库认证 ]
+    > db.auth("roott", "123456")
+
+    [ 查看当前库所有集合 ]
+    > show collections
+
+    [ 查看某个集合（即表）的所有内容 ]: db.表名.find()
+    > db.server.find()
+
+    [ 删除某个集合（即表）]: db.表名.drop();
+    > db.server.drop();
+
+    [ 导入数据 ](user.json暂且不需要，可以不用导入)
+    # /path/mongoimport -d 数据库名 -c 集合名 --type json --file 集合的json文件.json
+    /home/carhj/local/mongodb/bin/mongoimport -d sog -c user --type json --file /home/carhj/sog/mongodb/user.json
+
+
+    创建管理员账号(全局账号)
+    Use admin
+    db.createUser({user:'lincan',pwd:'123456',roles:['userAdminAnyDatabase','dbAdminAnyDatabase']})

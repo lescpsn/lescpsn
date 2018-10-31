@@ -1,0 +1,494 @@
+#+TITLE: emacs-study历程
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/my-org-worg.css" />
+
+* emacs安装
+** windows
++ 下载安装包
+#+BEGIN_EXAMPLE
+gnu网站http://ftp.gnu.org/gnu/emacs/windows下载windows对应的emacs版本
+
+http://ftp.gnu.org/gnu/emacs/windows/emacs-25.1-2-x86_64-w64-mingw32.zip
+#+END_EXAMPLE
+
++ 安装
+#+BEGIN_EXAMPLE
+emacs-25.1-2-x86_64-w64-mingw32.zip为绿色版本，
+
+直接解压到自己规划好的目录并修改为自己喜欢的名字即可以使用，如D:\Local\emacs
+#+END_EXAMPLE
+
++ 配置PATH环境变量
+#+BEGIN_EXAMPLE
+如：将emacs安装目录的bin目录D:\Local\emacs\bin添加到PATH环境变量中
+#+END_EXAMPLE
+
+
++ 规划emacs配置目录.emacs.d
+#+BEGIN_EXAMPLE
+编辑C:\Users\carhj\AppData\Roaming\.emacs.d\init.el文件,且保证C:\Users\carhj\AppData\Roaming\
+
+目录中不能有.emacs文件
+
+(setenv "HOME" "D:/Local/emacs/")
+;;(setenv "PATH" "E:/Local/emacs/")
+(setq default-directory "E:/Projects/lescpsn/")
+(load-file "D:/Local/emacs/.emacs.d/init.el")
+#+END_EXAMPLE
+
++ emacs启动
+#+BEGIN_EXAMPLE
+创建runemacs.exe的快捷方式到桌面，右键 --> 属性 --> 起始位置
+删除"D:/Local/emacs/.emacs.d/init.el"文件，恢复到初始状态 git checkout -- init.el，再次启动emacs
+#+END_EXAMPLE
+
+
+** linux
++ 网络安装
+#+BEGIN_EXAMPLE
+sudo apt-get install emacs
+#+END_EXAMPLE
+
+
+** 相关工具
++ etags
+#+BEGIN_EXAMPLE
+apt-get install global
+etags filename (find . -name *.py | xargs etags) 生成TAGS文件
+
+TAGS用以工程中代码跳转
+#+END_EXAMPLE
+
+
+* spacemacs安装
+
+** windows
++ 安装spacemacs
+#+BEGIN_EXAMPLE
+直接从git上下载代码到用户的家目录中，并取名为.emacs.d，
+
+如果之前运行过emacs，且windows的家目录下有.emacs文件和.emacs.d目录，请删除掉
+
+windows的家目录一般为C:\Users\用户名\AppData\Roaming\
+
+git clone https://github.com/syl20bnr/spacemacs.git C:\Users\carhj\AppData\Roaming\.emacs.d
+
+拷贝.spacemacs文件到C:\Users\carhj\AppData\Roaming\目录下
+
+拷贝elpa目录到C:\Users\carhj\AppData\Roaming\.emacs.d\目录下
+
+#+END_EXAMPLE
+
++ 启动emacs
+#+BEGIN_EXAMPLE
+
+spacemacs采用.emacs.d目录来控制emacs了，无需.emacs文件了
+
+1 选择emacs模式
+
+2 选择standard(spacemacs)
+
+3 选择full-featured(helm)
+
+4 第一次启动后，然后关闭emacs
+
+5 HOME目录下会自动生成C:\Users\carhj\AppData\Roaming\.spacemacs这个文件
+#+END_EXAMPLE
+
++ .spacemacs文件配置
+#+BEGIN_EXAMPLE
+用现有的模板文件.spacemacs覆盖掉HOME目录下的.spacemacs,也可以自己慢慢维护.spacemacs文件
+
+如若自己维护.spacemacs文件，至少也要修改下下面的两处，否则国内的网络让其无法正常运行
+
+修改插件仓储链接超时时间为60秒
+dotspacemacs-elpa-timeout 60
+
+修改LPA的仓储源，在 dotspacemacs/user-init 函数中
+(setq configuration-layer--elpa-archives
+    '(("melpa-cn" . "http://elpa.emacs-china.org/melpa/")
+      ("org-cn"   . "http://elpa.emacs-china.org/org/")
+      ("gnu-cn"   . "http://elpa.emacs-china.org/gnu/")))
+#+END_EXAMPLE
+
+
++ issue
+#+BEGIN_EXAMPLE
+1 evil-unimpaired安装不了
+  github网络问题，evil-unimpaire不容易装上,手工下载melpa后,放入到emacs.d\.cache\quelpa\目录下,
+  重启emacs
+
+
+
+#+END_EXAMPLE
+
+
+** linux
++ 安装spacemacs
+#+BEGIN_EXAMPLE
+直接从git上下载代码到用户的家目录中，并取名为.emacs.d，
+
+如果之前运行过emacs，且windows的家目录下有.emacs文件和.emacs.d目录，请删除掉
+
+git clone https://github.com/syl20bnr/spacemacs.git .emacs.d
+
+首次运行emacs让其生成.spacemacs文件 修改.spacemacs文件的插件数据源
+#+END_EXAMPLE
+
+
+
+** 相关工具的安装
++ 安装 aspell
+#+BEGIN_EXAMPLE
+windows:
+http://aspell.net/win32/ 下载Aspell-0-50-3-3-Setup.exe，Aspell-en-0.50-2-3.exe两个软件
+先安装Aspell-0-50-3-3-Setup.exe，再安装Aspell-en-0.50-2-3.exe（属于字典库）
+安装后的bin添加到PATH环境变量中去
+
+linux:
+sudo apt-get install aspell  (aspell-en英语字典库自动安装了)
+sudo apt-get install aspell-hy(美语)
+#+END_EXAMPLE
+
++ 安装 tern
+#+BEGIN_EXAMPLE
+windows:
+采用nmp包管理工具安装，没有npm的话，先需先安装nodejs
+npm install -g tern
+
+linux:
+采用nmp包管理工具安装，没有npm的话，先需先安装nodejs(这种安装方式可能有坑)
+sudo apt-get install nodejs (安装好检查下which node nodejs)
+由于ubuntu上名字叫nodejs,所有可以做个软链接
+ln -s /usr/bin/nodejs /usr/bin/node
+sudo apt-get install npm
+
+sudo npm install -g tern
+sudo npm -g install js-beautify
+#+END_EXAMPLE
+
++ 安装 source code font 字体
+#+BEGIN_EXAMPLE
+https://github.com/adobe-fonts/source-code-pro/downloads 下载 source code font 字体
+
+TTF下所有文件拷贝到c:/windows/font
+#+END_EXAMPLE
+
++ 安装 zlib
+#+BEGIN_EXAMPLE
+http://gnuwin32.sourceforge.net/packages/zlib.htm 下载windows版本的zlib
+
+安装zlib，一路回车法，将安装后的bin添加到PATH环境变量中去
+#+END_EXAMPLE
+
++ 安装 diff
+#+BEGIN_EXAMPLE
+https://sourceforge.net/projects/kdiff3/files/kdiff3/0.9.98/
+
+下载KDiff3-64bit-Setup_0.9.98-2.exe
+
+一路回车法安装diff,安装后的bin添加到PATH环境变量中去
+#+END_EXAMPLE
+
+
+* prelude 安装
+** 安装prelude
+#+BEGIN_EXAMPLE
+github上下载源代码
+
+git clone https://github.com/bbatsov/prelude.git ~/.emacs.d
+
+cp ~/.emacs.d/sample/prelude-modules.el ~/.emacs.d/  修改该文件，打开需要模块
+注意：;; (require 'prelude-evil)是vim操作模式，如果是emacs的操作风格请不要放开
+#+END_EXAMPLE
+
+
+** Windows
+#+BEGIN_EXAMPLE
+复制准备好的插件包elpa到~/.emacs.d/下
+
+复制my@prelude.el文件到~/.emacs.d/personal/目录下
+
+设置字体F10->option->set default font
+保存设置F10->option->save
+#+END_EXAMPLE
+
+
+** Linux
+#+BEGIN_EXAMPLE
+修改插件源
+vim  ~/.emacs.d/core/prelude-packages.el
+("melpa" . "http://elpa.emacs-china.org/melpa/")
+
+复制自己的配置文件my@prelude.el文件到~/.emacs.d/personal/目录下
+
+
+ad-handle-definition: `ido-completing-read' got redefined有卡死現象
+（應該是網絡環境引起的ssh客戶端不能測試鏈接）
+暂且修改
+sudo vim /etc/ssh/ssh_config 
+ConnectTimeout 1
+
+#+END_EXAMPLE
++ 开启xterm终端256色
+#+BEGIN_EXAMPLE
+bash shell
+vim ~/.bashrc
+if [ "$TERM" == "xterm" ]; then
+    export TERM=xterm-256color
+fi
+
+fish shell
+vim ~/.config/fish/config.fish
+set -x TERM xterm-256color 
+
+#+END_EXAMPLE
+
++ 更新插件
+#+BEGIN_EXAMPLE
+如果采用打包好的elpa插件源，由于平台的不同，肯能要更新下
+package-list-packages 进入列表
+package-menu-mark-upgrade [U] 设置更新标识
+package-menu-execute [x]执行更新操作
+#+END_EXAMPLE
+
+
+* TUTORIAL学习
++ 常用键定义
+#+BEGIN_EXAMPLE
+C :Ctrl
+M :Alt(或者ESC)
+#+END_EXAMPLE
+
++ 基本操作
+#+BEGIN_EXAMPLE
+C-V : 向下移动一屏幕
+M-V : 向上移动一屏幕
+C-l : 将光标所在的行重绘于屏幕的上，中，下
+C-p : 上一行
+C-n : 下一行
+C-f : 右移一个字符
+C-b : 左移一个字符
+M-f : 右移一个词
+M-b : 左移一个词
+C-a : 移到一行行首
+C-e : 移到一行行尾
+M-a : 移到一段段首
+M-e : 移到一段段尾
+M-< : 跳到行首
+M-> : 跳到行尾
+C-u 数字 command : 指定的command执行重复的次数
+M-数字 : 选择窗口
+C-g : 终止命令
+C-x 1 : 保留光标所在的窗格，关闭掉其它所有的窗格
+C-h k command : 显示某个命令的用法文档
+C-x : 代表和窗口，文件，缓冲区有关的命令
+DEL : Backspace
+C-d : 删除光标后一个字符
+M-DEL : 删除光标前一个单词（C-DEL也是一样）
+M-d : 删除光标后一个单词
+C-k : 删除光标到行尾
+M-k : 删除光标到段尾
+C-y : 粘贴
+M-y : 必须紧接着C-y后操作，可以恢复剪切缓冲区之前的内容
+C-/ : 恢复到前一次的操作(C-_也是一样）
+#+END_EXAMPLE
+
+
+* 文件（FILE）
+
+* org-mode
++ 文档标题
+#+BEGIN_EXAMPLE
+#+TITLE: 文档标题名
+#+END_EXAMPLE
+
++ 引入外部css文件
+#+BEGIN_EXAMPLE
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/my-org-worg.css" />
+#+END_EXAMPLE
+
+
+
+* tramp
++ tramp简介
+#+BEGIN_EXAMPLE
+tramp主要实现远程访问Linux服务器，可以直接编辑远程服务器上的文件
+#+END_EXAMPLE
+
++ 安装
+#+BEGIN_EXAMPLE
+1 emacs-24.5以上版本已经自带tramp包
+
+2 安装plink.exe，将plink.exe放置到emacs的bin目录下，plink.exe从ssh的客户端工具putty中拷贝过来
+#+END_EXAMPLE
+
++ 配置
+#+BEGIN_EXAMPLE
+(require 'tramp)
+(setq tramp-default-method "plink")
+例如：spacemacs中
+     在dotspacemacs/user-config ()函数中加入上面代码
+#+END_EXAMPLE
+
++ 操作方式
+#+BEGIN_EXAMPLE
+/user@ip:
+#+END_EXAMPLE
+
++ issue
+#+BEGIN_EXAMPLE
+首次要在windows的cmd行下，运用plink访问一次目标主机，否则因为没有添加公钥会一直卡死
+#+END_EXAMPLE
+
+
+* 常用快捷键
++ C-M-\ (M-x indent-region)
+#+BEGIN_EXAMPLE
+格式化代码
+#+END_EXAMPLE
+
++ C-@ (Ctrl+Shift+2)
+#+BEGIN_EXAMPLE
+打标 mark set
+#+END_EXAMPLE
+
++ M-;
+#+BEGIN_EXAMPLE
+注释掉选择区的代码
+#+END_EXAMPLE
+
++ M-% (Alt+Shift+5)
+#+BEGIN_EXAMPLE
+查找替换，y确认
+#+END_EXAMPLE
+
++ M-d
+#+BEGIN_EXAMPLE
+向后删除一个单词
+#+END_EXAMPLE
+
++ M-DEL(DEL可以是Delete或者Backspace)
+#+BEGIN_EXAMPLE
+向前删除一个单词
+#+END_EXAMPLE
+
++ M-w 或者 M-W (M-w 可能被qq语音输入占用)
+#+BEGIN_EXAMPLE
+复制选择的块
+#+END_EXAMPLE
+
++ C-y
+#+BEGIN_EXAMPLE
+粘贴buf中复制的块或剪切的块
+#+END_EXAMPLE
+
++ C-w
+#+BEGIN_EXAMPLE
+剪切(删除)选择的区域块，可以用C-y粘贴恢复回来
+#+END_EXAMPLE
+
++ C-k
+#+BEGIN_EXAMPLE
+剪切(删除)光标所在的行，可以用C-y粘贴恢复回来
+#+END_EXAMPLE
+
+
+
+* spacemacs教程
+** 常用快捷键
+#+BEGIN_EXAMPLE
+M-数字 : 选择窗口
+#+END_EXAMPLE
+
+
+** golang-mode
++ C-c C-a
+#+BEGIN_EXAMPLE
+快速import一个库
+#+END_EXAMPLE
+
++ C-c C-d
+#+BEGIN_EXAMPLE
+查看一个函数的声明
+#+END_EXAMPLE
+
++ C-c C-j/M-*
+#+BEGIN_EXAMPLE
+C-c C-j :跳转到函数定义处
+
+M-* :跳回到原处
+#+END_EXAMPLE
+
++ M-RET i r
+#+BEGIN_EXAMPLE
+删除多余的import包
+#+END_EXAMPLE
+
+
+** html-mode
++ C-j/C-RET/TAB
+#+BEGIN_EXAMPLE
+标签快速配对
+#+END_EXAMPLE
+
+
+** javascript-mode
+
+
+** python-mode
++ M-./M-*
+#+BEGIN_EXAMPLE
+M-. :跳转到函数定义处
+
+M-* :跳回到原处
+#+END_EXAMPLE
+
+
+** shell-mode
++ C-c :
+#+BEGIN_EXAMPLE
+设置当前shell脚本类型（bash，sh，ksh）
+#+END_EXAMPLE
+
++ C-c (
+#+BEGIN_EXAMPLE
+快速定义一个函数
+#+END_EXAMPLE
+
+
+
+
+
+
+
+
+
+* issue
+** windows
++ Error: (file-error “Searching for program” “no such file or directory” “diff”)
+#+BEGIN_EXAMPLE
+需要安装diff工具
+下载https://sourceforge.net/projects/kdiff3/files/kdiff3/0.9.98/
+安装KDiff3-64bit-Setup_0.9.98-2.exe，并将配置到环境变量中去
+#+END_EXAMPLE
+
+
++ The directory ~/.emacs.d/server is unsafe
+#+BEGIN_EXAMPLE
+~/.emacs.d/server 目录属主修改为当前用户
+右键 --> 属性 --> 安全 --> 高级 -->修改所有者
+#+END_EXAMPLE
+
++ javascript格式化代码
+#+BEGIN_EXAMPLE
+npm -g install js-beautify
+#+END_EXAMPLE
+
+** linux
+
+
+* lisp
++ C-x C-e
+#+BEGIN_EXAMPLE
+运算lisp
+#+END_EXAMPLE

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Karmanta - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Karmanta, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="img/favicon.png">
+    <title>{{title}} | 平台财务维护</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/css/elegant-icons-style.css" rel="stylesheet"/>
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Custom styles -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet"/>
+    <link href="/css/bootstrap-select.css" rel="stylesheet"/>
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="js/lte-ie7.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+<!-- container section start -->
+<section id="container" class="">
+    <!--header start-->
+    {% include section.header.html %}
+    <!--header end-->
+
+    <!--sidebar start-->
+    {% module Sidebar({'admin', 'admin-point'}) %}
+    <!--sidebar end-->
+
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row">
+                <div class="col-md-12">
+                    <section class="panel">
+                        <header class="panel-heading row">
+                            <span class="pull-left"><i class="icon_folder-add_alt"></i>流量平台加点</span>
+                        </header>
+                        <div class="panel-body">
+                            <form class="form-validate form-horizontal " method="get">
+                                <div class="form-group ">
+                                    <label class="col-sm-2 control-label">类型</label>
+
+                                    <div class="col-sm-10">
+                                        <select class="form-control m-bot15" id="form_type">
+                                            <option value="deposit">加款</option>
+                                            <option value="refund-manual">手动退款</option>
+                                            <option value="debit-manual">人工扣款</option>
+                                        </select>
+                                    </div>
+                                    <label class="col-sm-2 control-label">用户</label>
+
+                                    <div class="col-sm-10" style="margin-bottom:15px;">
+                                        <select class="form-control m-bot15" id="form_user_id" data-live-search="true">
+                                            {% for user in user_list %}
+                                            <option value="{{user['id']}}" data-subtext="{{user['tags']}}">
+                                                {{user['id']}} - {{user['name']}}
+                                            </option>
+                                            {% end %}
+                                        </select>
+                                    </div>
+                                    <label class=" col-sm-2 control-label
+                                            ">操作员</label>
+
+                                    <div class="col-sm-10">
+                                        <input id="form_operator" type="text" class="form-control m-bot15"
+                                               value=""/>
+                                    </div>
+                                    <div class="" id="form_order">
+                                        <label class="col-sm-2 control-label">系统订单号</label>
+
+                                        <div class="col-sm-10 m-bot15">
+                                            <input id="form_order_id" type="text" class="form-control"
+                                                   placeholder="Q开头23位订单号"/>
+                                                    <span id="act_query" class="add-on"><i
+                                                            class="icon-search"></i></span></div>
+
+                                        <!--<div class="col-sm-2">-->
+                                        <!--<a id="act_query" href="javascript:;" class="btn btn-info"><i-->
+                                        <!--class="icon-search"></i></a>-->
+                                        <!--</div>-->
+                                    </div>
+                                    <label class="col-sm-2 control-label">值(元)</label>
+
+                                    <div class="col-sm-10">
+                                        <input id="form_value" type="text" class="form-control m-bot15"
+                                               value=""/>
+
+                                        <div class="newnum_div"><span>大写金额：</span><input type="text"
+                                                                                         readonly="true"
+                                                                                         id="newnumber"/></div>
+                                        <label id="for_value" class="error"></label>
+                                    </div>
+
+                                    <label class="col-sm-2 control-label">验证码</label>
+
+                                    <div class="col-sm-10">
+                                        <input id="form_token" type="text" class="form-control m-bot15"
+                                               value=""/>
+                                        <label id="for_token" class="error"></label>
+                                    </div>
+                                    <label class="col-sm-2 control-label">说明</label>
+
+                                    <div class="col-sm-10">
+                                        <input id="form_notes" type="text" class="form-control m-bot15" value=""
+                                               maxlength="40"/>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-lg-offset-2 col-lg-10"><a id="act_adding" href="javascript:;"
+                                                                              class="btn btn-danger"><i class="icon-ok-circle"></i> 确定</a></div>
+                                </div>
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+            <!-- page end-->
+        </section>
+    </section>
+    <!--main content end-->
+</section>
+<!-- container section end -->
+<!-- javascripts -->
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<!-- nice scroll -->
+<script src="/js/jquery.scrollTo.min.js"></script>
+<script src="/js/jquery.nicescroll.js"></script>
+<!-- jquery ui -->
+<script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script type="text/javascript" src="/js/bootstrap-select.js"></script>
+<!-- custome script for all page -->
+<script src="/js/scripts.js"></script>
+<script src="/js/admin/fund.js"></script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+一、git基本操作
+    1、git提交文件规则(即哪些文件需要纳入版本库管理，哪些不需要纳入版本库管理)
+       项目工程更目录下创建.gitignore，并编辑提交规则，编辑完成后清理缓存，
+       重新纳入版本控制方能生效，每次修改.gitignore文件也一样需要重新执行
+        > touch .gitignore
+        > vim .gitignore
+        > git rm -r --cached .
+        > git add .
+    2、git删除远程分支
+        git branch -r -d origin/分支名
+        git push origin 空格:远程分支名
+
+    3、以当前分支为母版快速创建一个分支
+        git checkout -b 分支名
+
+    4、git获取远程分支到本地
+        git checkout -b 本地分支名 origin/远程分支名
+
+二、git为每个项目工程配置用户和邮箱信息
+    当一个用户同时拥有几个项目工程，并且想要每个项目工程提交的用户和邮箱记录不一样
+    时，就不能采用全局配置，需删除当前用户的全局配置信息，
+    必须在每个项目工程的根目录下配置相关信息
+    1、rm -rf ~/.gitconfig
+    2、git config user.name chehj
+    3、git config user.email chj@e7chong.com
+

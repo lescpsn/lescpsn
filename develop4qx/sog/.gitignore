@@ -1,0 +1,9 @@
+# git rm -r --cached .
+# git add .
+*.log
+*.bak
+*.bak/
+key/*
+log/*
+__pycache__/
+!.gitkeep

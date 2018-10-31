@@ -1,0 +1,70 @@
+#+TITLE: golang-study历程
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/my-org-worg.css" />
+
+* Golang开发环境搭建
+** Linux
+  + 安装Golang
+#+BEGIN_EXAMPLE
+sudo apt-get install golang
+
+bash shell:
+vim ~/.bashrc
+export GOPATH=~/Projects/lescpsn/golang
+
+fish  shell:
+vim  ~/.config/fish/config.fish (若没有，直接创建该文件)
+set -x GOPATH ~/Projects/lescpsn/golang
+
+mkdir $GOPATH/src
+mkdir $GOPATH/bin
+mkdir $GOPATH/pkg
+#+END_EXAMPLE
+
+
+* Golang工程开发工具
++ 配置开发工具的环境变量
+#+BEGIN_EXAMPLE
+vim .bashrc
+export PATH=$PATH:$GOPATH/bin
+#+END_EXAMPLE
+
++ gocode
+#+BEGIN_EXAMPLE
+代码补全
+go get -u -v -x github.com/nsf/gocode
+#+END_EXAMPLE
+
++ godef
+#+BEGIN_EXAMPLE
+代码跳转
+go get -u -v -x github.com/rogpeppe/godef
+#+END_EXAMPLE
+
+
+* go test
++ xxx _test.go 
+#+BEGIN_EXAMPLE
+xxx.go为源文件，xxx _test.go为源文件对应的测试文件
+#+END_EXAMPLE
++ go test -v
+#+BEGIN_EXAMPLE
+打印测试详细过程，包括日志
+#+END_EXAMPLE
+
++ go test -v xxx _test.go xxx.go 
+#+BEGIN_EXAMPLE
+测试指定文件，需带上原始文件
+#+END_EXAMPLE
+* issue
++ godef: no declaration found for net.ResolveTCPAddr
+#+BEGIN_EXAMPLE
+修改github.com\rogpeppe\godef\go\parser\parser.go中源代码,注释掉报错的这行
+//name, err := p.pathToName(litToString(path), filepath.Dir(filename))
+name, _ := p.pathToName(litToString(path), filepath.Dir(filename))
+
+//p.error(path.Pos(), fmt.Sprintf("cannot find identifier for package %q: %v", litToString(path), err))
+
+重新编译安装一下
+go install github.com/rogpeppe/godef
+#+END_EXAMPLE
+

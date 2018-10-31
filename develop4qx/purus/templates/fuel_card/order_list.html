@@ -1,0 +1,84 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Karmanta - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Karmanta, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>{{title}} | 订单记录</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/css/elegant-icons-style.css" rel="stylesheet" />
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+
+    <!-- date range picker -->
+    <link rel="stylesheet" type="text/css" href="/assets/bootstrap-daterangepicker/daterangepicker-bs3.css" />
+
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-select.css" />
+
+    <!-- Custom styles -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet" />
+    <link rel="stylesheet" href="/css/foundation.css">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="js/lte-ie7.js"></script>
+    <![endif]-->
+    <!-- <link rel="stylesheet" href="/css/foundation.css"> -->
+
+    <script src="/js/react.js"></script>
+    <!--<script src="/js/JSXTransformer.js"></script>-->
+    <script src="/js/jquery-2.1.3.js"></script>
+    <script src="/js/vendor/modernizr.js"></script>
+
+</head>
+<body>
+
+    <!-- container section start -->
+    <section id="container" class="">
+        <!--header start-->
+        {% include ../section.header.html %}
+        <!--header end-->
+        <!--sidebar start-->
+        {% module Sidebar({'fuel-card', 'fuel-card_order-list'}) %}
+        <!--sidebar end-->
+        <!--main content start-->
+        <section id="main-content"></section>
+        <!--main content end-->
+    </section>
+    <!-- container section end -->
+    <!-- javascripts -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- nice scroll -->
+    <script src="/js/jquery.scrollTo.min.js"></script>
+    <script src="/js/jquery.nicescroll.js"></script>
+    <!-- jquery ui -->
+    <script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
+    <!--underscore-->
+    <script src="/js/underscore-min.js"></script>
+    <script src="/js/underscore.string.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap-select.js"></script>
+
+    <!-- date range picker -->
+    <script type="text/javascript" src="/assets/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script type="text/javascript" src="/assets/bootstrap-daterangepicker/moment.js"></script>
+
+    <!-- custome script for all page -->
+    <script src="/js/scripts.js"></script>
+
+    <script src="/js/fuel_card/order_list.js"></script>
+
+</body>
+</html>

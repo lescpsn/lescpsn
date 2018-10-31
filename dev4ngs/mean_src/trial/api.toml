@@ -1,0 +1,772 @@
+#
+# Http各种请求写法如下：
+# GET(不带参数):
+# [[HttpRequest]]
+#    id = "10000"                               : API的id从1000开始，保持自增
+#    name = "验证用户名"                        : API名称
+#    path = "/v1/account/verify_username/dd"    : API请求路径
+#    method = "GET"                             : API的http请求方式
+
+#
+#
+Title = "This Is RESTful API Test Interface Config File"
+
+[RequetHost]
+TusoHost = "http://api.dev.tusoapp.com:8080"
+QiniuHost= "https://up.qbox.me"          
+
+# config Token
+[Token]  #//map[string]string = map[string]string{
+X-Tuso-Authentication-Token = "G1SyHxSoJIAyW5TE1rQOZIQTpkUl24ud"
+X-Tuso-Device-Token = "iOS-Simulator"
+
+# API testing array
+[ApiTestArray]
+10000=true
+10001=true
+#10002=true
+10003=true
+10004=true
+10005=true
+10006=true
+10007=true
+10008=true
+10009=true
+10010=true
+10011=true
+10012=true
+10013=true
+10014=true
+10015=true
+10016=true
+10017=true
+10018=true
+10019=true
+10020=true
+10021=true
+10022=true
+10023=true
+10024=true
+10025=true
+10026=true
+10027=true
+10028=true
+10029=true
+10030=true
+10031=true
+10032=true
+10033=true
+10034=true
+10035=true
+10036=true
+10037=true
+10038=true
+10039=true
+10040=true
+10041=true
+10042=true
+10043=true
+10044=true
+10045=true
+10046=true
+10047=true
+10048=true
+10049=true
+10050=true
+10051=true
+10052=true
+10053=true
+10054=true
+10055=true
+10056=true
+10057=true
+10058=true
+10059=true
+10060=true
+10061=true
+10062=true
+10063=true
+10064=true
+10065=true
+10066=true
+10067=true
+
+
+# 用于验证传入用户名是否存在于系统中
+[[HttpRequest]]
+    id = "10000"
+    name = "验证用户名"
+    request_host = "TusoHost"
+    path = "/v1/account/verify_username/test_user@qq.com"
+    method = "GET"
+
+# 用于在系统内创建一个普通用户
+[[HttpRequest]]
+    id = "10001"
+    name = "注册用户"
+    request_host = "TusoHost"    
+    path = "/v1/account/register"
+    method = "POST"
+    [HttpRequest.params]
+    username = "test_user@qq.com"
+    password = "123456"
+
+# 手机验证码注册
+[[HttpRequest]]
+    id = "10002"
+    name = ".发送验证码"
+    request_host = "TusoHost"    
+    path = "/v1/account/mobile/sms"
+    method = "POST"
+    [HttpRequest.params]
+    mobile = "18655590095"
+
+[[HttpRequest]]
+    id = "10003"
+    name = "验证码验证"
+    request_host = "TusoHost"    
+    path = "/v1/account/mobile/validate"
+    method = "POST"
+    [HttpRequest.params]
+    mobile = "18655590095"
+    code = "123456"
+
+[[HttpRequest]]
+    id = "10004"
+    name = "手机注册"
+    request_host = "TusoHost"    
+    path = "/v1/account/mobile/register"
+    method = "POST"
+    [HttpRequest.params]
+    username = "18655590095"
+    password = "123456"
+    secret = "123456"
+
+# 忘记密码
+[[HttpRequest]]
+    id = "10005"
+    name = "忘记密码"
+    request_host = "TusoHost"    
+    path = "/v1/account/forgetpass"
+    method = "POST"
+    [HttpRequest.params]
+    username = "18655590095"
+
+# 更新密码
+[[HttpRequest]]
+    id = "10006"
+    name = "更新密码"
+    request_host = "TusoHost"    
+    path = "/v1/account/updatepass/code"
+    method = "PUT"
+    [HttpRequest.params]
+    username = "18655590095"
+    password = "123456"
+    code = "123456"
+
+# 登陆
+[[HttpRequest]]
+    id = "10007"
+    name = "登陆"
+    request_host = "TusoHost"    
+    path = "/v1/account/login"
+    method = "POST"
+    [HttpRequest.params]
+    username = "lincan@ngs.tech"
+    password = "123456"
+
+# 邀请码
+[[HttpRequest]]
+    id = "10008"
+    name = "邀请码"
+    request_host = "TusoHost"    
+    path = "/v1/account/invite/18655590095"
+    method = "GET"
+
+# 获取指定用户
+[[HttpRequest]]
+    id = "10009"
+    name = "获取指定用户"
+    request_host = "TusoHost"
+    path = "/v1/user/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "GET"
+
+# 更新用户信息
+[[HttpRequest]]
+    id = "10010"
+    name = "更新用户信息"
+    request_host = "TusoHost"    
+    path = "/v1/user/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "PUT"
+    [HttpRequest.params]
+    nickname = "Fuck USA_JPN"
+
+# 关注用户信息
+[[HttpRequest]]
+    id = "10011"
+    name = "关注用户信息"
+    request_host = "TusoHost"    
+    path = "/v1/user/8cf2aadb-9729-41f9-bed4-065d99f00028/follow"
+    method = "PUT"
+
+# 取消关用户
+[[HttpRequest]]
+    id = "10012"
+    name = "取消关用户"
+    request_host = "TusoHost"
+    path = "/v1/user/8cf2aadb-9729-41f9-bed4-065d99f00028/unfollow"
+    method = "PUT"
+
+# 申请好友
+[[HttpRequest]]
+    id = "10013"
+    name = "申请好友"
+    request_host = "TusoHost"
+    path = "/v1/user/8cf2aadb-9729-41f9-bed4-065d99f00028/request"
+    method = "PUT"
+    [HttpRequest.params]
+    tuso_id = "197270"
+
+# 接受好友申请
+[[HttpRequest]]
+    id = "10014"
+    name = "接受好友申请"
+    request_host = "TusoHost"
+    path = "/v1/user/accept"
+    method = "PUT"
+    [HttpRequest.params]
+    uuid = "8cf2aadb-9729-41f9-bed4-065d99f00028"
+
+# 结束好友关系
+[[HttpRequest]]
+    id = "10015"
+    name = "友尽"
+    request_host = "TusoHost"
+    path = "/v1/user/$88888888/end_friend"
+    method = "PUT"
+    [HttpRequest.params]
+    tuso_id = "12345667"
+
+# 获取好友列表
+[[HttpRequest]]
+    id = "10016"
+    name = "获取好友列表"
+    request_host = "TusoHost"
+    path = "/v1/users/friend"
+    method = "GET"
+
+# 获取粉丝列表
+[[HttpRequest]]
+    id = "10017"
+    name = "获取粉丝列表"
+    request_host = "TusoHost"
+    path = "/v1/users/follower"
+    method = "GET"
+
+# 获取粉丝列表
+[[HttpRequest]]
+    id = "10018"
+    name = "获取粉丝列表"
+    request_host = "TusoHost"
+    path = "/v1/user/followee"
+    method = "GET"
+
+# 获取上传 Token
+[[HttpRequest]]
+    id = "10019"
+    name = "获取上传 Token"
+    request_host = "TusoHost"
+    path = "/v1/photo_token"
+    method = "GET"
+
+# 获取头像上传 Token
+[[HttpRequest]]
+    id = "10020"
+    name = "获取头像上传 Token"
+    request_host = "TusoHost"
+    path = "/v1/avatar_token"
+    method = "GET"
+
+# 获取照片唯一性
+[[HttpRequest]]
+    id = "10021"
+    name = "获取照片唯一性"
+    request_host = "TusoHost"
+    path = "/v1/photo_unique"
+    method = "GET"
+    [HttpRequest.params]
+    md5 = "hjduioshfauhy498"
+
+# 上传照片
+[[HttpRequest]]
+    id = "10022"
+    name = "上传照片"
+    request_host = "QiniuHost"
+    path = "/"
+    method = "POSTBIN"
+    [HttpRequest.params]
+    file = "tmpdata/test.png"
+    token = "X0W-1LWpcdD0eOQr0MUwOz1hQvuAPYxR9XAzbzHf:4DdW0w6XweZZq4zgGWTnKoMU56o=:eyJzY29wZSI6InR1c28iLCJkZWFkbGluZSI6MjkzNjk3MzExOCwiY2FsbGJhY2tVcmwiOiJodHRwOi8vYXBpLmRldi50dXNvYXBwLmNvbTo4MDgwL3Zici9hdmF0YXJfY2FsbGJhY2siLCJjYWxsYmFja0JvZHkiOiJidWNrZXQ9JChidWNrZXQpXHUwMDI2a2V5PSQoa2V5KVx1MDAyNmhhc2g9JChldGFnKVx1MDAyNmZzaXplPSQoZnNpemUpXHUwMDI2d2lkdGg9JCh4OndpZHRoKVx1MDAyNmhlaWdodD0kKHg6aGVpZ2h0KVx1MDAyNmV4aWY9JCh4OmV4aWYpXHUwMDI2cHJpdmFjeT0kKHg6cHJpdmFjeSlcdTAwMjZtZDU9JCh4Om1kNSlcdTAwMjZwcmltYXJ5X2NvbG9yPSQoeDpwcmltYXJ5X2NvbG9yKVx1MDAyNmdlb2xvY2F0aW9uPSQoeDpnZW9sb2NhdGlvbilcdTAwMjZlZGl0X3BhcmFtcz0kKHg6ZWRpdF9wYXJhbXMpXHUwMDI2dGltZXN0YW1wPSQoeDp0aW1lc3RhbXApXHUwMDI2dXQ9JCh4OnV0KSIsImNhbGxiYWNrQm9keVR5cGUiOiJhcHBsaWNhdGlvbi94LXd3dy1mb3JtLXVybGVuY29kZWQifQ=="
+    "x:timestamp" = "2002-10-02T10:00:00-05:00"
+    "x:ut" = "G1SyHxSoJIAyW5TE1rQOZIQTpkUl24ud"
+
+# 上传头像
+[[HttpRequest]]
+    id = "10023"
+    name = "上传头像"
+    request_host = "QiniuHost"
+    path = "/"
+    method = "POSTBIN"
+    [HttpRequest.params]
+    file = "tmpdata/test.png"
+    token = "X0W-1LWpcdD0eOQr0MUwOz1hQvuAPYxR9XAzbzHf:4DdW0w6XweZZq4zgGWTnKoMU56o=:eyJzY29wZSI6InR1c28iLCJkZWFkbGluZSI6MjkzNjk3MzExOCwiY2FsbGJhY2tVcmwiOiJodHRwOi8vYXBpLmRldi50dXNvYXBwLmNvbTo4MDgwL3Zici9hdmF0YXJfY2FsbGJhY2siLCJjYWxsYmFja0JvZHkiOiJidWNrZXQ9JChidWNrZXQpXHUwMDI2a2V5PSQoa2V5KVx1MDAyNmhhc2g9JChldGFnKVx1MDAyNmZzaXplPSQoZnNpemUpXHUwMDI2d2lkdGg9JCh4OndpZHRoKVx1MDAyNmhlaWdodD0kKHg6aGVpZ2h0KVx1MDAyNmV4aWY9JCh4OmV4aWYpXHUwMDI2cHJpdmFjeT0kKHg6cHJpdmFjeSlcdTAwMjZtZDU9JCh4Om1kNSlcdTAwMjZwcmltYXJ5X2NvbG9yPSQoeDpwcmltYXJ5X2NvbG9yKVx1MDAyNmdlb2xvY2F0aW9uPSQoeDpnZW9sb2NhdGlvbilcdTAwMjZlZGl0X3BhcmFtcz0kKHg6ZWRpdF9wYXJhbXMpXHUwMDI2dGltZXN0YW1wPSQoeDp0aW1lc3RhbXApXHUwMDI2dXQ9JCh4OnV0KSIsImNhbGxiYWNrQm9keVR5cGUiOiJhcHBsaWNhdGlvbi94LXd3dy1mb3JtLXVybGVuY29kZWQifQ=="
+    "x:timestamp" = "2002-10-02T10:00:00-05:00"
+    "x:ut" = "G1SyHxSoJIAyW5TE1rQOZIQTpkUl24ud"
+    
+# 二次编辑照片
+[[HttpRequest]]
+    id = "10024"
+    name = "二次编辑照片"
+    request_host = "TusoHost"
+    path = "/v1/photo/4f5088fd-93d4-4de1-9b01-e2ca8a135186"
+    method = "PUT"
+    [HttpRequest.params]
+    crop = '{"angle": 20, "width": 100, "height"= 200, "anchor": { x: 102,  y: 201}}'
+    filter = '{"version": 1.0, "filter_id": "f12", "lookup_intensity": 0.5, "params": [{ "0": 1, "1": 0.2}]}'
+
+# 获取指定图片
+[[HttpRequest]]
+    id = "10025"
+    name = "获取指定图片"
+    request_host = "TusoHost"
+    path = "/v1/photo/305f1d71-29d7-407a-be1a-983737dba85f/data"
+    method = "GET"
+
+# 查询指定用户图片
+[[HttpRequest]]
+    id = "10026"
+    name = "查询指定用户图片"
+    request_host = "TusoHost"
+    path = "/v1/user/a7a513e3-e391-4a04-a435-3dfb4b5247f9/photos"
+    method = "GET"
+    [HttpRequest.params]
+    since_id = 100
+    max_id = 50
+    page = 1
+    count = 20
+
+# 设置头像
+[[HttpRequest]]
+    id = "10027"
+    name = "设置头像"
+    request_host = "TusoHost"
+    path = "/v1/photo/$88888888/avatar"
+    method = "POST"
+    [HttpRequest.params]
+    origin_uuid = "adfjdfdfjoerr5m234r58u23498r43m9fqwe"
+    edit_params = '{}'
+
+# 获取用户头像列表
+[[HttpRequest]]
+    id = "10028"
+    name = "获取用户头像列表"
+    request_host = "TusoHost"
+    path = "/v1/photo/a7a513e3-e391-4a04-a435-3dfb4b5247f9/data"
+    method = "GET"
+
+# 设置图片公开
+[[HttpRequest]]
+    id = "10029"
+    name = "设置图片公开"
+    path = "/v1/photo/305f1d71-29d7-407a-be1a-983737dba85f/public"
+    method = "PUT"
+
+# 设置图片公开
+[[HttpRequest]]
+    id = "10030"
+    name = "设置图片公开"
+    request_host = "TusoHost"
+    path = "/v1/photo/305f1d71-29d7-407a-be1a-983737dba85f/private"
+    method = "PUT"
+
+# 删除图片
+[[HttpRequest]]
+    id = "10031"
+    name = "删除图片"
+    request_host = "TusoHost"
+    path = "/v1/photo/3c8c17ac-9dd4-4735-a24c-0b533b6c6148/delete"
+    method = "DELETE"
+
+# 批量公开图片
+[[HttpRequest]]
+    id = "10032"
+    name = "批量公开图片"
+    request_host = "TusoHost"
+    path = "/v1/photos/public"
+    method = "PUT"
+    [HttpRequest.params]
+    uuids = ["305f1d71-29d7-407a-be1a-983737dba85f", "3c8c17ac-9dd4-4735-a24c-0b533b6c6148"]
+
+# 批量隐私图片
+[[HttpRequest]]
+    id = "10033"
+    name = "批量隐私图片"
+    request_host = "TusoHost"
+    path = "/v1/photos/private"
+    method = "PUT"
+    [HttpRequest.params]
+    uuids = ["305f1d71-29d7-407a-be1a-983737dba85f", "3c8c17ac-9dd4-4735-a24c-0b533b6c6148"]
+
+# 批量删除图片
+[[HttpRequest]]
+    id = "10034"
+    name = "批量删除图片"
+    request_host = "TusoHost"
+    path = "/v1/photos/delete"
+    method = "DELETE"
+    [HttpRequest.params]
+    uuids = ["3c8c17ac-9dd4-4735-a24c-0b533b6c6148"]
+
+# 发送随记
+[[HttpRequest]]
+    id = "10035"
+    name = "发送随记"
+    request_host = "TusoHost"
+    path = "/v1/photo/305f1d71-29d7-407a-be1a-983737dba85f/note"
+    method = "POST"
+    [HttpRequest.params]
+    title = "Big Bang"
+    content = "fuck USA"
+    style = "v1/c"
+    timestamp = "2002-10-02T23:00:00+08:00"
+
+# 更新随记
+[[HttpRequest]]
+    id = "10036"
+    name = "更新随记"
+    request_host = "TusoHost"
+    path = "/v1/note/305f1d71-29d7-407a-be1a-983737dba85f"
+    method = "PUT"
+    [HttpRequest.params]
+    title = "Big Bang"
+    content = "wow，fantastic baby"
+    style = "v1/c"
+    timestamp = "2002-10-02T23:00:00+08:00"
+
+# 图片留言
+[[HttpRequest]]
+    id = "10037"
+    name = "图片留言"
+    request_host = "TusoHost"
+    path = "/v1/photo/5bd83ec5-d29a-4bc4-ad55-ee860b54abbe/comment"
+    method = "POST"
+    [HttpRequest.params]
+    reply_to = "78f82f90-6536-4614-9f69-600b8748a04f"
+    content = "啊，乖乖站好"
+    timestamp = "2002-10-02T23:00:00+08:00"
+
+# 获取图片留言
+[[HttpRequest]]
+    id = "10038"
+    name = "获取图片留言"
+    request_host = "TusoHost"
+    path = "/v1/photo/5bd83ec5-d29a-4bc4-ad55-ee860b54abbe/comments"
+    method = "GET"
+    [HttpRequest.params]
+    since_id = 100
+    max_id = 50
+    page = 1
+    count = 20
+
+# 删除图片留言
+[[HttpRequest]]
+    id = "10039"
+    name = "删除图片留言"
+    request_host = "TusoHost"
+    path = "/v1/photo/5bd83ec5-d29a-4bc4-ad55-ee860b54abbe/comment/"
+    method = "DELETE"
+    [HttpRequest.params]
+    since_id = 100
+    max_id = 50
+    page = 1
+    count = 20
+
+# 创建图说
+[[HttpRequest]]
+    id = "10040"
+    name = "创建图说"
+    request_host = "TusoHost"
+    path = "/v1/tuso"
+    method = "POST"
+    [HttpRequest.params]
+    uuids = ["585b0a3f-8460-4c51-aa51-a0f4d7342c24","78f82f90-6536-4614-9f69-600b8748a04f"]
+    timestamp ="2016-10-02T23:00:00+08:00"
+
+# 拉取用户图说
+[[HttpRequest]]
+    id = "10041"
+    name = "拉取用户图说"
+    request_host = "TusoHost"
+    path = "/v1/user/a7a513e3-e391-4a04-a435-3dfb4b5247f9/tusos"
+    method = "POST"
+    [HttpRequest.params]
+    since_id = 100
+    max_id = 50
+    page = 1
+    count = 20
+
+# 转发图说
+[[HttpRequest]]
+    id = "10042"
+    name = "转发图说"
+    request_host = "TusoHost"
+    path = "/v1/tuso/a7a513e3-e391-4a04-a435-3dfb4b5247f9/forward"
+    method = "PUT"
+
+# 图说点赞
+[[HttpRequest]]
+    id = "10043"
+    name = "图说点赞"
+    request_host = "TusoHost"
+    path = "/v1/tuso/a7a513e3-e391-4a04-a435-3dfb4b5247f9/start"
+    method = "PUT"
+
+# 图说取消点赞
+[[HttpRequest]]
+    id = "10044"
+    name = "图说取消点赞"
+    request_host = "TusoHost"
+    path = "/v1/tuso/a7a513e3-e391-4a04-a435-3dfb4b5247f9/unstart"
+    method = "PUT"
+
+# 拉取图说点赞列表
+[[HttpRequest]]
+    id = "10045"
+    name = "拉取图说点赞列表"
+    request_host = "TusoHost"
+    path = "/v1/tuso/a7a513e3-e391-4a04-a435-3dfb4b5247f9/unstart"
+    method = "PUT"
+    [HttpRequest.params]
+    since_id = 100
+    max_id = 50
+    page = 1
+    count = 20
+
+# 图说评论
+[[HttpRequest]]
+    id = "10046"
+    name = "图说评论"
+    request_host = "TusoHost"
+    path = "/v1/tuso/a7a513e3-e391-4a04-a435-3dfb4b5247f9/comment"
+    method = "POST"
+    [HttpRequest.params]
+    reply_to = "585b0a3f-8460-4c51-aa51-a0f4d7342c24"
+    content = "很好！"
+    timestamp = "2016-10-02T23:00:00+08:00"
+
+# 图说评论列表
+[[HttpRequest]]
+    id = "10047"
+    name = "图说评论列表"
+    request_host = "TusoHost"
+    path = "/v1/tuso/a7a513e3-e391-4a04-a435-3dfb4b5247f9/comment"
+    method = "GET"
+    [HttpRequest.params]
+    since_id = 100
+    max_id = 50
+    page = 1
+    count = 20
+
+# 删除图说评论
+[[HttpRequest]]
+    id = "10048"
+    name = "删除图说评论"
+    request_host = "TusoHost"
+    path = "/v1/tuso/a7a513e3-e391-4a04-a435-3dfb4b5247f9/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "DELETE"
+
+# 提交反馈
+[[HttpRequest]]
+    id = "10049"
+    name = "提交反馈"
+    request_host = "TusoHost"
+    path = "/v1/feedback"
+    method = "POST"
+
+# 创建日记
+[[HttpRequest]]
+    id = "10050"
+    name = "创建日记"
+    request_host = "TusoHost"
+    path = "/v1/diary"
+    method = "POST"
+    [HttpRequest.params]
+    user_id = "71db1dfb-43a2-4533-8ad5-601d9619214e"
+    diary_privacy = 4
+    title = "这是标题"
+    content = "这是内容"
+    style = "这是样式"
+
+# 修改日记
+[[HttpRequest]]
+    id = "10051"
+    name = "修改日记"
+    request_host = "TusoHost"
+    path = "/v1/diary/item/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "PUT"
+    [HttpRequest.params]
+    user_id = "71db1dfb-43a2-4533-8ad5-601d9619214e"
+    diary_privacy = 4
+    title = "这是标题"
+    content = "这是内容"
+    style = "这是样式"
+
+# 修改日记的部分信息
+[[HttpRequest]]
+    id = "10052"
+    name = "修改日记的部分信息"
+    request_host = "TusoHost"
+    path = "/v1/diary/patch/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "PUT"
+    [HttpRequest.params]
+    title = "这是标题"
+    style = "这是样式"
+
+# 修改日记的隐私状态
+[[HttpRequest]]
+    id = "10053"
+    name = "修改日记的隐私状态"
+    request_host = "TusoHost"
+    path = "/v1/diary/patch/a7a513e3-e391-4a04-a435-3dfb4b5247f9/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "PUT"
+
+# 根据id删除日记
+[[HttpRequest]]
+    id = "10054"
+    name = "根据id删除日记"
+    path = "/v1/diary/a7a513e3-e391-4a04-a435-3dfb4b5247f9/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "DELETE"
+
+# 根据uuid删除日记
+[[HttpRequest]]
+    id = "10055"
+    name = "根据uuid删除日记"
+    request_host = "TusoHost"
+    path = "/v1/diary/a7a513e3-e391-4a04-a435-3dfb4b5247f9/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "DELETE"
+
+# 根据用户的id和分页参数获取数据列表
+[[HttpRequest]]
+    id = "10056"
+    name = "根据用户的id和分页参数获取数据列表"
+    request_host = "TusoHost"
+    path = "/v1/diary/a7a513e3-e391-4a04-a435-3dfb4b5247f9/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "GET"
+    [HttpRequest.params]
+    since_id = 100
+    max_id = 50
+    page = 1
+    count = 20
+
+# 根据用户的id获取所有日记列表
+[[HttpRequest]]
+    id = "10057"
+    name = "根据用户的id获取所有日记列表"
+    request_host = "TusoHost"
+    path = "/v1/diary/all/a7a513e3-e391-4a04-a435-3dfb4b5247f9/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "GET"
+    [HttpRequest.params]
+    since_id = 100
+    max_id = 50
+    page = 1
+    count = 20
+
+# 根据用户的uuid获取所有日记列表
+[[HttpRequest]]
+    id = "10058"
+    name = "根据用户的uuid获取所有日记列表"
+    request_host = "TusoHost"
+    path = "/v1/diary/all/a7a513e3-e391-4a04-a435-3dfb4b5247f9/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "GET"
+
+# 根据日记id获取日记信息
+[[HttpRequest]]
+    id = "10059"
+    name = "根据日记id获取日记信息"
+    request_host = "TusoHost"
+    path = "/v1/diary/a7a513e3-e391-4a04-a435-3dfb4b5247f9/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "GET"
+
+# 根据多个日记id获取多条日记信息
+[[HttpRequest]]
+    id = "10060"
+    name = "根据多个日记id获取多条日记信息"
+    request_host = "TusoHost"
+    path = "/v1/diary/ids/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "GET"
+
+# 根据日记uuid获取日记的信息
+[[HttpRequest]]
+    id = "10061"
+    name = "根据日记uuid获取日记的信息"
+    request_host = "TusoHost"
+    path = "/v1/diary/uuid/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "GET"
+
+# 根据多个日记uuid取多条日记信息
+[[HttpRequest]]
+    id = "10062"
+    name = "根据多个日记uuid取多条日记信息"
+    request_host = "TusoHost"
+    path = "/v1/diary/uuids/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "GET"
+
+# 根据用户uuid、状态、分页信息获取数据列
+[[HttpRequest]]
+    id = "10063"
+    name = "根据用户uuid、状态、分页信息获取数据列表"
+    request_host = "TusoHost"
+    path = "/v1/account_dyms/usruuid/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "GET"
+    [HttpRequest.params]
+    since_id = 100
+    max_id = 50
+    count = 20
+    status = 2
+
+# 将消息设置为已读
+[[HttpRequest]]
+    id = "10064"
+    name = "将消息设置为已读"
+    request_host = "TusoHost"
+    path = "/v1/account_dyms/read/57626f3d7b389a22e39656dd"
+    method = "PUT"
+
+# 查看消息动态
+[[HttpRequest]]
+    id = "10065"
+    name = "查看消息动态"
+    request_host = "TusoHost"
+    path = "/v1/account_dyms/item/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "GET"
+
+# 根据id删除动态消息
+[[HttpRequest]]
+    id = "10066"
+    name = "根据id删除动态消息"
+    request_host = "TusoHost"
+    path = "/v1/account_dyms/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "DELETE"
+
+# 根据用户uuid、分页信息获取数据列表
+[[HttpRequest]]
+    id = "10067"
+    name = "根据用户uuid、分页信息获取数据列表"
+    request_host = "TusoHost"
+    path = "/v1/diarymixphoto/a7a513e3-e391-4a04-a435-3dfb4b5247f9"
+    method = "GET"
+    [HttpRequest.params]
+    since_id = ""
+    count = 100
+    drop_refresh = true
+

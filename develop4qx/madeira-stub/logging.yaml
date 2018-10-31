@@ -1,0 +1,64 @@
+version: 1
+
+loggers:
+  root:
+    level: DEBUG
+    handlers: [console]
+  tornado:
+    level: DEBUG
+    handlers: [console]
+  madeira.task:
+    level: DEBUG
+    handlers: [console]
+    propagate: no
+  madeira.request:
+    level: DEBUG
+    handlers: [request, console]
+    propagate: no
+  tornado.access:
+    level: DEBUG
+    handlers: [access]
+    propagate: no
+  madeira.finance:
+    level: DEBUG
+    handlers: [finance, console]
+    propagate: no
+
+formatters:
+  simple:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+  timedRotating:
+    format: '%(asctime)s %(name)-12s %(levelname)-8s %(message)s'
+    datefmt: '%m-%d %H:%M'
+
+handlers:
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple
+  request:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: DEBUG
+    formatter: timedRotating
+    filename: 'logs/request.log'
+    when: 'midnight'
+    interval: 1
+    backupCount: 30
+    encoding: 'utf8'
+  access:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: DEBUG
+    formatter: simple
+    filename: 'logs/access.log'
+    when: 'midnight'
+    interval: 1
+    backupCount: 30
+  finance:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: DEBUG
+    formatter: timedRotating
+    filename: 'logs/finance.log'
+    when: 'midnight'
+    interval: 1
+    backupCount: 90
+    encoding: 'utf8'

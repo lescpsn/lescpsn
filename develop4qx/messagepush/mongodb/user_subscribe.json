@@ -1,0 +1,22 @@
+{
+    "_id" : ObjectId("56a98b87b285a120cc681734"),
+    "type" : "madeira.order_timeout",
+    "operator_id" : "1",
+    "handling" : [
+        {
+            "handler" : "email",
+            "address" : "790720555@qq.com"
+        }
+    ]
+}
+{
+  "_id" : ObjectId("56a9ce49b285a11df0745a11"),
+  "type" : "madeira.order_timeout",
+  "operator_id" : "2",
+  "handling" : [
+    {
+      "handler" : "email",
+      "address" : "790720555@qq.com"
+    }
+  ]
+}

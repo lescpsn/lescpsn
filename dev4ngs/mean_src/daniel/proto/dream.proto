@@ -1,0 +1,449 @@
+syntax = "proto3";
+
+import "user.proto";
+import "photo.proto";
+import "diary.proto";
+import "comment.proto";
+import "feedback.proto";
+import "queryparameter.proto";
+import "photoechooption.proto";
+
+package proto;
+
+message Empty {}
+
+message IncrementRequest {
+    int64 id = 1;
+    int32 value = 2;
+}
+
+message Users {
+    repeated User user = 1;
+}
+
+message PostUserRequest {
+    User user = 1;
+}
+
+message UserResponse {
+    bool Null = 1;
+    User User = 2;
+}
+
+message PostAccountRequest {
+    string username = 1;
+    string password = 2;
+    Status status = 3;
+}
+
+message PutUserByIDRequest {
+    int64 id = 1;
+    User user = 2;
+}
+
+message PutUserByUUIDRequest {
+    string UUID = 1;
+    User user = 2;
+}
+
+message PutUserPasswordRequest {
+    string UUID = 1;
+    string password = 2;
+}
+
+message GetByIDRequest {
+    int64 id = 1;
+}
+
+message GetUserByTusoIDRequest {
+    string tusoID = 1;
+}
+
+message GetByUUIDRequest {
+    string UUID = 1;
+}
+
+message GetUserByMobileRequest {
+    string mobile = 1;
+}
+
+message GetUserByEmailRequest {
+    string email = 1;
+}
+
+message GetByIDsRequest {
+    repeated int64 ids = 1;
+}
+
+message GetByUUIDsRequest {
+    repeated string UUIDs = 1;
+}
+
+message GetUserByMobilesRequest {
+    repeated string mobiles = 1;
+}
+
+message FindUserRequest {
+    QueryParameter QueryParameter = 1;
+}
+
+message Bool {
+    bool Bool = 1;
+}
+
+message PhoneRequest {
+    string Phone = 1;
+}
+
+message SockpuppetRequest {
+    repeated string UUIDs = 1;
+}
+
+message UserRelationRequest {
+    int64 Paixuflag = 1;
+    QueryParameter QueryParameter = 2;
+}
+
+// Relation
+
+message UserRelations {
+    repeated UserRelation UserRelations = 1;
+}
+
+message PostRelationRequest {
+    UserRelation UserRelation = 1;
+}
+
+message RelationResponse {
+    bool Null = 1;
+    UserRelation UserRelation = 2;
+}
+
+message FindByIDWithQPRequest {
+    int64 ID = 1;
+    QueryParameter QueryParameter = 2;
+}
+
+message GetRelationRequest {
+    int64 fromID = 1;
+    int64 toID = 2;
+}
+
+message UserRelationTypeResponse {
+    UserRelatedType UserRelatedType = 1;
+}
+
+// Comment
+
+message Comments {
+    repeated Comment Comments = 1;
+}
+
+message PostCommentRequest {
+    Comment Comment = 1;
+}
+
+message CommentResponse {
+    bool Null = 1;
+    Comment Comment = 2;
+}
+
+message FindPCWithoutOwnerRequest {
+    int64 id = 1;
+    string UUID = 2;
+    QueryParameter QueryParameter = 3;
+}
+
+message FindPhotoReplyRequest {
+    int64 id = 1;
+    repeated string UUIDs = 2;
+}
+
+message FirstCommentRequest {
+    string UUID = 1;
+    int64 id = 2;
+}
+
+// Diary
+
+message PostDiaryRequest {
+    Diary Diary = 1;
+}
+
+message DiaryResponse {
+    bool Null = 1;
+    Diary Diary = 2;
+}
+
+message DiaryByIDRequest {
+    int64 id = 1;
+    Diary Diary = 2;
+}
+
+message Diaries {
+    repeated Diary Diaries = 1;
+}
+
+message FindByUUIDWithQPRequest {
+    string UUID = 1;
+    QueryParameter QueryParameter = 2;
+}
+
+// FeedBack
+
+message PostFeedbackRequest {
+    Feedback Feedback = 1;
+}
+
+// Note
+
+message NoteResponse {
+    bool Null = 1;
+    Note Note = 2;
+}
+
+message PostNoteRequest {
+    Note Note = 1;
+}
+
+message Notes {
+    repeated Note Note = 1;
+}
+
+message NoteByIDRequest {
+    int64 id = 1;
+    Note Note = 2;
+}
+
+message NoteByUUIDRequest {
+    string UUID = 1;
+    Note Note = 2;
+}
+
+// Photos
+
+message PhotoWithEchoOptionRequest {
+    Photo Photo = 1;
+    PhotoEchoOption PhotoEchoOption = 2;
+}
+
+message PhotoResponse {
+    bool Null = 1;
+    Photo Photo = 2;
+}
+
+message PhotoWithUUIDRequest {
+    string UUID = 1;
+    Photo Photo = 2;
+    PhotoEchoOption PhotoEchoOption = 3;
+}
+
+message PhotoWithIDRequest {
+    int64 id = 1;
+    Photo Photo = 2;
+    PhotoEchoOption PhotoEchoOption = 3;
+}
+
+message IDAndUUIDWithEchoOptionRequest {
+    int64 id = 1;
+    string UUID = 2;
+    PhotoEchoOption PhotoEchoOption = 3;
+}
+
+message UUIDAndVersionWithPhotoRequest {
+    string UUID = 1;
+    int64 dVersion = 2;
+    Photo Photo = 3;
+    PhotoEchoOption PhotoEchoOption = 4;
+}
+
+message Photos {
+    repeated Photo Photos = 1;
+}
+
+message UUIDsWithEchoOptionRequest {
+    repeated string UUIDs = 1;
+    PhotoEchoOption PhotoEchoOption = 2;
+}
+
+message IDsWithEchoOptionRequest {
+    repeated int64 ids = 1;
+    PhotoEchoOption PhotoEchoOption = 2;
+}
+
+message IDWithEchoOptionRequest {
+    int64 id = 1;
+    PhotoEchoOption PhotoEchoOption = 2;
+}
+
+message UUIDWithEchoOptionRequest {
+    string UUID = 1;
+    PhotoEchoOption PhotoEchoOption = 2;
+}
+
+message UUIDWithIdentifierRequest {
+    string UUID = 1;
+    string identifier = 2;
+    PhotoEchoOption PhotoEchoOption = 3;
+}
+
+message UUIDWithOptionRequest {
+    string UUID = 1;
+    QueryParameter QueryParameter = 2;
+    PhotoEchoOption PhotoEchoOption = 3;
+}
+
+message IDWithOptionRequest {
+    int64 id = 1;
+    QueryParameter QueryParameter = 2;
+    PhotoEchoOption PhotoEchoOption = 3;
+}
+
+// File
+
+message PostFileRequest {
+    File File = 1;
+}
+
+message FileResponse {
+    File File = 1;
+}
+
+message FileWithIDRequest {
+    int64 id = 1;
+    File File = 2;
+}
+
+message FileWithUUIDRequest {
+    string UUID = 1;
+    File File = 2;
+}
+
+message FileWithPIDRequest {
+    string pID = 1;
+}
+
+message Files {
+    repeated File Files = 1;
+}
+
+service DreamServices {
+    rpc CreateSchema(Empty) returns (Empty) {}
+    rpc TearDownSchema(Empty) returns (Empty) {}
+
+    rpc NewMobileUser(PostAccountRequest) returns (UserResponse) {}
+    rpc NewEmailUser(PostAccountRequest) returns (UserResponse) {}
+    rpc NewAnonymousUser(Empty) returns (UserResponse) {}
+    rpc UpdateUser(PutUserByUUIDRequest) returns (UserResponse) {}
+    rpc PatchUser(PostUserRequest) returns (UserResponse) {}
+    rpc PatchUserByID(PutUserByIDRequest) returns (UserResponse) {}
+    rpc PatchUserPassword(PutUserPasswordRequest) returns (UserResponse) {}
+    rpc GetUserByEmail(GetUserByEmailRequest) returns (UserResponse) {}
+    rpc GetUserByID(GetByIDRequest) returns (UserResponse) {}
+    rpc GetUserByTusoID(GetUserByTusoIDRequest) returns (UserResponse) {}
+    rpc GetUserByIDs(GetByIDsRequest) returns (Users) {}
+    rpc GetUserByMobileNumber(GetUserByMobileRequest) returns (UserResponse) {}
+    rpc GetUserByMobileNumbers(GetUserByMobilesRequest) returns (Users) {}
+    rpc GetUserByUUID(GetByUUIDRequest) returns (UserResponse) {}
+    rpc GetUserByUUIDs(GetByUUIDsRequest) returns (Users) {}
+    rpc FindUsers(FindUserRequest) returns (Users) {}
+    rpc DeleteUserByUUID(GetByUUIDRequest) returns (Bool) {}
+    rpc DeleteUserByID(GetByIDRequest) returns (Bool) {}
+    rpc DeleteUserByPhone(PhoneRequest) returns (Empty) {}
+    rpc BatchDeleteSockpuppet(SockpuppetRequest) returns (Empty) {}
+    rpc BatchGetSockpuppet(SockpuppetRequest) returns (Users) {}
+    rpc GetAllUserRelation(UserRelationRequest) returns (Users) {}
+
+    rpc UpsertRelation(PostRelationRequest) returns (RelationResponse) {}
+    rpc FindUserFollowees(FindByIDWithQPRequest) returns (UserRelations) {}
+    rpc FindUserFollows(FindByIDWithQPRequest) returns (UserRelations) {}
+    rpc FindUserFriends(FindByIDWithQPRequest) returns (UserRelations) {}
+    rpc GetRelation(GetRelationRequest) returns (RelationResponse) {}
+    rpc GetRelationType(GetRelationRequest) returns (UserRelationTypeResponse) {}
+    rpc IncrementFollowees(IncrementRequest) returns (Empty) {}
+    rpc IncrementFollowers(IncrementRequest) returns (Empty) {}
+    rpc IncrementFriends(IncrementRequest) returns (Empty) {}
+    rpc IncrementImages(IncrementRequest) returns (Empty) {}
+    rpc IncrementTusos(IncrementRequest) returns (Empty) {}
+
+
+    rpc NewComment(PostCommentRequest) returns (CommentResponse) {}
+    rpc FirstCommentByID(GetByIDRequest) returns (CommentResponse) {}
+    rpc FirstCommentByUUID(GetByUUIDRequest) returns (CommentResponse) {}
+    rpc FindNewsCommentsByID(FindByIDWithQPRequest) returns (Comments) {}
+    rpc FindPCWithoutOwner(FindPCWithoutOwnerRequest) returns (Comments) {}
+    rpc FindPhotoReply(FindPhotoReplyRequest) returns (Comments) {}
+    rpc FirstCommentByUser(FirstCommentRequest) returns (CommentResponse) {}
+    rpc FirstRepliedComment(FirstCommentRequest) returns (CommentResponse) {}
+    rpc DeleteCommentByUUID(GetByUUIDRequest) returns (Bool) {}
+    rpc DeleteCommentByID(GetByIDRequest) returns (Bool) {}
+
+
+    rpc NewDiary(PostDiaryRequest) returns (DiaryResponse) {}
+    rpc UpdateDiaryByID(DiaryByIDRequest) returns (DiaryResponse) {}
+    rpc PatchDiaryByID(DiaryByIDRequest) returns (DiaryResponse) {}
+    rpc DeleteDiaryByID(GetByIDRequest) returns (DiaryResponse) {}
+    rpc DeleteDiaryByUUID(GetByUUIDRequest) returns (DiaryResponse) {}
+    rpc GetDiaryByID(GetByIDRequest) returns (DiaryResponse) {}
+    rpc GetDiaryByUUID(GetByUUIDRequest) returns (DiaryResponse) {}
+    rpc GetDiaryByIDs(GetByIDsRequest) returns (Diaries) {}
+    rpc GetDiaryByUUIDs(GetByUUIDsRequest) returns (Diaries) {}
+    rpc FindDiaryByUserUUID(FindByUUIDWithQPRequest) returns (Diaries) {}
+    rpc FindDiaryByUserID(FindByIDWithQPRequest) returns (Diaries) {}
+    rpc FindAllDiaryByUserUUID(GetByUUIDRequest) returns (Diaries) {}
+    rpc FindAllDiaryByUserID(GetByIDRequest) returns (Diaries) {}
+
+    rpc AddFeedBack(PostFeedbackRequest) returns (Feedback) {}
+
+    rpc NewNote(PostNoteRequest) returns (NoteResponse) {}
+    rpc UpdateNoteByID(NoteByIDRequest) returns (NoteResponse) {}
+    rpc PatchNoteByID(NoteByIDRequest) returns (NoteResponse) {}
+    rpc DeleteNoteByID(GetByIDRequest) returns (NoteResponse) {}
+    rpc DeleteNoteByUUID(GetByUUIDRequest) returns (NoteResponse) {}
+    rpc GetNoteByID(GetByIDRequest) returns (NoteResponse) {}
+    rpc GetNoteByUUID(GetByUUIDRequest) returns (NoteResponse) {}
+    rpc GetNoteByIDs(GetByIDsRequest) returns (Notes) {}
+    rpc GetNoteByUUIDs(GetByUUIDsRequest) returns (Notes) {}
+    rpc FindNoteByUserUUID(FindByUUIDWithQPRequest) returns (Notes) {}
+    rpc FindNoteByUserID(FindByIDWithQPRequest) returns (Notes) {}
+
+
+    rpc NewPhoto(PhotoWithEchoOptionRequest) returns (PhotoResponse) {}
+    rpc NewDisplayPhoto(PhotoWithUUIDRequest) returns (PhotoResponse) {}
+    rpc UpgradePhotoByID(PhotoWithIDRequest) returns (PhotoResponse) {}
+    rpc UpgradePhotoToUUID(IDAndUUIDWithEchoOptionRequest) returns (PhotoResponse) {}
+    rpc PatchDisplayPhotoByUUID(UUIDAndVersionWithPhotoRequest) returns (PhotoResponse) {}
+    rpc PatchPhotoByUUID(PhotoWithUUIDRequest) returns (PhotoResponse) {}
+    rpc PatchPhotoByID(PhotoWithIDRequest) returns (PhotoResponse) {}
+    rpc PublicPhotosByUUIDs(UUIDsWithEchoOptionRequest) returns (Photos) {}
+    rpc PrivatePhotosByUUIDs(UUIDsWithEchoOptionRequest) returns (Photos) {}
+    rpc DeletePhotosByUUIDs(UUIDsWithEchoOptionRequest) returns (Photos) {}
+    rpc DeletePhotoByID(IDWithEchoOptionRequest) returns (PhotoResponse) {}
+    rpc DeletePhotoByUUID(UUIDWithEchoOptionRequest) returns (PhotoResponse) {}
+    rpc FirstPhotoByID(IDWithEchoOptionRequest) returns (PhotoResponse) {}
+    rpc FirstPhotoByUserIdentifier(UUIDWithIdentifierRequest) returns (PhotoResponse) {}
+    rpc FirstPhotoByFileUUID(UUIDWithEchoOptionRequest) returns (PhotoResponse) {}
+    rpc FirstPhotoByUUID(UUIDWithEchoOptionRequest) returns (PhotoResponse) {}
+    rpc FindPhotoByIDs(IDsWithEchoOptionRequest) returns (Photos) {}
+    rpc FindPhotoByUUIDs(UUIDsWithEchoOptionRequest) returns (Photos) {}
+    rpc FindPhotosByUserUUID(UUIDWithOptionRequest) returns (Photos) {}
+    rpc FindPhotosByUserID(IDWithOptionRequest) returns (Photos) {}
+    rpc FindPublicPhotosByUserUUID(UUIDWithOptionRequest) returns (Photos) {}
+    rpc FindPublicPhotosByUserID(IDWithOptionRequest) returns (Photos) {}
+    rpc FirstPhotosWithDeleted(GetByUUIDRequest) returns (PhotoResponse) {}
+
+    rpc NewFile(PostFileRequest) returns (FileResponse) {}
+    rpc UpdateFileByID(FileWithIDRequest) returns (FileResponse) {}
+    rpc UpdateFileByUUID(FileWithUUIDRequest) returns (FileResponse) {}
+    rpc PatchFileByID(FileWithIDRequest) returns (FileResponse) {}
+    rpc DeleteFileByID(GetByIDRequest) returns (FileResponse) {}
+    rpc DeleteFileByUUID(GetByUUIDRequest) returns (FileResponse) {}
+    rpc GetFileByPersistentID(FileWithPIDRequest) returns (FileResponse) {}
+    rpc GetFileByID(GetByIDRequest) returns (FileResponse) {}
+    rpc GetFileByUUID(GetByUUIDRequest) returns (FileResponse) {}
+    rpc FindFileByIDs(GetByIDsRequest) returns (Files) {}
+    rpc FindFileByUUIDs(GetByUUIDsRequest) returns (Files) {}
+    rpc FindFileByUserUUID(FindByUUIDWithQPRequest) returns (Files) {}
+    rpc FindFileByUserID(FindByIDWithQPRequest) returns (Files) {}
+    rpc UpgradePhotoByFileID(GetByIDRequest) returns (Empty) {}
+}

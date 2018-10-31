@@ -1,0 +1,114 @@
+#+TITLE: sublime-study历程
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/my-org-worg.css" />
+* sublime安装
+** Windows平台
++ 官网下载对应的安装包
+#+BEGIN_EXAMPLE
+便携版 sublime3
+http://www.sublimetext.com/3
+#+END_EXAMPLE
+
++ 安装
+#+BEGIN_EXAMPLE
+因为是便携版，直接解压到自己规划的指定的路径下即可
+#+END_EXAMPLE
+
++ 安装 package control
+#+BEGIN_EXAMPLE
+C + ·
+import urllib.request,os;pf='Package Control.sublime-package';ipp=sublime.installed_packages_path();urllib.request.install_opener(urllib.request.build_opener(urllib.request.ProxyHandler()));open(os.path.join(ipp,pf),'wb').write(urllib.request.urlopen('http://sublime.wbond.net/'+pf.replace(' ','%20')).read())
+#+END_EXAMPLE
+
+
++ 安装中文包
+#+BEGIN_EXAMPLE
+C + S + p -> install package -> chineseLocalizations (汉化包)
+#+END_EXAMPLE
+
++ issue
+#+BEGIN_EXAMPLE
+中文输入，光标不跟踪，一直悬浮在左上角
+C + S + p -> install package -> IMESupport
+win10下需要卸载掉系统自带的输入法，测试只能支持第三方方输入法，比如搜狗
+其实还是蛮大的bug的，很稳定
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+打开文件夹总是在新窗口
+首选项->设置->User
+"open_files_in_new_window": false,
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+双击打开文件，而不是文件夹
+"preview_on_click": false,
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+安装主题 spacegray
+该主题的详细配置请参看github
+  "spacegray_fileicons": true,
+	"spacegray_sidebar_font_xlarge": true,
+	"spacegray_sidebar_tree_xlarge": true,
+	"spacegray_tabs_auto_width": true,
+	"spacegray_tabs_xlarge": true,
+	"theme": "Spacegray.sublime-theme"
+
+    "color_scheme": "Packages/Theme - Spacegray/base16-ocean.dark.tmTheme",
+    "spacegray_fileicons": true,
+    "spacegray_sidebar_font_xlarge": true,
+    "spacegray_sidebar_tree_xlarge": true,
+    "spacegray_tabs_auto_width": true,
+    "spacegray_tabs_xlarge": true,
+    "theme": "Spacegray.sublime-theme"
+
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+设置tab为4个空格
+"tab_size": 4,
+"translate_tabs_to_spaces": true,
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+显示出空格为点号
+"draw_white_space": "all",
+#+END_EXAMPLE
+
+
+
+#+BEGIN_EXAMPLE
+sftp 插件
+"draw_white_space": "all",
+#+END_EXAMPLE
+
+
+#+BEGIN_EXAMPLE
+emacs 插件
+Emacs Pro Essentials
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+atom 相关插件
+Emacs Pro Essentials
+#+END_EXAMPLE
+
+
+
+
+* sublime之go开发环境搭建
+** 安装GoSublime
+#+BEGIN_EXAMPLE
+C +　S　+ P -> pci -> gosub
+#+END_EXAMPLE
+
+** 设置GoSublime
+#+BEGIN_EXAMPLE
+首选项 -> package设置 -> Gopsublime -> setting user 
+{
+    "env": {
+        "GOPATH": "E:/Projects/lescpsn/golang", //go程序的个人代码工程路径
+        "GOROOT": "D:/Go"   //go语言的安装路径
+    }
+}
+#+END_EXAMPLE

@@ -1,0 +1,340 @@
+#+TITLE: Oh My Emacs GUI
+#+OPTIONS: toc:nil num:nil ^:nil
+
+This is part of [[https://github.com/xiaohanyu/oh-my-emacs][oh-my-emacs]].
+
+This file contains some experimental packages, which may be:
+- not stable enough
+- usable, with some minor annoying problems, however
+- young packages without long time testing and validating.
+
+Load necessary packages as you like.
+
+* Prerequisites
+  :PROPERTIES:
+  :CUSTOM_ID: experimental-prerequisites
+  :END:
+
+#+NAME: experimental-prerequisites
+#+CAPTION: Prerequisites for ome-experimental module
+| Package | Windows | Ubuntu/Debian/Mint | ArchLinux | Fedora | Mac OS X | Mandatory? |
+|---------+---------+--------------------+-----------+--------+----------+------------|
+| [[http://www.stack.nl/~dimitri/doxygen/][Doxygen]] |         | doxygen            |           |        |          | No         |
+
+Note:
+- [[http://www.stack.nl/~dimitri/doxygen/][Doxygen]], even if you don't have doxygen installed, you can still use
+  doxymacs to insert doxygen-style comments. So I make this dependency
+  optional. However, so many Mac OS users have problems with this el-get
+  package, so I move
+
+* El-get packages
+  :PROPERTIES:
+  :CUSTOM_ID: experimental-el-get-packages
+  :END:
+
+#+NAME: experimental-el-get-packages
+#+CAPTION: El-get packages for ome-experimental module
+| Package          | Status       | Description                                           |
+|------------------+--------------+-------------------------------------------------------|
+| [[http://www.emacswiki.org/emacs/LaCarte][lacarte]]          | Recommended  | Access menubar in minibuffer command loop.            |
+| [[http://www.emacswiki.org/emacs/SrSpeedbar][SrSpeedbar]]       | Experimental | Make [[http://www.gnu.org/software/emacs/manual/html_node/speedbar/index.html][Speedbar]] show in same frame.                     |
+| [[https://github.com/m2ym/yascroll-el][yascroll]]        | Required | Eye candy for Emacs scroll bar.        |
+| [[https://github.com/aspiers/smooth-scrolling][smooth-scrolling]] | Recommended  | Emacs smooth scrolling package.                       |
+| [[https://github.com/nflath/hungry-delete][hungry-delete]]    | Experimental | Enables hungry deletion in all modes.                 |
+| [[http://doxymacs.sourceforge.net/][doxymacs]]         | Experimental | Literate comments for cc-mode.                        |
+| [[https://github.com/zk-phi/sublimity][sublimity]]        | Experimental | Bring sublime's smooth-scrolling and minimap to emacs |
+| [[https://github.com/emacsmirror/pos-tip][pos-tip]]          | Experimental | Show tooltip at point                                 |
+| [[https://github.com/flycheck/flycheck-pos-tip][flycheck-pos-tip]] | Experimental | Flycheck errors display in tooltip                    |
+| [[http://www.gnu.org/software/gettext/manual/html_node/PO-Mode.html][po-mode]]          | Experimental | Emacs's PO File Editor                                |
+| [[https://github.com/zk/emacs-dirtree][emacs-dirtree]]    | Experimental | Directory tree views in Emacs                         |
+
+Note:
+- [[http://doxymacs.sourceforge.net/][doxymacs]]: There're many Mac OS users having problems building with this
+  package, so I have to move this package from ome-cc module to
+  ome-experimental module. See [[https://github.com/xiaohanyu/oh-my-emacs/issues/17][github issue]] for details.
+
+* Lacarte
+  :PROPERTIES:
+  :CUSTOM_ID: lacarte
+  :END:
+
+By default, oh-my-emacs disables =menu-bar-mode=. Of course you can turn it on
+by =M-x menu-bar-mode=, however, most of the time menubar in Emacs is useless.
+Unfortunately, there may be some times that we want to access the menubar just
+to find or execute oblivious command. For example, the prefix key of
+=outline-mode= is =C-c @=, which is quite hard to type, and I often forgot the
+normal keybindings of outline-minor-mode. The normal workflow for this case is
+divided into three steps:
+1. turn on the menubar by =M-x menu-bar-mode=
+2. find/execute the command you want
+3. turn off the menubar again by =M-x menu-bar-mode=
+
+Ah, a little tedious, isn't it? Fortunately, with [[http://www.emacswiki.org/emacs/LaCarte][lacarte]], I can just =M-x
+lacarte-execute-menu-command=, and it will lead me to the right place. Helm
+also provides a =helm-source-lacarte= for lacarte support. See [[https://github.com/emacs-helm/helm/blob/master/helm-misc.el][helm-misc.el]] for
+details.
+
+#+NAME: lacarte
+#+BEGIN_SRC emacs-lisp
+(defun ome-lacarte-setup ()
+  (global-set-key (kbd "C-c M-x") 'lacarte-execute-command)
+  (global-set-key (kbd "C-c M-m") 'lacarte-execute-menu-command))
+
+(ome-install 'lacarte)
+#+END_SRC
+
+* Sr-speedbar
+  :PROPERTIES:
+  :CUSTOM_ID: sr-speedbar
+  :END:
+
+[[http://www.gnu.org/software/emacs/manual/html_node/speedbar/index.html][Speedbar]] is a program for Emacs which provides a special frame for conveniently
+navigating in or operating on another frame. The original inpiration comes from
+the "explorer" feature often used in modern development environments.
+
+By default, speedbar will fork a new frame, which, IMHO, is a bad
+idea. =sr-speedbar= solves this problem, however, it brings some new problems:
+- By default, the value of =sr-speedbar-right-side= is =t=. And this windows
+  will be occupied by =helm= when you do things with =helm=, which is quite
+  boring. So I have to =(setq sr-speedbar-right-side nil)=.
+- By default, the width of =sr-speedbar= window will change when you resize
+  the Emacs frame, so I have to adopt a code snippet from [[http://www.emacswiki.org/emacs/SrSpeedbar][emacswiki]].
+- Even we =(setq window-size-fixed 'width)=, the width of =sr-speedbar= window
+  still changes in some rare cases. For example, when you delete "window-1" by
+  =delete-window= in the following layout, =sr-speedbar= will expand, while
+  "window-2" will keep its width unchanged.
+
+| sr-speedbar | window-1 | window-2 |
+
+#+NAME: sr-speedbar
+#+BEGIN_SRC emacs-lisp
+(defadvice sr-speedbar-open (around ome-sr-speedbar-open disable)
+  ad-do-it
+  (with-current-buffer sr-speedbar-buffer-name
+    (setq window-size-fixed 'width)))
+
+(defun ome-sr-speedbar-setup ()
+  ;;keep speed bar window width after resizing
+  (ad-enable-advice 'sr-speedbar-open 'around 'ome-sr-speedbar-open)
+  (ad-activate 'sr-speedbar-open)
+  (setq sr-speedbar-skip-other-window-p t)
+  (setq sr-speedbar-right-side nil))
+
+(ome-install 'sr-speedbar)
+#+END_SRC
+
+* Yascroll
+  :PROPERTIES:
+  :CUSTOM_ID: yascroll
+  :END:
+
+[[https://github.com/m2ym/yascroll-el][yascroll.el]] is Yet Another Scroll Bar Mode for GNU Emacs.
+
+#+NAME: yascroll
+#+BEGIN_SRC emacs-lisp
+(defun ome-yascroll-setup ()
+  (global-yascroll-bar-mode 1))
+
+(ome-install 'yascroll)
+#+END_SRC
+
+* Smooth-scrolling
+  :PROPERTIES:
+  :CUSTOM_ID: smooth-scrolling
+  :END:
+
+Make emacs scroll smoothly. *WARNING*: This makes your emacs slow.
+
+#+NAME: smooth-scrolling
+#+BEGIN_SRC emacs-lisp
+(ome-install 'smooth-scrolling)
+#+END_SRC
+
+* Hungry-delete
+  :PROPERTIES:
+  :CUSTOM_ID: hungry-delete
+  :END:
+
+CC-mode does have some good [[http://www.gnu.org/software/emacs/manual/html_node/ccmode/Minor-Modes.html][innovations]], among which hungry-delete is what I
+want most. Fortunately, a good guy ported [[https://github.com/nflath/hungry-delete][hungry-delete]] from cc-mode to a
+independent package.
+
+#+NAME: hungry-delete
+#+BEGIN_SRC emacs-lisp
+(defun ome-hungry-delete-setup ()
+  (dolist (hook '(text-mode-hook prog-mode-hook comint-mode-hook))
+    (add-hook hook 'turn-on-hungry-delete-mode)))
+
+(ome-install 'hungry-delete)
+#+END_SRC
+
+* Fill-Column-Indicator
+  :PROPERTIES:
+  :CUSTOM_ID: fill-column-indicator
+  :END:
+
+"Many modern editors and IDEs can graphically indicate the location of the fill
+column by drawing a thin line (in design parlance, a "rule") down the length of
+the editing window. Fill-column-indicator implements this facility in Emacs
+[[https://github.com/alpaker/Fill-Column-Indicator][Fill-Column-Indicator]]."
+
+This package still has some conflicts with other oh-my-emacs packages, so I
+put it in ome-experimental module instead of core.
+
+#+NAME: fill-column-indicator
+#+BEGIN_SRC emacs-lisp :tangle no
+(defun ome-fill-column-indicator-setup ()
+  (add-hook 'text-mode-hook 'fci-mode)
+  (add-hook 'prog-mode-hook 'fci-mode))
+
+(ome-install 'fill-column-indicator)
+#+END_SRC
+
+* Documentation with Doxymacs in CC-mode
+  :PROPERTIES:
+  :CUSTOM_ID: doxymacs
+  :END:
+
+#+BEGIN_QUOTE
+Doxygen is the de facto standard tool for generating documentation from
+annotated C++ sources, but it also supports other popular programming languages
+such as C, Objective-C, C#, PHP, Java, Python, IDL (Corba, Microsoft, and
+UNO/OpenOffice flavors), Fortran, VHDL, Tcl, and to some extent D.
+
+-- http://www.doxygen.org/
+#+END_QUOTE
+
+[[http://doxymacs.sourceforge.net/][Doxymacs]] brings the power of doxygen to Emacs, you can easily insert Doxygen
+style comments in emacs. The default keybindings are:
+- =C-c d ?= look up documentation for the symbol under the point.
+- =C-c d r= rescan your Doxygen tags file.
+- =C-c d f= insert a Doxygen comment for the next function.
+- =C-c d i= insert a Doxygen comment for the current file.
+- =C-c d ;= insert a Doxygen comment for a member variable on the current line
+  (like M-;).
+- =C-c d m= insert a blank multi-line Doxygen comment.
+- =C-c d s= insert a blank single-line Doxygen comment.
+- =C-c d @= insert grouping comments around the current region.
+
+If you like, you can even integrate Doxygen to CMake workflow, see [[http://majewsky.wordpress.com/2010/08/14/tip-of-the-day-cmake-and-doxygen/][here]].
+
+#+NAME: doxymacs
+#+BEGIN_SRC emacs-lisp
+(defun ome-doxymacs-setup ()
+  (add-hook 'c-mode-common-hook 'doxymacs-mode)
+  (add-hook 'c-mode-common-hook 'doxymacs-font-lock))
+
+(ome-install 'doxymacs)
+#+END_SRC
+
+* Sublimity
+  :PROPERTIES:
+  :CUSTOM_ID: sublimity
+  :END:
+
+As a long-history editor, emacs lacks some "modern" features established by
+other "modern" editors, among which [[http://www.sublimetext.com/][sublime]] is one of the most famous and
+popular. To tell the truth, the minimap and smooth-scrolling looks really
+charming and attractive. There're various attempts trying to bring these
+features to emacs, such as [[http://www.emacswiki.org/emacs/MiniMap][minimap.el]], but none of them work perfectly.
+
+[[https://github.com/zk-phi/sublimity][sublimity]] is just another attemp, it's not perfect, however, IMHO, it's better
+than others.
+
+After installing sublimity, type =M-x sublimity-mode= to enable it.
+
+*WARNING*: This makes your emacs slow.
+
+#+NAME: sublimity
+#+BEGIN_SRC emacs-lisp
+  (defun ome-sublimity-setup ()
+    (require 'sublimity-scroll)
+    (require 'sublimity-map))
+
+  (ome-install 'sublimity)
+#+END_SRC
+
+* Pos-tip
+  :PROPERTIES:
+  :CUSTOM_ID: pos-tip
+  :END:
+
+By default, =auto-complete= will use =popup.el= library to display completion
+list, while =popup.el= itself can show some tooltip to display annotations of
+the menu items when available. However, sometimes the layout of the tooltip
+looks bad when you use the builtin =popup.el= windows. Fortunately, =pos-tip=
+provide a better way to display tooltips in a specified location, and it can be
+used by other frontend program like =popup.el=. Auto-complete has a builtin
+variable =ac-quick-help-prefer-pos-tip=, which defaults to =t=, that means when
+we have =pos-tip= library installed, we will have a better tooltip window. I
+tried and it works like a charm. However, some users of ome reported that they
+have various problem installing =pos-tip=, see github issue [[https://github.com/xiaohanyu/oh-my-emacs/issues/70][70]] and [[https://github.com/xiaohanyu/oh-my-emacs/issues/71][71]], so I
+made it a experimental package in ome ome-experimental module, and I hope you
+have a good luck and able to enjoy it. To get this package, just =(ome-load
+"modules/ome-experimental.org" "pos-tip")=
+
+#+NAME: pos-tip
+#+BEGIN_SRC emacs-lisp
+(defun ome-pos-tip-setup ()
+  (require 'pos-tip))
+
+(ome-install 'pos-tip)
+
+#+END_SRC
+
+By default, flycheck show errors in [[http://www.gnu.org/software/emacs/manual/html_node/emacs/Echo-Area.html][echo area]], which is not intuitive. This
+[[https://github.com/flycheck/flycheck-pos-tip][flycheck-pos-tip]] extention will display errors under point using [[https://github.com/emacsmirror/pos-tip][pos-tip]].
+
+#+NAME: flycheck-pos-tip
+#+BEGIN_SRC emacs-lisp
+(defun ome-flycheck-pos-tip-setup ()
+  (eval-after-load 'flycheck
+    '(progn
+       (require 'flycheck-pos-tip)
+       (setq flycheck-display-errors-function
+             #'flycheck-pos-tip-error-messages)
+       (setq flycheck-pos-tip-timeout 10))))
+
+(ome-install 'flycheck-pos-tip)
+#+END_SRC
+
+* Po-mode
+  :PROPERTIES:
+  :CUSTOM_ID: po-mode
+  :END:
+
+Emacs always bring you some surprises for you daily job. Some day I wanted to
+do some i18n/l10n work for a python project, and I found [[http://www.gnu.org/software/gettext/manual/html_node/PO-Mode.html][PO-Mode]], which is
+really awesome. I even wanted to write a tiny tutorial for this great mode, but
+I just gave up. Since for any questions in =po-mode=, you can just type =?= or
+=h=, and you will get a brief and concise answer.
+
+#+NAME: po-mode
+#+BEGIN_SRC emacs-lisp
+(defun ome-po-mode-setup ()
+  (add-hook 'po-mode-hook
+            (lambda ()
+              (linum-mode 1)))
+  ;; disable evil-mode since some key binding conflicts
+  (when (featurep 'evil)
+    (add-hook 'po-mode-hook 'turn-off-evil-mode)))
+
+(ome-install 'po-mode)
+#+END_SRC
+
+* emacs-dirtree
+  :PROPERTIES:
+  :CUSTOM_ID: emacs-dirtree
+  :END:
+
+[[https://github.com/zk/emacs-dirtree][emacs-dirtree]] provide a long lost directory browser for Emacs. However, this
+package didn't update for a long time, so I only put this in ome-experimental
+module, and you can load this package by put `(ome-load
+"modules/ome-experimental.org" "emacs-dirtree")` in oh-my-emacs startup file.
+
+#+NAME: emacs-dirtree
+#+BEGIN_SRC emacs-lisp
+(defun ome-emacs-dirtree-setup ())
+
+(ome-install 'emacs-dirtree)
+#+END_SRC

@@ -1,0 +1,2 @@
+downstream:
+  '100001': { name: 'QX 趣讯管理员 lb2', shard_id: '100001', master: '100001', domain_id: '000000', shard: '42.121.252.237', pass: '', iv: '', key: '', tags: '', type: 'full-seller' }

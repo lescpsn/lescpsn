@@ -1,0 +1,59 @@
+% Created 2016-07-09 六 10:23
+\documentclass[11pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fixltx2e}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{float}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{marvosym}
+\usepackage{wasysym}
+\usepackage{amssymb}
+\usepackage{hyperref}
+\tolerance=1000
+\author{ubuntu-16.04-server-amd64$_{\text{001}}$}
+\date{\today}
+\title{mongodb\_study}
+\hypersetup{
+  pdfkeywords={},
+  pdfsubject={},
+  pdfcreator={Emacs 24.5.1 (Org mode 8.2.10)}}
+\begin{document}
+
+\maketitle
+\tableofcontents
+
+\section{manged}
+\label{sec-1}
+\section{创建数据库访问用户}
+\label{sec-2}
+\subsection{admin库中创建一个管理员用户}
+\label{sec-2-1}
+>mongo
+>use admin
+>db.createUser(\{user:'ngsmongo',pwd:'ngsmongo',roles:['userAdminAnyDatabase','dbAdminAnyDatabase']\})
+
+\subsection{用户库中创建一个数据库连接用户}
+\label{sec-2-2}
+>use mydb [ use mean ]
+>db.createUser(\{user: "ngsmongo", pwd: "ngsmongo", roles: [\{role: "dbOwner", db: "mean"\}]\})
+
+\subsection{切换到admin库中对用户库用户授权}
+\label{sec-2-3}
+>use admin
+>db.grantRolesToUser("ngsmongo",[\{ role: "dbOwner", db: "mean" \} ])
+\section{mongodb常用操作}
+\label{sec-3}
+\subsection{连接mongodb}
+\label{sec-3-1}
+mongo 127.0.0.1:27017/mean -u ngsmongo -p ngsmongo
+\section{学习资源}
+\label{sec-4}
+\url{http://wenku.baidu.com/link?url=hcm2wZyR2bRZY6atMbNpCwrq7y5gb3BZJyvb4ty2mhDbD-yfjlTQk6Iwu0n-t5t9MRGI3Hlx5TEfBid2VNco4b5IC9z3z0tfOPME-NseC3C}
+% Emacs 24.5.1 (Org mode 8.2.10)
+\end{document}

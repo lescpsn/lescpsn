@@ -1,0 +1,4 @@
+{ "id" : 200001, "ip":  "192.168.1.159", "hostname": "qxdevp", "notes": "趣讯开发主机（64bit）", "loginuser": "carhj", "privatekey": "/home/carhj/qxdevelop/sog/key/192.168.1.159_id_rsa", "protocol": "ssh", "port": 22 }
+{ "id" : 200002, "ip":  "192.168.1.192", "hostname": "workhorse1", "notes": "spark_workhorse1", "loginuser": "kevin", "privatekey": "/home/carhj/qxdevelop/sog/key/192.168.1.192_id_rsa", "protocol": "ssh", "port": 7022 }
+{ "id" : 200003, "ip":  "192.168.1.104", "hostname": "workhorse1", "notes": "spark_workhorse1", "loginuser": "carhj", "privatekey": "/home/carhj/qxdevelop/sog/key/192.168.1.104_id_rsa", "protocol": "ssh", "port": 22 }
+{ "id" : 200004, "ip":  "192.168.1.105", "hostname": "workhorse1", "notes": "spark_workhorse1", "loginuser": "carhj", "privatekey": "/home/carhj/qxdevelop/sog/key/192.168.1.105_id_rsa", "protocol": "ssh", "port": 22 }

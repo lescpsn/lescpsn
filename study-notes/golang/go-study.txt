@@ -1,0 +1,40 @@
+[go语言常用网址]
+[Golang中国]    :http://www.golangtc.com/
+[GO语言中文网]  :http://studygolang.com/
+
+Golang安装<1.4
+[Linux]:
+url:鼠标右键复制链接地址
+1、下载源码安装包，可以保持最新的版本
+wget -c http://www.golangtc.com/static/go/1.6/go1.6.linux-amd64.tar.gz
+
+2、解压到要安装的目标路径
+tar -zxvf go1.6.linux-amd64.tar.gz  -C /home/carhj/local/
+
+3、cd到go/src目录下执行安装脚本
+./all.bash
+
+网络安装方式:
+sudo apt-get install golang
+
+
+4、go语言命令集
+   查看某个包的所有函数
+   go doc fmt
+
+   查看某个函数的具体用法
+   godoc fmt Println
+
+   本地启动go的帮助文档服务
+   godoc  -http=:8080
+   http://localhost:8080（采用这种方式可以访问，无须登录官网）
+
+5、go语言的主函数main既没有参数，也没有返回值
+   func main(){
+   }
+
+6、package必须放在非注释的第一行
+
+7、go语言基本类型
+   bool类型（true，false）
+   整数

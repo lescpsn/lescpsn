@@ -1,0 +1,78 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Specify Vagrant version and Vagrant API version
+VAGRANTFILE_API_VERSION = "2"
+Vagrant.require_version ">= 1.6.3"
+
+require 'yaml'
+
+containers = YAML.load_file('containers.yml')
+
+Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
+    config.vm.define "ubuntu-14.04"
+    config.vm.box = "bento/ubuntu-14.04"
+
+    config.vm.network :forwarded_port, guest: 2375, host: 2375, auto_correct: true
+
+    config.vm.provision "shell" do |s|
+        ssh_pub_key = File.readlines("#{Dir.home}/.ssh/id_rsa.pub").first.strip
+            s.inline = <<-SHELL
+            echo #{ssh_pub_key} >> /root/.ssh/authorized_keys
+        SHELL
+    end
+
+
+    # config.vm.synced_folder ".", "/var/www", type: "nfs"
+    config.ssh.forward_agent = true
+
+    config.vm.provision "shell", path: 'clone.sh'
+
+    config.vm.provider "virtualbox" do |virtualbox|
+        virtualbox.memory = 2048
+    end
+
+    config.vm.provision "docker" do |docker|
+        docker.build_image "/var/ngspace/houston", args: "-t vagrantdocker/houston"
+        docker.build_image "/var/ngspace/dream", args: "-t vagrantdocker/dream"
+    end
+
+
+    # containers.each do |container|
+
+    # end
+
+#   config.vm.define "app" do |app|
+#     app.vm.provider "docker" do |docker|
+#       docker.image = "debian"
+#       docker.name  = "app"
+#       docker.volumes = %w(/var/www:/var/www)
+#       docker.vagrant_vagrantfile = __FILE__
+#       docker.remains_running = false
+#     end
+#   end
+
+#   config.vm.define "phpfpm" do |phpfpm|
+#     phpfpm.vm.provider "docker" do |docker|
+#       docker.image = "vagrantdocker/phpfpm"
+#       docker.create_args = %w(--volumes-from="app")
+#       docker.name = "phpfpm"
+#       docker.vagrant_vagrantfile = __FILE__
+#     end
+#   end
+
+#   config.vm.define "nginx" do |nginx|
+#     nginx.vm.provider "docker" do |docker|
+#       docker.image = "vagrantdocker/nginx"
+#       docker.create_args = %w(--volumes-from="app")
+#       docker.ports = %w(80:80)
+#       docker.link "phpfpm:phpfpm"
+#       docker.vagrant_vagrantfile = __FILE__
+#     end
+#   end
+end
+
+# $shell_script = <<SCRIPT
+# sudo chmod 755 /tmp/
+# sudo chmod +x /tmp/vagrant-shell
+# SCRIPT

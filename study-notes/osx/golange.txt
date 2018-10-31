@@ -1,0 +1,22 @@
+一、go语言在osx系统上的安装部署
+    1、下载osx的go语言安装包
+       https://golang.org/dl/
+
+    2、采用brew方式自动安装
+       brew install go
+
+    3、配置环境变化（fish shell中）
+       GOPATH:
+       set -x GOPATH "/Users/carhj/goproject"
+       set -x GOBIN "/usr/local/bin"
+
+    4、安装gocode
+       go get github.com/nsf/gocode
+       go install github.com/nsf/gocode
+
+    5、安装godef
+       go get github.com/rogpeppe/godef
+       go install github.com/rogpeppe/godef
+
+    5、安装godep
+       go get github.com/tools/godep

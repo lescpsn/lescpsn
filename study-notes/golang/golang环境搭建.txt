@@ -1,0 +1,15 @@
+[ VMware Tools 安装 ]
+       1、菜单 -> 虚拟机 -> 设置 -> CD/DVD 启动连接 连接选择 使用ISO影像文件
+
+       2、菜单 -> 点击安装或者升级
+
+       3、挂载光驱（用root执行）
+	   # mkdir /mnt/cdrom
+	   # mount /dev/cdrom /mnt/cdrom
+
+       4、挂载光驱（用root执行）
+	   # cd /mnt/cdrom
+	   # cp VMwareTools-10.0.0-2977863.tar.gz /tmp
+       	   # tar -zxvf VMwareTools-10.0.0-2977863.tar.gz
+	   # cd vmware-tools-distrib
+	   # ./vmware-install.pl

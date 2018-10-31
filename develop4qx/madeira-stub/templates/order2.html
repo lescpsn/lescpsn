@@ -1,0 +1,100 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="/css/bootstrap-theme.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="/js/jquery-2.1.1.js"></script>
+    <script src="/js/bootstrap.js"></script>
+
+    <style>
+        .highlight {
+            padding: 9px 14px;
+            margin-bottom: 14px;
+            background-color: #f7f7f9;
+            border: 1px solid #e1e1e8;
+            border-radius: 4px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="jumbotron">
+    <h1>Madeira/Stub</h1>
+</div>
+<div id="main-content" class="container">
+</div>
+
+<script>
+
+    $(function () {
+        return;
+
+        $('#btn_act').click(function () {
+            var t = $('input[name=prod_type]:checked').val();
+
+            if (!t) {
+                alert('输入');
+                return;
+            }
+
+
+        });
+
+        $("#prod_fee").click(function () {
+            $("#routing").html('')
+                    .append(new Option('fengyun', 'fengyun'))
+                    .append(new Option('yuechen', 'yuechen'))
+                    .append(new Option('machado', 'machado'))
+                    .append(new Option('shili', 'shili'))
+                    .append(new Option('stub', 'stub'))
+                    .append(new Option('', ''));
+            $("#result").html('')
+                    .append(new Option("成功(0:1)", "0:1"))
+                    .append(new Option("自动退款(0:9)", "0:9"))
+                    .append(new Option("无效(5003)", "5003:0"));
+            $("#offer").attr('disabled', 'true');
+//            $("#price").val('50');
+        });
+
+        $("#prod_data").click(function () {
+            $("#routing").html('')
+                    .append(new Option('telecom_js', 'telecom_js'))
+                    .append(new Option('hacmcc', 'hacmcc'))
+                    .append(new Option('niukou', 'niukou'))
+                    .append(new Option('cmcc-sn', 'cmcc-sn'))
+                    .append(new Option('mopote', 'mopote'))
+                    .append(new Option('mopote-test', 'mopote-test'))
+                    .append(new Option('legend', 'legend'))
+                    .append(new Option('xicheng', 'xicheng'))
+                    .append(new Option('quxun', 'quxun'))
+                    .append(new Option('wo-test', 'wo-test'))
+                    .append(new Option('wo-stub', 'wo-stub'))
+                    .append(new Option('21cn-qx', '21cn-qx'))
+                    .append(new Option('seek-stub', 'seek-stub'))
+                    .append(new Option('cmcc-stub', 'cmcc-stub'))
+                    .append(new Option('21cn-stub', '21cn-stub'))
+                    .append(new Option('seek', 'seek'))
+                    .append(new Option('yangchan', 'yangchan'))
+                    .append(new Option('cmcc-states', 'cmcc-states'))
+                    .append(new Option('cmcc', 'cmcc'))
+                    .append(new Option('cmcc-leliu', 'cmcc-leliu'))
+                    .append(new Option('suka-nation', 'suka-nation'))
+                    .append(new Option('suka-stub', 'suka-stub'))
+                    .append(new Option('21cn', '21cn'));
+            $("#result").html('')
+                    .append(new Option("成功(0:1)", "0:1"))
+                    .append(new Option("超时(599)", "599:0"));
+            $("#offer").removeAttr('disabled');
+        });
+
+        $("#offer").change(function (d) {
+        })
+    })
+</script>
+<script src="/js/vendor.js"></script>
+<script src="/js/app.js"></script>
+</body>
+</html>

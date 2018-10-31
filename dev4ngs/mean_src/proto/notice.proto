@@ -1,0 +1,21 @@
+syntax = "proto3";
+
+package proto;
+
+enum NoticStatus {
+    Null = 0;
+    Read = 1;
+    Unread = 2;
+    OutTime = 3;
+}
+
+message Notice {
+    string ID = 1;
+    int64 FromID = 2;
+    int64 ToID = 3;
+    string Title = 4;
+    string Type = 5;
+    string Content = 6;
+    string Timestamp = 7;
+    NoticStatus Status = 8;
+}

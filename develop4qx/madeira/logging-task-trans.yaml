@@ -1,0 +1,32 @@
+version: 1
+
+loggers:
+  root:
+    level: DEBUG
+    handlers: [console]
+  tornado:
+    level: DEBUG
+    handlers: [console]
+  madeira.task:
+    level: DEBUG
+    handlers: [task, console]
+    propagate: no
+
+formatters:
+  simple:
+    format: '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+
+handlers:
+  task:
+    class: logging.handlers.TimedRotatingFileHandler
+    level: DEBUG
+    formatter: simple
+    filename: 'logs/task-trans.log'
+    when: 'midnight'
+    interval: 1
+    backupCount: 90
+    encoding: 'utf8'
+  console:
+    class: logging.StreamHandler
+    level: DEBUG
+    formatter: simple

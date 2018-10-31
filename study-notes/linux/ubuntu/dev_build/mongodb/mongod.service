@@ -1,0 +1,12 @@
+[Unit]
+Description=mongodb
+After=network.target
+
+[Service]
+Type=forking
+ExecStart=/usr/local/mongodb/bin/mongod.sh start
+ExecStop=/usr/local/mongodb/bin/mongod.sh stop
+ExecReload=/usr/local/mongodb/bin/mongod.sh restart
+
+[Install]
+WantedBy=multi-user.target

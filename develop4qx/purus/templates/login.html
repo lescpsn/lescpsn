@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Karmanta - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Karmanta, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>{{title}} | 登录</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/css/elegant-icons-style.css" rel="stylesheet"/>
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Custom styles -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet"/>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="/js/html5shiv.js"></script>
+    <script src="/js/respond.min.js"></script>
+    <![endif]-->
+    <script src="/js/jquery-1.8.3.min.js"></script>
+    <script src="/js/login.js"></script>
+    <style>
+        /*login*/
+        .loginBox {
+            background: rgba(255, 255, 255, 0.4) none repeat scroll 0 0;
+            box-shadow: 0 0 1px rgba(255, 255, 255, 0.8) inset;
+            padding: 8px;
+            max-width: 378px;
+            margin: 200px auto 0;
+            border-radius: 5px;
+            font-family: "Microsoft YaHei";
+        }
+
+        .loginBox .panels {
+            border: 1px solid #1894e7;
+            background: #f3f3f3;
+            border-radius: 5px;
+            padding: 20px;
+        }
+
+        .panels-heading {
+            width: 185px;
+            margin: 0 auto;
+            padding-bottom: 10px;
+        }
+
+        .loginBox .input-group {
+            margin-bottom: 15px;
+        }
+
+        .loginBox .yzm {
+            margin-bottom: 0;
+        }
+
+        .loginBox .form-control {
+            height: 40px;
+        }
+
+        .loginBox .input-group-addon {
+            background: #fafafa;
+            color: #30a5df;
+            min-width: 40px;
+            font-size: 14px;
+            padding: 6px 12px;
+        }
+
+        .loginBox .input-capt {
+            padding: 0;
+            background: #fff;
+        }
+
+        .loginBox .message {
+            margin: 10px 0;
+            height: 20px;
+            padding: 0 0 0 42px;
+            line-height: 20px;
+        }
+
+        .loginBox .message:before {
+            border: 0;
+        }
+
+        .loginBox .btns {
+            width: 100%;
+        }
+
+        .loginBox .form_btn_s {
+            display: block;
+            float: left;
+            font-size: 14px;
+            width: 128px;
+            line-height: 30px;
+        }
+
+        .loginBox .form_btn {
+            display: block;
+            float: right;
+            width: 100px;
+            height: 30px;
+            background: url("../img/login_btn.png") no-repeat 0 0;
+        }
+
+        .icp, .icp a {
+            color: #fff;
+            font-size: 14px;
+        }
+    </style>
+
+
+</head>
+
+<body class="login-img3-body">
+<div class="container">
+    <div class="loginBox">
+        <div class="panels">
+            <form class="loginform" action="index.html">
+                <div class="input-group panels-heading">
+                    <img alt="logo" class="img-responsive" width="90%" src="/img/login_logo.png">
+                </div>
+                <div class="input-group user">
+                    <span class="input-group-addon"><i class="icon_profile"></i></span>
+                    <input id="username" class="form-control" type="text" placeholder="账户">
+                </div>
+                <div class="input-group password">
+                    <span class="input-group-addon"><i class="icon_key"></i></span>
+                    <input id="password" class="form-control" type="password" placeholder="密码">
+                </div>
+                <div class="input-group yzm">
+                    <span class="input-group-addon"><i class="icon-asterisk"></i></span>
+                    <input id="captcha" class="form-control" type="text" placeholder="验证码" maxlength="4">
+                    <span class="input-group-addon input-capt"><img id="img-captcha" class="image-captcha"
+                                                                    src="/auth/captcha.jpg?t=1432020742562"
+                                                                    title="点击更换验证码"></span>
+                </div>
+                <div class="price_color message"></div>
+                <div class="input-group btns">
+                    <a id="loginBtn" class="form_btn" href="javascript:void(0);"></a>
+
+                    <div class="form_btn_s">没有帐号？<a href="http://www.e7chong.com/register.html" target="_blank">立即注册</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="icp">
+    {{copyright}} {% if icp %} ICP证: <a href="http://www.miibeian.gov.cn/">{{icp}}</a> {% end %}
+</div>
+</body>
+</html>

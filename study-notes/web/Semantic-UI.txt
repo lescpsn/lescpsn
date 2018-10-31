@@ -1,0 +1,26 @@
+一、Semantic-UI环境搭建
+    1、源码安装NodeJs，以安装Node.js v0.12为例
+       (参看https://github.com/nodesource/distributions主页安装说明)
+       # ubuntu采用普通用户安装
+       $ curl -sL https://deb.nodesource.com/setup_0.12 | sudo -E bash -
+       $ sudo apt-get install -y nodejs
+
+    2、安装gulp
+       $ sudo npm rm --global gulp(如果需要请删除老的不需要的gulp)
+       $ sudo npm install --global gulp-cli
+       # sudo npm install --save-dev gulp
+       $ sudo npm install -g gulp
+
+    3、安装Semantic-UI(进入到自己的工程目录下)
+       $ cd myproject
+       $ npm install semantic-ui --save
+         选择 [2]Express (Set components and output folder)
+         选择 Is this your project folder? 默认的工程目录
+         选择 components
+         ⬡ header
+         ⬡ icon
+         ⬡ image
+         ⬡ reveal
+         后面一路回车，默认选择即可
+       $ cd semantic/
+       $ gulp build

@@ -1,0 +1,74 @@
+#+TITLE: Python-Study
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/my-org-worg.css" />
+
+* Python开发环境搭建
+#+BEGIN_EXAMPLE
+由于python2和python3两者有较大的差别，且暂未统一且不兼容。为了使两者完美的和谐共存，可以采用
+
+virtualenv或anaconda等方式管理多版本python共存。由于anaconda本身已经包含了各个版本的python，
+
+所以无须再独立安装python了。anaconda详细用法见Anaconda详细教程.html
+#+END_EXAMPLE
+** Windows
++ 下载并安装anaconda
+#+BEGIN_EXAMPLE
+从清大大学的镜像网站：https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/ 下载适合的版本
+
+Anaconda3-4.3.0.1-Windows-x86_64.exe，一路回车法安装到自己定义好的目录下了。
+
+where conda      (查看conda的安装位置)
+
+conda --version  (查看conda的版本)
+#+END_EXAMPLE
+
++ 设置conda仓储的镜像
+#+BEGIN_EXAMPLE
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/
+
+conda config --set show_channel_urls yes
+
+最后生成的配置文件在C:\Users\carhj\.condarc，即也可以直接编辑该文件
+#+END_EXAMPLE
+
+
+** Linux
++ 下载并安装anacoda
+#+BEGIN_EXAMPLE
+从清大大学的镜像网站：https://mirrors.tuna.tsinghua.edu.cn/anaconda/archive/ 下载适合的版本
+Anaconda3-4.2.0-Linux-x86_64.sh
+
+执行shell脚本安装
+bash Anaconda3-4.2.0-Linux-x86_64.sh 一路回车法
+
+which conda      (查看conda的安装位置)
+
+conda --version  (查看conda的版本)
+#+END_EXAMPLE
+
+** conda常用命令
+#+BEGIN_EXAMPLE
+conda update conda          (升级conda)
+
+conda create -n py27env python=2.7  anaconda 
+(创建一个指定py2版本的新环境python2，并且包含指定的模块aconda。)
+
+创建一个指定版本python3.4的新环境py34env，只包含python的基本模块。
+conda create -n py34env python=3.4 (注意 prelude的anaconda不支持3.6，只能支持到3.4版本)
+
+conda create -n py36env python=3.6
+(创建一个指定版本python3.6的新环境py36env，只包含python的基本模块。)
+
+conda info -e               (查看当前系统中所有的python环境)
+
+删除某个版本python的环境
+conda remove -n py2env --all 
+
+activate py2env            (windows下激活某个环境)
+deactivate                 (windows退出某个环境)
+
+source activate py2env     (linux下激活某个环境)
+source deactivate          (linux退出某个环境)
+
+conda install pkgName
+#+END_EXAMPLE
+

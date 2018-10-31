@@ -1,0 +1,34 @@
+#!/bin/sh
+MONGODBDIR=/usr/local/mongodb
+MONGODB_PORT=27017
+#BIN="$MONGODBDIR/bin/mongod --dbpath=$MONGODBDIR/data --logpath=$MONGODBDIR/logs --logappend --port=$MONGODB_PORT --fork --auth"
+BIN="$MONGODBDIR/bin/mongod --dbpath=$MONGODBDIR/data --logpath=$MONGODBDIR/logs --logappend --port=$MONGODB_PORT --fork"
+
+case "$1" in
+    start)
+        ${BIN}
+        ;;
+    stop)
+        PID=`ps -ef | grep mongod | grep -v grep | awk '{print $2}'`
+        if [ "X${PID}" != "X" ]; then
+            kill -9 ${PID}
+        fi
+
+
+        ;;
+
+    status)
+        PID=`ps -ef | grep $MONGODBDIR/bin/mongod | grep -v grep|awk '{print $2}'`
+        if [ "X${PID}" != "X" ]; then
+           echo "Mongodb is running at [$PID]"
+        else
+            echo "Mongodb is stopped."
+        fi
+        ;;
+    *)
+        echo "Usage: $0 {start|stop|status} [version ..]"
+        exit 1
+        ;;
+esac
+
+exit 0

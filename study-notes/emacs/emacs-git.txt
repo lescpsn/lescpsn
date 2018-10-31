@@ -1,0 +1,43 @@
+# 建立一个存放emacs配置的文件夹，用于存放各种emacs的配置，方便切换
+# 同时支持多用户
+mkdir /opt/emacs.d/
+chmod  777 /opt/emacs.d/
+
+# purcell's .emacs.d
+git clone https://github.com/purcell/emacs.d.git purcell
+ln -s /opt/emacs.d/purcell ~/.emacs.d
+[ 卸载：rm -rf ~/.emacs.d  # not is ~/.emacs.d/ ]
+
+
+方法二安装:
+curl -L https://git.io/epre | sh
+安装aspell
+sudo apt-get install aspell   
+
+cp  sample/prelude-modules.el  .  并且修改自己需要加载的模块
+启动emacs
+>emacs
+更新插件软件包
+M-x package-list-packages RET U x
+emacs C-x C-ell 可以重新加载模块，或者重新启动emacs一下
+
+# prelude's .emacs.d
+git clone https://github.com/bbatsov/prelude.git prelude
+ln -s /opt/emacs.d/prelude ~/.emacs.d
+cp ~/.emacs.d/sample/prelude-modules.el ~/.emacs.d/
+修改prelude-modules.el文件
+
+[ 卸载：rm -rf ~/.emacs.d  # not is ~/.emacs.d/ ]
+
+# oh-my-emacs's .emacs.d
+git clone https://github.com/xiaohanyu/oh-my-emacs.git oh-my-emacs
+ln -s /opt/emacs.d/oh-my-emacs ~/.emacs.d
+[ 卸载：rm -rf ~/.emacs.d  # not is ~/.emacs.d/ ]
+
+# spacemacs's .emacs.d
+git clone https://github.com/syl20bnr/spacemacs.git spacemacs
+ln -s /opt/emacs.d/spacemacs ~/.emacs.d
+[ 卸载：rm -rf ~/.emacs.d # not is ~/.emacs.d/ ]
+
+Emacs ELPA 中文镜像站
+http://elpa.codefalling.com/

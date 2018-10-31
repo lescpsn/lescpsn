@@ -1,0 +1,30 @@
+1 发送超时，回单时找不到
+
+redis-cli -n set map:cmcc:80005185512946 Q2014121114111310005682
+
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema"><soap:Body><ECServices xmlns="http://ECService.EC.webservice.whty.com"><request><BIPCode xmlns="http://ECService.EC.webservice.whty.com/xsd">EC0005</BIPCode><BIPVer xmlns="http://ECService.EC.webservice.whty.com/xsd">V 1.0</BIPVer><ECCode xmlns="http://ECService.EC.webservice.whty.com/xsd">2001292059</ECCode><ECUserName xmlns="http://ECService.EC.webservice.whty.com/xsd">admin</ECUserName><ECUserPwd xmlns="http://ECService.EC.webservice.whty.com/xsd">tLPWBs5tYB6zAlaG/sBgDIdKHnL1eYEt</ECUserPwd><areacode xmlns="http://ECService.EC.webservice.whty.com/xsd">769</areacode><origDomain xmlns="http://ECService.EC.webservice.whty.com/xsd">NGADC</origDomain><processTime xmlns="http://ECService.EC.webservice.whty.com/xsd">20141211141531</processTime><response xsi:nil="true" xmlns="http://ECService.EC.webservice.whty.com/xsd" /><svcCont xmlns="http://ECService.EC.webservice.whty.com/xsd">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;NGMemberRequest&gt;
+  &lt;BODY&gt;
+    &lt;ECCode&gt;2001292059&lt;/ECCode&gt;
+    &lt;PrdOrdNum&gt;51215000010&lt;/PrdOrdNum&gt;
+    &lt;Member&gt;
+      &lt;OptType&gt;0&lt;/OptType&gt;
+      &lt;Mobile&gt;13926492932&lt;/Mobile&gt;
+      &lt;UserName&gt;13926492932&lt;/UserName&gt;
+      &lt;CRMApplyCode&gt;80005185512946&lt;/CRMApplyCode&gt;
+      &lt;PrdList&gt;
+        &lt;PrdCode&gt;AppendAttr.8585&lt;/PrdCode&gt;
+        &lt;OptType&gt;0&lt;/OptType&gt;
+        &lt;Service&gt;
+          &lt;ServiceCode&gt;Service8585.Mem&lt;/ServiceCode&gt;
+          &lt;USERINFOMAP&gt;
+            &lt;OptType&gt;0&lt;/OptType&gt;
+            &lt;ItemName&gt;IFPersonPay&lt;/ItemName&gt;
+            &lt;ItemValue&gt;0&lt;/ItemValue&gt;
+          &lt;/USERINFOMAP&gt;
+        &lt;/Service&gt;
+      &lt;/PrdList&gt;
+    &lt;/Member&gt;
+  &lt;/BODY&gt;
+&lt;/NGMemberRequest&gt;</svcCont><transIDO xmlns="http://ECService.EC.webservice.whty.com/xsd">769201412111415310707</transIDO></request></ECServices></soap:Body></soap:Envelope>

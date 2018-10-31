@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Karmanta - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Karmanta, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>{{title}} | 加款</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/css/elegant-icons-style.css" rel="stylesheet"/>
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Custom styles -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet"/>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="js/lte-ie7.js"></script>
+    <![endif]-->
+    <style>
+        .step_li{ margin-bottom: 40px; font-family: "Microsoft YaHei";}
+        .step_title{background:url(../img/step_title_bg.png) repeat-x 0 25px;}
+        .form-horizontal .step_title{border: 0;}
+        .step_title .step_l{ padding-right: 0;}
+        .step_title b{ display: block;float: right; width: 50px; height: 50px; text-align: center; line-height: 50px; font-size: 35px; color: #fff; background: #ff6060;border-radius:50%;}
+        .step_title .step_r{ background: #fff;}
+        .step_title h3{ margin:0;}
+        .step_title h5 span,.step_color{ color: #df0516;}
+        .step_li,.step_li h1,.step_li h2,.step_li h3,.step_li h4,.step_li h5,.step_li h6,.step_li .h1,.step_li .h2,.step_li .h3,.step_li .h4,.step_li .h5,.step_li .h6 {font-family: "Microsoft YaHei";}
+    </style>
+</head>
+<body>
+    <!-- container section start -->
+    <section id="container" class="">
+        <!--header start-->
+        {% include section.header.html %}
+        <!--header end-->
+
+        <!--sidebar start-->
+        {% module Sidebar({'add-fund'}) %}
+        <!--sidebar end-->
+
+        <!--main content start-->
+        <section id="main-content">
+            <section class="wrapper">
+                <div class="row">
+                    <div class="col-md-12">
+                        <form class="form-validate form-horizontal " method="get">
+
+                            <section class="panel">
+                                <header class="panel-heading">广东圣山网络 加款</header>
+                                <div class="panel-body">
+                                    <div class="step_li">
+                                        <div class="step_title form-group">
+                                            <label class="step_l col-sm-1"><b>1</b></label>
+                                            <div class="step_r col-sm-6">
+                                                <h3>打开微店</h3>
+                                                <h5>流量充值链接：<a href="http://weidian.com/s/163431854?wfr=c" target="_blank">http://weidian.com/s/163431854?wfr=c</a> 任意选择200元或者500元的产品，直接点击立即购买</h5>
+                                            </div>
+                                        </div>
+                                        <div class="step_group form-group">  
+                                             <label class="col-sm-1">&nbsp;</label>
+                                             <div class="col-sm-6">
+                                                <img src="../img/step1.jpg" width="90%">
+                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="step_li">
+                                        <div class="step_title form-group">
+                                            <label class="step_l col-sm-1"><b>2</b></label>
+                                            <div class="step_r col-sm-2">
+                                                <h3>选择要购买的份数</h3>
+                                                <h5>直接去结算</h5>
+                                            </div>
+                                        </div>
+                                        <div class="step_group form-group">  
+                                             <label class="col-sm-1">&nbsp;</label>
+                                             <div class="col-sm-6">
+                                                <img src="../img/step2.jpg" width="90%">
+                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="step_li">
+                                        <div class="step_title form-group">
+                                            <label class="step_l col-sm-1"><b>3</b></label>
+                                            <div class="step_r col-sm-6">
+                                                <h3>填好收货信息</h3>
+                                                <h5><span>注意: 在线支付界面必须选择直接付款，否则不予发货，</span>备注模块一定要写清楚账号信息，否则充错概不负责，最后提交订单完成支付</h5>
+                                            </div>
+                                        </div>
+                                        <div class="step_group form-group">  
+                                             <label class="col-sm-1">&nbsp;</label>
+                                             <div class="col-sm-6">
+                                                <h3>方式一：直接付款</h3>
+                                                <img src="../img/step3.jpg" width="90%">
+                                                <h4 class="step_color">注：选择直接付款方式</h4>
+                                                <p>&nbsp;</p>
+                                                <img src="../img/step4.jpg" width="90%">
+                                                <h4 class="step_color">注：备注写平台账号</h4>
+                                                <p>&nbsp;</p>
+                                                <h3>方式二：支付宝转账</h3>
+                                                <h4>
+                                                    <p>直接支付宝转账 至支付宝账号 <span class="step_color">13726825474</span>  **旋</p>   
+                                                    <p><span class="step_color">转账时留言 平台账号为******* </span> </p>
+                                                    <p>如有疑问请咨询客服QQ:737686887   QQ:1034713733  </p>
+                                                    <p>&nbsp;</p>
+                                                    <img src="../img/step5.jpg" width="90%">
+                                                </h4>
+                                             </div>
+                                        </div>
+                                    </div>
+                                    <div class="step_li">
+                                        <div class="step_group form-group">  
+                                            <label class="col-sm-1">&nbsp;</label>
+                                            <div class="col-sm-6">
+                                                <h4><span class="step_color">温馨提示：</span><br> <br>流量充值发货时间为工作日早上9:00--12:00，下午13:30--18:00，法定节假日以及休息日会不定时发货，通常情况下一个小时之内充值完毕，最迟24小时发货</h4>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </section>
+
+                        </form>
+                    </div>
+                </div>
+                <!-- page end--> </section>
+        </section>
+        <!--main content end--> </section>
+    <!-- container section end -->
+    <!-- javascripts -->
+    <script src="/js/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+    <!-- nice scroll -->
+    <script src="/js/jquery.scrollTo.min.js"></script>
+    <script src="/js/jquery.nicescroll.js"></script>
+    <!-- jquery ui -->
+    <script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
+    <!-- custome script for all page -->
+    <script src="/js/scripts.js"></script>
+    <script src="/js/admin/card.js"></script>
+
+</body>
+</html>

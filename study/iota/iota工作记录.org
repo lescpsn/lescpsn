@@ -1,0 +1,21 @@
+
+#+TITLE:  IOTA工作记录
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/my-org-worg.css" />
+
+* 设备连接服务设计
+** 连接池设计
++ 连接池全局信息
+#+BEGIN_EXAMPLE
+最大连接数： MaxClinetConnet
+连接数超时关闭： ClinetTimeOut
+#+END_EXAMPLE
++ 客户端连接的数据结构
+#+BEGIN_EXAMPLE
+
+#+END_EXAMPLE
+
+
+
+
+** 请求，返回设计
+Request<--->Response

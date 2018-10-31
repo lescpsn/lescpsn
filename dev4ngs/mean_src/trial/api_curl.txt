@@ -1,0 +1,31 @@
+自己：
+{
+        uuid: a7a513e3-e391-4a04-a435-3dfb4b5247f9,
+        tuso_id: 318124,
+        email: e@e.com,
+        token: G1SyHxSoJIAyW5TE1rQOZIQTpkUl24ud,
+}
+
+朋友：
+{
+        uuid: 8cf2aadb-9729-41f9-bed4-065d99f00028
+        tuso_id: 197270,
+        email: lincan@ngs.tech,
+        token: iBbuv0QPoa8heQPLVQZyJpiPGpRRr5eS
+        uuid: ac9530e1-e763-45c3-99ee-63e49ca7ecf7
+}
+
+#10000
+curl -v -XGET "http://api.dev.tusoapp.com:8080/v1/account/verify_username/test_user@qq.com"
+
+#10010
+curl -v -XGET -H "X-Tuso-Device-Token:iOS-Simulator" -H "X-Tuso-Authentication-Token:G1SyHxSoJIAyW5TE1rQOZIQTpkUl24ud" "http://api.dev.tusoapp.com:8080/v1/user/a7a513e3-e391-4a04-a435-3dfb4b5247f9testing"
+
+#10011
+curl -v -XPUT -H "X-Tuso-Device-Token:iOS-Simulator" -H "X-Tuso-Authentication-Token:G1SyHxSoJIAyW5TE1rQOZIQTpkUl24ud" "http://api.dev.tusoapp.com:8080/v1/user/a7a513e3-e391-4a04-a435-3dfb4b5247f9" -d '{"nickname":"fuck USA"}'
+
+#10014
+curl -v -XPUT -H "X-Tuso-Device-Token:iOS-Simulator" -H "X-Tuso-Authentication-Token:G1SyHxSoJIAyW5TE1rQOZIQTpkUl24ud" "http://api.dev.tusoapp.com:8080/v1/user/8cf2aadb-9729-41f9-bed4-065d99f00028/request" -d '{"tuso_id": "197270"}'
+
+#10025
+ curl -v -XPOST -H"X-Tuso-Device-Token:iOS-Simulator" -H "X-Tuso-Authentication-Token:G1SyHxSoJIAyW5TE1rQOZIQTpkUl24ud" "http://api.dev.tusoapp.com:8080/v1/photo/5bd83ec5-d29a-4bc4-ad55-ee860b54abbe/comment" -d'{"reply_to": "78f82f90-6536-4614-9f69-600b8748a04f","content": "啊，乖乖站好","timestamp": "2002-10-02T23:00:00+08:00"}'

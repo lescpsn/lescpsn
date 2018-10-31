@@ -1,0 +1,746 @@
+#+TITLE:  NODE.JS & ES6
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/my-org-worg.css" />
+
+* node.js概览
+#+BEGIN_EXAMPLE
+
+编写高性能网络服务器的javascript脚本性语言(用js开发服务端程序)
+
+单线程异步I/O，事件驱动
+
+#+END_EXAMPLE
+
+
+* 向node.js发问
+** Question 1
++ Q：如何运行第一个node.js程序？
++ A:
+#+BEGIN_EXAMPLE
+1 官网https://nodejs.org/en/下载最新安装包
+
+2 安装node.js，选择好合适的安装目录，一路回车法
+
+3 安装后cmd命令行中用node -v,npm -v查看两个重要的命令是否安装成功
+  node是node.js的主程序，npm是node.js管理包的工具
+
+4 编写第一个001.js程序（名字任意，一般以js作为后缀，理论上讲脚本程序后缀名js也是可以任意的）
+
+5 node 001.js 直接运行程序
+#+END_EXAMPLE
+
+
+#+BEGIN_EXAMPLE
+// 001.js
+
+console.log("Welcome To IOTA!");
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+c/P/l/s/j/nodejs/example:master*? λ node 001.js 
+Welcome To IOTA!
+c/P/l/s/j/nodejs/example:master*? λ 
+#+END_EXAMPLE
+
+** Question 2
++ Q：如何定义变量呢？
++ A:
+#+BEGIN_EXAMPLE
+1 程序想写活，可能是需要变量来动态获取和保存各个阶段的不同的值
+
+2 脚本语言是弱类型语言，变量是没有类型的
+
+3 var 关键字定义变量
+
+4 每一个问题只是一个突破口，以此向下挖掘，发散到不能发散为止
+
+比如：可以联想到注释如何写？既然是脚本语言为何要var，不要var又如何呢？？
+     字符串型"",'',``赋值又有什么区别吗？只是声明一个变量，不赋值，那它初始值又是什么呢？
+     既然是没有类型，那"123"==123吗？"abc"可以直接相加123吗？已经保存已知类型的变量，
+     中途是否可以保存其它类型值。下面简单测试程序中出现的undefined，NaN是什么意思？
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+// 002.js
+
+
+// 如何注释
+// 脚本语言是弱类型语言，变量是没有类型的
+var s_a1 = "Welcome To Iota!:1"; // 字符串 "", '', `` 区别
+var s_a2 = 'Welcome To Iota!:2';
+var s_a3 = `Welcome To Iota!:3`;
+console.log("-------------------------------------");
+console.log("s_a1 is: ", s_a1);
+console.log("s_a2 is: ", s_a2);
+console.log("s_a3 is: ", s_a3);
+console.log("-------------------------------------");
+
+var s_a4; // 只是声明
+console.log("s_a4 is: ", s_a4);
+console.log("-------------------------------------");
+
+var f_a1 = 123.4; // 存储浮点数
+var i_a1 = 123; // 存储整数
+console.log("f_a1 is: ", f_a1);
+console.log("i_a1 is: ", i_a1);
+console.log("s_a1 + i_a1 is: ", s_a1 + i_a1); // 字符串，整数相加
+console.log("f_a1 / i_a1 is: ", f_a1 / i_a1); // 浮点数除以整数
+console.log("f_a1 / s_a1 is: ", f_a1 / s_a1); // 浮点数除以字符串
+console.log("-------------------------------------");
+
+f_a1 = s_a1; // 之前保存字符串的变量也可以赋值给保存浮点型的变量
+console.log("f_a1 is: ", f_a1);
+console.log("-------------------------------------");
+
+i_a21 = 234; // 不用var關鍵字
+console.log("i_a21(not use var) is: ", i_a21);
+console.log("-------------------------------------");
+
+var ch_a1 = "A";
+var ch_a2 = 'B';
+var ch_a3 = `C`;
+console.log("ch_a1 is: ", ch_a1);
+console.log("ch_a2 is: ", ch_a2);
+console.log("ch_a3 is: ", ch_a3);
+
+console.log("-------------------------------------t101: 测试0");
+//var ch_b1 = '123';
+//var int_b1 = 123;
+var ch_b1 = '0';
+var int_b1 = 0;
+
+if (int_b1 == ch_b1) { // 可以打印出來 全部转换成数字比较
+    console.log("int_b1 == ch_b1?", int_b1 == ch_b1);
+}
+
+if (ch_b1 == int_b1) { // 可以打印出來 全部转换成数字比较
+    console.log("ch_b1 == int_b1?", ch_b1 == int_b1);
+}
+
+if (ch_b1) { // 可以打印出來
+    console.log("变量ch_b1保存的字符'0'");
+}
+
+if (int_b1) { // 不能打印出來
+    console.log("变量int_b1保存的数值0");
+}
+console.log("-------------------------------------t102: 测试0");
+
+if (0) { // 不能打印出來
+    console.log("字面量數值0");
+}
+
+if ('0') {
+    console.log("字面量字符'0'");
+}
+console.log("-------------------------------------t103: 测试0");
+if (0 == '0') { // 可以打印出來
+    console.log("字面量數值0=='0'");
+}
+
+if (1 == '1') { // 可以打印出來
+    console.log("字面量數值1=='1'");
+}
+console.log("-------------------------------------");
+
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+c/P/l/s/j/nodejs/example:master*? λ node.exe 002.js 
+-------------------------------------
+s_a1 is:  Welcome To Iota!:1
+s_a2 is:  Welcome To Iota!:2
+s_a3 is:  Welcome To Iota!:3
+-------------------------------------
+s_a4 is:  undefined
+-------------------------------------
+f_a1 is:  123.4
+i_a1 is:  123
+s_a1 + i_a1 is:  Welcome To Iota!:1123
+f_a1 / i_a1 is:  1.0032520325203254
+f_a1 / s_a1 is:  NaN
+-------------------------------------
+f_a1 is:  Welcome To Iota!:1
+-------------------------------------
+i_a21(not use var) is:  234
+-------------------------------------
+ch_a1 is:  A
+ch_a2 is:  B
+ch_a3 is:  C
+-------------------------------------t101: 测试0
+int_b1 == ch_b1? true
+ch_b1 == int_b1? true
+变量ch_b1保存的字符'0'
+-------------------------------------t102: 测试0
+字面量字符'0'
+-------------------------------------t103: 测试0
+字面量數值0=='0'
+字面量數值1=='1'
+-------------------------------------
+c/P/l/s/j/nodejs/example:master*? λ 
+#+END_EXAMPLE
+
+** Question 3
++ Q：如何定义数组呢？
++ A:
+#+BEGIN_EXAMPLE
+1 var arr_a1 = []; // 直接一个方括号就ok了
+
+2 弱类型语言，数组元素类型要一致吗？(如果不一致，就不是传统意义上的数组，只是一个序列)
+
+3 如果不一致，那就应该可以数组中嵌套数组（因为根本无类型要求吗）
+
+4 数组的长度呢？
+
+5 有了数组长度，可以迭代数组？是不是只能(i=0;i<len;i++)呢，有没有其它更好的方式呢？
+
+6 如何获得数组中的元素呢？
+
+7 如何修改数组中的元素呢？
+
+8 如何删除数组中的元素呢？
+
+9 是否可以追加新的元素到已有数组中呢？
+
+10 数组与数组之间有没有什么操作方法，比如链接，拷贝？
+
+11 数组与数组如果能连接，链接完还是数组吗？
+
+12 数组是否可以切片呢？
+
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+var arr_a1 = ['a', 'b', 'c']; // 同一个类型
+var arr_a2 = ['d', 'e', 1, "124"]; // 不同类型混合
+var arr_a3 = ['f', 'eg', 1, "124", [1.23, "hij"]]; // 既然可以不同类型，当然可以支持嵌套
+
+console.log("-------------------------------------");
+console.log("arr_a1 = ", arr_a1);
+console.log("arr_a2 = ", arr_a2);
+console.log("arr_a3 = ", arr_a3);
+
+console.log("-------------------------------------");
+len_arr_a3 = arr_a3.length; // 数组长度
+for (i = 0; i < len_arr_a3; i++) { //  如何迭代
+    console.log(arr_a3[i]);
+}
+
+console.log("-------------------------------------");
+var arr_a4 = arr_a2 + arr_a3;  // 连接两个数组
+console.log("arr_a4 = arr_a2 + arr_a3: ", arr_a4);
+console.log("arr_a4.length = ", arr_a4.length);
+console.log("-------------------------------------");
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+c/P/l/s/j/nodejs/example:master*? λ node.exe 003.js 
+-------------------------------------
+arr_a1 =  [ 'a', 'b', 'c' ]
+arr_a2 =  [ 'd', 'e', 1, '124' ]
+arr_a3 =  [ 'f', 'eg', 1, '124', [ 1.23, 'hij' ] ]
+-------------------------------------
+f
+eg
+1
+124
+[ 1.23, 'hij' ]
+-------------------------------------
+arr_a4 = arr_a2 + arr_a3:  d,e,1,124f,eg,1,124,1.23,hij
+arr_a4.length =  28
+-------------------------------------
+c/P/l/s/j/nodejs/example:master*? λ 
+#+END_EXAMPLE
+
+** Question 4
++ Q：如何定义字典呢？
++ A:
+#+BEGIN_EXAMPLE
+1 javascript的object就是一个字典
+
+2 mymap = {}
+
+3 如何获取某个键的值
+
+4 如何修改某个键的值
+
+5 如何追加一个新的键
+
+6 如何遍历
+
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+// 004.js
+
+mymap = {
+    "id": 10001,
+    "name": "abb"
+};
+
+var id_value = mymap['id'];
+var name_value = mymap['name'];
+console.log("---------------------------------");
+console.log(mymap);
+console.log(id_value);
+console.log(name_value);
+
+console.log("---------------------------------");
+mymap['id'] = '20001';
+console.log(mymap);
+console.log("---------------------------------");
+
+mymap['city'] = 'nanjing';
+console.log(mymap);
+console.log("---------------------------------");
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+c/P/l/s/j/nodejs/example:master*? λ node 004.js
+---------------------------------
+{ id: 10001, name: 'abb' }
+10001
+abb
+---------------------------------
+{ id: '20001', name: 'abb' }
+---------------------------------
+{ id: '20001', name: 'abb', city: 'nanjing' }
+---------------------------------
+c/P/l/s/j/nodejs/example:master*? λ 
+
+#+END_EXAMPLE
+
+** Question 5
++ Q 5.1：如何定义函数呢？
++ A:
+#+BEGIN_EXAMPLE
+1 function 函数名(参数1, 参数2)
+function print_log(args1, args2) {
+}
+#+END_EXAMPLE
+
++ Q 5.2：有匿名函数吗？
+#+BEGIN_EXAMPLE
+有
+#+END_EXAMPLE
+
++ Q 5.3：函数的参数可以再是函数吗？
+#+BEGIN_EXAMPLE
+可以
+语言级别中已经实现了map,filter这种思想的函数了
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+// 005.js
+
+/******************************************************************************/
+function print_log(level, msg) {
+    if (level == "ERRO") {
+        console.log("\033[31m[" + level + "]\033[0m" + msg);
+    } else if (level == "INFO") {
+        console.log("\033[32m[" + level + "]\033[0m" + msg);
+    } else if (level == "WARN") {
+        console.log("\033[33m[" + level + "]\033[0m" + msg);
+    }
+}
+/******************************************************************************/
+function main() {
+    print_log("ERRO", 'This is ERRO test.');
+    print_log("INFO", 'This is INFO test.');
+    print_log("WARN", 'This is WARN test.');
+}
+/******************************************************************************/
+main();
+#+END_EXAMPLE
+#+BEGIN_EXAMPLE
+c/P/l/s/j/nodejs/example:master*? λ node 005.js 
+[ERRO]This is ERRO test.
+[INFO]This is INFO test.
+[WARN]This is WARN test.
+c/P/l/s/j/nodejs/example:master*? λ 
+#+END_EXAMPLE
+
+** Question 6
++ Q: 如何导入其它js文件中的函数呢？
++ A:
+#+BEGIN_EXAMPLE
+// lib.js
+module.exports = {
+    funname1: function(arg1, arg2) {
+    // do something
+    },
+    funname2: function(arg1, arg2) {
+    // do something
+    }
+};
+
+// 006.js
+var libfun = require("./lib.js");
+#+END_EXAMPLE
+#+BEGIN_EXAMPLE
+// lib.js
+/******************************************************************************/
+module.exports = {
+
+    print_log: function(level, msg) {
+        if (level == "ERRO") {
+            console.log("\033[31m[" + level + "]\033[0m" + msg);
+        } else if (level == "INFO") {
+            console.log("\033[32m[" + level + "]\033[0m" + msg);
+        } else if (level == "WARN") {
+            console.log("\033[33m[" + level + "]\033[0m" + msg);
+        }
+    },
+
+    print_log2: function(level, msg) {
+        if (level == "ERRO") {
+            console.log("\033[31m[" + level + "]\033[0m" + msg);
+        } else if (level == "INFO") {
+            console.log("\033[32m[" + level + "]\033[0m" + msg);
+        } else if (level == "WARN") {
+            console.log("\033[33m[" + level + "]\033[0m" + msg);
+        }
+    }
+
+};
+/******************************************************************************/
+
+// 006.js
+
+var libfun = require("./lib.js");
+libfun.print_log("INFO", "print_log function from lib.js");
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+c/P/l/study/nodejs/example:master*? λ node.exe 006.js 
+[INFO]print_log function from lib.js
+c/P/l/study/nodejs/example:master*? λ 
+#+END_EXAMPLE
+
+** Question 7
++ Q 7.1: node.js面向对象的特性呢？
++ A:
+#+BEGIN_EXAMPLE
+可以定义一个结构体
+#+END_EXAMPLE
+
++ Q 7.2: 那结构体可以定义成员方法吗？
++ A:
+#+BEGIN_EXAMPLE
+可以
+#+END_EXAMPLE
+
++ Q 7.3: 那结构体可以继承吗？
+#+BEGIN_EXAMPLE
+可以用组合的方式
+#+END_EXAMPLE
+
+** Question 8
++ Q: node.js如何实现异步呢？
++ A:
+#+BEGIN_EXAMPLE
+1 采用回调函数
+
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+2 采用async可以做到用同步的写法实现异步的功能
+#+END_EXAMPLE
+
+** Question 9
++ Q: node.js事件驱动
++ A:
+#+BEGIN_EXAMPLE
+消息名(相当于通道)
+向一个消息名里抛出消息 emit
+从一个消息名里监听消息 once （多种模式）
+#+END_EXAMPLE
+** Question 10
++ Q: node.js的web后端开发
++ A:
+#+BEGIN_EXAMPLE
+学习相关的三方库
+http
+file
+mysql,postgresql
+mongodb
+#+END_EXAMPLE
+
+
+* es6
+#+BEGIN_EXAMPLE
+ECMAScript语言规范第6版，规范编写JS代码的方式！
+#+END_EXAMPLE
+** let 和 const
++ let
+#+BEGIN_EXAMPLE
+let定义一个变量，并且定义的变量为块级作用域
+#+END_EXAMPLE
+
++ const
+#+BEGIN_EXAMPLE
+const定义一个常量
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+// es6_001.js
+
+const pi = 3.1415926;
+for (let i = 0; i < 2; i++) {
+    console.log("this is for loop i: ", i);
+}
+
+console.log("pi: ", pi);
+
+// let声明的i，只是在for作用域中，这里没有定义的变量i报错
+console.log("this is not for loop i: ", i); 
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+c/P/l/s/javascript/nodejs/es6:master*? λ node.exe  es6_001.js 
+this is for loop i:  0
+this is for loop i:  1
+pi:  3.1415926
+c:\Projects\lescpsn\study\javascript\nodejs\es6\es6_001.js:9
+console.log("this is not for loop i: ", i); 
+                                        ^
+
+ReferenceError: i is not defined
+#+END_EXAMPLE
+
+** for of 直接遍历数组的值
+#+BEGIN_EXAMPLE
+let myArry = ['a', 'ab', "b", "bc"];
+
+for (let v of myArry) {
+    console.log(v);
+}
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+c/P/l/s/javascript/nodejs/es6:master*? λ node.exe  es6_002.js 
+a
+ab
+b
+bc
+c/P/l/s/javascript/nodejs/es6:master*? λ 
+#+END_EXAMPLE
+
+** 函数定义
+ #+BEGIN_EXAMPLE
+ getName: function(name)  ==>     getName(name) 
+ #+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+// es6_003.js
+
+var human = {
+    getName(name) { // getName: function(name)
+        console.log("my name is: ", name);
+    }
+};
+human.getName('abb');
+#+END_EXAMPLE
+#+BEGIN_EXAMPLE
+c/P/l/s/javascript/nodejs/es6:master*? λ node.exe  es6_003.js 
+my name is:  abb
+c/P/l/s/javascript/nodejs/es6:master*? λ 
+#+END_EXAMPLE
+
+** 类定义（class）
+#+BEGIN_EXAMPLE
+// es6_004.js
+
+class Human {
+    constructor(name) {  // 相当于构造函数
+        this.name = name;
+    }
+    getName(){
+        console.log("my name is:",this.name);
+    }
+}
+var man = new Human('bccc');
+man.getName();
+#+END_EXAMPLE
+#+BEGIN_EXAMPLE
+c/P/l/s/javascript/nodejs/es6:master*? λ node.exe es6_004.js 
+my name is: bccc
+c/P/l/s/javascript/nodejs/es6:master*? λ 
+
+#+END_EXAMPLE
+
+** 继承类定义（class，extends）
+#+BEGIN_EXAMPLE
+// es6_005.js
+
+class Human {
+    constructor(name) { // 相当于构造函数
+        this.name = name;
+    }
+    getName() {
+        console.log("my name is:", this.name);
+    }
+}
+
+class Man extends Human {
+    constructor(name, sex) { // 相当于构造函数
+        super(name); // 继承父类的构造函数
+        this.sex = sex;
+    }
+
+    info() {
+        console.log(this.name, "is", this.sex);
+    }
+}
+
+var boy = new Man("Jem", "boy");
+boy.getName();
+boy.info();
+#+END_EXAMPLE
+#+BEGIN_EXAMPLE
+c/P/l/s/javascript/nodejs/es6:master*? λ node.exe es6_005.js 
+my name is: Jem
+Jem is boy
+c/P/l/s/javascript/nodejs/es6:master*? λ 
+#+END_EXAMPLE
+
+** 公有导出
+#+BEGIN_EXAMPLE
+// lib.js
+module.exports  ==>  export
+export {funct, var, var};
+
+require  ==> import
+import {funct, var,var} from "./lib.js"
+#+END_EXAMPLE
+
+** 箭头函数
+#+BEGIN_EXAMPLE
+箭头操作符 => 简化了函数的书写。操作符左边为输入的参数，而右边则是进行的操作以及返回的值
+#+END_EXAMPLE
+#+BEGIN_EXAMPLE
+let arr_a1 = ['a',"ab",1,1.45,['b','bc']];
+console.log(arr_a1);
+console.log("----------------------------------------");
+arr_a1.forEach((item,i) =>console.log(item,i));
+console.log("----------------------------------------");
+#+END_EXAMPLE
+
+
+#+BEGIN_EXAMPLE
+c/P/l/s/javascript/nodejs/es6:master*? λ node.exe  es6_007.js 
+[ 'a', 'ab', 1, 1.45, [ 'b', 'bc' ] ]
+----------------------------------------
+a 0
+ab 1
+1 2
+1.45 3
+[ 'b', 'bc' ] 4
+----------------------------------------
+c/P/l/s/javascript/nodejs/es6:master*? λ 
+#+END_EXAMPLE
+
+** 字符串模板
+#+BEGIN_EXAMPLE
+// es6_008.js
+
+let num = Math.random();
+console.log(`random num is ${num}`);  //必须加有{}
+console.log(`random num is $num`);
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+c/P/l/s/javascript/nodejs/es6:master*? λ node.exe  es6_008.js 
+random num is 0.8724538604517855
+random num is $num
+c/P/l/s/javascript/nodejs/es6:master*? λ 
+#+END_EXAMPLE
+
+** 解构(函数多返回值)
+#+BEGIN_EXAMPLE
+如果函数返回多个值，可以直接返回一个数组，数组中的值会自动被解析到对应接收该值的数组变量中。
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+// es6_009.js
+
+function getVal() {
+    return [1, 'a', "bc"];
+}
+
+[va1, va2, va3] = getVal();
+
+[vb1, vb2] = getVal(); // 接受数组的元素个数可以比返回数组的个数少
+
+//['',vc2,vc3] =getVal(); // 如何表示占位符呢？
+
+console.log(va1, va2, va3);
+console.log(vb1, vb2);
+//console.log(vc2, vc3);
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+c/P/l/s/javascript/nodejs/es6:master*? λ node.exe  es6_009.js 
+1 'a' 'bc'
+1 'a'
+c/P/l/s/javascript/nodejs/es6:master*? λ 
+#+END_EXAMPLE
+
+** 函数参数默认值
+#+BEGIN_EXAMPLE
+// es6_010.js
+
+function sayHi(name='HanMM') {
+    console.log(`Hi ${name}`);
+
+}
+sayHi();
+sayHi('Tom');
+
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+c/P/l/s/javascript/nodejs/es6:master*? λ node.exe  es6_010.js 
+Hi HanMM
+Hi Tom
+c/P/l/s/javascript/nodejs/es6:master*? λ 
+#+END_EXAMPLE
+
+** 新增的集合相关类型
++ map set
+#+BEGIN_EXAMPLE
+// es6_011.js
+
+let s = new Set();
+s.add('zhangsan');
+s.add(11);
+s.add(3.14);
+
+console.log(s);
+console.log(s.size);
+console.log(s.has(11));
+console.log("-----------------------------------");
+let m = new Map();
+m.set('name','Tom');
+m.set('age',32);
+console.log(m);
+console.log(m.size);
+console.log(m.has('age'));
+#+END_EXAMPLE
+
+#+BEGIN_EXAMPLE
+c/P/l/s/javascript/nodejs/es6:master*? λ node.exe  es6_011.js 
+Set { 'zhangsan', 11, 3.14 }
+3
+true
+------------------------
+Map { 'name' => 'Tom', 'age' => 32 }
+2
+true
+c/P/l/s/javascript/nodejs/es6:master*? λ 
+#+END_EXAMPLE
+
++ WeakSet WeakMap 
+#+BEGIN_EXAMPLE
+参数只接受对象 , 且不能遍历.
+#+END_EXAMPLE
+

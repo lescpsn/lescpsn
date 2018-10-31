@@ -1,0 +1,23 @@
+npm -v //  >=3.08
+
+npm i npm g  // npm 升级
+
+// 安装webpack
+npm install webpack -g
+
+
+npm install vue -g 
+
+
+// 安装vue
+ 
+npm install -g vue-cli
+
+vue init webpacke es6  //es6 项目名称
+
+use eslintt  一定选择 no
+
+cd es6
+npm install
+
+npm run dev

@@ -1,0 +1,34 @@
+downstream:
+  '100001': { name: 'QX 趣讯管理员 lb2', shard_id: '100001', master: '100001', domain_id: '000000', shard: '192.168.1.153:80002', pass: 'b0u1o2nZlQuASnMQ', iv: '6820887183850041', key: '3Q6WWVYgP1iVtXd2NP63uiUvygDUlFDU', tags: 'qxqxglylb2', type: 'full-seller' }
+  '100011': { name: '火星殖民地总代理', shard_id: '100001', master: '100001', domain_id: '000000', shard: '192.168.1.153:80002', pass: 'igSOkA8soCdKgnNQ', iv: '6728883200414639', key: '3Q6WWVYgP1iVtXd2NP63uiUvygDUlFDU', tags: 'qxqxglylb2', type: 'full-seller' }
+  '100012': { name: '火星殖民地', shard_id: '100002', master: '100002', domain_id: '000012', shard: '192.168.1.100:8899', pass: 'igSOkA8soCdKgnNQ', iv: '6728883200414639', key: '3Q6WWVYgP1iVtXd2NP63uiUvygDUlFDU', tags: 'qxqxglylb2', type: 'full-seller' }
+  '100013': { name: '土星殖民地', shard_id: '100003', master: '100003', domain_id: '000013', shard: '192.168.1.100:8899', pass: 'igSOkA8soCdKgnNQ', iv: '6728883200414639', key: '3Q6WWVYgP1iVtXd2NP63uiUvygDUlFDU', tags: 'qxqxglylb2', type: 'full-seller' }
+
+user:
+ '2'   : { login: 'lb2',user_id: '100011', role: 'admin',  name: '火星殖民地总代理',  password: 'f17637e565e1af9e1d7ad5030060f7f1dd88bc32'}
+
+domain:
+  '000000': { host: '192.168.1.162:8888', title: '一起充', up_domain: 'None', up_user: 'None'}
+
+interface:
+  'cmcc-sn'        : '陕西移动-全国(逸弘)'
+  'hacmcc'         : '河南移动-分省(能力平台)'
+  '21cn-leliu'     : '21世纪-(乐流)'
+  'wo'             : '联通'
+  'xicheng'        : '西城'
+  'cmcc'           : '广东移动-分省(趣讯)'
+  'cmcc-states'    : '广东移动-全国'
+  'aspire'         : '北京卓望'
+  'niukou'         : '纽扣'
+  'aspire_ec'      : '江苏移动-分省(蝶信)'
+  'migu'           : '动漫基地'
+  'telecom_js'     : '镇江电信'
+  'dahanfc'        : '大汉三通'
+  'cmcc-snbj'      : '陕西移动(宝鸡)-分省'
+  'cmcc-gd-jinyue' : '广东移动-分省(今月)'
+  'xiaowo'         : '上海小沃'
+  'idatafocus'     : '流量星'
+  'xicheng-sn'     : '西城-陕西通道'
+  'llreader'       : '上海朗朗'
+  'idatafocus-cn'  : '流量星-全国'
+  'ruanyunbi'      : '未来无限'

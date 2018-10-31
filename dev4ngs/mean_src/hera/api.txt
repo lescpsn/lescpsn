@@ -1,0 +1,29 @@
+# RESTful API 接口说明
+
+# 批量添加马甲号
+url:    /v1/batchsockpuppet/add
+用法:   curl -v -XPOST "http://192.168.1.127:8888/v1/batchsockpuppet/add"
+
+# 批量修改设置马甲号
+url:    /v1/batchsockpuppet/set
+用法:   curl -v -XPOST "http://192.168.1.127:8888/v1/batchsockpuppet/set"
+
+# 批量删除马甲号
+url:    /v1/batchsockpuppet/delete
+用法:   curl -v -XDELETE "http://192.168.1.127:8888/v1/batchsockpuppet/delete"
+
+// 马甲号对图说点赞
+url:    /v1/sockpuppettotuso/wonderful
+用法:   curl -v -XPOST "http://192.168.1.127:8888/v1/sockpuppettotuso/wonderful" -d '{"sockpuppetuuids":["1111"], "tusouuids":["222"]}'
+
+# 获取所有用户的所有图说
+url:    /v1/tuso
+用法:   curl -v XGET "http://192.168.1.127:8401/v1/tuso?offsetHead=1&offsetTail=5"
+说明：  offsetHead 起始记录数，offsetTail终止记录数，offsetHead=offsetTail查询所有记录
+
+# 获取所有用户的关系
+url:    /v1/relation
+用法:   curl -v -XGET  "192.168.1.127:8401/v1/relation?offsetHead=1&offsetTail=2&seqenceMethod=1"
+说明：  offsetHead 起始记录数，offsetTail终止记录数，seqenceMethod排序方法，
+        offsetHead=offsetTail查询所有记录
+

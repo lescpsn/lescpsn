@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+import "user.proto";
+
+package proto;
+
+enum CommentType {
+    comment_type_null = 0;
+    comment_type_news = 1;
+    comment_type_image = 2;
+    comment_type_diary = 3;
+}
+
+message Comment {
+    int64 ID = 1;
+    string UUID = 2;
+    int64 SourceId = 3;
+    User User = 4;
+    string UserUUID = 5;
+    Comment ReplyTo = 6;
+    string ReplyToUUID = 7;
+    string Content = 8;
+    CommentType Type = 9;
+    string Timestamp = 10;
+}

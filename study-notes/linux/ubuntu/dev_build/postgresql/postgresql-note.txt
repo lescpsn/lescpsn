@@ -1,0 +1,42 @@
+1、联网环境安装方式：
+        a、sudo apt-get install postgresql
+           此过程自动创建了管理员postgres系统用户
+
+        b、切换到root用户下设置postgres系统用户的密码
+           > sudo -i
+            # passwd postgres
+           其实也可以不用设置postgres用户的密码，只是每次登陆postgres用户需要
+           从root用户跳转过去（即从root用户直接su - postgres）
+
+        c、修改数据库原始用户 postgres 密码
+           > su - postgres
+           > psql
+           > ALTER USER postgres with PASSWORD '123456';
+           > \q （退出psql客户端）
+
+           创建一个链接超级用户和数据库
+           > psql
+           > CREATE USER hengjun WITH SUPERUSER PASSWORD '123456';
+           > CREATE DATABASE mean;
+           ( CREATE USER 用户名 WITH SUPERUSER PASSWORD '密码';)
+           ( CREATE DATABASE 数据库名;)
+
+        d、修改数据库配置文件 /etc/postgresql/9.5/main/postgresql.conf
+           listen_addresses = '*'
+
+        e、修改数据库客户端配置文件 /etc/postgresql/9.5/main/pg_hba.conf
+           注释掉两行，新增一行
+           # IPv4 local connections:
+           # host    all             all             127.0.0.1/32            md5
+           # IPv6 local connections:
+           # host    all             all             ::1/128                 md5
+
+            host    all             all             0.0.0.0 0.0.0.0            md5
+
+        f、重启 postgresql 服务
+           /etc/init.d/postgresql  restart
+
+2、psql客户端用法
+
+        psql -U hengjun -h 127.0.0.1  等价于 psql -U hengjun -h 127.0.0.1 hengjun
+        不加数据库名参数默认即用和用户名等同的数据名登陆

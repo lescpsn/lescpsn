@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Referer" content="www.e7chong.com">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Karmanta - Bootstrap 3 Responsive Admin Template">
+    <meta name="author" content="GeeksLabs">
+    <meta name="keyword" content="Karmanta, Dashboard, Admin, Template, Theme, Bootstrap, Responsive, Retina, Minimal">
+    <link rel="shortcut icon" href="img/favicon.png">
+
+    <title>{{ title }} | 银行卡加款</title>
+
+    <!-- Bootstrap CSS -->
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <!-- bootstrap theme -->
+    <link href="/css/bootstrap-theme.css" rel="stylesheet">
+    <!--external css-->
+    <!-- font icon -->
+    <link href="/css/elegant-icons-style.css" rel="stylesheet"/>
+    <link href="/assets/font-awesome/css/font-awesome.css" rel="stylesheet"/>
+    <!-- Custom styles -->
+    <link href="/css/style.css" rel="stylesheet">
+    <link href="/css/style-responsive.css" rel="stylesheet"/>
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 -->
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <script src="js/lte-ie7.js"></script>
+    <![endif]-->
+
+</head>
+<body>
+
+<!-- container section start -->
+<section id="container" class="">
+    <!--header start-->
+    {% include section.header.html %}
+    <!--header end-->
+
+    <!--sidebar start-->
+    {% module Sidebar({'add', 'add-fund-yeepay'}) %}
+    <!--sidebar end-->
+
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <div class="row">
+                <div class="col-md-12">
+                    <form id='pay_form' action="/yeepay/order"
+                          target="_blank" class="form-validate form-horizontal "
+                          method="get">
+                        <section class="panel">
+                            <header class="panel-heading">
+                                银行卡-自动加款
+                            </header>
+                            <div class="panel-body">
+                                {% if message %}
+                                {{message}}
+                                {% else %}
+                                <label class="col-sm-2 col-md-1 control-label">金额</label>
+
+                                <div class="col-sm-6 col-md-4">
+                                    <input type="text" name="amount" placeholder="充值金额请输入大于100的整数"
+                                           class="form-control input-sm"/> 
+                                </div>
+
+                                <div class="col-sm-4 col-md-2">
+                                    <a id="act_query" href="javascript:void(0);" class="btn btn-danger">
+                                        <i class="icon-ok"></i> 充值</a>
+                                </div>
+                                {% end %}
+                            </div>
+                        </section>
+
+                        <section class="panel">
+                            <header class="panel-heading">
+                                在线支付使用帮助
+                            </header>
+
+                            <div class="panel-body">
+
+                                <div class="col-md-12">
+                                    <h3>温馨提示</h3>
+                                    <ol>
+                                        <li>支持国内主流银行储蓄卡以及信用卡充值，如遇到任何支付问题可以查看在线支付帮助；</li>
+                                        <li>充值成功后，余额可能存在延迟现象，一般1到5分钟内到账，如有问题，请咨询客服；</li>
+                                        <li>充值金额输入值必须是大于100的整数；</li>
+                                        <li>充值完成后，您可以进入加款明细查看余额充值状态；</li>
+                                        <li>在线支付手续费为千分之六，实际到账金额会扣除千分之六的手续费。</li>
+                                    </ol>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <img src="/img/yeepay/help1.png"/>
+                                </div>
+                                <div class="col-md-12">
+                                    <img src="/img/yeepay/help2.png"/>
+                                </div>
+
+                            </div>
+                        </section>
+                    </form>
+                </div>
+            </div>
+            <!-- page end-->
+        </section>
+    </section>
+    <!--main content end-->
+
+    <div class="modal" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">提交成功</h4>
+                </div>
+                <div class="modal-body">
+                    √ 充值成功！请点击“充值成功”按钮查看加款余额；<br/>
+                    × 充值失败！请点击“重新充值”按钮重新进行加款。<br/>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" id="pay_success">充值成功</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">重新充值</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+<!-- container section end -->
+<!-- javascripts -->
+<script src="/js/jquery.js"></script>
+<script src="/js/bootstrap.min.js"></script>
+<!-- nice scroll -->
+<script src="/js/jquery.scrollTo.min.js"></script>
+<script src="/js/jquery.nicescroll.js"></script>
+<!-- jquery ui -->
+<script src="/js/jquery-ui-1.9.2.custom.min.js"></script>
+<!-- custome script for all page -->
+<script src="/js/scripts.js"></script>
+<script>
+    $(function () {
+                $('#act_query').click(function () {
+                    $('#pay_form').submit();
+                    $('#myModal').modal('show');
+                });
+
+                $('#pay_success').click(function () {
+                    location.replace('/dashboard');
+                })
+            }
+    );
+</script>
+{% if refresh %}
+<script>
+    setTimeout(function () {
+        location.reload();
+    }, 3000);
+</script>
+{% end %}
+</body>
+</html>

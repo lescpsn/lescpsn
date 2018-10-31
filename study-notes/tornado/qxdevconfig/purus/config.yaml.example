@@ -1,0 +1,126 @@
+role:
+  admin:
+    - admin
+    - admin-card
+    - admin-customer
+    - admin-devops
+    - admin-meituan
+    - admin-point
+    - admin-product
+    - admin-routing
+    - data-batch
+    - charge
+    - data-charge
+    - sinopec-charge
+    - data-query
+    - fee-finance
+    - fee-query
+    - sinopec-query
+    - sinopec-finance
+    - services
+    - fuel-card
+    - fuel-card-bot-account
+    - fuel-card-customer-list
+    - fuel-card-single-recharge
+    - fuel-card-big-recharge
+    - fuel-card-order-list
+    - report-form
+  admin-devops:
+    - admin
+    - admin-card
+    - admin-customer
+    - admin-devops
+    - admin-meituan
+    - data-query
+    - fee-query
+    - sinopec-query
+    - services
+  admin-finance:
+    - admin
+    - data-query
+    - fee-finance
+    - fee-query
+  admin-sales:
+    - admin
+    - admin-meituan
+    - data-query
+    - fee-finance
+  admin-service:
+    - admin
+    - admin-card
+    - data-query
+    - fee-query
+    - sinopec-query
+    - services
+  data_agent:
+    - data-query
+    - fee-finance
+  data_sellers:
+    - charge
+    - data-charge
+    - data-query
+    - fee-finance
+  sinopec_sellers:
+    - charge
+    - sinopec-charge
+    - sinopec-query
+    - sinopec-finance
+  fee_sellers:
+    - fee-finance
+    - fee-query
+  fuel_card_sellers:
+    - fuel-card
+    - fuel-card-bot-account
+    - fuel-card-customer-list
+    - fuel-card-single-recharge
+    - fuel-card-big-recharge
+    - fuel-card-order-list
+  fuel_card_manager:
+    - admin
+    - fuel-card
+    - fuel-card-order-list
+
+database:
+    purus:   'mysql+mysqlconnector://purus:Purus_123@localhost/purus'
+    madeira: 'mysql+mysqlconnector://madeira:madeira_123@localhost/madeira'
+
+config:
+  site: 1
+  title: '一起充平台'
+  copyright: '(C)2015 南京趣讯网络版权所有。'
+  icp: '苏ICP备14052747号-1'
+  port: 8888
+  port_block: 8889
+  debug: False
+
+cache:
+  - {ip: 'localhost', port: 26379}
+
+#machado: {ip: '10.168.42.235', port: 6379, url: 'http://tapi.e7chong.com:8901'}
+#madeira: {ip: '10.168.42.235', port: 6379, db: 1}
+
+blocking:
+  url: 'http://localhost:8889'
+  mongo: 'http://183.207.183.233:8890'
+
+safety:
+  white_list:
+    - '127.0.0.1'
+    - '::1'
+    - '10.168.18.135'
+    - '183.207.183.233'
+  secret: 'uQHbe2CKQeHPaic3'
+
+repo:
+  path: 'config_repo'
+
+connection:
+    quxun_cmcc_fee_madeira: 'http://121.40.154.48:8899'
+    quxun_sinopec_card: 'http://120.26.91.66:9903'
+    quxun_card: 'http://183.207.183.233:9003'
+    modem_forrestal: 'http://localhost:8903'
+    fuel_card_callback: 'http://localhost:8888/fuel_card/callback'
+    db_exporter: 'http://localhost:9090'
+    modem_port: 'http://localhost:11111'
+    repo: 'http://192.168.1.200:8907'
+    spark_statistics: 'http://192.168.1.162:4567'

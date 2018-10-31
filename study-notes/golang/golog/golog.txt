@@ -1,0 +1,6 @@
+https://github.com/ngaut/log
+https://github.com/gogap/logrus
+https://github.com/gogap/logrus
+https://github.com/cxr29/log
+https://github.com/someonegg/golog
+https://github.com/inconshreveable/log15

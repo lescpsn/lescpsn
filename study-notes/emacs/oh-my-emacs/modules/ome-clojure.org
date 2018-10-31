@@ -1,0 +1,131 @@
+#+TITLE: Oh My Emacs Clojure
+#+OPTIONS: toc:2 num:nil ^:nil
+
+This is part of [[https://github.com/xiaohanyu/oh-my-emacs][oh-my-emacs]].
+
+This file contains some settings for [[* Clojure][Clojure]] programming language.
+
+* Prerequisites
+  :PROPERTIES:
+  :CUSTOM_ID: clojure-prerequisites
+  :END:
+
+#+NAME: clojure-prerequisites
+#+CAPTION: Prerequisites for ome-clojure module
+| Package    | Windows | Ubuntu/Debian/Mint | ArchLinux | Fedora | Mac OS X | Mandatory? |
+|------------+---------+--------------------+-----------+--------+----------+------------|
+| [[http://leiningen.org/][Leiningen]]  | [web]   | [web]              | [web]     | [web]  | [web]    | Yes        |
+
+Note:
+- [[http://leiningen.org/][Leiningen]] for Clojure. I recommend you install leiningen from the official
+  website to keep update with the lastest version.
+
+* El-get packages
+  :PROPERTIES:
+  :CUSTOM_ID: clojure-el-get-packages
+  :END:
+
+#+NAME: clojure-el-get-packages
+#+CAPTION: El-get packages for ome-clojure module
+| Package      | Status   | Description                               |
+|--------------+----------+-------------------------------------------|
+| [[https://github.com/clojure-emacs/clojure-mode][clojure-mode]] | Required | Major mode for Clojure.                   |
+| [[https://github.com/clojure-emacs/cider][CIDER]]        | Required | CIDER is a Clojure IDE and REPL for Emacs |
+| [[https://github.com/clojure-emacs/ac-cider][ac-cider]]     | Required | Emacs auto-complete client for CIDER      |
+
+* Clojure
+  :PROPERTIES:
+  :CUSTOM_ID: clojure
+  :END:
+
+[[http://www.clojure.org][Clojure]] is a modern Lisp on top of JVM, it is a member of the Lisp family of
+languages. Clojure extends the code-as-data system beyond parenthesized lists
+(s-expressions) to vectors and maps.
+
+Since Clojure is a Lisp dialect, it should work the SLIME way. Yeah, first
+comes [[https://github.com/technomancy/swank-clojure][swank-clojure]], then [[https://github.com/clojure-emacs/cider][CIDER]][1]. The only thing you need to install is
+[[http://leiningen.org/][leiningen]] 2.x. I recommend you to install it manually, since not all [[https://github.com/technomancy/leiningen/wiki/Packaging][package
+manager]] provides the latest version.
+
+The general way to install lastest stable leiningen is:
+#+BEGIN_SRC sh
+wget -O /tmp/lein https://raw.github.com/technomancy/leiningen/stable/bin/lein
+sudo mv /tmp/lein /usr/bin/lein
+lein version
+#+END_SRC
+
+Or you can see leiningen's [[https://github.com/technomancy/leiningen/wiki/Upgrading][wiki]] for upgrading details.
+
+And to make leiningen works with emacs cider, you should make leiningen know
+something about cider, here's my =$HOME/.lein/profiles.clj=:
+
+#+BEGIN_SRC clojure
+{:user
+ {:plugins
+  [[cider/cider-nrepl "0.8.2"]]}
+ :repl-options
+ {:nrepl-middleware
+  [cider.nrepl.middleware.apropos/wrap-apropos
+   cider.nrepl.middleware.classpath/wrap-classpath
+   cider.nrepl.middleware.complete/wrap-complete
+   cider.nrepl.middleware.info/wrap-info
+   cider.nrepl.middleware.inspect/wrap-inspect
+   cider.nrepl.middleware.macroexpand/wrap-macroexpand
+   cider.nrepl.middleware.ns/wrap-ns
+   cider.nrepl.middleware.resource/wrap-resource
+   cider.nrepl.middleware.stacktrace/wrap-stacktrace
+   cider.nrepl.middleware.test/wrap-test
+   cider.nrepl.middleware.trace/wrap-trace
+   cider.nrepl.middleware.undef/wrap-undef]}}
+#+END_SRC
+
+Now, just open a clojure file, then =cider-jack-in=, and you can program
+Clojure the SLIME way. [[http://vimeo.com/22798433][Here]] is an awesome live demo to demonstrate the Clojure
+workflow.
+
+It's really really awesome, ah?
+
+#+NAME: clojure
+#+BEGIN_SRC emacs-lisp
+(ome-install 'clojure-mode)
+
+(defun ome-cider-setup ()
+  (add-hook 'cider-mode-hook 'cider-turn-on-eldoc-mode)
+  (setq nrepl-hide-special-buffers t)
+  (setq cider-repl-tab-command 'indent-for-tab-command)
+  (setq cider-prefer-local-resources t)
+  (setq cider-repl-pop-to-buffer-on-connect nil)
+  (setq cider-repl-pop-to-buffer-on-connect nil)
+  (setq cider-popup-stacktraces nil)
+  (setq cider-repl-popup-stacktraces t)
+  (setq cider-auto-select-error-buffer t)
+  (setq nrepl-buffer-name-show-port t)
+  (setq cider-repl-display-in-current-window t)
+  (setq cider-repl-result-prefix ";; => ")
+  (setq cider-interactive-eval-result-prefix ";; => ")
+  (setq cider-repl-use-clojure-font-lock t)
+  (setq cider-test-show-report-on-success t)
+  (setq nrepl-hide-special-buffers t)
+  (setq nrepl-buffer-name-separator "-")
+  (setq nrepl-buffer-name-show-port t)
+  ;; repl history
+  (setq cider-repl-wrap-history t))
+
+(defun ome-ac-cider-setup ()
+  (add-hook 'cider-mode-hook 'ac-flyspell-workaround)
+  (add-hook 'cider-mode-hook 'ac-cider-setup)
+  (add-hook 'cider-repl-mode-hook 'ac-cider-setup)
+  (eval-after-load "auto-complete"
+    '(add-to-list 'ac-modes 'cider-repl-mode)))
+
+(when (executable-find "lein")
+  (ome-install 'cider)
+  (ome-install 'ac-cider))
+#+END_SRC
+
+* Todos
+- The boot up speed of JVM is too slow, so we may need to refer to
+  http://icylisper.github.io/jark/.
+
+
+[1] CIDER was formerly known as and renamed from =nrepl.el=.

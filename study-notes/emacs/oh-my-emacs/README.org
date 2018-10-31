@@ -1,0 +1,255 @@
+#+TITLE: Oh My Emacs
+* Announcement
+Hey, emacsers,
+
+I've been inactive on this project for a long long time, sorry about that since
+I'm busy on my personal business. And I'm looking for a new maintainer for this
+project since I've switched to [[https://github.com/syl20bnr/spacemacs][spacemacs]] recently, and I must say that I'm
+really impressed by the work of spacemacs community.
+
+The reason to switch to spacemacs:
+- Spacemacs is much more faster than oh-my-emacs due to its lazy-loading feature.
+- Spacemacs has the best community among all "dotemacs" project, unfortunately,
+  I don't have enough time to foster a community for oh-my-emacs.
+- Spacemacs has more packages support, which is called [[https://github.com/syl20bnr/spacemacs/tree/master/layers][layers]] in its own words.
+- Spacemacs is driven by [[https://github.com/emacs-helm/helm][helm]] and [[https://bitbucket.org/lyro/evil/wiki/Home][evil]], two of my favourite and the most
+  powerful packages in emacs world, which is the same as oh-my-emacs.
+
+Among all of the above, however, I still prefer oh-my-emacs's org-mode based
+literate documentation. It's an amazing experimentation and a wonderful journey
+for [[https://en.wikipedia.org/wiki/Literate_programming][literate programming]], in a modern way. This is the best part of oh-my-emacs.
+
+And I think it's better for emacs community to put major focus on one great
+project, so I think it's time to end this experimentation. And I may contribute
+some of the tiny great features of oh-my-emacs to spacemacs, when I have time.
+If anybody still has some interest in oh-my-emacs and want to be the new
+maintainer, contact me and we can discuss some internal details.
+
+Thanks. Thanks for all PR and contributions for oh-my-emacs. Happy with you in
+the last two years.
+
+* Introduction
+
+#+ATTR_HTML: title="Join the chat at https://gitter.im/xiaohanyu/oh-my-emacs"
+[[https://gitter.im/xiaohanyu/oh-my-emacs?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge][file:https://badges.gitter.im/Join%20Chat.svg]]
+
+It is said that Emacs is "a great operating system, lacking only a decent
+editor"[1].
+
+Yes, it is, it really is. In fact, Emacs has basic process control and
+management, window and frame management(just like windows manager in modern
+Linux desktop environment), programming APIs(yeah, elisp to emacs is what
+syscall and glibc to Linux), comprehensive manuals and documentation. The only
+limitation with Emacs is your imagination.
+
+You can live in Emacs if you like.
+
+But I won't do that, since I want to watch video with mplayer, surf the
+Internet with Firefox/Chrome(not with [[http://emacs-w3m.namazu.org/][emacs-w3m]]), listen to music with
+[[http://amarok.kde.org/][amarok]]. I use Emacs to do what it is good at, namely, text editing. To me,
+coding and writing.
+
+This project was born one day I want to reorganize my messy =.emacs.d=. I've
+tried all the famous =.emacs.d= projects(such as [[https://github.com/bbatsov/prelude][prelude]], [[https://github.com/technomancy/emacs-starter-kit][starter-kit]], etc) but
+none of them works the way I want it to.
+
+Then I found [[https://github.com/eschulte/emacs24-starter-kit][emacs24-starter-kit]], I was deeply attracted by its literate way
+to organize and embed elisp code in org-mode files, I wanted to make some
+contribution to make it a full-blown hacking environment, but I stopped after
+I dived into the code a little, since I want:
+- Adapt =el-get= instead of the builtin =package.el=, and
+- Have a better completion including =auto-complete= and various =ac-sources=
+  projects for various programming languages.
+
+The starter kit projects is just starter's kit, what I want is a full-blown
+hacker's kit. So I start my own project, [[https://github.com/xiaohanyu/oh-my-emacs][oh-my-emacs]], whose name is inspired
+by [[https://github.com/robbyrussell/oh-my-zsh][oh-my-zsh]].
+
+* Features
+- Better default settings with various eye candy, powerline, scrollbar,
+  color-theme, fonts, etc.
+- Adopt =el-get= as the default package manager for Emacs, instead of the
+  default builtin =package.el=, say goodbye to =./configure; make; make
+  install= and explicitly manually management of =load-path=. =el-get= also
+  provides automatic documentation management, customizable user's recipe
+  support, etc.
+- Self-adapted, only install necessary packages when it satisfies the
+  prerequisities. You need to install [[http://clang.llvm.org/][clang]] for [[https://github.com/brianjcj/auto-complete-clang][auto-complete-clang]], for
+  example.
+- Modular, only load necessary packages as you need.
+- Literate, each package has comprehensive documentation or even a tiny
+  tutorial with it, together with necessary web links. Say goodbye to old,
+  out-dated emacs lisp code from Google.
+- Work as expected, completion every where when possible, semantic code
+  completion through [[https://github.com/auto-complete/auto-complete][auto-complete]] with various ac backend, [[https://github.com/emacs-helm/helm][helm]] for
+  minibuffer completion, etc.
+- Full-blown, oh-my-emacs is not another starter kit, it is hacker kit.
+
+* Quick Start
+Simple enough, first, ensure you have a good network(Chinese users should get
+rid of GFW when possible to avoid many weird problems during first startup);
+second, *ensure that you have installed the necessary tools* pointed out by
+the *Prerequisites* sections from oh-my-emacs modules. Basically, you need to
+install the following packages in you operating system, which is the mandatory
+prerequisites of [[file:ome.org][ome.org]]:
+- [[https://www.gnu.org/software/emacs/][emacs 24.3+]]
+- [[http://savannah.nongnu.org/projects/cvs][cvs]]
+- [[http://subversion.apache.org/][subversion]]
+- [[http://mercurial.selenic.com/][mercurial]]
+- [[http://git-scm.com/][git]]
+- [[http://www.gnu.org/software/make/][make]]
+- [[http://www.gnu.org/software/texinfo/][texinfo]]
+- [[http://gcc.gnu.org/][gcc]]
+- [[http://www.gnu.org/software/automake/][automake]]
+- [[http://www.gnu.org/software/autoconf/][autoconf]]
+
+Please backup your old =.emacs= and =.emacs.d= before you join the journey:
+
+#+BEGIN_SRC sh
+git clone https://github.com/xiaohanyu/oh-my-emacs $HOME/.emacs.d
+#+END_SRC
+
+Then just fire up your Emacs and make a coffee, and you should have a
+full-blown Emacs OS!
+
+** Evil
+
+Note that oh-my-emacs enabled [[http://gitorious.org/evil/pages/Home][evil]] by default, you can disable it globally by
+=M-x evil-mode=, however, I do recommend you enable it and try to adapt, ah,
+finally the Emacs OS get a good editor, evil.
+
+** Helm
+You may miss the old =M-x= when you first start with oh-my-emacs, me too,
+before I fall in love with [[https://github.com/emacs-helm/helm][helm]]. I highly recommend you to adapt with the helm
+way. Believe me, helm will bring you lots of surprise.
+
+There're two key points for helm beginners:
+- In normal helm, =TAB= is not used as the traditional completion key. Maybe
+  this is the most whirlwind turnaround with helm since so many packages use
+  =TAB= for completion. Remember, =TAB= in helm is used to access the helm
+  action menu. You may wonder, then, how can I do type completion in helm? The
+  answer is, no need to do type completion explicitly. Just type, and helm will
+  lead you to the right place. However, oh-my-emacs has binded =TAB= to
+  =helm-execute-persistent-action= for you, which will makes you feel like
+  home. Type =C-z= for amazing things, and =C-SPC= to select and do some cool.
+- oh-my-emacs bind the traditional =C-x C-f= to =helm-find-files= by
+  default. You should use =C-l= to go to the precedent directory level instead
+  of =DEL=.
+
+* What's in Oh-my-emacs
+
+Now you know why Emacs is "a great operating system, lacking only a decent
+editor".
+
+#+NAME: what's-in-oh-my-emacs
+#+CAPTION: What's in oh-my-emacs
+| Module           | Package             | Description                                                                                              |
+|------------------+---------------------+----------------------------------------------------------------------------------------------------------|
+| ome-advanced     | [[http://gitorious.org/evil/pages/Home][evil]]                | Evil is an extensible vi layer for Emacs.                                                                |
+|                  | [[http://github.com/cofi/evil-leader][evil-leader]]         | Add <leader> shortcuts to Evil.                                                                          |
+|                  | [[http://github.com/timcharper/evil-surround][evil-surround]]       | Emulate Tim Pope's surround.vim in evil.                                                                 |
+|                  | [[https://github.com/magnars/expand-region.el#readme][expand-region]]       | Expand region increases the selected region by semantic units.                                           |
+|                  | [[https://github.com/winterTTr/ace-jump-mode/wiki][ace-jump-mode]]       | A quick cursor location minor mode for emacs                                                             |
+| ome-auto-mode    | [[https://github.com/lunaryorn/puppet-mode][puppet-mode]]         | A simple mode for editing puppet manifests                                                               |
+|                  | [[nil][wikipedia-mode]]      | Mode for editing Wikipedia articles off-line                                                             |
+|                  | [[https://github.com/yoshiki/yaml-mode][yaml-mode]]           | Simple major mode to edit YAML file for emacs                                                            |
+| ome-basic        | [[https://github.com/lunaryorn/flycheck][flycheck]]            | On-the-fly syntax checking extension                                                                     |
+| ome-cc           | [[https://github.com/vmfhrmfoaj/cscope-el][xcscope]]             | Cscope interface for (X)Emacs                                                                            |
+|                  | [[https://github.com/brianjcj/auto-complete-clang][auto-complete-clang]] | Auto-complete sources for Clang. Combine the power of AC, Clang and Yasnippet.                           |
+| ome-clojure      | [[https://github.com/clojure-emacs/clojure-mode][clojure-mode]]        | Emacs support for the Clojure language.                                                                  |
+|                  | [[https://github.com/clojure-emacs/cider][cider]]               | CIDER is a Clojure IDE and REPL.                                                                         |
+|                  | [[https://github.com/purcell/ac-nrepl][ac-nrepl]]            | Nrepl completion source for Emacs auto-complete package                                                  |
+| ome-common-lisp  | [[https://github.com/antifuchs/slime][slime]]               | Superior Lisp Interaction Mode for Emacs                                                                 |
+|                  | [[https://github.com/purcell/ac-slime][ac-slime]]            | Emacs auto-complete plugin for Slime symbols                                                             |
+| ome-completion   | [[https://github.com/auto-complete/auto-complete][auto-complete]]       | The most intelligent auto-completion extension.                                                          |
+|                  | [[https://github.com/emacs-helm/helm][helm]]                | Emacs incremental and narrowing framework                                                                |
+|                  | [[https://github.com/auto-complete/popup-el][popup]]               | Visual Popup Interface Library for Emacs                                                                 |
+|                  | [[https://github.com/capitaomorte/yasnippet.git][yasnippet]]           | YASnippet is a template system for Emacs.                                                                |
+| ome-emacs-lisp   | [[https://github.com/purcell/elisp-slime-nav][elisp-slime-nav]]     | Slime-style navigation for Emacs Lisp                                                                    |
+| ome-experimental | [[https://raw.github.com/emacsmirror/emacswiki.org/master/lacarte.el][lacarte]]             | Execute menu items as commands, with completion.                                                         |
+|                  | [[nil][sr-speedbar]]         | Same frame speedbar                                                                                      |
+|                  | [[https://github.com/aspiers/smooth-scrolling][smooth-scrolling]]    | Make emacs scroll smoothly.                                                                              |
+|                  | [[https://github.com/nflath/hungry-delete][hungry-delete]]       | Enables hungry deletion in all modes.                                                                    |
+|                  | [[http://doxymacs.sourceforge.net/][doxymacs]]            | Doxymacs is Doxygen + {X}Emacs.                                                                          |
+| ome-gui          | [[https://github.com/bbatsov/solarized-emacs][solarized-emacs]]     | Emacs highlighting using Ethan Schoonover's Solarized color scheme                                       |
+|                  | [[https://github.com/milkypostman/powerline][powerline]]           | Powerline for Emacs                                                                                      |
+|                  | [[https://github.com/m2ym/yascroll-el][yascroll]]            | Yet Another Scroll Bar Mode                                                                              |
+| ome-java         | [[https://github.com/senny/emacs-eclim/][eclim]]               | This project brings some of the great eclipse features to emacs developers.                              |
+| ome-miscs        | [[https://github.com/jlr/rainbow-delimiters#readme][rainbow-delimiters]]  | Color nested parentheses, brackets, and braces according to their depth.                                 |
+|                  | [[http://cvs.savannah.gnu.org/viewvc/*checkout*/gettext/gettext/gettext-tools/misc/po-mode.el][po-mode]]             | Major mode for GNU gettext PO files                                                                      |
+|                  | [[https://github.com/magit/magit#readme][magit]]               | It's Magit! An Emacs mode for Git.                                                                       |
+|                  | [[https://github.com/bbatsov/projectile][projectile]]          | Project navigation and management library for Emacs                                                      |
+|                  | [[https://github.com/Fuco1/smartparens][smartparens]]         | Autoinsert pairs of defined brackets and wrap regions                                                    |
+|                  | [[http://emacs-w3m.namazu.org/][emacs-w3m]]           | A simple Emacs interface to w3m                                                                          |
+|                  | [[https://github.com/syohex/emacs-quickrun][quickrun]]            | Run commands quickly                                                                                     |
+|                  | [[http://www.eskimo.com/~seldon/diminish.el][diminish]]            | An Emacs package that diminishes the amount of space taken on the mode line by the names of minor modes. |
+| ome-ocaml        | [[http://caml.inria.fr/svn/ocaml/trunk/emacs][caml-mode]]           | O'Caml code editing commands for Emacs                                                                   |
+|                  | [[svn://svn.forge.ocamlcore.org/svn/tuareg/trunk][tuareg-mode]]         | A GOOD Emacs mode to edit Objective Caml code.                                                           |
+| ome-org          | [[http://orgmode.org][org-mode]]            | Org-mode 8.x branch.                                                                                     |
+|                  | [[http://www.emacswiki.org/emacs/Htmlize][htmlize]]             | Convert buffer text and decorations to HTML.                                                             |
+| ome-python       | [[https://github.com/jorgenschaefer/elpy][elpy]]                | Emacs Python Development Environment                                                                     |
+| ome-ruby         | [[https://github.com/nonsequitur/inf-ruby][inf-ruby]]            | Inferior Ruby Mode - ruby process in a buffer.                                                           |
+| ome-scheme       | [[http://www.nongnu.org/geiser/][geiser]]              | Make Scheme hacking inside Emacs (even more) fun.                                                        |
+|                  | [[https://github.com/xiaohanyu/ac-geiser][ac-geiser]]           | Emacs auto-complete backend for geiser                                                                   |
+| ome-tex          | [[http://www.gnu.org/software/auctex/][auctex]]              | AUCTeX is an extensible package for writing and formatting TeX files Emacs.                              |
+|                  | [[http://staff.science.uva.nl/~dominik/Tools/cdlatex/cdlatex.el][cdlatex-mode]]        | a minor mode which re-implements many features also found in the AUCTeX LaTeX mode.                      |
+| ome-writing      | [[http://jblevins.org/projects/markdown-mode/][markdown-mode]]       | Major mode to edit Markdown files in Emacs                                                               |
+
+* Gallery
+[[http://www.douban.com/photos/album/117065634/][Here]]'re some screenshots of oh-my-emacs:
+
+- Startup screen:
+[[http://img3.douban.com/view/photo/large/public/p2134421167.jpg]]
+
+- =org-babel= from org-mode, auto-complete for emacs lisp:
+[[http://img3.douban.com/view/photo/large/public/p2134421326.jpg]]
+
+- helm-grep to search words in multiple files:
+[[http://img3.douban.com/view/photo/large/public/p2134421804.jpg]]
+
+- auto-complete for C++ QT
+[[http://img3.douban.com/view/photo/large/public/p2134420940.jpg]]
+
+- auto-complete for python
+[[http://img4.douban.com/view/photo/large/public/p2134421478.jpg]]
+
+- AUCTeX with outline-minor-mode, helm completion for TeX commands
+[[http://img3.douban.com/view/photo/large/public/p2134420730.jpg]]
+
+* References
+- [[https://github.com/bbatsov/prelude][Emacs Prelude]]: Prelude is an Emacs distribution that aims to enhance the
+  default Emacs experience.
+- [[https://github.com/eschulte/emacs24-starter-kit][emacs24-starter-kit]]: A cleaner version of the literate starter kit based on
+  Emacs24.
+- [[https://github.com/technomancy/emacs-starter-kit][emacs-starter-kit]]: The Starter Kit provides a more pleasant set of defaults
+  than you get normally with Emacs.
+- [[https://github.com/rdallasgray/graphene][graphene]]: A set of defaults for Emacs, for refugees from GUI text editors.
+- [[https://github.com/purcell/emacs.d][purcell's emacs.d]]: An Emacs configuration bundle with batteries included.
+
+* Tips
+- You need to install =emacs24-el= in ubuntu, or =org-export= won't work. I
+  don't know why.
+
+* Support This Project
+
+I'm just a single guy and I do not have enough time to make this project meet
+everybody's needs. So if you want to support this project, you can do in the
+following ways:
+
+- Contributing code. I've written a basic [[https://github.com/xiaohanyu/oh-my-emacs/blob/master/CONTRIBUTING.org][CONTRIBUTING]] guide about it. Please
+  do read it before you fire github issue or send me a pull request.
+- Make some donations. Currently I'm a freelancer doing some part-time job for
+  my life. I create this project first for me, then share for you. So if you
+  think it is not useless and want to support this project, you can make some
+  donations for me via paypal or alipay:
+  - paypal: xiaohanyu1988<at>gmail.com (Paypal didn't support donation button
+    for Chinese user, damn.)
+  - alipay:
+#+BEGIN_HTML
+  <a href='http://me.alipay.com/xiaohanyu'>
+    <img src='https://img.alipay.com/sys/personalprod/style/mc/btn-index.png'/>
+  </a>
+#+END_HTML
+
+* Footnotes
+[1] [[http://en.wikipedia.org/wiki/Editor_war][Editor war]]

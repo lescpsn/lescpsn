@@ -1,0 +1,67 @@
+syntax = "proto3";
+
+import "nulltype.proto";
+
+package proto;
+
+enum Gender {
+    user_gender_null = 0;
+    user_gender_female = 1;
+    user_gender_male = 2;
+}
+
+enum Status {
+    user_status_null = 0;
+    user_status_activated = 1;
+    user_status_sockpuppet = 2;
+    user_status_deactivated = 3;
+    user_status_closed = 4;
+}
+
+message User {
+    int64 ID = 1;
+    string UUID = 2;
+    string CreatedAt = 3;
+    StringType TusoID = 4;
+    StringType Email = 5;
+    StringType MobileNumber = 6;
+    StringType Password = 7;
+    string Birthday = 8;
+    StringType Salt = 9;
+    StringType Token = 10;
+    StringType Nickname = 11;
+    StringType RealName = 12;
+    Gender Gender = 13;
+    StringType Location = 14;
+    IntegerType FolloweesCount = 15;
+    IntegerType FollowersCount = 16;
+    IntegerType FriendsCount = 17;
+    IntegerType ImagesCount = 18;
+    IntegerType TusosCount = 19;
+    StringType NuclearKey = 20;
+    StringType Secrets = 21;
+    Status Status = 22;
+    string FirstPhoto = 25;
+    string FirstTuso = 26;
+}
+
+enum UserRelatedType {
+    related_type_null = 0;
+    related_type_none = 1;
+    related_type_followee = 2;
+    related_type_follower = 3;
+    related_type_mutual_follow = 4;
+    related_type_friend = 5;
+    related_type_Self = 100;
+}
+
+message UserRelation {
+    int64 ID = 1;
+    string UUID = 2;
+    IntegerType FromID = 3;
+    IntegerType ToID = 4;
+    UserRelatedType RelatedType = 5;
+    BooleanType ApplyingFriends = 6;
+    string ApplyAt = 7;
+    StringType Remark = 8;
+}

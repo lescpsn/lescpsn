@@ -1,0 +1,10 @@
+所需依赖包模块安装
+pip3 install redis
+pip3 install SQLAlchemy
+pip3 install pinyin
+
+# mysql-connector-python采用pip3自动安装不，采用手工方式安装
+> wget http://cdn.mysql.com/Downloads/Connector-Python/mysql-connector-python-2.0.4.zip
+> unzip mysql-connector-python-2.0.4.zip
+> cd mysql-connector-python-2.0.4
+> python3 setup.py install

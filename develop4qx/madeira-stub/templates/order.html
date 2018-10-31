@@ -1,0 +1,289 @@
+<html>
+<head>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.css">
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="/css/bootstrap-theme.css">
+
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="/js/jquery-2.1.1.js"></script>
+    <script src="/js/bootstrap.js"></script>
+
+    <style>
+        .highlight {
+            padding: 9px 14px;
+            margin-bottom: 14px;
+            background-color: #f7f7f9;
+            border: 1px solid #e1e1e8;
+            border-radius: 4px;
+        }
+    </style>
+
+</head>
+<body>
+<div class="jumbotron">
+    <h1>Madeira/Stub</h1>
+    <!--<p>测试框架</p>-->
+    <ul class="nav nav-tabs">
+        <li role="presentation" class="active"><a href="/unit/start">Ordering</a></li>
+        <li role="presentation"><a href="/unit/query">Querying</a></li>
+    </ul>
+</div>
+<!--<form method="post" action='http://121.40.139.128:8899/order.do'>-->
+<!-- <form method="post" action='http://121.40.139.128:9998/order.do'> -->
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 form-horizontal">
+
+            <div class="row">
+
+                <label class="col-md-1 control-label">Type</label>
+
+                <div class="col-md-11 form-group">
+                    <label class="radio-inline">
+                        <input type="radio" name="prod_type" id="prod_fee" value="fee"> Fee
+                    </label>
+                    <label class="radio-inline">
+                        <input type="radio" name="prod_type" id="prod_data" value="data"> Data
+                    </label>
+                </div>
+
+                <label class="col-md-1 control-label">路由</label>
+
+                <div class="col-md-2 form-group">
+                    <select class="form-control" id='routing'>
+                        <option value="stub">Stub</option>
+                    </select>
+                </div>
+
+                <label class="col-md-1 control-label">结果</label>
+
+                <div class="col-md-2 form-group">
+                    <select class="form-control" id='result'>
+
+                    </select>
+                </div>
+
+                <label class="col-md-1 control-label">目标</label>
+
+                <div class="col-md-2 form-group">
+                    <select class="form-control" id='url'>
+                        <option value="http://localhost:8899">Localhost(8899)</option>
+                        <option value="http://localhost:8901">Localhost(8901)</option>
+                        <option value="http://localhost:8902">Localhost(8902)</option>
+                        <option value="http://121.41.55.86:8899">Elsa(8899)</option>
+                        <option value="http://fee.e7chong.com:8899">Billy(话费节点)</option>
+                        <option value="http://data.e7chong.com">Chandler(流量节点)</option>
+                        <option value="http://192.168.1.72:8902">Ranger(8902)</option>
+                    </select>
+                </div>
+
+                <label class="col-md-1 control-label">号码</label>
+
+                <div class="col-md-3 form-group">
+                    <select class="form-control" id='mobile'>
+                        <option value="18151671606">(江苏电信)18151671606</option>
+                        <option value="18822972877">(东莞移动)18822972877</option>
+                        <option value="18626411002">(江苏联通)18626411002</option>
+                        <option value="13951771065">(江苏移动)13951771065</option>
+                        <option value="13770830500">(江苏移动)13770830500</option>
+                        <option value="13989487822">(全国移动测试)13989487822</option>
+                        <option value="13989487823">(全国移动测试)13989487823</option>
+                        <option value="13760759751">(广东移动)13760759751</option>
+                        <option value="13602876410">(广东移动)13602876410</option>
+                        <option value="13794389182">(广东移动)13794389182</option>
+                        <option value="13510251926">(a广东移动)13510251926</option>
+                        <option value="18905172668">(江苏电信)18905172668</option>
+                        <option value="13382010799">(江苏电信)13382010799</option>
+                        <option value="13000101234">(北京联通)13000101234</option>
+                        <option value="13675119562">(江苏移动)13675119562</option>
+                        <option value="13510251926">(广东移动)13510251926</option>
+                        <option value="18218619466">(广东移动)18218619466</option>
+                        <option value="13922766180">(广东移动)13922766180(吴红安)</option>
+                        <option value="13911808888">(北京移动)13911808888</option>
+                        <option value="18627190241">(武汉联通)18627190241</option>
+
+
+                    </select>
+                </div>
+
+                <label class="col-md-1 control-label">用户</label>
+
+                <div class="col-md-2 form-group">
+                    <select class="form-control" id='user_id'>
+                        <option value="100001">100001</option>
+                        <option value="100002">100002</option>
+                        <option value="100003">100003</option>
+                        <option value="100011">100011</option>
+                    </select>
+                </div>
+
+                <label class="col-md-1 control-label">面值</label>
+
+                <div class="col-md-2 form-group">
+                    <input class='form-control' type='text' id="price" name='price' value='10'/>
+                </div>
+
+                <label class="col-md-1 control-label">售价</label>
+
+                <div class="col-md-2 form-group">
+                    <input class='form-control' type='text' id="value" name='value' value='9870'/>
+                </div>
+
+                <label class="col-md-1 control-label">成本</label>
+
+                <div class="col-md-3 form-group">
+                    <input class='form-control' type='text' id="cost" name='cost' value='9810'/>
+                </div>
+
+                <label class="col-md-1 control-label">流量包</label>
+
+                <div class="col-md-5 form-group">
+                    <select class='form-control' id="offer" name='offer'>
+                        <option value='TBU00000200A'>TBC00002000A 联通3元20M流量包</option>
+                        <option value='TBU00000500A'>TBC00002000A 联通6元50M流量包</option>
+                        <option value='TBC00000300B'>TBC00000300B 全国电信30M流量包</option>
+                        <option value='TBC00000000T'>TBC00000000T 电信0元非定向0M流量包</option>
+                        <option value='TBC00000100A'>TBC00000100A 电信10M流量包</option>
+                        <option value='TBC00000100B'>TBC00000100B 电信10M流量包</option>
+                        <option value='TBC00000300A'>TBC00000300A 电信30M流量包</option>
+                        <option value='TBC00001000A'>TBC00001000A 电信100M流量包</option>
+                        <option value='TBC00002000A'>TBC00002000A 电信200M流量包</option>
+                        <option value='TBC00005000A'>TBC00005000A 电信500M流量包</option>
+                        <option value='TBM00000300A'>TBM00000100A 移动10M流量包</option>
+                        <option value='TBM00000300A'>TBM00000300A 移动30M流量包</option>
+                        <option value='TBM00001500A'>TBM00001500A 移动150M流量包</option>
+                        <option value='TBM00010000A'>TBM00010000A 移动1G流量包</option>
+                        <option value='TBU00002000A'>TBC00005000A 联通20元100M流量包</option>
+
+                    </select>
+                </div>
+
+                <label class="col-md-2 control-label">代充结果</label>
+
+                <div class="col-md-4 form-group">
+                    <select class='form-control' id="spc_result" name='offer'>
+                        <option value='0:0'>成功(0:0)</option>
+                        <option value='0:902'>卡密错(0:902)</option>
+                        <option value='0:903'>卡失效(0:903)一次</option>
+                        <option value='0:903/2'>卡失效(0:903)二次</option>
+                        <option value='0:905'>号码错(0:905)</option>
+                        <option value='0:906'>未知结果(0:906)</option>
+                        <option value='113:905'>帐户余额不足(113:-1)</option>
+                    </select>
+                </div>
+
+                <div class="col-md-2">
+                    <a id='btn_act' class="btn btn-danger">START!</a>
+                </div>
+
+                <label class="col-md-12"></label>
+                <label class="col-md-1 control-label">Result</label>
+
+                <div class="col-md-12">
+                    <pre style="height: 200px;" id="message" class="highlight"></pre>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    $(function () {
+
+        $('#btn_act').click(function () {
+            var t = $('input[name=prod_type]:checked').val();
+
+            if (!t) {
+                alert('输入');
+                return;
+            }
+
+            var q = {
+                type: t,
+                user_id: $('#user_id').val(),
+                price: $('#price').val(),
+                mobile: $('#mobile').val(),
+                cost: $('#cost').val(),
+                value: $('#value').val(),
+                result: $('#result').val(),
+                url: $('#url').val(),
+                spc_result: $('#spc_result').val(),
+                routing: $('#routing').val()
+            };
+
+            if (t == 'data') {
+                q.offer = $('#offer').val();
+            }
+
+            console.info('query string=' + q);
+
+            $("#message").text('');
+
+            var url = '/unit/start';
+
+            $.post(url, JSON.stringify(q)).done(function (data) {
+                console.info('return=' + data);
+                $("#message").text(data);
+            }).fail(function (e) {
+                alert('fail');
+                $("#message").text('Fail');
+            });
+        });
+
+        $("#prod_fee").click(function () {
+            $("#routing").html('')
+                    .append(new Option('fengyun', 'fengyun'))
+                    .append(new Option('yuechen', 'yuechen'))
+                    .append(new Option('machado', 'machado'))
+                    .append(new Option('shili', 'shili'))
+                    .append(new Option('stub', 'stub'))
+                    .append(new Option('', ''));
+            $("#result").html('')
+                    .append(new Option("成功(0:1)", "0:1"))
+                    .append(new Option("自动退款(0:9)", "0:9"))
+                    .append(new Option("无效(5003)", "5003:0"));
+            $("#offer").attr('disabled', 'true');
+//            $("#price").val('50');
+        });
+
+        $("#prod_data").click(function () {
+            $("#routing").html('')
+                    .append(new Option('telecom_js', 'telecom_js'))
+                    .append(new Option('hacmcc', 'hacmcc'))
+                    .append(new Option('niukou', 'niukou'))
+                    .append(new Option('cmcc-sn', 'cmcc-sn'))
+                    .append(new Option('mopote', 'mopote'))
+                    .append(new Option('mopote-test', 'mopote-test'))
+                    .append(new Option('legend', 'legend'))
+                    .append(new Option('xicheng', 'xicheng'))
+                    .append(new Option('quxun', 'quxun'))
+                    .append(new Option('wo-test', 'wo-test'))
+                    .append(new Option('wo-stub', 'wo-stub'))
+                    .append(new Option('21cn-qx', '21cn-qx'))
+                    .append(new Option('seek-stub', 'seek-stub'))
+                    .append(new Option('cmcc-stub', 'cmcc-stub'))
+                    .append(new Option('21cn-stub', '21cn-stub'))
+                    .append(new Option('seek', 'seek'))
+                    .append(new Option('yangchan', 'yangchan'))
+                    .append(new Option('cmcc-states', 'cmcc-states'))
+                    .append(new Option('cmcc', 'cmcc'))
+                    .append(new Option('cmcc-leliu', 'cmcc-leliu'))
+                    .append(new Option('suka-nation', 'suka-nation'))
+                    .append(new Option('suka-stub', 'suka-stub'))
+                    .append(new Option('21cn', '21cn'));
+            $("#result").html('')
+                    .append(new Option("成功(0:1)", "0:1"))
+                    .append(new Option("超时(599)", "599:0"));
+            $("#offer").removeAttr('disabled');
+        });
+
+        $("#offer").change(function (d) {
+        })
+    })
+</script>
+</body>
+</html>

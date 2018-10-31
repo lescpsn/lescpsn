@@ -1,0 +1,8 @@
+RewriteEngine on
+RewriteRule ^(rest/simple)$ $1/index.php
+RewriteRule ^(rest/simple/smsmopush)$ $1.php
+RewriteRule ^(rest/simple/smsrptpush)$ $1.php
+
+RewriteRule ^(rest/standard)$ $1/index.php
+RewriteRule ^(rest/standard/smsmopush)$ $1.php
+RewriteRule ^(rest/standard/smsrptpush)$ $1.php

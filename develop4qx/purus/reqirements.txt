@@ -1,0 +1,12 @@
+Pillow==2.6.1
+PyYAML==3.11
+SQLAlchemy==0.9.8
+XlsxWriter==0.5.7
+certifi==14.05.14
+mysql-connector-python==1.2.3
+onetimepass==0.3.0
+pycrypto==2.6.1
+redis==2.10.1
+six==1.8.0
+tornado==4.0.2
+wheezy.captcha==0.1.29

@@ -1,0 +1,12 @@
+#+TITLE: SourceInsight-Study
+#+HTML_HEAD: <link rel="stylesheet" type="text/css" href="../style/my-org-worg.css" />
+
+* Windows
++ 安装sourceinsight
+#+BEGIN_EXAMPLE
+官网下载 https://www.sourceinsight.com/download/ 最新版本
+
+一路回车版
+#+END_EXAMPLE
+* Linux
++ 安装anacoda
